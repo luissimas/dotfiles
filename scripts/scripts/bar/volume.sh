@@ -1,10 +1,7 @@
 #!/bin/sh
 
 # Laptop command
-#volume="$(amixer get Master | grep 'Mono:' | awk '{print $4}' | tr -d '[%]')"
-
-# Desktop command
-volume="$(amixer get Master | grep 'Left:' | awk '{print $5}' | tr -d '[%]')"
+volume="$(amixer get Master | grep 'Mono:' | awk '{print $4}' | tr -d '[%]')"
 
 if [ $volume -gt 70 ] || [ $volume -eq 70 ]; then
 	icon=""

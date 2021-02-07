@@ -5,7 +5,7 @@ dotfilesdir=/home/padawan/dotfiles
 cd $dotfilesdir
 
 # Install packages from list
-paru --needed -<packages.txt
+paru -S --needed -<packages.txt
 
 # Use GNU Stow to symlink config files
 stow alacritty
