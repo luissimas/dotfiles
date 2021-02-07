@@ -56,9 +56,6 @@ alias vim='nvim'
 
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
-# Alias for dotfiles git bare repo
-alias cfg='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
 # Vi mode configs
 export KEYTIMEOUT=1
 
