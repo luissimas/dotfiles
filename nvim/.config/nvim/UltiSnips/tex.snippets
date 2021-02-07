@@ -1,0 +1,128 @@
+snippet iint "Indefinite integal" wA
+\int{$1}\,dx$0
+endsnippet
+
+snippet dint "Definite integal" wA
+\int_$1^$2{$3}\,d$0
+endsnippet
+
+snippet liev "Evaluation of definite integral with \left and \right" wA
+\left. $3 \right|_$1^$2 $0
+endsnippet
+
+snippet biev "Evaluation of definite integral with \Bigr" wA
+$3 \Bigr|_$1^$2 $0
+endsnippet
+
+snippet lmt "Limit" wA
+\lim_{$1 \to $2}$0
+endsnippet
+
+snippet inft "Infinity" wA
+\infty$0
+endsnippet
+
+snippet // "Fractions" wA
+\frac{$1}{$2}$0
+endsnippet
+
+snippet beg "Enviroment" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet mi "Inline math" A
+$${1}$${0}
+endsnippet
+
+snippet	mq "Display math" A
+\[
+	$1
+\]
+	$0
+endsnippet
+
+snippet start "Basic template" bA
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{{./img/}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+
+\geometry{
+	margin=1in,
+	headheight=16pt
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{$2}
+\lhead{$3}
+\cfoot{\thepage}
+
+\title{$1}
+\author{Luís Augusto Simas do Nascimento}
+
+\begin{document}
+\maketitle
+
+$0
+
+\end{document}
+endsnippet
+
+snippet fancyhdr "Fancy headers" b
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{$1}
+\lhead{$2}
+\cfoot{\thepage}
+
+$0
+endsnippet
+
+snippet newpensum "Pensum template" bA
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{{./img/}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+
+\geometry{
+  margin=1in,
+  headheight=16pt
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CAPITVLVM $1}
+\lhead{\today}
+\cfoot{\thepage}
+
+\title{CAPITVLVM $1 - $2}
+\author{Luís Augusto Simas do Nascimento}
+
+\begin{document}
+
+\subsection*{PENSVM A}
+$0
+
+\subsection*{PENSVM B}
+
+\subsection*{PENSVM C}
+
+\end{document}
+endsnippet

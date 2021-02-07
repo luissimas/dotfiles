@@ -1,0 +1,40 @@
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "{foreground}" # Foreground
+set notification-warning-bg     "{background}" # Orange
+set notification-warning-fg     "{foreground}" # Selection
+set notification-bg             "{background}" # Background
+set notification-fg             "{foreground}" # Foreground
+
+set completion-bg               "{background}" # Background
+set completion-fg               "{foreground}" # Comment
+set completion-group-bg         "{background}" # Background
+set completion-group-fg         "{foreground}" # Comment
+set completion-highlight-bg     "{foreground}" # Selection
+set completion-highlight-fg     "{background}" # Foreground
+
+set index-bg                    "{background}" # Background
+set index-fg                    "{foreground}" # Foreground
+set index-active-bg             "{color1}" # Current Line
+set index-active-fg             "{foreground}" # Foreground
+
+set inputbar-bg                 "{background}" # Background
+set inputbar-fg                 "{foreground}" # Foreground
+set statusbar-bg                "{background}" # Background
+set statusbar-fg                "{foreground}" # Foreground
+
+set default-bg                  "{background}" # Background
+set default-fg                  "{foreground}" # Foreground
+
+set render-loading              true
+set render-loading-fg           "{background}" # Background
+set render-loading-bg           "{foreground}" # Foreground
+
+set recolor-lightcolor          "{background}" # Background
+set recolor-darkcolor           "{foreground}" # Foreground
+
+set selection-clipboard "clipboard"
+
+set font "Fira Code Regular 9"
+
+map i recolor
+

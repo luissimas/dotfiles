@@ -1,0 +1,9 @@
+
+configuration{
+  modi: "run,drun";
+  font: "Fira Code Nerd 12";
+  width: 600;
+  show-icons: true;
+  hide-scrollbar: true;
+  theme: "~/.cache/wal/colors-rofi-dark";
+}

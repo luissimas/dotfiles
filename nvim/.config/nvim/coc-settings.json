@@ -1,0 +1,23 @@
+{
+  "explorer.icon.enableNerdfont": true,
+  "explorer.datetime.format": "dd/MM/yyyy HH:mm:ss",
+  "explorer.previewAction.onHover": false,
+  "explorer.quitOnOpen": true,
+  "explorer.width": 30,
+  "explorer.keyMappings.global": {
+    "s": "open:vsplit"
+  },
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "~/.config/nvim/UltiSnips/"
+  ],
+  "pairs.enableCharacters": [
+    "(",
+    "[",
+    "{",
+    "'",
+    "\"",
+    "`"
+  ],
+  "clangd.path": "/home/padawan/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
+}
