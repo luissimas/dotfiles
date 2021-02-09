@@ -29,6 +29,8 @@ PS1='%~ λ '
 alias l='ls --color=auto'
 alias la='ls --color=auto -A'
 
+alias grep='grep --color=auto'
+
 alias rm='rm -i'
 alias rd='rm -rf -i'
 
