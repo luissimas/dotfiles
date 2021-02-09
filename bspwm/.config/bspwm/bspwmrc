@@ -6,9 +6,8 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 $HOME/.config/polybar/launch.sh
 
-source $HOME/.cache/wal/colors.sh
-
-bspc monitor -d Δ Θ Π Ψ Ω
+bspc monitor DVI-D-0 -d Δ Θ Π Ψ Ω
+bspc monitor HDMI-0 -d Δ Θ Π Ψ Ω
 
 bspc config border_width         2
 bspc config window_gap           5
@@ -22,6 +21,8 @@ bspc config automatic_scheme longest_side
 #bspc config top_padding 25
 
 # colors
+source $HOME/.cache/wal/colors.sh
+
 bspc config normal_border_color "$background"
 bspc config active_border_color "$foreground"
 bspc config focused_border_color "$foreground"
