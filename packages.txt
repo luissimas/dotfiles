@@ -118,3 +118,4 @@ sxhkd
 polybar
 stow
 latin-words
+picom-ibhagwan-git
