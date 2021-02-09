@@ -19,8 +19,8 @@ super + shift + {w,r,o,d}
 	{$BROWSER,alacritty -e lf,obsidian,discord}
 
 # scripts
-super + shift + {t,b,p,y}
-	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh}
+super + shift + {t,b,p,y,s}
+	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh,spotify.sh}
 
 # volume
 super + shift + {equal,minus}

@@ -1,5 +1,5 @@
 #!/bin/zsh
-filePath="/home/padawan/.screenshots/"
+filePath="/home/padawan/screenshots/"
 
 # If no arguments are given, a rofi prompt is shown
 if [[ -z "$1" ]]; then
@@ -8,9 +8,8 @@ else
   fileName="$1"
 fi
 
-# Kill unclutter to improve mouse selection
-kill $(pgrep unclutter)
-echo $filePath$fileName.png
+# Kill unclutter to allow mouse selection
+killall unclutter
 
 # Launch scrot
 scrot -s $filePath$fileName.png

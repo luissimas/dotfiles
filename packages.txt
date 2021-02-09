@@ -119,3 +119,7 @@ polybar
 stow
 latin-words
 picom-ibhagwan-git
+steam
+ttf-liberation
+spotifyd
+spotify-tui
