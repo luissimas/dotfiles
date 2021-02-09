@@ -52,7 +52,7 @@ super + m
 
 # show/hide polybar
 super + b
-  polybar-msg cmd toggle && bspc config top_padding {0,30}
+  polybar-msg cmd toggle && bspc config -m DVI-D-0 top_padding {0,30}
 
 # send the newest marked node to the newest preselected node
 super + y
@@ -77,6 +77,10 @@ super + {_,shift + }{h,j,k,l}
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+
+# swap monitor focus/node
+super + {_,shift} + space
+	bspc {monitor -f,node -m} next
 
 # focus the last node/desktop
 super + {grave,Tab}
