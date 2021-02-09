@@ -1,4 +1,3 @@
-stow
 alacritty-git
 alsa-utils
 autoconf
@@ -117,3 +116,5 @@ zsh-syntax-highlighting-git
 bspwm
 sxhkd
 polybar
+stow
+latin-words

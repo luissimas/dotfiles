@@ -24,3 +24,4 @@ stow wallpapers
 stow xinit
 stow zathura
 stow zsh
+stow picom

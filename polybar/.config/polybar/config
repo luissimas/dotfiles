@@ -27,58 +27,38 @@ highlight = ${xrdb:color15:#222}
 ; | |_) | (_| | |  \__ \
 ; |_.__/ \__,_|_|  |___/
 
-[bar/base]
-enable-ipc = true
-font-0=Fira Code Nerd Font:style=Regular:pixelsize=10:antialias=true;2
+[bar/bar]
+enable-ipc=true
+height = 20
+width = 80%
+offset-x = 10%
+offset-y = 10
+radius = 10
+padding=2
+line-size = 2
 
-padding = 1
 border-size = 0
 border-color = ${colors.foreground}
 
-module-margin = 2
-
-height = 25
-
 background = ${colors.background}
 foreground = ${colors.foreground}
-override-redirect=false
-offset-y = 5
+
+font-0=Fira Code Nerd Font:style=Regular:pixelsize=10:antialias=true;2
+
+module-margin = 1
+
+modules-left = bspwm 
+; Spotify (scripts at github.com/dietervanhoof/polybar-spotify-controls)
+;modules-center = previous playpause next spotify
+; Mpd
+modules-center = mpd
+modules-right = cpu time
+
+scroll-up = bspwn-wsnext
+scroll-down = bspwn-wsprev
 
 wm-restack = bspwm
-
-[bar/ws]
-inherit = bar/base
-width = 8.8%
-
-padding = 0
-
-underline-size = 2
-
-offset-x = 5
-line-size = 1
-
-modules-left = bspwm
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
-
-[bar/center]
-inherit = bar/base
-enable-opc = true
-
-width = 38%
-
-offset-x = 31%
-
-modules-center = packages network temperature cpu battery alsa
-
-[bar/tray]
-inherit = bar/base
-width = 13%
-
-offset-x = 86.5%
-
-modules-left = time 
-
+override-redirect = false
 ;                      _       _           
 ;  _ __ ___   ___   __| |_   _| | ___  ___ 
 ; | '_ ` _ \ / _ \ / _` | | | | |/ _ \/ __|

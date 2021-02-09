@@ -11,5 +11,7 @@ setxkbmap -layout us -variant intl &
 xrandr --output HDMI-0 --left-of DVI-D-0
 unclutter --timeout 1 &
 ~/.fehbg &
+wal -R &
+picom &
 dwmblocks &
-exec dwm
+exec bspwm
