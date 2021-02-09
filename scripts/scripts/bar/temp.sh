@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-isLaptop="$(cat /sys/class/power_supply/BAT*/status)"
+isLaptop="$(cat /sys/class/power_supply/BAT*/status 2>/dev/null)"
 
 if [ -z "$isLaptop" ]; then
   # Desktop

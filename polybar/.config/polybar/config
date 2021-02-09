@@ -52,7 +52,7 @@ modules-left = bspwm
 ;modules-center = previous playpause next spotify
 ; Mpd
 modules-center = mpd
-modules-right = cpu time
+modules-right = packages network temperature cpu alsa time
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -160,13 +160,12 @@ label-full = %percentage%%
 format-full = <ramp-capacity>  <label-full>
 
 [module/temperature]
-type = internal/temperature
+type = custom/script
 
-interval = 1
+exec = ~/scripts/bar/temp.sh
 
-hwmon-path = /sys/class/hwmon/hwmon3/temp1_input
+interval = 5
 
-label =  %temperature-c%
 
 [module/cpu]
 type = internal/cpu
