@@ -197,7 +197,11 @@ type = custom/script
 
 exec = ~/scripts/bar/packages.sh
 
-interval = 3600
+exec-if = sudo pacman -Sy
+
+interval = 300
+
+click-left = ~/scripts/bar/packages.sh 
 
 [module/network]
 type = custom/script
