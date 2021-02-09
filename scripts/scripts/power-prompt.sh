@@ -1,7 +1,11 @@
 #!/bin/zsh
 
-selected=$(echo -e 'No\nYes' | rofi -dmenu -p "Shutdown?" -l 2)
+option=$(echo -e 'Shutdown\nReboot' | rofi -dmenu -p "Power prompt")
 
-if [ $selected = "Yes" ]; then
-  exec shutdown now
-fi
+case $option in "Shutdown")
+    exec shutdown now
+    ;;
+  "Reboot")
+    exec reboot
+    ;;
+esac

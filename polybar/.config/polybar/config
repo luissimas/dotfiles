@@ -51,7 +51,7 @@ modules-left = bspwm
 ; Spotify (scripts at github.com/dietervanhoof/polybar-spotify-controls)
 ;modules-center = previous playpause next spotify
 ; Mpd
-modules-center = mpd
+modules-center = xwindow
 modules-right = packages network temperature cpu alsa time
 
 scroll-up = bspwn-wsnext
@@ -77,12 +77,14 @@ scroll-down = bspc desktop -f prev
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:33:...%
+label = %title%
+
 label-margin = 2
+label-maxlen = 50
 
 [module/bspwm]
 type = internal/bspwm
-reverse-scroll = false
+enable-scroll = false
 
 label-focused = %name%
 label-focused-foreground = ${colors.background}
@@ -97,6 +99,10 @@ label-occupied-padding = 1
 
 label-empty = %name%
 label-empty-padding = 1
+
+format = <label-state> <label-mode>
+
+label-monocle = 
 
 
 [module/time]
@@ -125,7 +131,7 @@ ramp-volume-0 = ""
 ramp-volume-1 = ""
 ramp-volume-2 = ""
 
-label-muted = " "   
+label-muted = " muted"   
 
 [module/battery]
 type = internal/battery
