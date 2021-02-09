@@ -3,7 +3,7 @@
 # This script was copied from https://github.com/Bugswriter/myyt and was modified for my own needs
 
 # Your api key (its better to make that a cat command)
-YT_API_KEY=AIzaSyAZVpG9uqFgbgGyNR9y46WVpvyaQIbO4Ms
+YT_API_KEY=$(cat ~/.ytbapikey.txt)
 
 # If no arguments are given, a rofi prompt is shown
 if [[ -z "$1" ]]; then
