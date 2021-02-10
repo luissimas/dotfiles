@@ -23,5 +23,6 @@ bspc config gapless_monocle      false
 bspc config focus_follows_pointer false
 
 # Rules
-bspc rule -a Steam desktop=5 state=floating
-bspc rule -a discord desktop=5 state=floating
+bspc rule -a Steam state=floating
+bspc rule -a discord state=floating
+bspc rule -a spotify-tui state=floating
