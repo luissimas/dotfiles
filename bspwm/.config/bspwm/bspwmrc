@@ -1,14 +1,13 @@
 #! /bin/sh
 
 # Startup
-
 xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd > /dev/null || sxhkd &
 ~/.config/polybar/launch.sh
+~/scripts/bspwm/bspwmcolors.sh
 
 # Config
-
-bspc monitor DVI-D-0 -d 1 2 3 4 5
+bspc monitor DVI-D-0 -d Δ Θ Π Ψ Ω
 bspc monitor HDMI-0 -d 6
 
 bspc config border_width         0
@@ -20,6 +19,8 @@ bspc config -m HDMI-0 top_padding 0
 bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      false
+
+bspc config focus_follows_pointer false
 
 # Rules
 bspc rule -a Steam desktop=5 state=floating

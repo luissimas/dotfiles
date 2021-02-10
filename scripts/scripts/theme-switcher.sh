@@ -16,6 +16,9 @@ case $option in "Pywal")
     wal -i "$wallpaperDirectory$selected" -q
     printf "Done.\n\n"
 
+    # Update bspwm colors
+    ~/scripts/bspwm/bspwmcolors.sh
+
     # Update betterlockscreen (takes a while)
     printf "Setting lock screen...\n"
     betterlockscreen -u "$wallpaperDirectory$selected" >/dev/null 2>&1
@@ -31,7 +34,10 @@ case $option in "Pywal")
   *) printf "No option selected."
   esac
 
-  wal --theme $theme
+    wal --theme $theme
+
+    # Update bspwm colors
+    ~/scripts/bspwm/bspwmcolors.sh
   ;;
 "Wallpaper")
   selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")

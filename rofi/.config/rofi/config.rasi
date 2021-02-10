@@ -5,5 +5,5 @@ configuration{
   width: 600;
   show-icons: true;
   hide-scrollbar: true;
-  theme: "~/.cache/wal/colors-rofi-dark";
+  theme: "~/.cache/wal/rofi-custom";
 }
