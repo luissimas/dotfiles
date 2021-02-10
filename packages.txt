@@ -123,3 +123,4 @@ steam
 ttf-liberation
 spotifyd
 spotify-tui
+playerctl

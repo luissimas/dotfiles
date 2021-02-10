@@ -5,7 +5,7 @@ wifiStatus="$(cat /sys/class/net/w*/operstate 2>/dev/null)"
 wifiName="$(iwgetid -r)"
 
 if [[ $ethStatus = "up" ]]; then
-	printf " Ethernet"
+	printf ""
 elif [[ $wifiStatus = "up" ]]; then
   printf  "  $wifiName"
 else
