@@ -11,4 +11,4 @@ else
   temp="$(sensors | grep temp1 | awk 'NR==1{printf "%d", $2}')"
 fi
 
-printf "﬙ $temp°C"
+printf " $temp°C"
