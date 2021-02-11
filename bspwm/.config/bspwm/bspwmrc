@@ -25,5 +25,6 @@ bspc config focus_follows_pointer false
 # Rules
 bspc rule -a Steam state=floating
 bspc rule -a discord state=floating
-bspc rule -a spotify-tui state=floating
+bspc rule -a spotify-tui desktop=^6 state=floating
+bspc rule -a qutebrowser desktop=^1 monitor=^1
 bspc rule -a Zathura state=tiled
