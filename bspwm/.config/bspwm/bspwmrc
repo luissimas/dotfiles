@@ -8,7 +8,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Config
 bspc monitor DVI-D-0 -d Δ Θ Π Ψ Ω
-bspc monitor HDMI-0 -d 6
+bspc monitor HDMI-0 -d 6 7 8
+
+bspc wm --reorder-monitors DVI-D-0 HDMI-0
 
 bspc config border_width         0
 bspc config window_gap          10
@@ -23,8 +25,8 @@ bspc config gapless_monocle      false
 bspc config focus_follows_pointer false
 
 # Rules
+bspc rule -a qutebrowser desktop=^6
+bspc rule -a spotify-tui desktop=^7 state=floating
 bspc rule -a Steam state=floating
 bspc rule -a discord state=floating
-bspc rule -a spotify-tui desktop=^6 state=floating
-bspc rule -a qutebrowser desktop=^1 monitor=^1
 bspc rule -a Zathura state=tiled

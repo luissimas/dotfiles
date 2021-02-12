@@ -90,9 +90,9 @@ super + {_,shift} + space
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
-# focus or send to the given desktop
+# focus or send to the given desktop on the focused monitor
 super + {_,shift + }{1-5}
-	bspc {desktop -f,node -d} '^{2-6}'
+	bspc {desktop -f,node -d} focused:'^{1-5}'
 
 ###########
 #preselect#
