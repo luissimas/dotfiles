@@ -3,7 +3,7 @@
 wallpaperDirectory=/home/padawan/.wal/
 
 # Prompt if the script should use the wallpaper or the themes
-option=$(echo -e 'Wallpaper\nTheme\nPywal' | rofi -dmenu -p "Source")
+option=$(echo -e 'Wallpaper\nTheme\nPywal' | rofi -dmenu -i -p "Source")
 
 case $option in "Pywal")
   selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")
@@ -26,7 +26,7 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Gruvbox\nNord\nDracula' | rofi -dmenu -p "Source")
+  selected=$(echo -e 'Gruvbox\nNord\nDracula' | rofi -dmenu -i -p "Source")
 
   case $selected in "Gruvbox") theme="base16-gruvbox-hard";;
   "Nord") theme="base16-nord";;
