@@ -7,7 +7,6 @@ nnoremap <leader>es :set spell!<Enter>
 nnoremap <leader>S :Startify<Enter>
 nnoremap <leader>cm :CocList marketplace<Enter>
 nnoremap <leader>e :CocCommand explorer<Enter>
-nnoremap <silent> <Leader>/ :noh<cr>
 
 " File specific auto pairs
 autocmd Filetype tex let b:coc_pairs=[["$", "$"]]

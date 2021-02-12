@@ -91,6 +91,9 @@ set linebreak
 set splitbelow
 set splitright
 set updatetime=1000
+set nohlsearch
+set incsearch
+set scrolloff=8
 
 " Tabs
 set tabstop=2

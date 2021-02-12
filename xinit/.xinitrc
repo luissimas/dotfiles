@@ -13,5 +13,4 @@ unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
 picom &
-dwmblocks &
 exec bspwm
