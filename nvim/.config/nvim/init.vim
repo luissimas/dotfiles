@@ -94,6 +94,7 @@ set updatetime=1000
 set nohlsearch
 set incsearch
 set scrolloff=8
+set nowrap
 
 " Tabs
 set tabstop=2

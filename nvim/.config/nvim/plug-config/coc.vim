@@ -1,5 +1,5 @@
 " Extensions
-let g:coc_global_extensions = ['coc-snippets', 'coc-ultisnips', 'coc-json', 'coc-explorer', 'coc-tsserver', 'coc-vimlsp', 'coc-vimtex', 'coc-html', 'coc-css', 'coc-clangd', 'coc-marketplace', 'coc-sh', 'coc-phpls', 'coc-pairs', 'coc-bootstrap-classname']
+let g:coc_global_extensions = ['coc-snippets', 'coc-ultisnips', 'coc-json', 'coc-explorer', 'coc-tsserver', 'coc-vimlsp', 'coc-vimtex', 'coc-html', 'coc-css', 'coc-clangd', 'coc-marketplace', 'coc-sh', 'coc-phpls', 'coc-pairs', 'coc-bootstrap-classname', 'coc-pyright']
 
 " Close explorer if its the last buffer
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

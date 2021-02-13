@@ -17,9 +17,10 @@ inoremap <C-l> <Esc>[s1z=`]a
 
 " Compile outputs or show previews
 autocmd Filetype c nmap <leader>c :!gcc -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
+autocmd Filetype python nmap <leader>c :!alacritty --class Alacritty,Float -e python %<Enter>
 autocmd Filetype javascript nmap <leader>c :!node %<Enter>
 autocmd Filetype tex nmap <leader>c <plug>(vimtex-compile)
-nmap <leader>c :Pandoc pdf<Enter>
+autocmd Filetype pandoc nmap <leader>c :Pandoc pdf<Enter>
 nmap <leader>of :!zathura %:r.pdf&<Enter>
 
 " Navigation and resizing in splits
