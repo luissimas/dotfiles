@@ -39,6 +39,8 @@ pandoc
 pfetch-git
 pkgconf
 pulseaudio
+pulseaudio-alsa
+pamixer
 python-pip
 python-pynvim
 python-ueberzug-git

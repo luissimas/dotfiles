@@ -24,7 +24,10 @@ super + shift + {t,b,p,y,s}
 
 # volume
 super + shift + {equal,minus}
-  amixer sset 'Master' 5%{+,-}
+  pamixer --allow-boost {-i,-d} 5
+
+super + shift + m
+	pamixer -t
 
 # lock screen
 super + shift + q
