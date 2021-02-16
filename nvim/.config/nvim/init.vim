@@ -95,6 +95,10 @@ set nohlsearch
 set incsearch
 set scrolloff=8
 set nowrap
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 
 " Tabs
 set tabstop=2
