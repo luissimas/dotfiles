@@ -15,7 +15,7 @@ if [[ -n "$query" && "$query" != " " ]]; then
   query="${query// /+}"
 
   # Get search results and pipe into rofi using python web scraper
-  selectedUrl=$(python ~/scripts/youtube-scraper.py $query | rofi -dmenu -i -p "Select a video " -l 10 -width 80 | awk '{print $NF}')
+  selectedUrl=$(python ~/scripts/youtube-scraper.py $query | rofi -dmenu -i -p "Select a video " -l 10 -width 60 | awk '{print $NF}')
 
   # Checks if any video was selected
   if [[ -n "$selectedUrl" && "$selectedUrl" != "https://" ]]; then

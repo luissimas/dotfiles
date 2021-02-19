@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 killall -q spotifyd
+killall -q spt
 
 spotifyd
 
