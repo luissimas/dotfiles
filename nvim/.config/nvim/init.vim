@@ -61,7 +61,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     source ~/.config/nvim/plug-config/texconceal.vim
 
     " Snippets package
-    Plug 'honza/vim-snippets'
+    " Plug 'honza/vim-snippets'
 
     " Colorschemes
     Plug 'morhetz/gruvbox'
