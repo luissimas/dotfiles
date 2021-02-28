@@ -58,6 +58,9 @@ alias vim='nvim'
 
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
+# Habitica cli tool 
+alias hbt='python ~/fun/python/habitica-cli-py/main.py'
+
 # Vi mode configs
 export KEYTIMEOUT=1
 

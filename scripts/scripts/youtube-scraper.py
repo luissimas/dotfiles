@@ -17,9 +17,9 @@ class Result:
 def scrapePage(query):
     # Setting up driver
     options = webdriver.ChromeOptions()
-    options.binary_location = "/usr/bin/chromium"
+    options.binary_location = "/usr/bin/brave"
     options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
 
     driver.get('https://www.youtube.com')
 

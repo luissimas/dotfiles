@@ -1,17 +1,22 @@
 #!/bin/zsh
-filePath="/home/padawan/screenshots/"
+screenshotPath="/home/padawan/screenshots/"
+obsidianPath="/home/padawan/dox/vault/Attachments/"
 
-# If no arguments are given, a rofi prompt is shown
-if [[ -z "$1" ]]; then
-  fileName=$(rofi -dmenu -p "File name " -l 0)
-else
-  fileName="$1"
-fi
+selected=$(echo -e 'Obsidian\nScreenshot' | rofi -dmenu -p "Type")
 
 # Kill unclutter to allow mouse selection
 killall unclutter
 
 # Launch scrot
+if [[ "$selected" == "Obsidian" ]]; then
+  filePath=$obsidianPath
+  echo $filePath
+  fileName=$(rofi -dmenu -p "File name" -l 0)
+elif [[ "$selected" == "Screenshot" ]]; then
+  filePath=$screenshotPath
+  fileName=$(rofi -dmenu -p "File name" -l 0)
+fi
+
 scrot -s $filePath$fileName.png
 
 # Relaunch unclutter
