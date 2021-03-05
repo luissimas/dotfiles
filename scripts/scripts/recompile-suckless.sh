@@ -17,6 +17,6 @@ printf "Recompiling dwm...\n"
 compileDwm
 printf "Done.\n\n"
 
-#printf "Recompiling st...\n"
-#compileSt
-#printf "Done.\n"
+printf "Recompiling st...\n"
+compileSt
+printf "Done.\n"

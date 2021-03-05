@@ -3,8 +3,8 @@
 ########################
 
 # terminal emulator
-super + Return
-	alacritty
+super + {_,shift} + Return
+	{alacritty, st}
 
 # program launcher
 super + p
