@@ -5,7 +5,7 @@ Autor(es): Luís Augusto Simas do Nascimento
 Data de Criação: `date "+%d/%m/%Y"`
 Data de Atualização: `date "+%d/%m/%Y"`
 
-Objetivos: $2
+Objetivos: $1
 
 */
 
@@ -24,4 +24,23 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+endsnippet
+
+snippet header "Header file template" b
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `date "+%d/%m/%Y"`
+Data de Atualização: `date "+%d/%m/%Y"`
+
+Objetivos: $1
+
+*/
+
+#ifndef ${2}_H
+#define ${2}_H
+
+$0
+
+#endif
 endsnippet

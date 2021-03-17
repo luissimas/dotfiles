@@ -44,6 +44,7 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 font-0=Fira Code Nerd Font:style=Regular:pixelsize=10:antialias=true;2
+font-1=cryptocoins:style=Regular;0
 
 module-margin = 1
 

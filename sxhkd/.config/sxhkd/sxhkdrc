@@ -30,11 +30,11 @@ super + shift + m
 	pamixer -t
 
 # lock screen
-super + shift + q
+super + alt + q
 	betterlockscreen -l dim
 
 # shutdown
-super + alt + q
+super + shift + q
   $HOME/scripts/power-prompt.sh
 
 ###############

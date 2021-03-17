@@ -7,6 +7,8 @@ nnoremap <leader>es :set spell!<Enter>
 nnoremap <leader>S :Startify<Enter>
 nnoremap <leader>cm :CocList marketplace<Enter>
 nnoremap <leader>e :CocCommand explorer<Enter>
+nnoremap <S-l> $
+nnoremap <S-h> 0
 
 " File specific auto pairs
 autocmd Filetype tex let b:coc_pairs=[["$", "$"]]
@@ -17,7 +19,7 @@ inoremap <C-l> <Esc>[s1z=`]a
 
 " Compile outputs or show previews
 autocmd Filetype c nmap <leader>c :!gcc -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
-autocmd Filetype cpp nmap <leader>c :!g++ -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
+autocmd Filetype cpp nmap <leader>c :!make && alacritty --class Alacritty,Float -e ./output<Enter>
 autocmd Filetype python nmap <leader>c :!alacritty --class Alacritty,Float -e python %<Enter>
 autocmd Filetype javascript nmap <leader>c :!node %<Enter>
 autocmd Filetype tex nmap <leader>c <plug>(vimtex-compile)

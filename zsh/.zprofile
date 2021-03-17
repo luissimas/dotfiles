@@ -3,7 +3,7 @@ export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/scripts/"
 
 # Exports
 export TERM="alacritty"
-export BROWSER="brave"
+export BROWSER="qutebrowser"
 export READER="zathura"
 export EDITOR="nvim"
 export LF_ICONS="\

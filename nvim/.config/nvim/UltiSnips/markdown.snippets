@@ -25,6 +25,26 @@ snippet biev "Evaluation of definite integral with \Bigr" wA
 $3 \Bigr|_$1^$2 $0
 endsnippet
 
+snippet vt "Vector" wA
+\vec{$1}$0
+endsnippet
+
+snippet ivt "Inline vector" wA
+$\vec{${1}}${2}$${0}
+endsnippet
+
+snippet bvt "Big vector" wA
+\overrightarrow{$1}$0
+endsnippet
+
+snippet pnt "Point" wA
+$1($2,$3)$0
+endsnippet
+
+snippet ipnt "Inline point" wA
+$${1}(${2},${3})$${0}
+endsnippet
+
 snippet lmt "Limit" wA
 \lim_{$1 \to $2}$0
 endsnippet
@@ -75,12 +95,26 @@ fontsize: 12pt
 ---
 
 # PENSVM A
-$0
+$3
 
 # PENSVM B
+$4
 
 # PENSVM C
+$0
+endsnippet
 
+snippet start "New document" bA
+---
+author: Luís Augusto Simas do Nascimento
+title: $1
+date: `date "+%d/%m/%Y"`
+classoption: a4paper
+geometry: margin=1in
+fontsize: 12pt
+---
+
+$0
 endsnippet
 
 

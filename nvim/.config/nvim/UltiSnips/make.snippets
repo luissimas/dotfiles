@@ -1,0 +1,13 @@
+snippet new "Makefile template" bA
+CXX=g++
+CXXFLAGS=-Wall $0
+
+LIBRARIES=
+EXECUTABLE=output
+
+all: *.cpp
+	$(CXX) $(CXXFLAGS) $? -o $(EXECUTABLE) $(LIBRARIES)
+
+clean:
+	rm $(EXECUTABLE)
+endsnippet
