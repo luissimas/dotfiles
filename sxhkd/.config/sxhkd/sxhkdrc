@@ -22,6 +22,10 @@ super + shift + {w,r,o,d,z}
 super + shift + {t,b,p,y,s,a}
 	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh,spotify.sh,audiosink.sh}
 
+# quick screenshot to clipboard
+super + a
+	scrot -s -e 'xclip -selection clipboard -t "image/png" < $f && rm $f'
+
 # volume
 super + shift + {equal,minus}
   pamixer --allow-boost {-i,-d} 5

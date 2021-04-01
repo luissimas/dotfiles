@@ -9,13 +9,17 @@ settings:
   content.media.audio_capture:
     https://meet.google.com: true
   content.media.audio_video_capture:
+    global: true
     https://meet.google.com: true
   content.media.video_capture:
+    global: true
     https://meet.google.com: true
   content.notifications:
+    https://cuckoo.team: false
     https://mail.protonmail.com: false
     https://meet.google.com: false
     https://www.askpython.com: false
+    https://www.computerworld.com: false
     https://www.duolingo.com: false
     https://www.reddit.com: false
   content.register_protocol_handler:

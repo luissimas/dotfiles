@@ -13,9 +13,9 @@ compileSt(){
   make clean install >/dev/null
 }
 
-printf "Recompiling dwm...\n"
-compileDwm
-printf "Done.\n\n"
+#printf "Recompiling dwm...\n"
+#compileDwm
+#printf "Done.\n\n"
 
 printf "Recompiling st...\n"
 compileSt

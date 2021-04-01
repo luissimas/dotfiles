@@ -31,9 +31,6 @@ alias la='ls --color=auto -A'
 
 alias grep='grep --color=auto'
 
-alias rm='rm -i'
-alias rd='rm -rf -i'
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias c='customcd'

@@ -1,4 +1,4 @@
-alacritty-git
+alacritty
 alsa-utils
 autoconf
 automake

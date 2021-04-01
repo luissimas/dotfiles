@@ -41,6 +41,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Airline statusbar
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     source ~/.config/nvim/plug-config/airline.vim
 
     " Wich key for keybinding display
@@ -69,15 +70,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dracula/vim', {'name':'dracula'}
     Plug 'romgrk/doom-one.vim'
     Plug 'dylanaraps/wal.vim'
-    source ~/.config/nvim/colorschemes.vim
 
 call plug#end()
 
-let g:airline_theme = 'wal'
-"let g:airline_theme = 'gruvbox'
-
-colorscheme wal
-"colorscheme gruvbox
+source ~/.config/nvim/colorschemes.vim
 
 " Spellcheck
 set spelllang=pt,en,la

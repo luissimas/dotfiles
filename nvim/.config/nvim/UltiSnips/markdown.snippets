@@ -14,7 +14,7 @@ snippet iint "Indefinite integal" wA
 endsnippet
 
 snippet dint "Definite integal" wA
-\int_$1^$2{$3}\,d$0
+\int_{$1}^{$2}{$3}\,d$0
 endsnippet
 
 snippet liev "Evaluation of definite integral with \left and \right" wA
@@ -31,6 +31,14 @@ endsnippet
 
 snippet ivt "Inline vector" wA
 $\vec{${1}}${2}$${0}
+endsnippet
+
+snippet pmst "Produto misto" wA
+(\vec{u},\vec{v},\vec{w})${0}
+endsnippet
+
+snippet ipmst "Inline produto misto" wA
+$(\vec{u},\vec{v},\vec{w})${1}$${0}
 endsnippet
 
 snippet bvt "Big vector" wA
@@ -65,6 +73,10 @@ endsnippet
 
 snippet mk "Inline math" A
 $${1}$${0}
+endsnippet
+
+snippet bb "Bold text" A
+**$1**$0
 endsnippet
 
 snippet	mq "Display math" A

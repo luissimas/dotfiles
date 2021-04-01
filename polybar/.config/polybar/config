@@ -49,7 +49,7 @@ font-1=cryptocoins:style=Regular;0
 module-margin = 1
 
 modules-left = bspwm 
-#modules-center = spotify
+modules-center = spotify
 modules-right = packages network temperature cpu pulseaudio time
 
 scroll-up = bspwn-wsnext
@@ -198,7 +198,7 @@ exec = ~/scripts/bar/packages.sh
 
 exec-if = sudo pacman -Sy
 
-interval = 300
+interval = 3600
 
 click-left = ~/scripts/bar/packages.sh 
 
