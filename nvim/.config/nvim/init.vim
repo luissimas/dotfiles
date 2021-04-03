@@ -70,6 +70,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dracula/vim', {'name':'dracula'}
     Plug 'romgrk/doom-one.vim'
     Plug 'dylanaraps/wal.vim'
+    Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
