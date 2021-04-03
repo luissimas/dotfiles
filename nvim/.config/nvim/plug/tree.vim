@@ -57,3 +57,28 @@ let g:nvim_tree_icons = {
     \   'symlink_open': "",
     \   }
     \ }
+
+
+" Keymappings
+lua <<EOF
+    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
+    vim.g.nvim_tree_bindings = {
+      ["<C-t>"]          = tree_cb("tabnew"),
+      ["<CR>"]           = tree_cb("cd"),
+      ["o"]              = tree_cb("edit"),
+      ["l"]              = tree_cb("edit"),
+      ["s"]              = tree_cb("vsplit"),
+      ["h"]              = tree_cb("dir_up"),
+      ["I"]              = tree_cb("toggle_ignored"),
+      ["H"]              = tree_cb("toggle_dotfiles"),
+      ["R"]              = tree_cb("refresh"),
+      ["a"]              = tree_cb("create"),
+      ["d"]              = tree_cb("remove"),
+      ["r"]              = tree_cb("rename"),
+      ["x"]              = tree_cb("cut"),
+      ["c"]              = tree_cb("copy"),
+      ["p"]              = tree_cb("paste"),
+      ["q"]              = tree_cb("close"),
+    }
+EOF
