@@ -18,19 +18,20 @@
 "
 
 " Vim-plug specific config file
-source ~/.config/nvim/vim-plug.vim
+source ~/.config/nvim/config/vim-plug.vim
 
 " Colorschemes config
-source ~/.config/nvim/colorschemes.vim
+source ~/.config/nvim/config/colorschemes.vim
 
 " All the keymaps
-source ~/.config/nvim/keymaps.vim
+source ~/.config/nvim/config/keymaps.vim
 
 " General neovim configuration via 'sets'
-source ~/.config/nvim/sets.vim
+source ~/.config/nvim/config/sets.vim
 
 " Autocommands
-source ~/.config/nvim/autocommands.vim
+source ~/.config/nvim/config/autocommands.vim
+
 
 
 
@@ -39,10 +40,9 @@ source ~/.config/nvim/autocommands.vim
 "
 " Plugin-specific configs
 "
-source ~/.config/nvim/plug-config/coc.vim
-source ~/.config/nvim/plug-config/startify.vim
-source ~/.config/nvim/plug-config/airline.vim
-source ~/.config/nvim/plug-config/whichkey.vim
-source ~/.config/nvim/plug-config/vimtex.vim
-source ~/.config/nvim/plug-config/pandoc.vim
-source ~/.config/nvim/plug-config/texconceal.vim
+luafile ~/.config/nvim/plug/lspconfig.lua
+source ~/.config/nvim/plug/completion.vim
+source ~/.config/nvim/plug/ultisnips.vim
+source ~/.config/nvim/plug/airline.vim
+source ~/.config/nvim/plug/vimtex.vim
+source ~/.config/nvim/plug/pandoc.vim

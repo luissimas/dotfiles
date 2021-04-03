@@ -9,13 +9,10 @@
 " Space as leader key
 let mapleader=" "
 
-nnoremap <leader>S :Startify<Enter>
-nnoremap <leader>cm :CocList marketplace<Enter>
-nnoremap <leader>e :CocCommand explorer<Enter>
 
-" Resource config and restart CoC
-nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter> :CocRestart<Enter>
 
+" Resource config
+nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter>
 
 " Quit buffer
 nnoremap <leader>q :q<Enter>
@@ -33,12 +30,28 @@ nnoremap <leader>es :set spell!<Enter>
 nnoremap <S-l> $
 nnoremap <S-h> 0
 
-" File specific auto pairs
-autocmd Filetype tex let b:coc_pairs=[["$", "$"]]
-autocmd Filetype markdown let b:coc_pairs=[["$", "$"]]
-
 " Auto spell correction
 inoremap <C-l> <Esc>[s1z=`]a
+
+
+
+
+" LSP
+nnoremap <silent> gd :lua vim.lsp.buf.definition()<Enter>
+nnoremap <silent> K :lua vim.lsp.buf.hover()<Enter>
+nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<Enter>
+nnoremap <silent> <leader>f :lua vim.lsp.buf.formatting()<Enter>
+
+
+" Completion
+" Using <Tab> and <Shift-Tab> to navigate through completion popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" UltiSnips
+nnoremap <silent> <leader>se :UltiSnipsEdit<Enter>
+
+
 
 
 " Navigation and resizing in splits
@@ -46,10 +59,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <A-h> :vertical resize +5<cr>
-nnoremap <A-j> :resize +5<cr>
-nnoremap <A-k> :resize -5<cr>
-nnoremap <A-l> :vertical resize -5<cr>
+nnoremap <A-h> :vertical resize +5<Enter>
+nnoremap <A-j> :resize +5<Enter>
+nnoremap <A-k> :resize -5<Enter>
+nnoremap <A-l> :vertical resize -5<Enter>
+
+
 
 " File-specific compile commands
 augroup COMPILE_KEYMAPS
@@ -67,7 +82,10 @@ augroup COMPILE_KEYMAPS
   autocmd FIletype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
 augroup END
 
-" Latin long vowels there's probably a better way to do that
+
+
+
+" Latin long vowels
 inoremap ä ā
 inoremap Ä Ā
 inoremap ë ē
