@@ -25,18 +25,28 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Autocompletion
   Plug 'nvim-lua/completion-nvim'
+
+  " Treesitter
+  "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  " Lspking completion popup icons
   Plug 'onsails/lspkind-nvim'
 
   " Snippets
   Plug 'SirVer/ultisnips'
 
   " File tree
-  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
 
-  " Airline statusbar
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  " Font icons for tree and statusbar
+  Plug 'kyazdani42/nvim-web-devicons'
+
+  " Galaxyline statusbar
+  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+  " Bufferline
+
+
 
   " Vimtex for latex
   Plug 'lervag/vimtex'
