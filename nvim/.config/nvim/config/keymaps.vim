@@ -23,6 +23,9 @@ nnoremap <leader>w :w<Enter>
 " Open a vertical split
 nnoremap <leader>s :vsplit<Enter>
 
+" Toggle file tree
+nnoremap <leader>e :NvimTreeToggle<Enter>
+
 " Enable spellcheck
 nnoremap <leader>es :set spell!<Enter>
 

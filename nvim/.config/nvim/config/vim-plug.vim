@@ -25,9 +25,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Autocompletion
   Plug 'nvim-lua/completion-nvim'
+  Plug 'onsails/lspkind-nvim'
 
   " Snippets
   Plug 'SirVer/ultisnips'
+
+  " File tree
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-tree.lua'
 
   " Airline statusbar
   Plug 'vim-airline/vim-airline'

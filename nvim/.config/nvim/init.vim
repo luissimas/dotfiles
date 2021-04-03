@@ -44,6 +44,7 @@ source ~/.config/nvim/config/autocommands.vim
 luafile ~/.config/nvim/plug/lspconfig.lua
 source ~/.config/nvim/plug/completion.vim
 source ~/.config/nvim/plug/ultisnips.vim
+source ~/.config/nvim/plug/tree.vim
 source ~/.config/nvim/plug/airline.vim
 source ~/.config/nvim/plug/vimtex.vim
 source ~/.config/nvim/plug/pandoc.vim

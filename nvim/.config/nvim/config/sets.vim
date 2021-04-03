@@ -35,3 +35,7 @@ set expandtab
 
 " Clipboard
 set clipboard=unnamedplus
+
+" Netrw
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0

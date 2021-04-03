@@ -18,3 +18,6 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " Enabling UltiSnips
 let g:completion_enable_snippet = 'UltiSnips'
+
+" Enabling lspkind icons
+lua require('lspkind').init()
