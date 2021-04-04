@@ -11,6 +11,7 @@ require('bufferline').setup{
    options = {
      view = "default",
      separator_style = "thin",
+     close_icon = ' ',
      buffer_close_icon = ' ',
 
      -- Enabling lsp diagnostics
