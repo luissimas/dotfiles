@@ -41,12 +41,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Galaxyline statusbar
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
+  " Bufferline
+  Plug 'akinsho/nvim-bufferline.lua'
+
   " Icons for file tree and statusbar
   Plug 'kyazdani42/nvim-web-devicons'
 
 
-
-  " Bufferline
 
 
 
@@ -62,5 +63,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'dylanaraps/wal.vim'
   Plug 'joshdick/onedark.vim'
   Plug 'arcticicestudio/nord-vim'
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()

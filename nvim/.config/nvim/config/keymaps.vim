@@ -14,8 +14,11 @@ let mapleader=" "
 " Resource config
 nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter>
 
-" Quit buffer
-nnoremap <leader>q :q<Enter>
+" Close buffer
+nnoremap <leader>q :bd<Enter>
+
+" Close window
+nnoremap <leader>qq :q<Enter>
 
 " Safe buffer
 nnoremap <leader>w :w<Enter>
@@ -55,7 +58,11 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap <silent> <leader>se :UltiSnipsEdit<Enter>
 
 
-
+" Bufferline navigation
+nnoremap <silent> <C-o> :BufferLineCycleNext<Enter>
+nnoremap <silent> <C-i> :BufferLineCyclePrev<Enter>
+nnoremap <silent> <A-o> :BufferLineMoveNext<Enter>
+nnoremap <silent> <A-i> :BufferLineMovePrev<Enter>
 
 " Navigation and resizing in splits
 nnoremap <C-h> <C-w>h
