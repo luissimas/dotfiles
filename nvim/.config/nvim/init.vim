@@ -38,9 +38,11 @@ source ~/.config/nvim/config/autocommands.vim
 
 
 
+
 "
 " Plugin-specific configs
 "
+
 luafile ~/.config/nvim/plug/lspconfig.lua
 luafile ~/.config/nvim/plug/galaxyline.lua
 luafile ~/.config/nvim/plug/bufferline.lua

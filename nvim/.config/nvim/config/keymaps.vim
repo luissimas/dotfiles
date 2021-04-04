@@ -58,7 +58,16 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap <silent> <leader>se :UltiSnipsEdit<Enter>
 
 " Telescope
-nnoremap <leader>ff :Telescope find_files<Enter>
+nnoremap <leader>ff :lua require('telescope.builtin').find_files()<Enter>
+nnoremap <leader>ft :lua require('telescope.builtin').builtin()<Enter>
+nnoremap <leader>fg :lua require('telescope.builtin').git_status()<Enter>
+
+nnoremap <leader>fd :lua require('telepada').find_dotfiles()<Enter>
+nnoremap <leader>fh :lua require('telepada').find_home()<Enter>
+nnoremap <leader>fc :lua require('telepada').colorscheme()<Enter>
+nnoremap <leader>fw :lua require('telepada').wal()<Enter>
+
+
 
 " Bufferline navigation
 nnoremap <silent> <C-o> :BufferLineCycleNext<Enter>
