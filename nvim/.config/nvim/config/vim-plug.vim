@@ -47,8 +47,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Icons for file tree and statusbar
   Plug 'kyazdani42/nvim-web-devicons'
 
-
-
+  " Telescope
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 
 
   " Vimtex for latex

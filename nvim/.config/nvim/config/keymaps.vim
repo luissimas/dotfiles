@@ -46,7 +46,7 @@ inoremap <C-l> <Esc>[s1z=`]a
 nnoremap <silent> gd :lua vim.lsp.buf.definition()<Enter>
 nnoremap <silent> K :lua vim.lsp.buf.hover()<Enter>
 nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<Enter>
-nnoremap <silent> <leader>f :lua vim.lsp.buf.formatting()<Enter>
+nnoremap <silent> <C-f> :lua vim.lsp.buf.formatting()<Enter>
 autocmd FileType cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>
 
 " Completion
@@ -57,6 +57,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " UltiSnips
 nnoremap <silent> <leader>se :UltiSnipsEdit<Enter>
 
+" Telescope
+nnoremap <leader>ff :Telescope find_files<Enter>
 
 " Bufferline navigation
 nnoremap <silent> <C-o> :BufferLineCycleNext<Enter>
