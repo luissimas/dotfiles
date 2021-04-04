@@ -30,7 +30,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'onsails/lspkind-nvim'
 
   " Treesitter
-  "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Snippets
   Plug 'SirVer/ultisnips'

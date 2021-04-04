@@ -15,10 +15,10 @@ let mapleader=" "
 nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter>
 
 " Close buffer
-nnoremap <leader>q :bd<Enter>
+nnoremap <leader>c :bd<Enter>
 
 " Close window
-nnoremap <leader>qq :q<Enter>
+nnoremap <leader>q :q<Enter>
 
 " Safe buffer
 nnoremap <leader>w :w<Enter>
