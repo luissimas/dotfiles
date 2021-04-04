@@ -24,3 +24,11 @@ augroup TRIMWHITESPACE
   " right before the writting of a buffer
   autocmd BufWritePre * :call TrimWhitespace()
 augroup END
+
+augroup STATUSLINECOLORSYNC
+  " Clears all autocommands from this group
+  autocmd!
+
+  " On colorscheme change, change the statusline theme as well
+  " autocmd ColorScheme * :exe':AirlineTheme '.g:colors_name
+augroup END

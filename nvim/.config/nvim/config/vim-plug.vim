@@ -26,11 +26,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Autocompletion
   Plug 'nvim-lua/completion-nvim'
 
-  " Treesitter
-  "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
   " Lspking completion popup icons
   Plug 'onsails/lspkind-nvim'
+
+  " Treesitter
+  "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Snippets
   Plug 'SirVer/ultisnips'
@@ -38,11 +38,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " File tree
   Plug 'kyazdani42/nvim-tree.lua'
 
-  " Font icons for tree and statusbar
-  Plug 'kyazdani42/nvim-web-devicons'
-
   " Galaxyline statusbar
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+  " Icons for file tree and statusbar
+  Plug 'kyazdani42/nvim-web-devicons'
+
+
 
   " Bufferline
 
@@ -56,9 +58,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'vim-pandoc/vim-pandoc-syntax'
 
   " Colorschemes
-  Plug 'romgrk/doom-one.vim'
   Plug 'morhetz/gruvbox'
   Plug 'dylanaraps/wal.vim'
+  Plug 'joshdick/onedark.vim'
   Plug 'arcticicestudio/nord-vim'
 
 call plug#end()

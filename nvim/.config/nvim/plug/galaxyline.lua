@@ -143,13 +143,17 @@ section.right[4] = {
 
 section.right[5] = {
     ShowLspClient = {
-        provider = 'GetLspClient',
-        condition = function()
-            local tbl = {['dashboard'] = true, [' '] = true}
-            if tbl[vim.bo.filetype] then return false end
-            return true
+        provider = function()
+          local lspclient = require('galaxyline.provider_lsp').get_lsp_client()
+
+          if lspclient == "No Active Lsp" then
+            return ' '
+          else
+            return ' '..lspclient
+          end
+
         end,
-        icon = ' ',
+
         highlight = {colors.fg, colors.bg}
     }
 }

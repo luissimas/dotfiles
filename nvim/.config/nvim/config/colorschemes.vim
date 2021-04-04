@@ -13,12 +13,4 @@ let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_termcolors=16
 
 
-
-
-"let g:airline_theme = 'wal'
-"let g:airline_theme = 'gruvbox'
-let g:airline_theme = 'nord'
-
-"colorscheme wal
-"colorscheme gruvbox
 colorscheme nord
