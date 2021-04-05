@@ -33,7 +33,7 @@ end
 function M.find_home()
    require('telescope.builtin').find_files{
      prompt_title = "All files",
-     cwd = "~/"
+     cwd = "~"
    }
 end
 
