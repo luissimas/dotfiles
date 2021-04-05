@@ -13,4 +13,4 @@ let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_termcolors=16
 
 
-colorscheme nord
+colorscheme onedark

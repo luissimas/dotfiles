@@ -64,6 +64,7 @@ nnoremap <leader>fg :lua require('telescope.builtin').git_status()<Enter>
 
 nnoremap <leader>fd :lua require('telepada').find_dotfiles()<Enter>
 nnoremap <leader>fh :lua require('telepada').find_home()<Enter>
+nnoremap <leader>fv :lua require('telepada').find_vault()<Enter>
 nnoremap <leader>fc :lua require('telepada').colorscheme()<Enter>
 nnoremap <leader>fw :lua require('telepada').wal()<Enter>
 
@@ -93,13 +94,13 @@ augroup COMPILE_KEYMAPS
   autocmd!
 
   " Define the keybindings via autocommands
-  autocmd Filetype c nmap <leader>c :!gcc -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
-  autocmd Filetype cpp nmap <leader>c :!make && alacritty --class Alacritty,Float -e ./output<Enter>
-  autocmd Filetype python nmap <leader>c :!alacritty --class Alacritty,Float -e python %<Enter>
-  autocmd Filetype javascript nmap <leader>c :!node %<Enter>
-  autocmd Filetype tex nmap <leader>c <plug>(vimtex-compile)
+  autocmd Filetype c nmap <leader>o :!gcc -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
+  autocmd Filetype cpp nmap <leader>o :!make && alacritty --class Alacritty,Float -e ./output<Enter>
+  autocmd Filetype python nmap <leader>o :!alacritty --class Alacritty,Float -e python %<Enter>
+  autocmd Filetype javascript nmap <leader>o :!node %<Enter>
+  autocmd Filetype tex nmap <leader>o <plug>(vimtex-compile)
   autocmd FIletype tex nmap <leader>of :!zathura %:r.pdf&<Enter>
-  autocmd Filetype pandoc nmap <leader>c :Pandoc pdf<Enter>
+  autocmd Filetype pandoc nmap <leader>o :Pandoc pdf<Enter>
   autocmd FIletype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
 augroup END
 

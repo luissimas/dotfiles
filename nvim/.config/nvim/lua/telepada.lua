@@ -32,9 +32,16 @@ end
 -- Find in home directory
 function M.find_home()
    require('telescope.builtin').find_files{
-     prompt_title = "Home",
+     prompt_title = "All files",
      cwd = "~/"
    }
+end
+
+function M.find_vault()
+  require('telescope.builtin').find_files{
+    prompt_title = "Notes",
+    cwd = "~/dox/vault"
+  }
 end
 
 -- Change theme using pywal
