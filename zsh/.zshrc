@@ -2,15 +2,17 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd extendedglob nomatch
+setopt autocd extendedglob nomatch PROMPT_SUBST
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/padawan/.zshrc'
 
-autoload -Uz compinit
+autoload -Uz compinit promptinit
 compinit
+promptinit
+
 _comp_options+=(globdots)
 # End of lines added by compinstall
 
@@ -22,8 +24,14 @@ _comp_options+=(globdots)
 unsetopt complete_aliases
 autoload -U colors && colors
 
+# Git info
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+zstyle ':vcs_info:git:*' formats ' %b'
+
 # Prompt Style
-PS1='%~ λ '
+PROMPT='%B%~ %F{yellow}${vcs_info_msg_0_}%f%b λ '
 
 # Aliases
 alias l='ls --color=auto'
@@ -37,7 +45,7 @@ alias c='customcd'
 
 customcd () {
   cd $1
-  ls --color=auto -A 
+  ls --color=auto -A
 }
 
 alias addall='git add -A'
@@ -55,7 +63,7 @@ alias vim='nvim'
 
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
-# Habitica cli tool 
+# Habitica cli tool
 alias hbt='python ~/fun/python/habitica-cli-py/main.py'
 
 # Vi mode configs

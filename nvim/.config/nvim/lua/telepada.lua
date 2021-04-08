@@ -24,7 +24,7 @@ local M = {}
 function M.find_dotfiles()
    require('telescope.builtin').git_files{
      prompt_title = "Dotfiles",
-     cwd = "~/dotfiles/"
+     cwd = "~/dotfiles"
    }
 end
 
@@ -62,7 +62,7 @@ function M.wal()
     -- Clear ignore patterns filter (so we can find the images)
     file_ignore_patterns = { " " },
 
-    cwd = "~/.wal/",
+    cwd = "~/.wal",
 
     attach_mappings = function(prompt_bufnr, map)
       function set_theme(close)
@@ -106,6 +106,9 @@ function change_colorscheme(themeName)
   elseif themeName == 'onedark' then
     vim.fn.system("wal --theme base16-onedark -q")
     vim.fn.system("feh --bg-fill ~/.wal/japanesestreet.png")
+  elseif themeName == 'dracula' then
+    vim.fn.system("wal --theme base16-dracula -q")
+    vim.fn.system("feh --bg-fill ~/.wal/basedracula.png")
   end
 
   -- Change vim theme

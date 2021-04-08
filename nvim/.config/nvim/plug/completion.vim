@@ -28,4 +28,4 @@ lua require('lspkind').init()
 " plugin for those files, but I still need the completion
 " to show my snippets
 
-autocmd Filetype pandoc lua require('completion').on_attach()
+autocmd Filetype markdown lua require('completion').on_attach()

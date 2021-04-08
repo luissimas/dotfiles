@@ -1,4 +1,4 @@
-snippet start "Start new project"
+snippet main "Main project file" b
 /*
 
 Autor(es): Luís Augusto Simas do Nascimento
@@ -13,13 +13,10 @@ Objetivos: $1
 #include <iostream>
 #include <string>
 
-using namespace std;
+using std::string;
+using std::cout;
+using std::endl;
 
-$0
-
-endsnippet
-
-snippet main "Main function template"
 // Função principal
 int main(int argc, char *argv[])
 {
@@ -33,10 +30,48 @@ int main(int argc, char *argv[])
 endsnippet
 
 snippet header "Header file template" b
-#ifndef ${2}_H
-#define ${2}_H
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `date "+%d/%m/%Y"`
+Data de Atualização: `date "+%d/%m/%Y"`
+
+Objetivos: Arquivo de cabeçalho da classe $1
+
+*/
+
+#ifndef $2_H
+#define $2_H
+
+// Bibliotecas
+#include <iostream>
+#include <string>
+
+using std::string;
 
 $0
 
 #endif
+endsnippet
+
+snippet implementation "Implementation of header file template" b
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `date "+%d/%m/%Y"`
+Data de Atualização: `date "+%d/%m/%Y"`
+
+Objetivos: Implementar os métodos da classe $1
+
+*/
+
+// Arquivo de cabeçalho
+#include "$1.h"
+
+using std::string;
+using std::cout;
+using std::endl;
+
+$0
+
 endsnippet

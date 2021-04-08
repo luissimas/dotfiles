@@ -11,8 +11,24 @@
 
 local section = require('galaxyline').section
 
+--[[
 local colors = {
     bg = '#3B4252',
+    fg = '#ECEFF4',
+    yellow = '#FFCC66',
+    cyan = '#4EC9B0',
+    green = '#608B4E',
+    orange = '#FF8800',
+    purple = '#C586C0',
+    magenta = '#D16D9E',
+    blue = '#569CD6',
+    red = '#F44747'
+}
+]]
+
+-- Onedark
+local colors = {
+    bg = '#282c34',
     fg = '#ECEFF4',
     yellow = '#FFCC66',
     cyan = '#4EC9B0',

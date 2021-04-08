@@ -5,7 +5,7 @@
 " | (_| | |_| | || (_) | | (_| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
 "  \__,_|\__,_|\__\___/   \___\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
 "
-
+" To find filetype use :set filetype?
 
 
 
@@ -15,6 +15,8 @@ fun! TrimWhitespace()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
 endfun
+
+autocmd Filetype markdown :set nowrap&
 
 augroup TRIMWHITESPACE
   " Clears all autocommands from this group

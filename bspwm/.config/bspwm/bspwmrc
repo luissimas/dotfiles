@@ -26,7 +26,7 @@ bspc config focus_follows_pointer true
 
 # Rules
 bspc rule -a qutebrowser desktop=^6
-bspc rule -a Brave-browser desktop=^6
+#bspc rule -a Brave-browser desktop=^6
 bspc rule -a spotify-tui desktop=^7 state=floating
 bspc rule -a obsidian monitor=^1
 bspc rule -a Rofi monitor=^1

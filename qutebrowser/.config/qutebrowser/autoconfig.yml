@@ -21,6 +21,7 @@ settings:
     https://www.askpython.com: false
     https://www.computerworld.com: false
     https://www.duolingo.com: false
+    https://www.javatpoint.com: false
     https://www.reddit.com: false
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false

@@ -53,12 +53,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'nvim-telescope/telescope.nvim'
 
 
+
+
+
   " Vimtex for latex
-  Plug 'lervag/vimtex'
+  " Plug 'lervag/vimtex'
 
   " Vim-pandoc for makdown compile and highlight
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
+  "Plug 'vim-pandoc/vim-pandoc'
+  "Plug 'vim-pandoc/vim-pandoc-syntax'
 
   " Colorschemes
   Plug 'morhetz/gruvbox'
