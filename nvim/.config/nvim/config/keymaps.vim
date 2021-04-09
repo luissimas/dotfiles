@@ -46,6 +46,7 @@ inoremap <C-l> <Esc>[s1z=`]a
 nnoremap <silent> gd :lua vim.lsp.buf.definition()<Enter>
 nnoremap <silent> K :lua vim.lsp.buf.hover()<Enter>
 nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<Enter>
+nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<Enter>
 nnoremap <silent> <C-f> :lua vim.lsp.buf.formatting()<Enter>
 autocmd FileType cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>
 
