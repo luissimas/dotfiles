@@ -100,8 +100,14 @@ augroup COMPILE_KEYMAPS
   autocmd Filetype javascript nmap <leader>o :!node %<Enter>
   autocmd Filetype tex nmap <leader>o <plug>(vimtex-compile)
   autocmd FIletype tex nmap <leader>of :!zathura %:r.pdf&<Enter>
+
   autocmd Filetype pandoc nmap <leader>o :Pandoc pdf<Enter>
-  autocmd FIletype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
+  autocmd Filetype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
+
+
+  autocmd Filetype rmd nmap <silent> <leader>o :!Rscript -e "rmarkdown::render('%')" >/dev/null<Enter><>
+  autocmd Filetype rmd nmap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>
+
 augroup END
 
 

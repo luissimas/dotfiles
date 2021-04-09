@@ -28,10 +28,10 @@ autoload -U colors && colors
 autoload -Uz vcs_info
 precmd() { vcs_info }
 
-zstyle ':vcs_info:git:*' formats ' %b'
+zstyle ':vcs_info:git:*' formats '  %b'
 
 # Prompt Style
-PROMPT='%B%~ %F{yellow}${vcs_info_msg_0_}%f%b λ '
+PROMPT='%B%~%F{yellow}${vcs_info_msg_0_}%f%b λ '
 
 # Aliases
 alias l='ls --color=auto'
