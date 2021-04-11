@@ -46,8 +46,8 @@ nnoremap <silent> gd :lua vim.lsp.buf.definition()<Enter>
 nnoremap <silent> K :lua vim.lsp.buf.hover()<Enter>
 nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<Enter>
 " nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<Enter>
-nnoremap <silent> <C-f> :lua vim.lsp.buf.formatting()<Enter>
 autocmd FileType cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>
+nnoremap <silent> <C-f> :lua vim.lsp.buf.formatting()<Enter>
 
 " Completion
 " Using <Tab> and <Shift-Tab> to navigate through completion popup menu
@@ -56,6 +56,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " UltiSnips
 nnoremap <silent> <leader>se :UltiSnipsEdit<Enter>
+
+" Prettier
+autocmd FileType javascript,html,css,json,yaml,typescript nnoremap <C-f> :Prettier<Enter>
 
 " Telescope
 nnoremap <leader>ff :lua require('telescope.builtin').find_files()<Enter>

@@ -32,6 +32,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Treesitter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+  " Prettier
+  Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
   " Snippets
   Plug 'SirVer/ultisnips'
 
