@@ -7,12 +7,11 @@
 "
 "
 
-
 " Tree side
-let g:nvim_tree_side = 'left'
+let g:nvim_tree_side = 'right'
 
 " Tree width
-let g:nvim_tree_width = 25
+let g:nvim_tree_width = 30
 
 " Update cursor when entering a buffer
 let g:nvim_tree_follow = 1
@@ -22,19 +21,25 @@ let g:nvim_tree_follow = 1
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 
 " Automatically close tree buffer when a file is opened
-let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_quit_on_open = 0
 
 " Automatically close tree buffer when it's the last buffer
-let g:nvim_tree_auto_close = 1
+let g:nvim_tree_auto_close = 0
 
 " Icons to show
-let g:nvim_tree_show_icons = { 'git': 1, 'folders': 1, 'files': 1 }
+let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 1 }
 
 " Highlight for git attributes
-let g:nvim_tree_git_hl = 1
+let g:nvim_tree_git_hl = 0
 
-" Keeping netrw (it's useful for some other stuff
+" Keeping netrw (it's useful for some other stuff)
 let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
+
+" Visual trailing lines on folders
+let g:nvim_tree_add_trailing = 1
+
+" Lsp diagnostics in the tree
+let g:nvim_tree_lsp_diagnostics = 1
 
 " Icons
 let g:nvim_tree_icons = {
@@ -66,10 +71,11 @@ lua <<EOF
     vim.g.nvim_tree_bindings = {
       ["<C-t>"]          = tree_cb("tabnew"),
       ["<CR>"]           = tree_cb("cd"),
+      ["<BS>"]           = tree_cb("dir_up"),
       ["o"]              = tree_cb("edit"),
       ["l"]              = tree_cb("edit"),
       ["s"]              = tree_cb("vsplit"),
-      ["h"]              = tree_cb("dir_up"),
+      ["h"]              = tree_cb("close_node"),
       ["I"]              = tree_cb("toggle_ignored"),
       ["H"]              = tree_cb("toggle_dotfiles"),
       ["R"]              = tree_cb("refresh"),

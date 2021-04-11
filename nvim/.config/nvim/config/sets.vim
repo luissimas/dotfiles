@@ -21,12 +21,13 @@ set splitright
 set updatetime=1000
 set nohlsearch
 set incsearch
-set scrolloff=16
+set scrolloff=8
 set nowrap
 set hidden
 set cmdheight=1
 set signcolumn=yes
 set termguicolors
+set timeoutlen=200
 
 " Tabs
 set tabstop=2

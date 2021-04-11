@@ -60,6 +60,7 @@ alias clone='git clone'
 alias pacman='sudo pacman'
 
 alias vim='nvim'
+alias code='codium'
 
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 

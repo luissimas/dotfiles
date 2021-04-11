@@ -14,8 +14,8 @@ let mapleader=" "
 " Resource config
 nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter>
 
-" Close buffer
-nnoremap <leader>c :bd<Enter>
+" Close buffer and keep the split
+nnoremap <leader>c :bp <bar> vs <bar> bn <bar> bd <Enter>
 
 " Close window
 nnoremap <leader>q :q<Enter>
@@ -30,15 +30,14 @@ nnoremap <leader>s :vsplit<Enter>
 nnoremap <leader>e :NvimTreeToggle<Enter>
 
 " Enable spellcheck
-nnoremap <leader>es :set spell!<Enter>
+nnoremap <leader>sk :set spell!<Enter>
 
 " Move to begin/end of line with L and H
 nnoremap <S-l> $
 nnoremap <S-h> 0
 
 " Auto spell correction
-inoremap <C-l> <Esc>[s1z=`]a
-
+inoremap <C-l> <Esc>[s1z=`]i
 
 
 
@@ -46,7 +45,7 @@ inoremap <C-l> <Esc>[s1z=`]a
 nnoremap <silent> gd :lua vim.lsp.buf.definition()<Enter>
 nnoremap <silent> K :lua vim.lsp.buf.hover()<Enter>
 nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<Enter>
-nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<Enter>
+" nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<Enter>
 nnoremap <silent> <C-f> :lua vim.lsp.buf.formatting()<Enter>
 autocmd FileType cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>
 

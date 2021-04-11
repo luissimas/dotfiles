@@ -22,10 +22,11 @@ let g:completion_enable_snippet = 'UltiSnips'
 " Enabling lspkind icons
 lua require('lspkind').init()
 
+
 " Enabling completion on every markdown buffer
 " This is required for my setup since that at the moment I
 " don't have any lsp server to attach the completion
 " plugin for those files, but I still need the completion
 " to show my snippets
-
 autocmd Filetype markdown lua require('completion').on_attach()
+autocmd Filetype rmd lua require('completion').on_attach()
