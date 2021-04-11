@@ -57,7 +57,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 
 
-
   " Vimtex for latex
   " Plug 'lervag/vimtex'
 

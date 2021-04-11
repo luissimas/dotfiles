@@ -24,7 +24,7 @@ nnoremap <leader>q :q<Enter>
 nnoremap <leader>w :w<Enter>
 
 " Open a vertical split
-nnoremap <leader>s :vsplit<Enter>
+nnoremap <C-s> :vsplit<Enter>
 
 " Toggle file tree
 nnoremap <leader>e :NvimTreeToggle<Enter>

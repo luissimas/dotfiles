@@ -26,8 +26,9 @@ set nowrap
 set hidden
 set cmdheight=1
 set signcolumn=yes
+"set colorcolumn=80,120
 set termguicolors
-set timeoutlen=200
+set timeoutlen=300
 
 " Tabs
 set tabstop=2
