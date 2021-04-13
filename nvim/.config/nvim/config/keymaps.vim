@@ -15,7 +15,7 @@ let mapleader=" "
 nnoremap <leader>r :source ~/.config/nvim/init.vim<Enter>
 
 " Close buffer and keep the split
-nnoremap <leader>c :bp <bar> vs <bar> bn <bar> bd <Enter>
+" nnoremap <leader>c :bp <bar> vs <bar> bn <bar> bd <Enter>
 
 " Close window
 nnoremap <leader>q :q<Enter>
@@ -72,12 +72,15 @@ nnoremap <leader>fc :lua require('telepada').colorscheme()<Enter>
 nnoremap <leader>fw :lua require('telepada').wal()<Enter>
 
 
+" Barbar tabline navigation
+nnoremap <silent> <C-o> :BufferNext<Enter>
+nnoremap <silent> <C-i> :BufferPrevious<Enter>
+nnoremap <silent> <A-o> :BufferMoveNext<Enter>
+nnoremap <silent> <A-i> :BufferMovePrev<Enter>
+nnoremap <silent> <leader>c :BufferClose<Enter>
 
-" Bufferline navigation
-nnoremap <silent> <C-o> :BufferLineCycleNext<Enter>
-nnoremap <silent> <C-i> :BufferLineCyclePrev<Enter>
-nnoremap <silent> <A-o> :BufferLineMoveNext<Enter>
-nnoremap <silent> <A-i> :BufferLineMovePrev<Enter>
+
+
 
 " Navigation and resizing in splits
 nnoremap <C-h> <C-w>h

@@ -46,8 +46,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Galaxyline statusbar
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
-  " Bufferline
-  Plug 'akinsho/nvim-bufferline.lua'
+  " Barbar tabline
+  Plug 'romgrk/barbar.nvim'
 
   " Icons for file tree and statusbar
   Plug 'kyazdani42/nvim-web-devicons'
