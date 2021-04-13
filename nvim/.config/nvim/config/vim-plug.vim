@@ -20,6 +20,7 @@ autocmd VimEnter *
 
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+
   " LSP Config
   Plug 'neovim/nvim-lspconfig'
 
@@ -43,13 +44,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " File tree
   Plug 'kyazdani42/nvim-tree.lua'
 
-  " Galaxyline statusbar
-  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+  " Lualine statusline
+  Plug 'hoob3rt/lualine.nvim'
 
   " Barbar tabline
   Plug 'romgrk/barbar.nvim'
 
-  " Icons for file tree and statusbar
+  " Icons for file tree and tabline
   Plug 'kyazdani42/nvim-web-devicons'
 
   " Telescope
@@ -75,5 +76,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'joshdick/onedark.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
 call plug#end()

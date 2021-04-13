@@ -16,6 +16,9 @@ let g:nvim_tree_width = 30
 " Update cursor when entering a buffer
 let g:nvim_tree_follow = 1
 
+" Visual indent markers
+let g:nvim_tree_indent_markers = 1
+
 " Files to be ignored
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 
@@ -26,19 +29,19 @@ let g:nvim_tree_quit_on_open = 0
 let g:nvim_tree_auto_close = 1
 
 " Icons to show
-let g:nvim_tree_show_icons = { 'git': 1, 'folders': 1, 'files': 1 }
+let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 1 }
 
 " Highlight for git attributes
 let g:nvim_tree_git_hl = 0
 
 " Keeping netrw (it's useful for some other stuff)
-let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
+let g:nvim_tree_disable_netrw = 1 "1 by default, disables netrw
 
 " Visual trailing lines on folders
-let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_add_trailing = 0
 
 " Lsp diagnostics in the tree
-let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_lsp_diagnostics = 0
 
 " Icons
 let g:nvim_tree_icons = {
