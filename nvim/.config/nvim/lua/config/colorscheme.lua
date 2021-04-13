@@ -6,8 +6,17 @@
 --
 --
 
+-- Gruvbox config
+vim.g.gruvbox_italic=1
+vim.g.gruvbox_bold=1
+vim.g.gruvbox_contrast_dark="hard"
+vim.g.gruvbox_termcolors=16
+
+
 local M = {}
 
 M.colorscheme = 'onedark'
+
+vim.cmd('colorscheme '..M.colorscheme)
 
 return M

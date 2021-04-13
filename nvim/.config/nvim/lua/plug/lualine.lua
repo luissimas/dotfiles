@@ -36,7 +36,7 @@ end
 
 require('lualine').setup{
   options = {
-    theme = require('colorscheme').colorscheme,
+    theme = require('config.colorscheme').colorscheme,
     section_separators = {'', ''},
     component_separators = {'', ''},
   },
