@@ -13,4 +13,4 @@ let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_termcolors=16
 
 
-colorscheme onedark
+lua vim.cmd('colorscheme '..require('colorscheme').colorscheme)

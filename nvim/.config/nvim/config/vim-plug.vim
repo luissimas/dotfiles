@@ -61,6 +61,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Autopairs
   Plug 'jiangmiao/auto-pairs'
 
+  " Indent lines
+  Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+
+  " Comment lines
+  Plug 'tpope/vim-commentary'
+
+  " Color highlight
+  Plug 'norcalli/nvim-colorizer.lua'
+
+  " Git sings
+  Plug 'lewis6991/gitsigns.nvim'
 
 
   " Vimtex for latex

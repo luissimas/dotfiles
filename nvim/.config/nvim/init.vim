@@ -47,10 +47,13 @@ luafile ~/.config/nvim/plug/lspconfig.lua
 luafile ~/.config/nvim/plug/treesitter.lua
 luafile ~/.config/nvim/plug/telescope.lua
 luafile ~/.config/nvim/plug/lualine.lua
+luafile ~/.config/nvim/plug/colorizer.lua
+luafile ~/.config/nvim/plug/gitsigns.lua
 source ~/.config/nvim/plug/completion.vim
 source ~/.config/nvim/plug/ultisnips.vim
 source ~/.config/nvim/plug/barbar.vim
 source ~/.config/nvim/plug/tree.vim
+source ~/.config/nvim/plug/indent.vim
 
 "source ~/.config/nvim/plug/vimtex.vim
 "source ~/.config/nvim/plug/pandoc.vim

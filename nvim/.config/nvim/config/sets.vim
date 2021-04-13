@@ -28,7 +28,7 @@ set cmdheight=1
 set signcolumn=yes
 "set colorcolumn=80,120
 set termguicolors
-set timeoutlen=300
+set timeoutlen=500
 
 " Tabs
 set tabstop=2
