@@ -27,6 +27,9 @@ return require('packer').startup(
     -- Prettier
     use {'prettier/vim-prettier', run = 'npm install' }
 
+    -- Git integration
+    use 'tpope/vim-fugitive'
+
     -- Snippets
     use 'SirVer/ultisnips'
 
