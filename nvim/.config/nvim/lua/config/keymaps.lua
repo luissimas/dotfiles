@@ -56,13 +56,15 @@ vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript 
 -- Telescope
 vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ft', ':lua require("telescope.builtin").builtin()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require("telescope.builtin").git_status()<Enter>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require("telepada").find_dotfiles()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telepada").find_home()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fv', ':lua require("telepada").find_vault()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("telepada").colorscheme()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telepada").wal()<Enter>', { noremap = true, silent = true })
+
+-- Vim-fugitive
+vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
 
 -- Barbar tabline navigation
 vim.api.nvim_set_keymap('n', '<C-o>', ':BufferNext<Enter>', { noremap = true, silent = true })
