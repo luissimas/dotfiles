@@ -4,6 +4,12 @@
 -- Options
 vim.o.completeopt="menuone,noinsert,noselect"
 
+-- Triger completion on delete
+vim.g.completion_trigger_on_delete = 1
+
+-- Smart case matching
+vim.g.completion_matching_smart_case = 1
+
 -- Matching strategy
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 

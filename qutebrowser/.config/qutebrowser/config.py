@@ -26,7 +26,7 @@ config.load_autoconfig()
 
 ## Always restore open sites when qutebrowser is reopened.
 ## Type: Bool
-c.auto_save.session = True 
+c.auto_save.session = True
 
 ## Backend to use to display websites. qutebrowser supports two different
 ## web rendering engines / backends, QtWebKit and QtWebEngine. QtWebKit
@@ -460,13 +460,13 @@ c.auto_save.session = True
 ##   - lightness-cielab: Modify colors by converting them to CIELAB color space and inverting the L value.
 ##   - lightness-hsl: Modify colors by converting them to the HSL color space and inverting the lightness (i.e. the "L" in HSL).
 ##   - brightness-rgb: Modify colors by subtracting each of r, g, and b from their maximum value.
-# c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+#c.colors.webpage.darkmode.algorithm = 'lightness-hsl'
 
 ## Contrast for dark mode. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
 ## `brightness-rgb`.
 ## Type: Float
-# c.colors.webpage.darkmode.contrast = 0.0
+#c.colors.webpage.darkmode.contrast = -0.1
 
 ## Render all web contents using a dark theme. Example configurations
 ## from Chromium's `chrome://flags`:  - "With simple HSL/CIELAB/RGB-based
@@ -478,7 +478,7 @@ c.auto_save.session = True
 ## `colors.webpage.darkmode.threshold.background` to 205.  - "With
 ## selective inversion of everything": Combines the two variants   above.
 ## Type: Bool
-# c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = False
 
 ## Render all colors as grayscale. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or

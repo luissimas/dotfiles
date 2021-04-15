@@ -7,13 +7,12 @@
 --
 --
 
+-- TODO: util to set options
 
 -- Spellcheck
 vim.o.spelllang='pt,en,la'
 
 -- General config
-vim.o.number = true
-vim.o.relativenumber = true
 vim.o.encoding='UTF-8'
 vim.o.smartindent = true
 vim.o.autoindent = true
@@ -26,12 +25,17 @@ vim.o.incsearch = true
 vim.o.scrolloff = 8
 vim.o.hidden = true
 vim.o.cmdheight = 1
-vim.o.signcolumn = 'false'
+vim.o.signcolumn = 'yes'
 --vim.o.colorcolumn = '80,120'
 vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
-vim.cmd('set nowrap')
+
+vim.wo.relativenumber = true
+vim.wo.number = true
+vim.wo.wrap = false
+vim.wo.signcolumn = 'yes'
+
 
 -- Tabs
 vim.o.tabstop = 2

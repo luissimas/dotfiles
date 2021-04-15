@@ -32,10 +32,6 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
-  ["auto-pairs"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/auto-pairs"
-  },
   ["barbar.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/barbar.nvim"
@@ -52,9 +48,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
-  gruvbox = {
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gruvbox"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -68,9 +64,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
+  ["lush.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lush.nvim"
+  },
   ["nord-vim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nord-vim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -79,6 +83,10 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-toggleterm.lua"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -109,9 +117,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  sonokai = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/sonokai"
+  },
   spaceduck = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/spaceduck"
+  },
+  ["telescope-media-files.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope-media-files.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -121,13 +137,29 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
+  ["vim-closetag"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-closetag"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
+  ["vim-pandoc"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-pandoc"
+  },
+  ["vim-pandoc-syntax"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
+  },
   ["vim-prettier"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-prettier"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vimtex"
   },
   ["wal.vim"] = {
     loaded = true,

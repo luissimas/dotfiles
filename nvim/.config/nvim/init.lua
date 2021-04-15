@@ -8,22 +8,20 @@
 --
 --
 --
---  This is the main file init.vim, here we can source all the other config
+-- This is the main file init.lua, here we can source all the other config
 --  files. The idea is to keep things more modular and extensible.
 --
 
 -- Plugins list
 require('plugins')
 
--- General neovim configuration via sets
+-- General
 require('config.sets')
-
--- Autocommands
 require('config.autocommands')
-
--- All the keymaps
 require('config.keymaps')
 
+-- Setting colorscheme
+vim.cmd('colorscheme '..require('config.colorscheme').colorscheme)
 
 -- Plugin-specific configs
 require('plug.lspconfig')
@@ -37,3 +35,7 @@ require('plug.ultisnips')
 require('plug.tree')
 require('plug.indent')
 require('plug.barbar')
+require('plug.pandoc')
+require('plug.closetag')
+require('plug.autopairs')
+require('plug.toggleterm')

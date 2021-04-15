@@ -7,16 +7,17 @@
 --
 
 -- Gruvbox config
-vim.g.gruvbox_italic=1
-vim.g.gruvbox_bold=1
-vim.g.gruvbox_contrast_dark="hard"
-vim.g.gruvbox_termcolors=16
+vim.o.background = "dark" -- or "light" for light mode
 
+-- Sonokai config
+vim.g.sonokai_style = 'atlantis'
+vim.g.sonokai_enable_italic = 1
+vim.g.sonokai_disable_italic_comment = 1
+
+-- testando aqui
 
 local M = {}
 
 M.colorscheme = 'onedark'
-
-vim.cmd('colorscheme '..M.colorscheme)
 
 return M

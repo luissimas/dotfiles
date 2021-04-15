@@ -32,8 +32,8 @@ font:
 
 window:
   padding:
-    x: 20
-    y: 20
+    x: 10
+    y: 10
 
 scrolling:
   history: 10000

@@ -11,7 +11,7 @@
 vim.g.nvim_tree_side = 'right'
 
 -- Tree width
-vim.g.nvim_tree_width = 30
+vim.g.nvim_tree_width = 25
 
 -- Update cursor when entering a buffer
 vim.g.nvim_tree_follow = 1

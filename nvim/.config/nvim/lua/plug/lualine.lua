@@ -12,7 +12,8 @@
 -- Custom functions
 -- Lsp client function from Galaxyline.nvim
 local get_lsp_client = function (msg)
-  msg = 'No Active Lsp'
+  -- msg = 'No Active Lsp'
+  msg = ' '
   local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
   local clients = vim.lsp.get_active_clients()
 
@@ -23,14 +24,12 @@ local get_lsp_client = function (msg)
   for _,client in ipairs(clients) do
     local filetypes = client.config.filetypes
     if filetypes and vim.fn.index(filetypes,buf_ft) ~= -1 then
-      return client.name
+      return ' '..client.name
     end
   end
 
   return msg
 end
-
-
 
 
 
@@ -45,7 +44,7 @@ require('lualine').setup{
     lualine_a = {'mode'},
     lualine_b = {'branch'},
     lualine_c = {'filename'},
-    lualine_x = { {'diagnostics', sources={'nvim_lsp'} }, { get_lsp_client, icon=''} },
+    lualine_x = { {'diagnostics', sources={'nvim_lsp'} }, { get_lsp_client } },
     lualine_y = {'filetype', 'progress', 'location'},
     lualine_z = {'encoding'}
   },

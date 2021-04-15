@@ -14,7 +14,7 @@ require('gitsigns').setup {
     noremap = true,
     buffer = true,
 
-    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    ['n B'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
 
   },
 
@@ -22,9 +22,9 @@ require('gitsigns').setup {
     interval = 1000
   },
 
-  current_line_blame = true,
+  current_line_blame = false,
   sign_priority = 6,
-  signcolumn = true,
+  signcolumn = false,
   update_debounce = 100,
   status_formatter = nil, -- Use default
   use_decoration_api = true,
@@ -49,6 +49,6 @@ require('gitsigns').setup {
         )
     end
 
-return {{' '..text, 'GitSignsCurrentLineBlame'}}
+    return {{' '..text, 'GitSignsCurrentLineBlame'}}
   end
 }

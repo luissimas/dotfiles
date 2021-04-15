@@ -1,10 +1,13 @@
+-- Only required if you have packer configured as `opt`
+vim.cmd [[packadd packer.nvim]]
+
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
   execute 'packadd packer.nvim'
 end
 
@@ -13,17 +16,13 @@ return require('packer').startup(
     -- Packer auto-manager
     use {"wbthomason/packer.nvim", opt = true}
 
-    -- LSP Config
-    use 'neovim/nvim-lspconfig'
-
-    -- Autocompletion
-    use 'nvim-lua/completion-nvim'
-
-    -- Lspking completion popup icons
-    use 'onsails/lspkind-nvim'
-
-    -- Treesitter
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    -- LSP Config, autocompletion and Treesitter
+    use {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/completion-nvim', -- Autocompletion
+      'onsails/lspkind-nvim', -- Lspking completion popup icons
+      {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- Treesitter
+    }
 
     -- Prettier
     use {'prettier/vim-prettier', run = 'npm install' }
@@ -44,12 +43,23 @@ return require('packer').startup(
     use 'kyazdani42/nvim-web-devicons'
 
     -- Telescope
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-media-files.nvim',
+      }
+    }
+
+    -- Toggle terminal wrapper
+    use "akinsho/nvim-toggleterm.lua"
 
     -- Autopairs
-    use 'jiangmiao/auto-pairs'
+    use "windwp/nvim-autopairs"
+
+    -- Autoclose tags
+    use 'alvan/vim-closetag'
 
     -- Indent lines
     use {'lukas-reineke/indent-blankline.nvim',  branch = 'lua' }
@@ -64,18 +74,19 @@ return require('packer').startup(
     use 'lewis6991/gitsigns.nvim'
 
     -- Vimtex for latex
-    -- Plug 'lervag/vimtex'
+    use 'lervag/vimtex'
 
     -- Vim-pandoc for makdown compile and highlight
-    -- Plug 'vim-pandoc/vim-pandoc'
-    -- Plug 'vim-pandoc/vim-pandoc-syntax'
+    use 'vim-pandoc/vim-pandoc'
+    use 'vim-pandoc/vim-pandoc-syntax'
 
     -- Colorschemes
-    use 'morhetz/gruvbox'
+    use 'sainnhe/sonokai'
     use 'dylanaraps/wal.vim'
     use 'joshdick/onedark.vim'
     use 'arcticicestudio/nord-vim'
     use {'dracula/vim', as = 'dracula' }
     use {'pineapplegiant/spaceduck', branch = 'main' }
+    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   end
 )

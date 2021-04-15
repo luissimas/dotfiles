@@ -16,7 +16,7 @@ super + Escape
 
 # applications
 super + shift + {w,r,o,d,z}
-	{$BROWSER,alacritty -e lf,obsidian,discord,zathura}
+	{qutebrowser,alacritty -e lf,obsidian,discord,zathura}
 
 # scripts
 super + shift + {t,b,p,y,s,a,c}

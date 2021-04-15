@@ -9,7 +9,7 @@
 vim.g.mapleader = " "
 
 -- Resource config
-vim.api.nvim_set_keymap('n', '<leader>r', ':source ~/.config/nvim/init.vim<Enter>', { noremap = true, silent=false })
+vim.api.nvim_set_keymap('n', '<leader>r', ':luafile ~/.config/nvim/init.lua<Enter> :PackerInstall<Enter>', { noremap = true, silent=false })
 
 -- Close buffer and keep the split
 vim.api.nvim_set_keymap('n', '<leader>c', ':bp <bar> vs <bar> bn <bar> bd <Enter>', { noremap = true })
@@ -44,7 +44,8 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':lua vim.lsp.buf.formatting()<Enter>', { 
 
 -- Completion (setting <Tab> and <Shift-tab> to navigate through completion popup menu)
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-n>" : "\\<S-Tab>"', { expr = true, noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, noremap = true, silent = true })
+vim.cmd('imap <silent> <C-p> <Plug>(completion_trigger)')
 
 -- UltiSnips edit snippets
 vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = true, silent = true })
@@ -78,7 +79,7 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<A-h>', ':vertical resize +5<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-j>', ':resize +5<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-k>', ':resize -5<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-l>', ':vetiral resize -5<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-l>', ':vertical resize -5<Enter>', { noremap = true, silent = true })
 
 
 -- <leader>o and <leader>of binded in autocommands.vim
