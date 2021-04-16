@@ -29,7 +29,15 @@ require('telescope').setup{
       }
     },
 
+    layout_strategy = "horizontal",
+
+    layout_defaults ={
+      horizontal = {
+        preview_width = 0.6,
+      }
+    },
+
     -- Files to be ignored
-    file_ignore_patterns = { 'node_modules', '%.png', '%.jpg', '%.jpeg', '%.pdf' }
-  }
+    file_ignore_patterns = { 'node_modules', '%.png', '%.jpg', '%.jpeg', '%.pdf' },
+  },
 }

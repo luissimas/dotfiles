@@ -54,14 +54,14 @@ vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = 
 vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript nnoremap <C-f> :Prettier<Enter>')
 
 -- Telescope
+-- vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ width=120, results_height = 5, preview_height = 200 }))<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ft', ':lua require("telescope.builtin").builtin()<Enter>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require("telepada").find_dotfiles()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telepada").find_home()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fv', ':lua require("telepada").find_vault()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("telepada").colorscheme()<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telepada").wal()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require("telescope_custom.find").find_dotfiles()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope_custom.find").find_home()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fv', ':lua require("telescope_custom.find").find_vault()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("telescope_custom.colorscheme").colorscheme()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telescope_custom.colorscheme").wal()<Enter>', { noremap = true, silent = true })
 
 -- Vim-fugitive
 vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
