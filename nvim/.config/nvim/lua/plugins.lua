@@ -92,13 +92,13 @@ return require('packer').startup(
 
     -- Colorschemes
     use{
+      'morhetz/gruvbox',
       'sainnhe/sonokai',
       'dylanaraps/wal.vim',
       'joshdick/onedark.vim',
       'arcticicestudio/nord-vim',
       {'dracula/vim', as = 'dracula' },
       {'pineapplegiant/spaceduck', branch = 'main' },
-      {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}},
     }
 
   end
