@@ -60,6 +60,9 @@ return require('packer').startup(
     -- Autopairs
     use "windwp/nvim-autopairs"
 
+    -- Color pairs
+    use 'p00f/nvim-ts-rainbow'
+
     -- Autoclose tags
     use 'alvan/vim-closetag'
 
@@ -72,6 +75,9 @@ return require('packer').startup(
     -- Color highlight
     use 'norcalli/nvim-colorizer.lua'
 
+    -- Smooth scrolling
+    use 'karb94/neoscroll.nvim'
+
     -- Git sings
     use 'lewis6991/gitsigns.nvim'
 
@@ -79,16 +85,21 @@ return require('packer').startup(
     use 'lervag/vimtex'
 
     -- Vim-pandoc for makdown compile and highlight
-    use 'vim-pandoc/vim-pandoc'
-    use 'vim-pandoc/vim-pandoc-syntax'
+    use {
+    'vim-pandoc/vim-pandoc',
+    'vim-pandoc/vim-pandoc-syntax',
+    }
 
     -- Colorschemes
-    use 'sainnhe/sonokai'
-    use 'dylanaraps/wal.vim'
-    use 'joshdick/onedark.vim'
-    use 'arcticicestudio/nord-vim'
-    use {'dracula/vim', as = 'dracula' }
-    use {'pineapplegiant/spaceduck', branch = 'main' }
-    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use{
+      'sainnhe/sonokai',
+      'dylanaraps/wal.vim',
+      'joshdick/onedark.vim',
+      'arcticicestudio/nord-vim',
+      {'dracula/vim', as = 'dracula' },
+      {'pineapplegiant/spaceduck', branch = 'main' },
+      {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}},
+    }
+
   end
 )

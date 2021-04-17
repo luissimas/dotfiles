@@ -32,4 +32,9 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true
   },
+
+  -- Color pairs
+  rainbow = {
+    enable = true,
+  }
 }
