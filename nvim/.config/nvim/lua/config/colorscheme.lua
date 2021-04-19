@@ -21,6 +21,6 @@ vim.g.sonokai_disable_italic_comment = 1
 
 local M = {}
 
-M.colorscheme = 'nord'
+M.colorscheme = 'onedark'
 
 return M

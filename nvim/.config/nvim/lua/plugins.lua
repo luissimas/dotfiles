@@ -64,7 +64,7 @@ return require('packer').startup(
     use 'p00f/nvim-ts-rainbow'
 
     -- Autoclose tags
-    use 'alvan/vim-closetag'
+    use 'windwp/nvim-ts-autotag'
 
     -- Indent lines
     use {'lukas-reineke/indent-blankline.nvim',  branch = 'lua' }
@@ -80,6 +80,9 @@ return require('packer').startup(
 
     -- Git sings
     use 'lewis6991/gitsigns.nvim'
+
+    -- Dashboard
+    use 'glepnir/dashboard-nvim'
 
     -- Vimtex for latex
     use 'lervag/vimtex'

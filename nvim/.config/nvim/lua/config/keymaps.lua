@@ -55,7 +55,8 @@ vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript 
 
 -- Telescope
 -- vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ width=120, results_height = 5, preview_height = 200 }))<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fo', ':Telescope oldfiles<Enter>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>fd', ':lua require("telescope_custom.find").find_dotfiles()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope_custom.find").find_home()<Enter>', { noremap = true, silent = true })

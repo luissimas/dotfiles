@@ -36,5 +36,10 @@ require('nvim-treesitter.configs').setup {
   -- Color pairs
   rainbow = {
     enable = true,
-  }
+  },
+
+  -- Autoclose tags
+  autotag = {
+    enable = true,
+  },
 }

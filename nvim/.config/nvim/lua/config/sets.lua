@@ -10,7 +10,7 @@
 -- TODO: util to set options
 
 -- Spellcheck
-vim.o.spelllang='pt,en,la'
+vim.bo.spelllang='pt,en,la'
 
 -- General config
 vim.o.encoding='UTF-8'
