@@ -15,6 +15,9 @@ unclutter --timeout 1 &
 wal -R &
 picom &
 
+# Redshift controlling backlight temperature and color
+redshift -b 1:0.5 -l -27.59667:-48.54917 &
+
 # Starting gnome-keyring for mailspring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)&
 export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)&

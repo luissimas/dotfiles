@@ -30,6 +30,9 @@ function change_theme(theme, method)
     elseif theme == 'dracula' then
       vim.fn.system("wal --theme base16-dracula -q")
       vim.fn.system("feh --bg-fill ~/.wal/basedracula.png")
+    elseif theme == 'palenight' then
+      vim.fn.system("wal --theme base16-material-palenight -q")
+      vim.fn.system("feh --bg-fill ~/.wal/palenight.jpg")
     end
 
     -- Change vim theme

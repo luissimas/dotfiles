@@ -100,6 +100,7 @@ return require('packer').startup(
       'dylanaraps/wal.vim',
       'joshdick/onedark.vim',
       'arcticicestudio/nord-vim',
+      'drewtempelmeyer/palenight.vim',
       {'dracula/vim', as = 'dracula' },
       {'pineapplegiant/spaceduck', branch = 'main' },
     }

@@ -6,21 +6,23 @@
 --
 --
 
--- Gruvbox config
+-- Gruvbox
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_contrast_dark = 'hard'
 vim.g.gruvbox_hls_cursor = 'gray'
 vim.g.gruvbox_sign_column = 'bg0'
 
--- Sonokai config
+-- Sonokai
 vim.g.sonokai_style = 'atlantis'
 vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_disable_italic_comment = 1
 
+-- Palenight
+vim.g.palenight_terminal_italics = 1
 
 
 local M = {}
 
-M.colorscheme = 'onedark'
+M.colorscheme = 'palenight'
 
 return M
