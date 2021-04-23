@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Making sure that everything is up to date
+pacman -Syu
+
 dotfilesdir=/home/padawan/dotfiles
 
 cd $dotfilesdir
