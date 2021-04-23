@@ -101,7 +101,6 @@ scrot
 sed
 spotify-tui
 spotifyd
-steam
 stow
 sudo
 sxhkd
