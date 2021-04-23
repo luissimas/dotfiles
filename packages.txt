@@ -1,4 +1,3 @@
-alacritty
 alsa-utils
 autoconf
 automake
@@ -42,6 +41,7 @@ jdk8-openjdk
 jq
 jre8-openjdk
 jre8-openjdk-headless
+kitty
 latex-mk
 latin-words
 lf
@@ -93,7 +93,6 @@ python-pynvim
 python-pywal
 python-ueberzug-git
 python2
-qutebrowser
 r
 redshift
 rofi

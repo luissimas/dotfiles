@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + {_,shift} + Return
-	{alacritty, st}
+	{kitty, st}
 
 # program launcher
 super + p
@@ -16,7 +16,7 @@ super + Escape
 
 # applications
 super + shift + {w,r,o,d,z}
-	{$BROWSER,alacritty -e lf,obsidian,discord,zathura}
+	{$BROWSER,kitty -e lf,obsidian,discord,zathura}
 
 # scripts
 super + shift + {t,b,p,y,s,a,c}

@@ -2,7 +2,7 @@
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/scripts/"
 
 # Exports
-export TERM="alacritty"
+export TERM="kitty"
 export BROWSER="brave"
 export READER="zathura"
 export EDITOR="nvim"
