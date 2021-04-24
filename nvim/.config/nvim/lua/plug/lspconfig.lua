@@ -15,9 +15,7 @@
 
 
 --[[
- Importing the setup configuration for each language server and attaching
- completion on setup, so the completion plugin can actually display the
- information that the lsp server is returning.
+ Importing the setup configuration for each language server.
 
  All the information about the servers can be found here:
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
@@ -25,28 +23,28 @@
 ]]
 
 -- Bash
-require('lspconfig').bashls.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').bashls.setup{}
 
 -- C/C++
-require('lspconfig').clangd.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').clangd.setup{}
 
 -- Python
-require('lspconfig').pyright.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').pyright.setup{}
 
 -- R
-require('lspconfig').r_language_server.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').r_language_server.setup{}
 
 -- JavaScript/TypeScript
-require('lspconfig').tsserver.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').tsserver.setup{}
 
 -- Vim script
-require('lspconfig').vimls.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').vimls.setup{}
 
 -- Json
-require('lspconfig').jsonls.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').jsonls.setup{}
 
 -- CSS
-require('lspconfig').cssls.setup{on_attach=require'completion'.on_attach}
+require('lspconfig').cssls.setup{}
 
 
 
@@ -60,7 +58,7 @@ require('lspconfig').cssls.setup{on_attach=require'completion'.on_attach}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require('lspconfig').html.setup{on_attach=require'completion'.on_attach, capabilities = capabilities}
+require('lspconfig').html.setup{capabilities = capabilities}
 
 
 
@@ -69,7 +67,6 @@ require('lspconfig').html.setup{on_attach=require'completion'.on_attach, capabil
 local sumneko_binary = "/usr/bin/lua-language-server"
 
 require('lspconfig').sumneko_lua.setup{
-  on_attach = require'completion'.on_attach,
   cmd = {sumneko_binary};
   settings = {
     Lua = {
