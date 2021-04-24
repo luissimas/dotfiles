@@ -45,7 +45,7 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':lua vim.lsp.buf.formatting()<Enter>', { 
 -- Completion (setting <Tab> and <Shift-tab> to navigate through completion popup menu)
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, noremap = true, silent = true })
-vim.cmd('imap <silent> <C-p> <Plug>(completion_trigger)')
+vim.cmd('inoremap <silent><expr> <C-Space> compe#complete()')
 
 -- UltiSnips edit snippets
 vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = true, silent = true })

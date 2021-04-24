@@ -19,7 +19,7 @@ return require('packer').startup(
     -- LSP Config, autocompletion and Treesitter
     use {
       'neovim/nvim-lspconfig',
-      'nvim-lua/completion-nvim', -- Autocompletion
+      'hrsh7th/nvim-compe',-- Autocompletion
       'onsails/lspkind-nvim', -- Lspking completion popup icons
       {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- Treesitter
     }
@@ -64,7 +64,7 @@ return require('packer').startup(
     use 'p00f/nvim-ts-rainbow'
 
     -- Autoclose tags
-    use 'windwp/nvim-ts-autotag'
+    use 'alvan/vim-closetag'
 
     -- Indent lines
     use {'lukas-reineke/indent-blankline.nvim',  branch = 'lua' }

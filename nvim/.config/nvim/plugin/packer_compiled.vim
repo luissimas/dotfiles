@@ -36,9 +36,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
-  ["completion-nvim"] = {
+  ["dashboard-nvim"] = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/completion-nvim"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
   dracula = {
     loaded = true,
@@ -48,9 +48,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
-  ["gruvbox.nvim"] = {
+  gruvbox = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gruvbox"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -64,9 +64,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  ["lush.nvim"] = {
+  ["neoscroll.nvim"] = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lush.nvim"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
   },
   ["nord-vim"] = {
     loaded = true,
@@ -79,6 +79,10 @@ _G.packer_plugins = {
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+  },
+  ["nvim-compe"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -96,6 +100,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
@@ -108,6 +116,10 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+  },
+  ["palenight.vim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/palenight.vim"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -125,10 +137,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/spaceduck"
   },
-  ["telescope-media-files.nvim"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope-media-files.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
@@ -144,6 +152,10 @@ _G.packer_plugins = {
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-commentary"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-pandoc"] = {
     loaded = true,

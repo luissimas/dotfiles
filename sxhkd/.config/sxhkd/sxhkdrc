@@ -86,7 +86,7 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
+super + {i,o}
 	bspc desktop -f {prev,next}.local
 
 # swap monitor focus/node

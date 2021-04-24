@@ -6,7 +6,7 @@ vim.g.UltiSnipsEditSplit='normal'
 vim.g.UltiSnipsSnippetDirectories={'ultisnips'}
 
 -- Triggers
-vim.g.UltiSnipsExpandTrigger='<Enter>'
+vim.g.UltiSnipsExpandTrigger='<C-e>'
 vim.g.UltiSnipsJumpForwardTrigger='<Tab>'
 vim.g.UltiSnipsJumpBackwardTrigger='<S-tab>'
 
