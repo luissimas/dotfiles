@@ -46,6 +46,7 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':lua vim.lsp.buf.formatting()<Enter>', { 
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, noremap = true, silent = true })
 vim.cmd('inoremap <silent><expr> <C-Space> compe#complete()')
+vim.cmd('inoremap <silent><expr> <CR>      compe#confirm("<CR>")')
 
 -- UltiSnips edit snippets
 vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = true, silent = true })
