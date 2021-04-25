@@ -54,6 +54,10 @@ vim.api.nvim_exec([[
 
     autocmd Filetype rmd nmap <silent> <leader>o :!Rscript -e \"rmarkdown::render('%')\" >/dev/null<Enter><>
     autocmd Filetype rmd nmap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>
+
+    autocmd Filetype sql nmap <leader>o <Plug>(DBUI_ExecuteQuery)
+    autocmd Filetype sql vmap <leader>o <Plug>(DBUI_ExecuteQuery)
+
   augroup END
 
 ]], false)

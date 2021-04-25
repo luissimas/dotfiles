@@ -67,8 +67,6 @@ vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telescope_custom.color
 
 -- Dadbod
 vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<Enter>', { noremap = true, silent = true })
-vim.cmd('nmap <leader>o <Plug>(DBUI_ExecuteQuery)')
-vim.cmd('vmap <leader>o <Plug>(DBUI_ExecuteQuery)')
 
 -- Vim-fugitive
 vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
