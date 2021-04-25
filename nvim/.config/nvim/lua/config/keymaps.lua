@@ -69,7 +69,10 @@ vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telescope_custom.color
 vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<Enter>', { noremap = true, silent = true })
 
 -- Vim-fugitive
-vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
+
+-- Neogit
+vim.api.nvim_set_keymap('n', '<leader>g', ':lua require("neogit").open({ kind="split" })<Enter>', { noremap = true, silent = true })
 
 -- Barbar tabline navigation
 vim.api.nvim_set_keymap('n', '<C-o>', ':BufferNext<Enter>', { noremap = true, silent = true })
