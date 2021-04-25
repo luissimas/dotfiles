@@ -35,6 +35,7 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
 vim.wo.signcolumn = 'yes'
+vim.wo.foldenable = false
 
 
 -- Tabs

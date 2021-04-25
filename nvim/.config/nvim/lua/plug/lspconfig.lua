@@ -63,7 +63,7 @@ require('lspconfig').html.setup{capabilities = capabilities}
 
 
 
--- Lua (This one also requires a bit of work to setup)
+-- Lua (This one requires a bit of work to setup)
 local sumneko_binary = "/usr/bin/lua-language-server"
 
 require('lspconfig').sumneko_lua.setup{

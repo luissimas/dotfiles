@@ -54,6 +54,13 @@ return require('packer').startup(
       }
     }
 
+    -- Database management
+    use {
+      'tpope/vim-dadbod',
+      'kristijanhusak/vim-dadbod-ui',
+      'kristijanhusak/vim-dadbod-completion',
+    }
+
     -- Toggle terminal wrapper
     use "akinsho/nvim-toggleterm.lua"
 

@@ -65,6 +65,9 @@ vim.api.nvim_set_keymap('n', '<leader>fv', ':lua require("telescope_custom.find"
 vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("telescope_custom.colorscheme").colorscheme()<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require("telescope_custom.colorscheme").wal()<Enter>', { noremap = true, silent = true })
 
+-- Dadbod
+vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<Enter>', { noremap = true, silent = true })
+
 -- Vim-fugitive
 vim.api.nvim_set_keymap('n', '<leader>g', ':Git<Enter>', { noremap = true, silent = true })
 

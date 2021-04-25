@@ -37,9 +37,4 @@ require('nvim-treesitter.configs').setup {
   rainbow = {
     enable = true,
   },
-
-  -- Autoclose tags
-  autotag = {
-    enable = true,
-  },
 }

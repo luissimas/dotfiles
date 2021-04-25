@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ethStatus="$(cat /sys/class/net/enp*/operstate 2>/dev/null)" 
+ethStatus="$(cat /sys/class/net/enp*/operstate 2>/dev/null)"
 wifiStatus="$(cat /sys/class/net/w*/operstate 2>/dev/null)"
 wifiName="$(iwgetid -r)"
 
@@ -9,6 +9,6 @@ if [[ $ethStatus = "up" ]]; then
 elif [[ $wifiStatus = "up" ]]; then
   printf  "  $wifiName"
 else
-	printf " Disconnected"	
+	printf " Disconnected"
 fi
 

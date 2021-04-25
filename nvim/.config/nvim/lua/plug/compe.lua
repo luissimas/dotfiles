@@ -27,6 +27,7 @@ require('compe').setup {
     nvim_lua = true;
     vsnip = false;
     ultisnips = true;
+    vim_dadbod_completion = true;
   };
 }
 
