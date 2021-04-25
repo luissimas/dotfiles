@@ -103,6 +103,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neogit"
+  },
   ["neoscroll.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
@@ -203,10 +207,6 @@ _G.packer_plugins = {
   ["vim-dadbod-ui"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui"
-  },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-pandoc"] = {
     loaded = true,

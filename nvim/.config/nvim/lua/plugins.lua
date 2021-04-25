@@ -28,7 +28,9 @@ return require('packer').startup(
     use {'prettier/vim-prettier', run = 'npm install' }
 
     -- Git integration
-    use 'tpope/vim-fugitive'
+    -- use 'tpope/vim-fugitive'
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use 'lewis6991/gitsigns.nvim'
 
     -- Snippets
     use 'SirVer/ultisnips'
@@ -84,9 +86,6 @@ return require('packer').startup(
 
     -- Smooth scrolling
     use 'karb94/neoscroll.nvim'
-
-    -- Git sings
-    use 'lewis6991/gitsigns.nvim'
 
     -- Dashboard
     use 'glepnir/dashboard-nvim'
