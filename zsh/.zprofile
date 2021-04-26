@@ -1,5 +1,7 @@
 # Path
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/scripts/"
+export PATH=/home/$USER/.local/go/bin:$PATH
+export GOPATH=$HOME/.local/go
 
 # Exports
 export TERM="kitty"

@@ -20,6 +20,7 @@ require('compe').setup {
   -- Sources for completion
   source = {
     path = true;
+    spell = true;
     buffer = true;
     tags = true;
     calc = true;
