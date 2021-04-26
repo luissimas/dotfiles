@@ -30,7 +30,6 @@ vim.o.signcolumn = 'yes'
 vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
-
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
