@@ -20,12 +20,10 @@ return require('packer').startup(
     use {
       'neovim/nvim-lspconfig',
       'hrsh7th/nvim-compe',-- Autocompletion
-      'onsails/lspkind-nvim', -- Lspking completion popup icons
+      'onsails/lspkind-nvim', -- Lspkind completion popup icons
+      'mhartington/formatter.nvim', -- Code format
       {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- Treesitter
     }
-
-    -- Prettier
-    use {'prettier/vim-prettier', run = 'npm install' }
 
     -- Git integration
     -- use 'tpope/vim-fugitive'
@@ -62,6 +60,9 @@ return require('packer').startup(
       'kristijanhusak/vim-dadbod-ui',
       'kristijanhusak/vim-dadbod-completion',
     }
+
+    -- Lua pad
+    use "rafcamlet/nvim-luapad"
 
     -- Toggle terminal wrapper
     use "akinsho/nvim-toggleterm.lua"
@@ -110,6 +111,9 @@ return require('packer').startup(
       {'dracula/vim', as = 'dracula' },
       {'pineapplegiant/spaceduck', branch = 'main' },
     }
+
+    -- My custom plugins (testing stuff)
+    use '~/fun/lua/plugins/pomodoro'
 
   end
 )

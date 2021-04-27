@@ -51,8 +51,8 @@ vim.cmd('inoremap <silent><expr> <CR>      compe#confirm("<CR>")')
 -- UltiSnips edit snippets
 vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = true, silent = true })
 
--- Prettier
-vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript nnoremap <C-f> :Prettier<Enter>')
+-- Formatter
+vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript,lua nnoremap <C-f> :FormatWrite<Enter>')
 
 -- Telescope
 -- vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ width=120, results_height = 5, preview_height = 200 }))<Enter>', { noremap = true, silent = true })

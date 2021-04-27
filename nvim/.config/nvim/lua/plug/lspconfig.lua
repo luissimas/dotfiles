@@ -74,22 +74,3 @@ require('lspconfig').sumneko_lua.setup {
         }
     }
 }
-
--- Formatting
-require('lspconfig').efm.setup {
-    init_options = {documentFormatting = true},
-    filetypes = {"lua"},
-
-    settings = {
-
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
-                    formatStdin = true
-                }
-            }
-        }
-    }
-}

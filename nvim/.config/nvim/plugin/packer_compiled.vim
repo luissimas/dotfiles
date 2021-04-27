@@ -83,6 +83,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/dracula"
   },
+  ["formatter.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/formatter.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
@@ -131,6 +135,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-luapad"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-luapad"
+  },
   ["nvim-toggleterm.lua"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua"
@@ -167,6 +175,10 @@ _G.packer_plugins = {
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
+  pomodoro = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/pomodoro"
   },
   ["popup.nvim"] = {
     loaded = true,
@@ -215,10 +227,6 @@ _G.packer_plugins = {
   ["vim-pandoc-syntax"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
-  },
-  ["vim-prettier"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-prettier"
   },
   vimtex = {
     loaded = true,
