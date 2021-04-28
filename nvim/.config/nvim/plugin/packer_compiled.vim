@@ -236,6 +236,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vimtex"
   },
+  vimwiki = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vimwiki"
+  },
   ["wal.vim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/wal.vim"

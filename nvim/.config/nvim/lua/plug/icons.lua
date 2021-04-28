@@ -12,5 +12,11 @@ require('nvim-web-devicons').setup{
       color = "#FFA500",
       name = "Sqlite"
     },
+
+    wiki = {
+      icon = "",
+      color = "#006600",
+      name = "VimWiki"
+    }
   }
 }

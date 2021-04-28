@@ -28,9 +28,9 @@ vim.g.dashboard_custom_shortcut={
 }
 
 vim.g.dashboard_custom_section = {
-    a = {description = {'  Find File                          SPC f f'}, command = 'Telescope find_files'},
-    b = {description = {'  Recently Opened Files              SPC f o'}, command = 'Telescope oldfiles'},
-    c = {description = {'  Settings                           SPC f d'}, command = ':lua require("plug.dashboard").edit_settings()'}
+    a = {description = {'  Settings                           SPC f d'}, command = ':lua require("plug.dashboard").edit_settings()'},
+    b = {description = {'  Find File                          SPC f f'}, command = 'Telescope find_files'},
+    c = {description = {'  Recently Opened Files              SPC f o'}, command = 'Telescope oldfiles'}
 }
 
 local M = {}

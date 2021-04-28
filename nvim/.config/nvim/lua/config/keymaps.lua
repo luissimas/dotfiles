@@ -12,11 +12,12 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<leader>r', ':luafile ~/.config/nvim/init.lua<Enter> :PackerSync<Enter>', { noremap = true, silent=false })
 
 -- Close buffer and keep the split
-vim.api.nvim_set_keymap('n', '<leader>c', ':bp <bar> vs <bar> bn <bar> bd <Enter>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>c', ':bp <bar> vs <bar> bn <bar> bd <Enter>', { noremap = true })
 
 -- Close window
 vim.api.nvim_set_keymap('n', '<leader>q', ':q<Enter>', { noremap = true, silent = true })
--- Save buffer
+
+-- Write buffer
 vim.api.nvim_set_keymap('n', '<leader>w', ':w<Enter>', { noremap = true, silent = false })
 
 -- Open vertical split
@@ -41,7 +42,7 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':lua vim.lsp.buf.formatting()<Enter>', { 
 
 --Lspsaga
 vim.api.nvim_set_keymap('n', '<leader>rn', ':Lspsaga rename<Enter>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ca', ':Lspsaga code_action<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ca', ':Lspsaga code_action<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gd', ':Lspsaga lsp_finder<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':Lspsaga hover_doc<Enter>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'D', ':Lspsaga preview_definition<Enter>', { noremap = true, silent = true })
@@ -56,7 +57,7 @@ vim.cmd('inoremap <silent><expr> <CR>      compe#confirm("<CR>")')
 vim.api.nvim_set_keymap('n', '<leader>se', ':UltiSnipsEdit<Enter>', { noremap = true, silent = true })
 
 -- Formatter
-vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript,lua nnoremap <C-f> :FormatWrite<Enter>')
+vim.api.nvim_command('autocmd FileType javascript,html,css,json,yaml,typescript,lua,python nnoremap <C-f> :FormatWrite<Enter>')
 
 -- Telescope
 -- vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ width=120, results_height = 5, preview_height = 200 }))<Enter>', { noremap = true, silent = true })

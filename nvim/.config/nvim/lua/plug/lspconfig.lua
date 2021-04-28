@@ -13,28 +13,28 @@
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
 
 ]] -- Bash
-require('lspconfig').bashls.setup {}
+require("lspconfig").bashls.setup {}
 
 -- C/C++
-require('lspconfig').clangd.setup {}
+require("lspconfig").clangd.setup {}
 
 -- Python
-require('lspconfig').pyright.setup {}
+require("lspconfig").pyright.setup {}
 
 -- R
-require('lspconfig').r_language_server.setup {}
+require("lspconfig").r_language_server.setup {}
 
 -- JavaScript/TypeScript
-require('lspconfig').tsserver.setup {}
+require("lspconfig").tsserver.setup {}
 
 -- Vim script
-require('lspconfig').vimls.setup {}
+require("lspconfig").vimls.setup {}
 
 -- Json
-require('lspconfig').jsonls.setup {}
+require("lspconfig").jsonls.setup {}
 
 -- CSS
-require('lspconfig').cssls.setup {}
+require("lspconfig").cssls.setup {}
 
 -- HTML
 --[[
@@ -45,32 +45,32 @@ require('lspconfig').cssls.setup {}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require('lspconfig').html.setup {capabilities = capabilities}
+require("lspconfig").html.setup {capabilities = capabilities}
 
 -- Lua (This one requires a bit of work to setup)
 local sumneko_binary = "/usr/bin/lua-language-server"
 
 -- Autocomplete and diagnostics
-require('lspconfig').sumneko_lua.setup {
-    cmd = {sumneko_binary},
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = vim.split(package.path, ';')
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {enable = false}
-        }
+require("lspconfig").sumneko_lua.setup {
+  cmd = {sumneko_binary},
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+        -- Setup your lua path
+        path = vim.split(package.path, ";")
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {"vim"}
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {[vim.fn.expand("$VIMRUNTIME/lua")] = true, [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true}
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {enable = false}
     }
+  }
 }

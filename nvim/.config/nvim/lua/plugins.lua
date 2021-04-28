@@ -16,35 +16,29 @@ return require("packer").startup(
     -- Packer auto-manager
     use {"wbthomason/packer.nvim", opt = true}
 
-    -- LSP Config, autocompletion and Treesitter
+    -- LSP and autocomplete
     use {
-      "neovim/nvim-lspconfig",
       "hrsh7th/nvim-compe", -- Autocompletion
+      "neovim/nvim-lspconfig", -- Lsp Config layer
       "glepnir/lspsaga.nvim", -- Code actions, better diagnostics and a bunch of stuff
       "onsails/lspkind-nvim", -- Lspkind completion popup icons
       "mhartington/formatter.nvim", -- Code format
       {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- Treesitter
     }
 
-    -- Git integration
-    -- use 'tpope/vim-fugitive'
-    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
-    use "lewis6991/gitsigns.nvim"
-
     -- Snippets
     use "SirVer/ultisnips"
 
-    -- File tree
-    use "kyazdani42/nvim-tree.lua"
+    -- VimWiki
+    use "vimwiki/vimwiki"
 
-    -- Lualine statusline
-    use "hoob3rt/lualine.nvim"
-
-    -- Barbar tabline
-    use "romgrk/barbar.nvim"
-
-    -- Icons for file tree and tabline
-    use "kyazdani42/nvim-web-devicons"
+    -- Git integration
+    use {
+      -- "tpope/vim-fugitive",
+      "TimUntersberger/neogit",
+      requires = "nvim-lua/plenary.nvim",
+      "lewis6991/gitsigns.nvim"
+    }
 
     -- Telescope
     use {
@@ -55,6 +49,14 @@ return require("packer").startup(
       }
     }
 
+    -- Bars and tree
+    use {
+      "kyazdani42/nvim-tree.lua", -- File tree
+      "hoob3rt/lualine.nvim", -- Lualine statusline
+      "romgrk/barbar.nvim", -- Barbar tabline
+      "kyazdani42/nvim-web-devicons" -- Icons for file tree and tabline
+    }
+
     -- Database management
     use {
       "tpope/vim-dadbod",
@@ -62,35 +64,29 @@ return require("packer").startup(
       "kristijanhusak/vim-dadbod-completion"
     }
 
-    -- Lua pad
-    use "rafcamlet/nvim-luapad"
+    -- Autopairs and tags
+    use {
+      "windwp/nvim-autopairs",
+      "alvan/vim-closetag"
+    }
+
+    -- Pure visual stuff
+    use {
+      "p00f/nvim-ts-rainbow", -- Color pairs
+      "karb94/neoscroll.nvim", -- Smooth scrolling
+      "glepnir/dashboard-nvim", -- Dashboard
+      "norcalli/nvim-colorizer.lua", -- Color highlight
+      {"lukas-reineke/indent-blankline.nvim", branch = "lua"} -- Indent lines
+    }
 
     -- Toggle terminal wrapper
     use "akinsho/nvim-toggleterm.lua"
 
-    -- Autopairs
-    use "windwp/nvim-autopairs"
-
-    -- Color pairs
-    use "p00f/nvim-ts-rainbow"
-
-    -- Autoclose tags
-    use "alvan/vim-closetag"
-
-    -- Indent lines
-    use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
-
     -- Comment lines
     use "tpope/vim-commentary"
 
-    -- Color highlight
-    use "norcalli/nvim-colorizer.lua"
-
-    -- Smooth scrolling
-    use "karb94/neoscroll.nvim"
-
-    -- Dashboard
-    use "glepnir/dashboard-nvim"
+    -- Lua pad
+    use "rafcamlet/nvim-luapad"
 
     -- Vimtex for latex
     use "lervag/vimtex"

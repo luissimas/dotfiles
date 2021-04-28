@@ -20,6 +20,16 @@ require('formatter').setup({
             stdin = true
           }
         end
+      },
+    python = {
+        -- luafmt
+        function()
+          return {
+            exe = "autopep8",
+            args = {"--max-line-length", 120, "--aggressive"},
+            stdin = false
+          }
+        end
       }
   }
 })
