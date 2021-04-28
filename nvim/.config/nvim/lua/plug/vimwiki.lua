@@ -30,8 +30,8 @@ vim.g.vimwiki_list = {
   {
     path = "~/dox/vimwiki",
     name = "Main",
-    syntax = "default",
-    ext = ".wiki",
+    syntax = "markdown",
+    ext = ".md",
     maxhi = 1,
     automatic_nested_syntaxes = 1
   }

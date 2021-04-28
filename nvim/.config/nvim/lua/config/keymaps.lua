@@ -8,8 +8,8 @@
 
 vim.g.mapleader = " "
 
--- Resource config
-vim.api.nvim_set_keymap('n', '<leader>r', ':luafile ~/.config/nvim/init.lua<Enter> :PackerSync<Enter>', { noremap = true, silent=false })
+-- Reload file
+vim.api.nvim_set_keymap('n', '<leader>r', ':edit<Enter>', { noremap = true, silent=false })
 
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap('n', '<leader>c', ':bp <bar> vs <bar> bn <bar> bd <Enter>', { noremap = true })
