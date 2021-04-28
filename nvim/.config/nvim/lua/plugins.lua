@@ -91,8 +91,15 @@ return require("packer").startup(
     -- Vimtex for latex
     use "lervag/vimtex"
 
-    -- Vim-pandoc for makdown compile and highlight
+    -- Markdown
     use {
+      {
+        "iamcco/markdown-preview.nvim",
+        run = function()
+          vim.fn["mkdp#util#install"]()
+        end,
+        ft = {"markdown", "vim-plug"}
+      },
       "vim-pandoc/vim-pandoc",
       "vim-pandoc/vim-pandoc-syntax"
     }
@@ -103,6 +110,7 @@ return require("packer").startup(
       "sainnhe/sonokai",
       "dylanaraps/wal.vim",
       "joshdick/onedark.vim",
+      'folke/lsp-colors.nvim', -- Adds LSP colors for themes that don't yet support them
       "arcticicestudio/nord-vim",
       "drewtempelmeyer/palenight.vim",
       {"dracula/vim", as = "dracula"},
