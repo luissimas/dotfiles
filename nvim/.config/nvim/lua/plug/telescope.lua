@@ -41,3 +41,6 @@ require('telescope').setup{
     file_ignore_patterns = { 'node_modules', '%.png', '%.jpg', '%.jpeg', '%.pdf' },
   },
 }
+
+-- Loading extensions
+require('telescope').load_extension('fzy_native')

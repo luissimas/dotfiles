@@ -36,17 +36,16 @@ return require("packer").startup(
     use {
       -- "tpope/vim-fugitive",
       "TimUntersberger/neogit",
-      requires = "nvim-lua/plenary.nvim",
+      requires = {"nvim-lua/plenary.nvim"},
       "lewis6991/gitsigns.nvim"
     }
 
     -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
-      requires = {
-        "nvim-lua/popup.nvim",
-        "nvim-lua/plenary.nvim"
-      }
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim"
     }
 
     -- Bars and tree
@@ -85,6 +84,9 @@ return require("packer").startup(
     -- Comment lines
     use "tpope/vim-commentary"
 
+    -- Surroundings
+    use "tpope/vim-surround"
+
     -- Lua pad
     use "rafcamlet/nvim-luapad"
 
@@ -110,7 +112,7 @@ return require("packer").startup(
       "sainnhe/sonokai",
       "dylanaraps/wal.vim",
       "joshdick/onedark.vim",
-      'folke/lsp-colors.nvim', -- Adds LSP colors for themes that don't yet support them
+      "folke/lsp-colors.nvim", -- Adds LSP colors for themes that don't yet support them
       "arcticicestudio/nord-vim",
       "drewtempelmeyer/palenight.vim",
       {"dracula/vim", as = "dracula"},

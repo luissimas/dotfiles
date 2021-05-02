@@ -2,7 +2,7 @@
 vim.g.vimwiki_map_prefix = "<leader>v"
 
 -- Highlights for different header levels
-vim.g.vimwiki_hl_headers = 1
+vim.g.vimwiki_hl_headers = 0
 
 -- Highlights for checked items
 vim.g.vimwiki_hl_cb_checked = 2

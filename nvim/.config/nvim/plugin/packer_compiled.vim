@@ -205,6 +205,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/spaceduck"
   },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
@@ -241,6 +245,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-surround"
+  },
   vimtex = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vimtex"
@@ -260,8 +268,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time("Defining lazy-load filetype autocommands", true)
-vim.cmd [[au FileType vim-plug ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "vim-plug" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType vim-plug ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "vim-plug" }, _G.packer_plugins)]]
 time("Defining lazy-load filetype autocommands", false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

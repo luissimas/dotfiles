@@ -10,6 +10,7 @@
 -- TODO: util to set options
 
 -- Spellcheck
+vim.o.spelllang='pt,en,la'
 vim.bo.spelllang='pt,en,la'
 
 -- General config
@@ -25,11 +26,11 @@ vim.o.incsearch = true
 vim.o.scrolloff = 8
 vim.o.hidden = true
 vim.o.cmdheight = 1
-vim.o.signcolumn = 'yes'
--- vim.o.colorcolumn = '80,120'
 vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
+vim.wo.signcolumn = 'yes'
+-- vim.wo.colorcolumn = '80,120'
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false

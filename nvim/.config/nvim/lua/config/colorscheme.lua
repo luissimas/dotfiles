@@ -23,6 +23,6 @@ vim.g.palenight_terminal_italics = 1
 
 local M = {}
 
-M.colorscheme = 'palenight'
+M.colorscheme = 'onedark'
 
 return M
