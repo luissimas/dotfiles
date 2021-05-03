@@ -5,4 +5,4 @@ killall -q spt
 
 spotifyd
 
-alacritty --class Alacritty,spotify-tui -e spt
+kitty --class spotify-tui -e spt

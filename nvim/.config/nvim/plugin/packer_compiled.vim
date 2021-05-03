@@ -120,10 +120,6 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim"
   },
-  neogit = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neogit"
-  },
   ["neoscroll.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
@@ -237,6 +233,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
   ["vim-pandoc"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-pandoc"
@@ -268,8 +268,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time("Defining lazy-load filetype autocommands", true)
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType vim-plug ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "vim-plug" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 time("Defining lazy-load filetype autocommands", false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

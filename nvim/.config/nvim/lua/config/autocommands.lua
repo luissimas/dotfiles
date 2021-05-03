@@ -47,9 +47,9 @@ vim.api.nvim_exec([[
   augroup COMPILE_KEYMAPS
     autocmd!
 
-    autocmd Filetype c nmap <leader>o :!gcc -o output % -lm && alacritty --class Alacritty,Float -e ./output<Enter>
-    autocmd Filetype cpp nmap <leader>o :!make && alacritty --class Alacritty,Float -e ./output<Enter>
-    autocmd Filetype python nmap <leader>o :!alacritty --class Alacritty,Float -e python %<Enter>
+    autocmd Filetype c nmap <leader>o :!gcc -o output % -lm && kitty --class Float -e ./output<Enter>
+    autocmd Filetype cpp nmap <leader>o :!make && kitty --class Float -e ./output<Enter>
+    autocmd Filetype python nmap <leader>o :!kitty --class Float -e python %<Enter>
     autocmd Filetype javascript nmap <leader>o :!node %<Enter>
     autocmd Filetype tex nmap <leader>o <plug>(vimtex-compile)
     autocmd Filetype tex nmap <leader>of :!zathura %:r.pdf&<Enter>

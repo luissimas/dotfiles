@@ -34,8 +34,8 @@ return require("packer").startup(
 
     -- Git integration
     use {
-      -- "tpope/vim-fugitive",
-      "TimUntersberger/neogit",
+      "tpope/vim-fugitive",
+      -- "TimUntersberger/neogit",
       requires = {"nvim-lua/plenary.nvim"},
       "lewis6991/gitsigns.nvim"
     }
