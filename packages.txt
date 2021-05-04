@@ -54,9 +54,11 @@ linux-headers
 logmein-hamachi
 lua
 lua-language-server
+luarocks
 m4
 mailspring
 make
+mariadb
 mars-mips
 mesa
 mpv
@@ -93,11 +95,14 @@ python-pynvim
 python-pywal
 python-ueberzug-git
 python2
+qutebrowser
 r
 redshift
 rofi
+rstudio-desktop-bin
 scrot
 sed
+spaceship-prompt-git
 spotify-tui
 spotifyd
 stow
@@ -188,4 +193,5 @@ zathura-pdf-mupdf
 zip
 zscroll-git
 zsh
-zsh-syntax-highlighting-git
+zsh-autosuggestions
+zsh-syntax-highlighting
