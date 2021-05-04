@@ -13,6 +13,7 @@ unsetopt beep
 
 # Enable autocomplete
 autoload -U compinit
+zstyle ':completion:*' menu select
 compinit
 
 # Include hidden files on completion
@@ -83,10 +84,10 @@ customcd () {
 
 
 # Syntax highlighting
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Zsh-autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Enable prompt
 autoload -U promptinit
