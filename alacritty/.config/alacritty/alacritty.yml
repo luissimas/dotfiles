@@ -1,0 +1,52 @@
+# Font configuration (changes require restart)
+font:
+  # The size to use.
+  size: 11
+  # The normal (roman) font face to use.
+  normal:
+    family: Fira Code Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: Fira Code Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: Fira Code Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Italic
+
+# Point size
+  size: 11
+
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+
+window:
+  padding:
+    x: 10
+    y: 10
+
+scrolling:
+  history: 10000
+
+  multiplier: 10
+
+draw_bold_text_with_bright_colors: false
+
+selection:
+  save_to_clipboard: true
+
+background_opacity: 1
+
+# Colors (pywal)
+import:
+  - /home/padawan/.cache/wal/colors-alacritty.yml

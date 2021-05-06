@@ -1,3 +1,4 @@
+alacritty
 alsa-utils
 autoconf
 automake
@@ -78,6 +79,7 @@ pamixer
 pandoc
 paru-git
 patch
+pcmanfm
 pdfjs
 pfetch-git
 picom-ibhagwan-git
