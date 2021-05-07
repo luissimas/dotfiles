@@ -13,10 +13,14 @@
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
 
 ]] -- Bash
-require("lspconfig").bashls.setup {}
+require("lspconfig").bashls.setup {
+  filetypes = {"sh", "zsh"}
+}
 
 -- C/C++
-require("lspconfig").clangd.setup {}
+require("lspconfig").clangd.setup {
+  filetypes = {"c", "cpp", "objc", "objcpp", "ch"}
+}
 
 -- Python
 require("lspconfig").pyright.setup {}

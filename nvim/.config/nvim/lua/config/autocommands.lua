@@ -8,7 +8,8 @@
 -- To find filetype use :set filetype?
 --
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
 
   " Trim white spaces on buffer writes
   fun! TrimWhitespace()
@@ -32,6 +33,11 @@ vim.api.nvim_exec([[
     autocmd BufWritePre * :call TrimWhitespace()
   augroup END
 
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
+  augroup END
+
   augroup STATUSLINECOLORSYNC
     " Clears all autocommands from this group
     autocmd!
@@ -47,7 +53,7 @@ vim.api.nvim_exec([[
   augroup COMPILE_KEYMAPS
     autocmd!
 
-    autocmd Filetype c nmap <leader>o :!gcc -o output % -lm && kitty --class Float -e ./output<Enter>
+    autocmd Filetype c nmap <leader>o :!make && kitty --class Float -e ./output<Enter>
     autocmd Filetype cpp nmap <leader>o :!make && kitty --class Float -e ./output<Enter>
     autocmd Filetype python nmap <leader>o :!kitty --class Float -e python %<Enter>
     autocmd Filetype javascript nmap <leader>o :!node %<Enter>
@@ -65,4 +71,6 @@ vim.api.nvim_exec([[
 
   augroup END
 
-]], false)
+]],
+  false
+)

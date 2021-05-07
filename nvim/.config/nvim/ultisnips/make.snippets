@@ -1,11 +1,25 @@
-snippet new "Makefile template" bA
+snippet cpp "C++ makefile template" b
 CXX=g++
-CXXFLAGS=-Wall$0
+CXXFLAGS=-Wall $0
 
 LIBRARIES=
 EXECUTABLE=output
 
 all: *.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $(EXECUTABLE) $(LIBRARIES)
+
+clean:
+	rm $(EXECUTABLE)
+endsnippet
+
+snippet c "C makefile template" b
+CXX=gcc
+CXXFLAGS=-lm $0
+
+LIBRARIES=
+EXECUTABLE=output
+
+all: *.c
 	$(CXX) $(CXXFLAGS) $^ -o $(EXECUTABLE) $(LIBRARIES)
 
 clean:

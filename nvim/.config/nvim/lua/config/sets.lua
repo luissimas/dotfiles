@@ -10,11 +10,11 @@
 -- TODO: util to set options
 
 -- Spellcheck
-vim.o.spelllang='pt,en,la'
-vim.bo.spelllang='pt,en,la'
+vim.o.spelllang = "pt,en,la"
+vim.bo.spelllang = "pt,en,la"
 
 -- General config
-vim.o.encoding='UTF-8'
+vim.o.encoding = "UTF-8"
 vim.o.smartindent = true
 vim.o.autoindent = true
 vim.o.linebreak = true
@@ -29,23 +29,28 @@ vim.o.cmdheight = 1
 vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 -- vim.wo.colorcolumn = '80,120'
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 vim.wo.foldenable = false
-
 
 -- Tabs
 vim.o.tabstop = 2
+vim.bo.tabstop = 2
 vim.o.shiftwidth = 2
+vim.bo.shiftwidth = 2
 vim.o.expandtab = true
+vim.bo.expandtab = true
 
 -- Clipboard
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 
 -- Netrw
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
+
+-- Header files filetype
+vim.g.ch_syntax_for_h = 1
