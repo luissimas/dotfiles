@@ -7,34 +7,30 @@
 --
 --
 
-
-
-require('nvim-treesitter.configs').setup {
+require("nvim-treesitter.configs").setup {
   -- List of language parsers to always have installed
-   ensure_installed = {
-     "r",
-     "c",
-     "cpp",
-     "css",
-     "tsx",
-     "lua",
-     "json",
-     "bash",
-     "html",
-     "yaml",
-     "regex",
-     "latex",
-     "python",
-     "javascript",
-     "typescript"
-   },
-
+  ensure_installed = {
+    "r",
+    "c",
+    "cpp",
+    "css",
+    "tsx",
+    "lua",
+    "json",
+    "bash",
+    "html",
+    "yaml",
+    "regex",
+    "latex",
+    "python",
+    "javascript",
+    "typescript"
+  },
   highlight = {
     enable = true
   },
-
   -- Color pairs
   rainbow = {
-    enable = true,
-  },
+    enable = true
+  }
 }

@@ -51,6 +51,3 @@ vim.o.clipboard = "unnamedplus"
 -- Netrw
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-
--- Header files filetype
-vim.g.ch_syntax_for_h = 1

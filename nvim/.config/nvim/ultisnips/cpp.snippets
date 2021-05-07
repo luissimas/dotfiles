@@ -46,3 +46,51 @@ using namespace std;
 $0
 
 endsnippet
+
+snippet cheader "C header file template" b
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `date "+%d/%m/%Y"`
+Data de Atualização: `date "+%d/%m/%Y"`
+
+Objetivos: Arquivo de cabeçalho do TAD $1
+
+*/
+
+#ifndef $2_H
+#define $2_H
+
+// Bibliotecas
+#include <stdio.h>
+#include <stdlib.h>
+
+$0
+
+#endif
+endsnippet
+
+snippet header "C++ header file template" b
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `date "+%d/%m/%Y"`
+Data de Atualização: `date "+%d/%m/%Y"`
+
+Objetivos: Arquivo de cabeçalho da classe $1
+
+*/
+
+#ifndef $2_H
+#define $2_H
+
+// Bibliotecas
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+$0
+
+#endif
+endsnippet
