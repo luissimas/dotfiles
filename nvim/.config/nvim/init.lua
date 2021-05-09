@@ -17,5 +17,8 @@ require("config.sets")
 require("config.autocommands")
 require("config.keymaps")
 
+-- Plugins
+require("plugins")
+
 -- Setting colorscheme
 vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)

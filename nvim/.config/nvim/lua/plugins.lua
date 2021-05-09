@@ -215,8 +215,8 @@ return require("packer").startup(
     -- Surroundings
     use "tpope/vim-surround"
 
-    -- Lua pad
-    use {"rafcamlet/nvim-luapad", opt = true, ft = "lua"}
+    -- Codi
+    use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
 
     -- Vimtex for latex
     use {"lervag/vimtex", opt = true, ft = "tex"}
