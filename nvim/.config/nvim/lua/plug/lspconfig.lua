@@ -12,7 +12,8 @@
  All the information about the servers can be found here:
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
 
-]] -- Bash
+-- ]]
+-- Bash
 require("lspconfig").bashls.setup {
   filetypes = {"sh", "zsh"}
 }

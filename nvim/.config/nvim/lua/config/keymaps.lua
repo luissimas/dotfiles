@@ -36,14 +36,13 @@ vim.api.nvim_set_keymap("n", "<S-h>", "0", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-l>", "<Esc>[s1z=`]a", {noremap = true, silent = true})
 
 --Lsp
--- vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<Enter>", {noremap = true, silent = true})
 vim.api.nvim_command("autocmd FileType c,cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>")
 vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {noremap = true, silent = true})
 
 --Lspsaga
 vim.api.nvim_set_keymap("n", "<leader>rn", ":Lspsaga rename<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "ca", ":Lspsaga code_action<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gd", ":Lspsaga lsp_finder<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "K", ":Lspsaga hover_doc<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "D", ":Lspsaga preview_definition<Enter>", {noremap = true, silent = true})
 

@@ -24,6 +24,9 @@ vim.api.nvim_exec(
   " Hidding tabline in vimwiki buffers
   autocmd Filetype vimwiki :setlocal showtabline=0
 
+  " Packer autocompile
+  autocmd BufWritePost plugins.lua luafile %
+
   augroup TRIMWHITESPACE
     " Clears all autocommands from this group
     autocmd!
