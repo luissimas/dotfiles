@@ -212,6 +212,14 @@ return require("packer").startup(
     -- Comment lines
     use "tpope/vim-commentary"
 
+    -- Todo comments highlight
+    use {
+      "folke/todo-comments.nvim",
+      config = function()
+        require("plug.todocomments")
+      end
+    }
+
     -- Surroundings
     use "tpope/vim-surround"
 
