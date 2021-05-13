@@ -8,21 +8,38 @@
 
 -- Gruvbox
 vim.g.gruvbox_italic = 1
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.g.gruvbox_hls_cursor = 'gray'
-vim.g.gruvbox_sign_column = 'bg0'
+vim.g.gruvbox_contrast_dark = "hard"
+vim.g.gruvbox_hls_cursor = "gray"
+vim.g.gruvbox_sign_column = "bg0"
 
--- Sonokai
-vim.g.sonokai_style = 'atlantis'
-vim.g.sonokai_enable_italic = 1
-vim.g.sonokai_disable_italic_comment = 1
+-- Material-nvim
+vim.g.material_style = "palenight"
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = true
+vim.g.material_italic_functions = true
+vim.g.material_italic_variables = true
+vim.g.material_contrast = false
+vim.g.material_borders = true
+vim.g.material_disable_background = false
 
--- Palenight
-vim.g.palenight_terminal_italics = 1
-
+-- Tokyonight
+vim.g.tokyonight_style = "storm"
+vim.g.tokyonight_terminal_colors = true
+vim.g.tokyonight_italic_comments = true
+vim.g.tokyonight_italic_keywords = true
+vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_italic_variables = true
+vim.g.tokyonight_transparent = false
+vim.g.tokyonight_hide_inactive_statusline = true
+vim.g.tokyonight_dark_sidebar = true
+vim.g.tokyonight_dark_float = true
 
 local M = {}
 
-M.colorscheme = 'onedark'
+-- M.lualine_colorscheme = "material-nvim"
+-- M.colorscheme = "material"
+
+M.lualine_colorscheme = "tokyonight"
+M.colorscheme = "tokyonight"
 
 return M

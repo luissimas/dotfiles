@@ -7,48 +7,41 @@
 --
 --
 
-
-
 -- Custom functions
 -- Lsp client function from Galaxyline.nvim
-local get_lsp_client = function (msg)
+local get_lsp_client = function(msg)
   -- msg = 'No Active Lsp'
-  msg = ' '
-  local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
+  msg = " "
+  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
   local clients = vim.lsp.get_active_clients()
 
   if next(clients) == nil then
     return msg
   end
 
-  for _,client in ipairs(clients) do
+  for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes,buf_ft) ~= -1 then
-      return ' '..client.name
+    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+      return " " .. client.name
     end
   end
 
   return msg
 end
 
-
-
-require('lualine').setup{
+require("lualine").setup {
   options = {
-    theme = require('config.colorscheme').colorscheme,
-    section_separators = {'', ''},
-    component_separators = {'', ''},
+    theme = require("config.colorscheme").lualine_colorscheme,
+    section_separators = {"", ""},
+    component_separators = {"", ""}
   },
-
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
-    lualine_x = { {'diagnostics', sources={'nvim_lsp'} }, { get_lsp_client } },
-    lualine_y = {'filetype', 'progress', 'location'},
-    lualine_z = {'encoding'}
+    lualine_a = {"mode"},
+    lualine_b = {"branch"},
+    lualine_c = {"filename"},
+    lualine_x = {{"diagnostics", sources = {"nvim_lsp"}}, {get_lsp_client}},
+    lualine_y = {"filetype", "progress", "location"},
+    lualine_z = {"encoding"}
   },
-
-  extensions = { 'nvim-tree' },
+  extensions = {"nvim-tree"}
 }
-

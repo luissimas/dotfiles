@@ -249,14 +249,12 @@ return require("packer").startup(
 
     -- Colorschemes
     use {"morhetz/gruvbox"}
-    use {"sainnhe/sonokai"}
     use {"dylanaraps/wal.vim"}
     use {"joshdick/onedark.vim"}
+    use {"folke/tokyonight.nvim"}
     use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
     use {"arcticicestudio/nord-vim"}
-    use {"drewtempelmeyer/palenight.vim"}
-    use {"dracula/vim", as = "dracula"}
-    use {"pineapplegiant/spaceduck", branch = "main"}
+    use {"marko-cerovac/material.nvim"}
 
     -- My custom plugins (testing stuff)
     -- use "~/fun/lua/plugins/pomodoro"

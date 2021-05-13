@@ -32,7 +32,7 @@ vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
 vim.wo.signcolumn = "yes"
-vim.wo.colorcolumn = "80,120"
+-- vim.wo.colorcolumn = "80,120"
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
