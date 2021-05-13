@@ -43,12 +43,13 @@ case $option in "Pywal")
   themelight=$(echo -e 'Dark\nLight' | rofi -dmenu -i -p "Select")
 
   case $themelight in "Dark")
-    selected=$(echo -e 'Gruvbox\nOne\nNord\nDracula' | rofi -dmenu -i -p "Source")
+    selected=$(echo -e 'Tokyonight\nGruvbox\nOne\nNord\nDracula' | rofi -dmenu -i -p "Source")
 
     case $selected in "Gruvbox") theme="base16-gruvbox-hard";;
     "Nord") theme="base16-nord";;
     "One") theme="base16-onedark";;
     "Dracula") theme="base16-dracula";;
+    "Tokyonight") theme=~/.config/wal/colorschemes/tokyonight.json;;
     *) printf "No option selected."
     esac
 
