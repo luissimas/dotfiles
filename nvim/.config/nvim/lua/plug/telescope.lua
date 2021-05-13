@@ -7,40 +7,34 @@
 --                               |_|
 --
 
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
 
 -- Global customization affecting all pickers
-require('telescope').setup{
+require("telescope").setup {
   defaults = {
     -- Custom mappings (defaults can be found at <telescopedir>/lua/telescope/mappings.lua)
     mappings = {
       i = {
-        ['<C-s>'] = actions.file_vsplit,
-
+        ["<C-s>"] = actions.file_vsplit,
         ["<C-k>"] = actions.preview_scrolling_up,
-        ["<C-j>"] = actions.preview_scrolling_down,
+        ["<C-j>"] = actions.preview_scrolling_down
       },
-
       n = {
-        ['<C-s>'] = actions.file_vsplit,
-
-        ['<leader>q'] = actions.close,
-        ['<leader>c'] = actions.close
+        ["<C-s>"] = actions.file_vsplit,
+        ["<leader>q"] = actions.close,
+        ["<leader>c"] = actions.close
       }
     },
-
     layout_strategy = "horizontal",
-
-    layout_defaults ={
+    layout_defaults = {
       horizontal = {
-        preview_width = 0.6,
+        preview_width = 0.6
       }
-    },
-
+    }
     -- Files to be ignored
-    file_ignore_patterns = { 'node_modules', '%.png', '%.jpg', '%.jpeg', '%.pdf' },
-  },
+    -- file_ignore_patterns = {"node_modules", "%.png", "%.jpg", "%.jpeg", "%.pdf"}
+  }
 }
 
 -- Loading extensions
-require('telescope').load_extension('fzy_native')
+require("telescope").load_extension("fzy_native")

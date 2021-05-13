@@ -89,9 +89,9 @@ return require("packer").startup(
         require("plug.telescope")
       end,
       requires = {
-        "nvim-lua/popup.nvim",
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim"
+        {"nvim-lua/popup.nvim"},
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-telescope/telescope-fzy-native.nvim"}
       }
     }
 
@@ -221,7 +221,7 @@ return require("packer").startup(
     -- Vimtex for latex
     use {"lervag/vimtex", opt = true, ft = "tex"}
 
-    -- Markdown
+    -- Markdown preview
     use {
       "iamcco/markdown-preview.nvim",
       run = function()
@@ -234,6 +234,7 @@ return require("packer").startup(
       end
     }
 
+    -- Markdown syntax and compile
     use {
       "vim-pandoc/vim-pandoc",
       config = function()

@@ -28,10 +28,10 @@ vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_auto_close = 1
 
 -- Icons to show
-vim.g.nvim_tree_show_icons = {git = 0, folders = 1, files = 1}
+vim.g.nvim_tree_show_icons = {git = 1, folders = 1, files = 1}
 
 -- Highlight for git attributes
-vim.g.nvim_tree_git_hl = 0
+vim.g.nvim_tree_git_hl = 1
 
 -- Keeping netrw (it's useful for some other stuff)
 vim.g.nvim_tree_disable_netrw = 1 -- 1 by default, disables netrw

@@ -17,6 +17,8 @@ vim.bo.spelllang = "pt,en,la"
 vim.o.encoding = "UTF-8"
 vim.o.smartindent = true
 vim.o.autoindent = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 vim.o.linebreak = true
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -30,7 +32,7 @@ vim.o.termguicolors = true
 vim.o.timeoutlen = 500
 
 vim.wo.signcolumn = "yes"
--- vim.wo.colorcolumn = '80,120'
+vim.wo.colorcolumn = "80,120"
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false

@@ -1,17 +1,18 @@
-require('formatter').setup({
-  logging = false,
-  filetype = {
-    javascript = {
+require("formatter").setup(
+  {
+    logging = false,
+    filetype = {
+      javascript = {
         -- prettier
-       function()
+        function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), '--single-quote'},
+            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote"},
             stdin = true
           }
         end
-    },
-    lua = {
+      },
+      lua = {
         -- luafmt
         function()
           return {
@@ -21,7 +22,7 @@ require('formatter').setup({
           }
         end
       },
-    python = {
+      python = {
         -- luafmt
         function()
           return {
@@ -31,5 +32,6 @@ require('formatter').setup({
           }
         end
       }
+    }
   }
-})
+)
