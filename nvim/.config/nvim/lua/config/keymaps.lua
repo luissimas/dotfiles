@@ -31,6 +31,14 @@ vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true
 -- Move to begin/end of line with L and H
 vim.api.nvim_set_keymap("n", "<S-l>", "$", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<S-h>", "0", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<S-l>", "$", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<S-h>", "0", {noremap = true, silent = true})
+
+-- Use j and k for visual lines
+vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "k", "gk", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "j", "gj", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "k", "gk", {noremap = true, silent = true})
 
 -- Auto spell corretion
 vim.api.nvim_set_keymap("i", "<C-l>", "<Esc>[s1z=`]a", {noremap = true, silent = true})
