@@ -1,5 +1,5 @@
 -- Enabling completion
-vim.cmd('autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni')
+vim.cmd("autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni")
 
 -- Disabling execute on save
 vim.g.db_ui_execute_on_save = 0

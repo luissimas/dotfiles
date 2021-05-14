@@ -68,9 +68,6 @@ return require("packer").startup(
       end
     }
 
-    -- VimWiki
-    -- use "vimwiki/vimwiki"
-
     -- Fugitive
     use {"tpope/vim-fugitive"}
 
@@ -242,26 +239,26 @@ return require("packer").startup(
       end
     }
 
-    -- Markdown syntax and compile
+    -- Markdown compile
     use {
       "vim-pandoc/vim-pandoc",
       config = function()
         require("plug.pandoc")
       end,
       opt = true,
-      ft = "markdown",
-      requires = {
-        "vim-pandoc/vim-pandoc-syntax"
-      }
+      ft = "markdown"
+      -- requires = {
+      --   "vim-pandoc/vim-pandoc-syntax"
+      -- }
     }
 
     -- Colorschemes
-    use {"morhetz/gruvbox"}
+    -- use {"morhetz/gruvbox"}
     use {"dylanaraps/wal.vim"}
-    use {"joshdick/onedark.vim"}
+    -- use {"joshdick/onedark.vim"}
     use {"folke/tokyonight.nvim"}
     use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
-    use {"arcticicestudio/nord-vim"}
+    -- use {"arcticicestudio/nord-vim"}
     use {"marko-cerovac/material.nvim"}
 
     -- My custom plugins (testing stuff)
