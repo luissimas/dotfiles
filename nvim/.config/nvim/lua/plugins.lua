@@ -16,14 +16,6 @@ return require("packer").startup(
     -- Packer auto-manager
     use {"wbthomason/packer.nvim", opt = true}
 
-    -- Autocompletion
-    use {
-      "hrsh7th/nvim-compe",
-      config = function()
-        require("plug.compe")
-      end
-    }
-
     -- Lsp Config layer
     use {
       "neovim/nvim-lspconfig",
@@ -40,8 +32,28 @@ return require("packer").startup(
       end
     }
 
-    -- Lspkind completion popup icons
-    use {"onsails/lspkind-nvim"}
+    -- Treesitter
+    use {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+          require("plug.treesitter")
+        end,
+        run = ":TSUpdate"
+      },
+      -- Color pairs
+      {"p00f/nvim-ts-rainbow"}
+    }
+
+    -- Autocompletion
+    use {
+      "hrsh7th/nvim-compe",
+      config = function()
+        require("plug.compe")
+      end,
+      -- Lspkind completion popup icons
+      requires = {{"onsails/lspkind-nvim"}}
+    }
 
     -- Code format
     use {
@@ -51,31 +63,11 @@ return require("packer").startup(
       end
     }
 
-    -- Treesitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      config = function()
-        require("plug.treesitter")
-      end,
-      run = ":TSUpdate"
-    }
-
     -- Snippets
     use {
       "SirVer/ultisnips",
       config = function()
         require("plug.ultisnips")
-      end
-    }
-
-    -- Fugitive
-    use {"tpope/vim-fugitive"}
-
-    -- Git blame and signs
-    use {
-      "lewis6991/gitsigns.nvim",
-      config = function()
-        require("plug.gitsigns")
       end
     }
 
@@ -124,6 +116,17 @@ return require("packer").startup(
       end
     }
 
+    -- Git integration with fugitive ang gitsigns
+    use {
+      {"tpope/vim-fugitive"},
+      {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+          require("plug.gitsigns")
+        end
+      }
+    }
+
     -- Database management
     use {
       "tpope/vim-dadbod",
@@ -140,22 +143,11 @@ return require("packer").startup(
 
     -- Autopairs
     use {
-      "windwp/nvim-autopairs",
+      "steelsojka/pears.nvim",
       config = function()
-        require("plug.autopairs")
+        require("plug.pears")
       end
     }
-
-    -- Autoclose tags
-    use {
-      "alvan/vim-closetag",
-      config = function()
-        require("plug.closetag")
-      end
-    }
-
-    -- Color pairs
-    use {"p00f/nvim-ts-rainbow"}
 
     -- Smooth scrolling
     use {
@@ -165,7 +157,7 @@ return require("packer").startup(
       end
     }
 
-    -- Dashboard
+    -- Dashboard startpage
     use {
       "glepnir/dashboard-nvim",
       config = function()
@@ -220,7 +212,7 @@ return require("packer").startup(
     -- Surroundings
     use "tpope/vim-surround"
 
-    -- Codi
+    -- Codi scratchpad
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
 
     -- Vimtex for latex
