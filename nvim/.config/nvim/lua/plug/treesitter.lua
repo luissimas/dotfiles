@@ -12,19 +12,29 @@ require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "r",
     "c",
+    "go",
     "cpp",
     "css",
     "tsx",
     "lua",
+    "php",
     "json",
     "bash",
     "html",
     "yaml",
     "regex",
     "latex",
+    "fennel",
     "python",
+    "graphql",
+    "haskell",
+    "clojure",
+    "typescript",
     "javascript",
-    "typescript"
+    "dockerfile"
+  },
+  indent = {
+    enable = true
   },
   highlight = {
     enable = true

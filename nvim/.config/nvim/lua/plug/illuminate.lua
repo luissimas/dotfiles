@@ -4,7 +4,7 @@ vim.g.Illuminate_highlightUnderCursor = 1
 -- Delay time in milliseconds (default 0)
 vim.g.Illuminate_delay = 500
 
--- Disable for this filetypes
+-- Disable for those filetypes
 vim.g.Illuminate_ftblacklist = {
   "help",
   "terminal",
