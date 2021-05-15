@@ -5,7 +5,9 @@ CXXFLAGS=-Wall $0
 LIBRARIES=
 EXECUTABLE=output
 
-all: *.cpp
+SOURCES := ${wildcard *.cpp} ${wildcard **/*.cpp}
+
+all: $(SOURCES)
 	$(CXX) $(CXXFLAGS) $^ -o $(EXECUTABLE) $(LIBRARIES)
 
 clean:
@@ -19,7 +21,9 @@ CXXFLAGS=-lm $0
 LIBRARIES=
 EXECUTABLE=output
 
-all: *.c
+SOURCES := ${wildcard *.c} ${wildcard **/*.c}
+
+all: $(SOURCES)
 	$(CXX) $(CXXFLAGS) $^ -o $(EXECUTABLE) $(LIBRARIES)
 
 clean:
