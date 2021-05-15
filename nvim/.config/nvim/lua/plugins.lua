@@ -173,6 +173,14 @@ return require("packer").startup(
       end
     }
 
+    -- Highlight words under cursor
+    use {
+      "RRethy/vim-illuminate",
+      config = function()
+        require("plug.illuminate")
+      end
+    }
+
     -- Indent lines
     use {
       "lukas-reineke/indent-blankline.nvim",
@@ -249,7 +257,7 @@ return require("packer").startup(
     use {"dylanaraps/wal.vim"}
     -- use {"joshdick/onedark.vim"}
     use {"folke/tokyonight.nvim"}
-    use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
+    -- use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
     -- use {"arcticicestudio/nord-vim"}
     use {"marko-cerovac/material.nvim"}
 
