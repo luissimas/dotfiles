@@ -34,7 +34,6 @@ groff
 grub
 gzip
 htop
-inkscape
 insomnia
 iw
 java8-openjfx
@@ -131,6 +130,7 @@ tree-sitter
 ttf-jetbrains-mono
 ttf-liberation
 unclutter
+unrar
 unzip
 v4l2loopback-dc-dkms
 v4l2loopback-dkms
@@ -187,7 +187,6 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xsel
-yay-git
 youtube-dl
 zathura
 zathura-djvu

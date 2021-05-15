@@ -246,10 +246,10 @@ return require("packer").startup(
         require("plug.pandoc")
       end,
       opt = true,
-      ft = "markdown"
-      -- requires = {
-      --   "vim-pandoc/vim-pandoc-syntax"
-      -- }
+      ft = "markdown",
+      requires = {
+        "vim-pandoc/vim-pandoc-syntax"
+      }
     }
 
     -- Colorschemes
