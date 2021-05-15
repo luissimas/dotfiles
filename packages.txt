@@ -56,6 +56,7 @@ lua
 lua-language-server
 luarocks
 m4
+maim
 mailspring
 make
 mariadb
@@ -101,7 +102,6 @@ r
 redshift
 rofi
 rstudio-desktop-bin
-scrot
 sed
 spaceship-prompt-git
 spotify-tui

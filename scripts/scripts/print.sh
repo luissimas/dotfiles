@@ -17,7 +17,7 @@ elif [[ "$selected" == "Screenshot" ]]; then
   fileName=$(rofi -dmenu -p "File name" -l 0)
 fi
 
-scrot -s $filePath$fileName.png
+maim -s $filePath$fileName.png
 
 # Relaunch unclutter
 unclutter&
