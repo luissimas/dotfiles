@@ -51,7 +51,7 @@ whichkey.setup {
 whichkey.register(
   {
     ["<leader>"] = {
-      -- Telescope group
+      -- Telescope
       f = {
         name = "Telescope",
         f = {"<cmd>Telescope find_files<Enter>", "Find files"},
@@ -60,6 +60,14 @@ whichkey.register(
         v = {'<cmd>lua require("telescope_custom.find").find_vault()<Enter>', "Find vault"},
         c = {'<cmd>lua require("telescope_custom.colorscheme").colorscheme()<Enter>', "Colorscheme"},
         w = {'<cmd>lua require("telescope_custom.colorscheme").wal()<Enter>', "Pywal"}
+      },
+      -- Trouble
+      t = {
+        name = "Trouble",
+        w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<Enter>", "Lsp workspace diagnostics"},
+        d = {"<cmd>TroubleToggle lsp_document_diagnostics<Enter>", "Lsp document diagnostics"},
+        q = {"<cmd>TroubleToggle quickfix<Enter>", "Quickfix list"},
+        l = {"<cmd>TroubleToggle loclist<Enter>", "Local list"}
       },
       w = {"<cmd>w<Enter>", "Write buffer"},
       q = {"<cmd>q<Enter>", "Quit"},

@@ -79,12 +79,6 @@ vim.api.nvim_command(
 )
 
 -- Telescope
--- vim.api.nvim_set_keymap(
---   "n",
---   "<leader>ff",
---   ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ width=120, results_height = 5, preview_height = 200 }))<Enter>',
---   {noremap = true, silent = true}
--- )
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>fo", ":Telescope oldfiles<Enter>", {noremap = true, silent = true})
 
@@ -126,8 +120,22 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "<leader>g", ":Git<Enter>", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap('n', '<leader>g', ':lua require("neogit").open({ kind="split" })<Enter>', { noremap = true, silent = true })
 
--- Rest
--- vim.api.nvim_set_keymap("n", "<leader>rr", "<Plug>RestNvim", {noremap = false, silent = true})
+-- Trouble
+vim.api.nvim_set_keymap("n", "<leader>tt", ":TroubleToggle<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tw",
+  ":TroubleToggle lsp_workspace_diagnostics<Enter>",
+  {noremap = true, silent = true}
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>td",
+  ":TroubleToggle lsp_document_diagnostics<Enter>",
+  {noremap = true, silent = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>tq", ":TroubleToggle quickfix<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>tl", ":TroubleToggle loclist<Enter>", {noremap = true, silent = true})
 
 -- Barbar tabline navigation
 vim.api.nvim_set_keymap("n", "<C-o>", ":BufferNext<Enter>", {noremap = true, silent = true})

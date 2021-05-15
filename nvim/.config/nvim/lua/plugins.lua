@@ -127,6 +127,15 @@ return require("packer").startup(
       }
     }
 
+    -- Trouble for pretty quickfix lists
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("plug.trouble")
+      end
+    }
+
     -- Which-key
     use {
       "folke/which-key.nvim",

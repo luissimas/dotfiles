@@ -8,6 +8,7 @@
 --
 
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 
 -- Global customization affecting all pickers
 require("telescope").setup {
@@ -17,12 +18,14 @@ require("telescope").setup {
       i = {
         ["<C-s>"] = actions.file_vsplit,
         ["<C-k>"] = actions.preview_scrolling_up,
-        ["<C-j>"] = actions.preview_scrolling_down
+        ["<C-j>"] = actions.preview_scrolling_down,
+        ["<C-t>"] = trouble.open_with_trouble
       },
       n = {
         ["<C-s>"] = actions.file_vsplit,
         ["<leader>q"] = actions.close,
-        ["<leader>c"] = actions.close
+        ["<leader>c"] = actions.close,
+        ["<C-t>"] = trouble.open_with_trouble
       }
     },
     layout_strategy = "horizontal",

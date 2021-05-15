@@ -3,7 +3,7 @@
 local M = {}
 
 -- Function to change system's colorscheme
-function change_theme(theme, method)
+local function change_theme(theme, method)
   if method == "wal" then
     -- Wal command
     vim.fn.system("wal -i " .. theme .. " -q")
@@ -54,7 +54,7 @@ function M.wal()
         file_ignore_patterns = {},
         cwd = "~/.wal/",
         attach_mappings = function(prompt_bufnr, map)
-          function set_theme(close)
+          local function set_theme(close)
             local file = require("telescope.actions.state").get_selected_entry(bufnr)
 
             change_theme(file.cwd .. file.value, "wal")
@@ -94,7 +94,7 @@ function M.colorscheme()
     require("telescope.themes").get_dropdown(
       {
         attach_mappings = function(prompt_bufnr, map)
-          function set_colorscheme(close)
+          local function set_colorscheme(close)
             local themeName = require("telescope.actions.state").get_selected_entry(bufnr)
 
             change_theme(themeName.value, "name")
