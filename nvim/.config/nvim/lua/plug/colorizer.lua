@@ -1,5 +1,6 @@
 require("colorizer").setup {
-  "css",
-  "html",
-  "javascript"
+  -- "css",
+  -- "html",
+  -- "javascript",
+  "*"
 }
