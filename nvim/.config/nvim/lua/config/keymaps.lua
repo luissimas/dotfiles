@@ -12,7 +12,7 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap("n", "<leader>r", ":edit<Enter>", {noremap = true, silent = false})
 
 -- Close buffer and keep the split
--- vim.api.nvim_set_keymap('n', '<leader>c', ':bp <bar> vs <bar> bn <bar> bd <Enter>', { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})
 
 -- Close window
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})
@@ -120,7 +120,7 @@ vim.api.nvim_set_keymap(
 )
 
 -- Dadbod
-vim.api.nvim_set_keymap("n", "<leader>du", ":DBUIToggle<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>du", ":DBUIToggle<Enter>", {noremap = true, silent = true})
 
 -- Git
 vim.api.nvim_set_keymap("n", "<leader>g", ":Git<Enter>", {noremap = true, silent = true})
@@ -145,8 +145,6 @@ vim.api.nvim_set_keymap("n", "<A-h>", ":vertical resize +5<Enter>", {noremap = t
 vim.api.nvim_set_keymap("n", "<A-j>", ":resize +5<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<A-k>", ":resize -5<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<A-l>", ":vertical resize -5<Enter>", {noremap = true, silent = true})
-
--- <leader>o and <leader>of binded in autocommands.vim
 
 -- Latin long vowels
 vim.api.nvim_set_keymap("i", "ä", "ā", {noremap = true, silent = true})

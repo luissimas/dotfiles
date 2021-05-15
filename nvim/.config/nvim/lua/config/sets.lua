@@ -29,7 +29,7 @@ vim.o.scrolloff = 8
 vim.o.hidden = true
 vim.o.cmdheight = 1
 vim.o.termguicolors = true
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 400
 
 vim.wo.signcolumn = "yes"
 -- vim.wo.colorcolumn = "80,120"

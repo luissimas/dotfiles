@@ -127,6 +127,14 @@ return require("packer").startup(
       }
     }
 
+    -- Which-key
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("plug.whichkey")
+      end
+    }
+
     -- Database management
     use {
       "tpope/vim-dadbod",
