@@ -15,5 +15,7 @@ vim.g.Illuminate_ftblacklist = {
   "NeogitStatus",
   "packer",
   "NvimTree",
+  "markdown",
+  "pandoc",
   ""
 }
