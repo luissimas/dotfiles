@@ -38,11 +38,11 @@ xkb_symbols "padawan" {
     key <AC04> { [	   f,          F,             f,                F ] };
     key <AC05> { [	   g,          G,             g,                G ] };
     key <AC06> { [	 dead_acute, dead_diaeresis,  uotedbl, apostrophe ] };
-    key <AC07> { [	   h,          H,             h,                H ] };
-    key <AC08> { [	   j,          J,             j,                J ] };
-    key <AC09> { [	   k,          K,            oe,               OE ] };
-    key <AC10> { [	   l,          L,        oslash,         Ooblique ] };
-    key <AC11> { [ semicolon,      colon,     degree,     paragraph   ] };
+    key <AC07> { [ semicolon,      colon,     degree,     paragraph   ] };
+    key <AC08> { [	   h,          H,             h,                H ] };
+    key <AC09> { [	   j,          J,             j,                J ] };
+    key <AC10> { [	   k,          K,            oe,               OE ] };
+    key <AC11> { [	   l,          L,        oslash,         Ooblique ] };
 
     key <AB01> { [	   z,          Z,            ae,               AE ] };
     key <AB02> { [	   x,          X,             x,                X ] };
