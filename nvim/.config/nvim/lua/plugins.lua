@@ -64,13 +64,6 @@ return require("packer").startup(
     }
 
     -- Snippets
-    -- use {
-    --   "SirVer/ultisnips",
-    --   config = function()
-    --     require("plug.ultisnips")
-    --   end
-    -- }
-
     use {
       "hrsh7th/vim-vsnip",
       config = function()
@@ -217,7 +210,7 @@ return require("packer").startup(
       branch = "lua"
     }
 
-    -- Toggle terminal wrapper
+    -- Toggle terminal
     use {
       "akinsho/nvim-toggleterm.lua",
       config = function()

@@ -15,22 +15,24 @@
 -- ]]
 -- Bash
 require("lspconfig").bashls.setup {
+  cmd = {"bash-language-server", "start"},
   filetypes = {"sh", "zsh"}
 }
 
 -- C/C++
 require("lspconfig").clangd.setup {
+  cmd = {"clangd", "--background-index"},
   filetypes = {"c", "cpp", "objc", "objcpp", "ch"}
 }
 
 -- Python
 require("lspconfig").pyright.setup {}
 
--- R
-require("lspconfig").r_language_server.setup {}
-
 -- JavaScript/TypeScript
-require("lspconfig").tsserver.setup {}
+require("lspconfig").tsserver.setup {
+  cmd = {"typescript-language-server", "--stdio"},
+  filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"}
+}
 
 -- Vim script
 require("lspconfig").vimls.setup {}
@@ -38,24 +40,27 @@ require("lspconfig").vimls.setup {}
 -- Json
 require("lspconfig").jsonls.setup {}
 
--- CSS
-require("lspconfig").cssls.setup {}
+-- Haskell
+require("lspconfig").hls.setup {
+  cmd = {"haskell-language-server-wrapper", "--lsp"},
+  filetypes = {"haskell", "lhaskell"},
+  lspinfo = function(cfg)
+    -- return "specific"
+    if cfg.settings.languageServerHaskell.logFile or false then
+      return "logfile: " .. cfg.settings.languageServerHaskell.logFile
+    end
+    return ""
+  end,
+  settings = {
+    languageServerHaskell = {
+      formattingProvider = "ormolu"
+    }
+  }
+}
 
--- HTML
---[[
- For this one we have to set up snippets for it to work properly,
- here we are loading the snippet support and pass it
- to the capabilities attribute of the server call
-]]
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require("lspconfig").html.setup {capabilities = capabilities}
-
--- Lua (This one requires a bit of work to setup)
+-- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
 
--- Autocomplete and diagnostics
 require("lspconfig").sumneko_lua.setup {
   cmd = {sumneko_binary},
   settings = {
@@ -76,6 +81,48 @@ require("lspconfig").sumneko_lua.setup {
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {enable = false}
+    }
+  }
+}
+
+-- R
+require("lspconfig").r_language_server.setup {}
+
+-- HTML and CSS
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require("lspconfig").html.setup {capabilities = capabilities}
+require("lspconfig").cssls.setup {capabilities = capabilities}
+
+-- Docker
+require("lspconfig").dockerls.setup {
+  cmd = {"docker-langserver", "--stdio"},
+  filetypes = {"Dockerfile", "dockerfile"}
+}
+
+-- Latex
+require("lspconfig").texlab.setup {
+  cmd = {"texlab"},
+  filetypes = {"tex", "bib"},
+  settings = {
+    texlab = {
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
+      build = {
+        args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"},
+        executable = "latexmk",
+        isContinuous = false
+      },
+      chktex = {
+        onEdit = false,
+        onOpenAndSave = false
+      },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
+      forwardSearch = {
+        args = {}
+      }
     }
   }
 }
