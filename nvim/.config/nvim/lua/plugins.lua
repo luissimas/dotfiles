@@ -64,11 +64,21 @@ return require("packer").startup(
     }
 
     -- Snippets
+    -- use {
+    --   "SirVer/ultisnips",
+    --   config = function()
+    --     require("plug.ultisnips")
+    --   end
+    -- }
+
     use {
-      "SirVer/ultisnips",
+      "hrsh7th/vim-vsnip",
       config = function()
-        require("plug.ultisnips")
-      end
+        require("plug.vsnip")
+      end,
+      requires = {
+        {"rafamadriz/friendly-snippets"}
+      }
     }
 
     -- Telescope

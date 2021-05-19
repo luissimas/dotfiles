@@ -54,24 +54,12 @@ vim.api.nvim_set_keymap("n", "ca", ":Lspsaga code_action<Enter>", {noremap = tru
 vim.api.nvim_set_keymap("n", "K", ":Lspsaga hover_doc<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "D", ":Lspsaga preview_definition<Enter>", {noremap = true, silent = true})
 
--- Completion (setting <Tab> and <Shift-tab> to navigate through completion popup menu)
-vim.api.nvim_set_keymap(
-  "i",
-  "<Tab>",
-  'pumvisible() ? "\\<C-n>" : "\\<Tab>"',
-  {expr = true, noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "i",
-  "<S-Tab>",
-  'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"',
-  {expr = true, noremap = true, silent = true}
-)
+-- Completion
 vim.cmd("inoremap <silent><expr> <C-Space> compe#complete()")
 vim.cmd('inoremap <silent><expr> <CR>      compe#confirm("<CR>")')
 
 -- UltiSnips edit snippets
-vim.api.nvim_set_keymap("n", "<leader>se", ":UltiSnipsEdit<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>se", ":UltiSnipsEdit<Enter>", {noremap = true, silent = true})
 
 -- Formatter
 vim.api.nvim_command(
