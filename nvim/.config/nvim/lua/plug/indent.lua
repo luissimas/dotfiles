@@ -11,5 +11,6 @@ vim.g.indent_blankline_filetype_exclude = {
   "NeogitStatus",
   "packer",
   "NvimTree",
+  "lspinfo",
   ""
 }

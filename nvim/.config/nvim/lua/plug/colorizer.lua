@@ -1,6 +1,13 @@
 require("colorizer").setup {
-  -- "css",
-  -- "html",
-  -- "javascript",
-  "*"
+  "*",
+  "!help",
+  "!terminal",
+  "!toggleterm",
+  "!git",
+  "!fugitive",
+  "!dashboard",
+  "!NeogitStatus",
+  "!packer",
+  "!NvimTree",
+  "!lspinfo"
 }

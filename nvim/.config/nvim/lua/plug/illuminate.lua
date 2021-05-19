@@ -17,5 +17,6 @@ vim.g.Illuminate_ftblacklist = {
   "NvimTree",
   "markdown",
   "pandoc",
+  "lspinfo",
   ""
 }
