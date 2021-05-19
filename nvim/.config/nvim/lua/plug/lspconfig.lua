@@ -77,7 +77,12 @@ require("lspconfig").sumneko_lua.setup {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {[vim.fn.expand("$VIMRUNTIME/lua")] = true, [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true}
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          -- Adding nvim lua api types
+          [vim.fn.expand("$HOME/.local/share/nvim/site/pack/packer/start/lua-dev.nvim/types")] = true
+        }
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {enable = false}

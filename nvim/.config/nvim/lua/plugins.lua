@@ -21,7 +21,11 @@ return require("packer").startup(
       "neovim/nvim-lspconfig",
       config = function()
         require("plug.lspconfig")
-      end
+      end,
+      requires = {
+        -- Docs and signatures for nvim lua API
+        {"folke/lua-dev.nvim"}
+      }
     }
 
     -- Code actions, better diagnostics and a bunch of stuff
