@@ -11,11 +11,11 @@ xkb_symbols "padawan" {
     key <AE03> { [	   3, numbersign, threesuperior,      dead_macron ] };
     key <AE04> { [	   4,     dollar,      currency,         sterling ] };
     key <AE05> { [	   5,    percent,      EuroSign,     dead_cedilla ] };
-    key <AE06> { [     6, dead_circumflex,   onequarter,   asciicircum ] };
+    key <AE06> { [     6, dead_circumflex,   onequarter,  asciicircum ] };
     key <AE07> { [	   7,  ampersand,       onehalf,	      dead_horn ] };
     key <AE08> { [	   8,   asterisk, threequarters,      dead_ogonek ] };
     key <AE09> { [	   9,     notsign,                     dead_breve ] };
-    key <AE10> { [	   0,    degree,   dead_abovering,                ] };
+    key <AE10> { [	   0,    degree,   dead_abovering                 ] };
     key <AE11> { [     minus,  underscore, dead_macron, dead_belowdot ] };
     key <AE12> { [     equal,      plus,   multiply,         division ] };
 
@@ -24,8 +24,8 @@ xkb_symbols "padawan" {
     key <AD03> { [	   e,          E,        eacute,           Eacute ] };
     key <AD04> { [	   r,          R,    registered,       registered ] };
     key <AD05> { [	   t,          T,         thorn,            THORN ] };
-    key <AD06> { [     parenleft,  braceleft,  bracketleft ] };
-    key <AD07> { [     parenright, braceright, bracketright ] };
+    key <AD06> { [     parenleft,  braceleft,             bracketleft ] };
+    key <AD07> { [     parenright, braceright,           bracketright ] };
     key <AD08> { [	   y,          Y,    udiaeresis,       Udiaeresis ] };
     key <AD09> { [	   u,          U,        uacute,           Uacute ] };
     key <AD10> { [	   i,          I,        iacute,           Iacute ] };
