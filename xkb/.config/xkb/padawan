@@ -46,10 +46,10 @@ xkb_symbols "padawan" {
 
     key <AB01> { [	   z,          Z,            ae,               AE ] };
     key <AB02> { [	   x,          X,             x,                X ] };
-    key <AB03> { [	   c,          C,     copyright,             cent ] };
+    key <AB03> { [	   c,          C,     ccedilla,          Ccedilla ] };
     key <AB04> { [	   v,          V,             v,                V ] };
-    key <AB05> { [    comma,       less,      ccedilla,         Ccedilla ] };
-    key <AB06> { [    period,    greater, dead_abovedot,       dead_caron ] };
+    key <AB05> { [    comma,       less,      copyright,         cent ] };
+    key <AB06> { [    period,    greater, dead_abovedot,   dead_caron ] };
     key <AB07> { [	   b,          B,             b,                B ] };
     key <AB08> { [	   n,          N,        ntilde,           Ntilde ] };
     key <AB09> { [	   m,          M,            mu,               mu ] };

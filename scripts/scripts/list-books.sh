@@ -6,7 +6,7 @@ function get_books(){
   ls $wallpaperDirectory
 }
 
-selected=$(ls $booksDirectory/*/* | grep '.pdf\|.epub\|.djvu' | sed 's/\/home\/padawan\/dox\/books\///' | rofi -dmenu -i -p "Select a file")
+selected=$(ls $booksDirectory/**/* | grep '.pdf\|.epub\|.djvu' | sed 's/\/home\/padawan\/dox\/books\///' | rofi -dmenu -i -p "Select a file")
 
 if [ -z "$selected" ]; then
   echo "No book selected"
