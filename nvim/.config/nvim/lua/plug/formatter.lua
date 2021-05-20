@@ -22,13 +22,22 @@ require("formatter").setup(
           }
         end
       },
+      json = {
+        -- jq
+        function()
+          return {
+            exe = "jq",
+            args = {},
+            stdin = true
+          }
+        end
+      },
       python = {
-        -- luafmt
         function()
           return {
             exe = "autopep8",
             args = {"--max-line-length", 120, "--aggressive"},
-            stdin = false
+            stdin = true
           }
         end
       }

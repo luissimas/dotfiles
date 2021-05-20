@@ -38,7 +38,7 @@ vim.api.nvim_exec(
 
   augroup FormatAutogroup
     autocmd!
-    autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
+    autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json FormatWrite
   augroup END
 
   augroup STATUSLINECOLORSYNC
