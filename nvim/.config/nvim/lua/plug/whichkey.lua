@@ -55,6 +55,7 @@ whichkey.register(
       f = {
         name = "Telescope",
         f = {"<cmd>Telescope find_files<Enter>", "Find files"},
+        g = {"<cmd>Telescope live_grep<Enter>", "Grep"},
         d = {'<cmd>lua require("telescope_custom.find").find_dotfiles()<Enter>', "Find dotfiles"},
         h = {'<cmd>lua require("telescope_custom.find").find_home()<Enter>', "Find home"},
         v = {'<cmd>lua require("telescope_custom.find").find_vault()<Enter>', "Find vault"},
