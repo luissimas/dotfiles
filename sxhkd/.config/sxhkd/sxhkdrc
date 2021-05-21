@@ -24,7 +24,7 @@ super + shift + {t,b,p,y,s,a,c}
 
 # quick screenshot to clipboard
 super + a
-  maim -s | xclip -selection clipboard -t image/png
+  maim -su | xclip -selection clipboard -t image/png
 
 # volume
 super + shift + {equal,minus}

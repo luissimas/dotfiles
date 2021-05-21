@@ -71,6 +71,8 @@ alias clone='git clone'
 alias pacman='sudo pacman'
 alias vim='nvim'
 alias code='codium'
+alias icat='kitty +kitten icat'
+alias bat='bat --pager=never'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
 # Habitica cli tool
