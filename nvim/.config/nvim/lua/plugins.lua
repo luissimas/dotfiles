@@ -30,10 +30,18 @@ return require("packer").startup(
 
     -- Better LSP experience
     use {
-      "glepnir/lspsaga.nvim",
-      config = function()
-        require("plug.lspsaga")
-      end
+      {
+        "glepnir/lspsaga.nvim",
+        config = function()
+          require("plug.lspsaga")
+        end
+      },
+      {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+          require("plug.lsp_signature")
+        end
+      }
     }
 
     -- Treesitter

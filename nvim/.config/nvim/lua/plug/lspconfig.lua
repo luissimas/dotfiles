@@ -11,8 +11,11 @@
 
  All the information about the servers can be found here:
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
-
 -- ]]
+-- Capabilities for snippet support in servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- Bash
 require("lspconfig").bashls.setup {
   cmd = {"bash-language-server", "start"},
@@ -22,7 +25,8 @@ require("lspconfig").bashls.setup {
 -- C/C++
 require("lspconfig").clangd.setup {
   cmd = {"clangd", "--background-index"},
-  filetypes = {"c", "cpp", "objc", "objcpp", "ch"}
+  filetypes = {"c", "cpp", "objc", "objcpp", "ch"},
+  capabilities = capabilities
 }
 
 -- Python
@@ -94,9 +98,6 @@ require("lspconfig").sumneko_lua.setup {
 require("lspconfig").r_language_server.setup {}
 
 -- HTML and CSS
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 require("lspconfig").html.setup {capabilities = capabilities}
 require("lspconfig").cssls.setup {capabilities = capabilities}
 
