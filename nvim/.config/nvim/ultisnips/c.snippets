@@ -5,23 +5,17 @@ Autor(es): Luís Augusto Simas do Nascimento
 Data de Criação: `date "+%d/%m/%Y"`
 Data de Atualização: `date "+%d/%m/%Y"`
 
-Objetivos: $1
+Objetivos: $0
 
 */
 
 // Bibliotecas
-#include <errno.h>
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 // Função principal
 int main(int argc, char *argv[])
 {
-	$0
-
-	getchar();
-	getchar();
 
 	return 0;
 }
@@ -47,5 +41,8 @@ endsnippet
 
 snippet ptf "Printf snippet"
 printf("$1\n"$2);
-$0
+endsnippet
+
+snippet mlc "Malloc snippet" bA
+$1 *$2 = ($1 *)malloc(sizeof($1));$0
 endsnippet

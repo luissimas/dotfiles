@@ -25,7 +25,7 @@ else
   bspc rule -a obsidian monitor=^1
   bspc rule -a Rofi monitor=^1
   bspc rule -a Steam state=floating
-  bspc rule -a discord desktop=^7 state=floating
+  bspc rule -a discord desktop=^8 state=floating
   bspc rule -a Zathura state=tiled
   bspc rule -a Float state=floating
 fi

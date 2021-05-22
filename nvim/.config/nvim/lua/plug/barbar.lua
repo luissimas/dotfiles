@@ -38,3 +38,10 @@ local options = {
 }
 
 vim.g.bufferline = options
+
+-- Keymaps
+vim.api.nvim_set_keymap("n", "<C-o>", ":BufferNext<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<C-i>", ":BufferPrevious<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<A-o>", ":BufferMoveNext<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<A-i>", ":BufferMovePrev<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<Enter>", {noremap = true, silent = true})

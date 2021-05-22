@@ -19,13 +19,14 @@ require("compe").setup {
   source = {
     path = true,
     spell = true,
-    buffer = true,
+    buffer = false,
     tags = true,
     calc = true,
     nvim_lsp = true,
     nvim_lua = true,
-    vsnip = false,
+    vsnip = true,
     ultisnips = true,
+    treesitter = true,
     vim_dadbod_completion = true
   }
 }
@@ -33,6 +34,7 @@ require("compe").setup {
 -- Enabling lspkind icons
 require("lspkind").init()
 
+-- Vsnip integration
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -46,7 +48,7 @@ local check_back_space = function()
   end
 end
 
--- Make tabs work with vsnips
+-- Use (s-)tab to:
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
@@ -71,7 +73,14 @@ _G.s_tab_complete = function()
   end
 end
 
+-- Tab keymaps
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Manual completion popup
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {noremap = true, expr = true, silent = true})
+
+-- Confirm
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#confirm('<CR>')", {noremap = true, expr = true, silent = true})

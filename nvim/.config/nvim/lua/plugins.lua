@@ -28,7 +28,7 @@ return require("packer").startup(
       }
     }
 
-    -- Code actions, better diagnostics and a bunch of stuff
+    -- Better LSP experience
     use {
       "glepnir/lspsaga.nvim",
       config = function()
@@ -151,20 +151,6 @@ return require("packer").startup(
       end
     }
 
-    -- Database management
-    use {
-      "tpope/vim-dadbod",
-      config = function()
-        require("plug.dadbod")
-      end,
-      requires = {
-        "kristijanhusak/vim-dadbod-ui",
-        "kristijanhusak/vim-dadbod-completion"
-      },
-      opt = true,
-      ft = "sql"
-    }
-
     -- Autopairs
     use {
       "steelsojka/pears.nvim",
@@ -222,17 +208,6 @@ return require("packer").startup(
       end
     }
 
-    -- REST client
-    use {
-      "NTBBloodbath/rest.nvim",
-      requires = {"nvim-lua/plenary.nvim"},
-      opt = true,
-      ft = "http"
-    }
-
-    -- Comment lines
-    use "tpope/vim-commentary"
-
     -- Todo comments highlight
     use {
       "folke/todo-comments.nvim",
@@ -241,11 +216,31 @@ return require("packer").startup(
       end
     }
 
+    -- Comment lines
+    use "tpope/vim-commentary"
+
     -- Surroundings
     use "tpope/vim-surround"
 
+    -- Reload utility
+    use "famiu/nvim-reload"
+
     -- Codi scratchpad
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
+
+    -- Database management
+    use {
+      "tpope/vim-dadbod",
+      config = function()
+        require("plug.dadbod")
+      end,
+      requires = {
+        "kristijanhusak/vim-dadbod-ui",
+        "kristijanhusak/vim-dadbod-completion"
+      },
+      opt = true,
+      ft = "sql"
+    }
 
     -- Vimtex for latex
     use {"lervag/vimtex", opt = true, ft = "tex"}
@@ -270,19 +265,18 @@ return require("packer").startup(
         require("plug.pandoc")
       end,
       opt = true,
-      ft = "markdown",
+      -- ft = "markdown",
       requires = {
         "vim-pandoc/vim-pandoc-syntax"
       }
     }
 
     -- Colorschemes
-    -- use {"morhetz/gruvbox"}
-    use {"dylanaraps/wal.vim"}
-    -- use {"joshdick/onedark.vim"}
-    use {"folke/tokyonight.nvim"}
     -- use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
-    -- use {"arcticicestudio/nord-vim"}
+    use {"dylanaraps/wal.vim"}
+    use {"shaunsingh/nord.nvim"}
+    use {"folke/tokyonight.nvim"}
+    use "shaunsingh/moonlight.nvim"
     use {"marko-cerovac/material.nvim"}
 
     -- My custom plugins (testing stuff)

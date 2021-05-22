@@ -37,3 +37,9 @@ require("lspsaga").init_lsp_saga(
     rename_prompt_prefix = "➤"
   }
 )
+
+-- Keymaps
+vim.api.nvim_set_keymap("n", "<leader>rn", ":Lspsaga rename<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "ca", ":Lspsaga code_action<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "K", ":Lspsaga hover_doc<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "D", ":Lspsaga preview_definition<Enter>", {noremap = true, silent = true})

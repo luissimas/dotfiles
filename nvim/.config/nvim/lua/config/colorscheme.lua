@@ -42,4 +42,7 @@ local M = {}
 M.lualine_colorscheme = "tokyonight"
 M.colorscheme = "tokyonight"
 
+-- M.lualine_colorscheme = "moonlight"
+-- M.colorscheme = "moonlight"
+
 return M

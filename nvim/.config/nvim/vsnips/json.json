@@ -1,0 +1,15 @@
+{
+  "New snippet": {
+    "prefix": "ns",
+    "body": [
+      "\"$1\": {",
+      "  \"prefix\": \"$2\",",
+      "  \"body\": [",
+      "   $0",
+      "  ],",
+      "  \"description\": \"$1\"",
+      "},"
+    ],
+    "description": "New snippet"
+  }
+}

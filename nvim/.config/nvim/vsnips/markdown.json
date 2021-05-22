@@ -1,0 +1,47 @@
+{
+  "Inline math": {
+    "prefix": "mk",
+    "body": [
+      "\\$${1}\\$"
+    ],
+    "description": "Inline math"
+  },
+  "Espaco de probabilidade": {
+    "prefix": [
+      "probspc"
+    ],
+    "body": [
+      "\\$(\\Omega, \\mathcal{F}, P)\\$ \\${0}"
+    ]
+  },
+  "Math block": {
+    "prefix": "mq",
+    "body": [
+      "\\$\\$",
+      "\t${1}",
+      "\\$\\$"
+    ],
+    "description": "Math block"
+  },
+  "Fraction": {
+    "prefix": "fc",
+    "body": [
+      "\\frac{$1}{$2}"
+    ],
+    "description": "Fraction"
+  },
+  "Italics": {
+    "prefix": "ii",
+    "body": [
+      "*${1}*"
+    ],
+    "description": "Italic text"
+  },
+  "Bold": {
+    "prefix": "bb",
+    "body": [
+      "**${1}**"
+    ],
+    "description": "Bold text"
+  }
+}

@@ -41,3 +41,38 @@ require("telescope").setup {
 
 -- Loading extensions
 require("telescope").load_extension("fzy_native")
+
+-- Keymaps (currently it's all mapped by whichkey)
+-- vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fo", ":Telescope oldfiles<Enter>", {noremap = true, silent = true})
+
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>fd",
+--   ':lua require("telescope_custom.find").find_dotfiles()<Enter>',
+--   {noremap = true, silent = true}
+-- )
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>fh",
+--   ':lua require("telescope_custom.find").find_home()<Enter>',
+--   {noremap = true, silent = true}
+-- )
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>fv",
+--   ':lua require("telescope_custom.find").find_vault()<Enter>',
+--   {noremap = true, silent = true}
+-- )
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>fc",
+--   ':lua require("telescope_custom.colorscheme").colorscheme()<Enter>',
+--   {noremap = true, silent = true}
+-- )
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>fw",
+--   ':lua require("telescope_custom.colorscheme").wal()<Enter>',
+--   {noremap = true, silent = true}
+-- )

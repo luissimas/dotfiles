@@ -36,11 +36,16 @@ require("formatter").setup(
         function()
           return {
             exe = "autopep8",
-            args = {"--max-line-length", 120, "--aggressive"},
+            args = {"--max-line-length", 120, vim.api.nvim_buf_get_name(0)},
             stdin = true
           }
         end
       }
     }
   }
+)
+
+-- Keymaps
+vim.api.nvim_command(
+  "autocmd FileType javascript,html,css,json,yaml,typescript,lua,python nnoremap <C-f> :FormatWrite<Enter>"
 )

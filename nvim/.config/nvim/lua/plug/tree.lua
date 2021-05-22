@@ -86,3 +86,6 @@ vim.g.nvim_tree_bindings = {
   ["p"] = tree_cb("paste"),
   ["q"] = tree_cb("close")
 }
+
+-- Toggle file tree
+vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<Enter>", {noremap = true, silent = true})
