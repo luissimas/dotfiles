@@ -54,8 +54,10 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 
 # Aliases
-alias l='ls --color=auto'
-alias la='ls --color=auto -A'
+alias l='exa -l --no-user --time-style long-iso --icons'
+alias la='exa -la --no-user --time-style long-iso --icons'
+alias t='exa -T --icons'
+alias ta='exa -Ta --icons'
 alias grep='grep --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -81,7 +83,7 @@ alias hbt='python ~/fun/python/habitica-cli-py/main.py'
 # Custom cd function
 customcd () {
   cd $1
-  ls --color=auto -A
+  exa -la --no-user --time-style long-iso --icons
 }
 
 
