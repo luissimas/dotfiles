@@ -27,6 +27,9 @@ vim.g.nvim_tree_quit_on_open = 0
 -- Automatically close tree buffer when it's the last buffer
 vim.g.nvim_tree_auto_close = 1
 
+-- Hide folders and files starting with dot
+vim.g.nvim_tree_hide_dotfiles = 0
+
 -- Icons to show
 vim.g.nvim_tree_show_icons = {git = 1, folders = 1, files = 1}
 
@@ -34,13 +37,19 @@ vim.g.nvim_tree_show_icons = {git = 1, folders = 1, files = 1}
 vim.g.nvim_tree_git_hl = 1
 
 -- Keeping netrw (it's useful for some other stuff)
-vim.g.nvim_tree_disable_netrw = 1 -- 1 by default, disables netrw
+vim.g.nvim_tree_disable_netrw = 0 -- 1 by default, disables netrw
+
+-- Prevents netrw from automatically opening on folders
+vim.g.nvim_tree_hijack_netrw = 1
 
 -- Visual trailing lines on folders
 vim.g.nvim_tree_add_trailing = 0
 
 -- Lsp diagnostics in the tree
 vim.g.nvim_tree_lsp_diagnostics = 0
+
+-- Files that get an special highlight
+vim.g.nvim_tree_special_files = {"README.md", "Makefile", "MAKEFILE", "makefile"}
 
 -- Icons
 vim.g.nvim_tree_icons = {
@@ -52,7 +61,8 @@ vim.g.nvim_tree_icons = {
     unmerged = "",
     renamed = "➜",
     untracked = "★",
-    deleted = ""
+    deleted = "",
+    ignored = "◌"
   },
   folder = {
     default = "",
@@ -61,6 +71,12 @@ vim.g.nvim_tree_icons = {
     empty_open = "",
     symlink = "",
     symlink_open = ""
+  },
+  lsp = {
+    hint = "",
+    info = "",
+    warning = "",
+    error = ""
   }
 }
 

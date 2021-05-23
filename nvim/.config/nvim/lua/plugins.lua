@@ -64,7 +64,14 @@ return require("packer").startup(
         require("plug.compe")
       end,
       -- Lspkind completion popup icons
-      requires = {{"onsails/lspkind-nvim"}}
+      requires = {
+        {
+          "onsails/lspkind-nvim",
+          config = function()
+            require("plug.lspkind")
+          end
+        }
+      }
     }
 
     -- Code format
@@ -123,11 +130,12 @@ return require("packer").startup(
       end
     }
 
-    -- Icons for file tree and tabline
+    -- Icons
+    -- use {"ryanoasis/vim-devicons", opt = true}
     use {
       "kyazdani42/nvim-web-devicons",
       config = function()
-        require("plug.icons")
+        require("plug.webdevicons")
       end
     }
 
