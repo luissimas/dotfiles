@@ -13,8 +13,11 @@ unsetopt beep
 
 # Enable autocomplete
 autoload -U compinit
-zstyle ':completion:*' menu select
+zstyle ':completion:*' select
 compinit
+
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
 
 # Include hidden files on completion
 _comp_options+=(globdots)
@@ -92,6 +95,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Zsh-autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Accept autosuggestion
+bindkey '^ ' autosuggest-accept
 
 # Enable prompt
 autoload -U promptinit

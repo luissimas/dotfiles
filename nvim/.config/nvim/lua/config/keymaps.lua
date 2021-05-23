@@ -9,7 +9,7 @@
 vim.g.mapleader = " "
 
 -- Reload config
-vim.api.nvim_set_keymap("n", "<leader>r", ":Reload<Enter>", {noremap = true, silent = false})
+vim.api.nvim_set_keymap("n", "<leader>r", ":Restart<Enter>", {noremap = true, silent = false})
 
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})

@@ -10,6 +10,10 @@ super + {_,shift} + Return
 super + p
 	rofi -show run
 
+# power prompt
+super + shift + q
+  $HOME/scripts/power-prompt.sh
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -30,16 +34,13 @@ super + a
 super + shift + {equal,minus}
   pamixer --allow-boost {-i,-d} 5
 
+# mute volume
 super + shift + m
 	pamixer -t
 
 # lock screen
-super + alt + q
-	betterlockscreen -l dim
-
-# shutdown
-super + shift + q
-  $HOME/scripts/power-prompt.sh
+#super + alt + q
+#  betterlockscreen -l dim
 
 ###############
 #bspwm hotkeys#

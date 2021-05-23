@@ -18,14 +18,14 @@ require("compe").setup {
   -- Sources for completion
   source = {
     path = true,
-    spell = true,
+    spell = false,
     buffer = false,
     tags = true,
     calc = true,
     nvim_lsp = true,
     nvim_lua = true,
     vsnip = true,
-    ultisnips = true,
+    ultisnips = false,
     treesitter = true,
     vim_dadbod_completion = true
   }
