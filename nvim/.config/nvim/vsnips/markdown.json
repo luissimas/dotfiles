@@ -43,5 +43,17 @@
       "**${1}**"
     ],
     "description": "Bold text"
+  },
+  "New note": {
+    "prefix": "newnote",
+    "body": [
+      "# ${TM_FILENAME_BASE}",
+      "$0",
+      "",
+      "---",
+      "",
+      "created: ${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}"
+    ],
+    "description": "New note in Obsidian"
   }
 }
