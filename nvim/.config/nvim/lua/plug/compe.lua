@@ -22,6 +22,8 @@ require("compe").setup {
     buffer = false,
     tags = true,
     calc = true,
+    omni = false,
+    emoji = false,
     nvim_lsp = true,
     nvim_lua = true,
     vsnip = true,
@@ -73,14 +75,23 @@ _G.s_tab_complete = function()
   end
 end
 
+-- Completion toggle
+_G.compe_popup_toggle = function()
+  if vim.fn.pumvisible() == 1 then
+    return vim.fn.call("compe#close", {})
+  else
+    return vim.fn.call("compe#complete", {})
+  end
+end
+
 -- Tab keymaps
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
--- Manual completion popup
-vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {noremap = true, expr = true, silent = true})
+-- Manual completion popup toggle
+vim.api.nvim_set_keymap("i", "<C-Space>", "v:lua.compe_popup_toggle()", {noremap = true, expr = true, silent = true})
 
 -- Confirm
 vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {noremap = true, expr = true, silent = true})
