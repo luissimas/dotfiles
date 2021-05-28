@@ -139,9 +139,23 @@ return require("packer").startup(
       end
     }
 
-    -- Git integration with fugitive ang gitsigns
+    -- Git integration
     use {
-      {"tpope/vim-fugitive"},
+      --[[
+        I'm hopping between Fugitive and Neogit these days, Neogit has a better interface
+        and the diffview is very nice, but it doesn't work very well with symlinks
+      --]]
+      -- {"tpope/vim-fugitive"},
+      {
+        "TimUntersberger/neogit",
+        config = function()
+          require("plug.neogit")
+        end,
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "sindrets/diffview.nvim"
+        }
+      },
       {
         "lewis6991/gitsigns.nvim",
         config = function()
@@ -286,6 +300,9 @@ return require("packer").startup(
         "vim-pandoc/vim-pandoc-syntax"
       }
     }
+
+    -- Startup time log
+    use {"dstein64/vim-startuptime"}
 
     -- Colorschemes
     -- use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them

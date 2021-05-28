@@ -46,12 +46,6 @@ vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {n
 -- Dadbod
 -- vim.api.nvim_set_keymap("n", "<leader>du", ":DBUIToggle<Enter>", {noremap = true, silent = true})
 
--- Fugitive
-vim.api.nvim_set_keymap("n", "<leader>g", ":Git<Enter>", {noremap = true, silent = true})
-
--- Neogit
--- vim.api.nvim_set_keymap('n', '<leader>g', ':lua require("neogit").open({ kind="split" })<Enter>', { noremap = true, silent = true })
-
 -- Navigation and resizing splits
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true, silent = true})
