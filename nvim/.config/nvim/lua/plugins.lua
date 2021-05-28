@@ -131,13 +131,20 @@ return require("packer").startup(
     }
 
     -- Icons
-    -- use {"ryanoasis/vim-devicons", opt = true}
     use {
       "kyazdani42/nvim-web-devicons",
       config = function()
         require("plug.webdevicons")
       end
     }
+
+    -- use {
+    --   "yamatsum/nvim-nonicons",
+    --   config = function()
+    --     local icons = require "nvim-nonicons"
+    --     icons.get("file")
+    --   end
+    -- }
 
     -- Git integration
     use {
