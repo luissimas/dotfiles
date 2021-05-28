@@ -23,6 +23,15 @@
     ],
     "description": "Math block"
   },
+  "Definition math block": {
+    "prefix": "dmq",
+    "body": [
+      ">\\$\\$",
+      "\t${1}",
+      ">\\$\\$"
+    ],
+    "description": "Definition math block"
+  },
   "Fraction": {
     "prefix": "fc",
     "body": [

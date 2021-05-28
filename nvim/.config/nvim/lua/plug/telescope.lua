@@ -17,8 +17,8 @@ require("telescope").setup {
     mappings = {
       i = {
         ["<C-s>"] = actions.file_vsplit,
-        -- ["<C-k>"] = actions.preview_scrolling_up,
-        -- ["<C-j>"] = actions.preview_scrolling_down,
+        ["<C-k>"] = actions.preview_scrolling_up,
+        ["<C-j>"] = actions.preview_scrolling_down,
         ["<C-t>"] = trouble.open_with_trouble
       },
       n = {
@@ -28,6 +28,8 @@ require("telescope").setup {
         ["<C-t>"] = trouble.open_with_trouble
       }
     },
+    prompt_position = "bottom",
+    sorting_strategy = "descending",
     layout_strategy = "horizontal",
     layout_defaults = {
       horizontal = {

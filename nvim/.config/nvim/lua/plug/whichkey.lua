@@ -56,8 +56,12 @@ whichkey.register(
         name = "Telescope",
         f = {"<cmd>Telescope find_files<Enter>", "Find files"},
         g = {"<cmd>Telescope live_grep<Enter>", "Grep"},
+        h = {"<cmd>Telescope help_tags<Enter>", "Help"},
+        b = {
+          "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorting_strategy='ascending', prompt_position = 'top'})<Enter>",
+          "Current buffer"
+        },
         d = {'<cmd>lua require("telescope_custom.find").find_dotfiles()<Enter>', "Find dotfiles"},
-        h = {'<cmd>lua require("telescope_custom.find").find_home()<Enter>', "Find home"},
         v = {'<cmd>lua require("telescope_custom.find").find_vault()<Enter>', "Find vault"},
         c = {'<cmd>lua require("telescope_custom.colorscheme").colorscheme()<Enter>', "Colorscheme"},
         w = {'<cmd>lua require("telescope_custom.colorscheme").wal()<Enter>', "Pywal"}
