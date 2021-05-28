@@ -2,7 +2,7 @@
   "Inline math": {
     "prefix": "mk",
     "body": [
-      "\\$${1}\\$"
+      "\\$$1\\$ $0"
     ],
     "description": "Inline math"
   },

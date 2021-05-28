@@ -17,9 +17,9 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#000}
-foreground = ${xrdb:color7:#111}
-highlight = ${xrdb:color15:#222}
+background = ${xrdb:background:#000}
+foreground = ${xrdb:foreground:#111}
+highlight = ${xrdb:foreground:#222}
 
 ;  _
 ; | |__   __ _ _ __ ___
