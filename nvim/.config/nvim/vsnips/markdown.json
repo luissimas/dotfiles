@@ -64,5 +64,16 @@
       "created: ${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}"
     ],
     "description": "New note in Obsidian"
+  },
+  "Latex environments": {
+    "prefix": [
+      "beg"
+    ],
+    "body": [
+      "\\begin{$1}",
+      "\t$0",
+      "\\end{$1}"
+    ],
+    "description": "Latex environments"
   }
 }
