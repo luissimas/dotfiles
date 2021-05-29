@@ -43,9 +43,6 @@ vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<Enter>", {nore
 vim.api.nvim_command("autocmd FileType c,cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>")
 vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {noremap = true, silent = true})
 
--- Dadbod
--- vim.api.nvim_set_keymap("n", "<leader>du", ":DBUIToggle<Enter>", {noremap = true, silent = true})
-
 -- Navigation and resizing splits
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true, silent = true})

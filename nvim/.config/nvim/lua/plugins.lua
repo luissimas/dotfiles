@@ -138,31 +138,23 @@ return require("packer").startup(
       end
     }
 
-    -- use {
-    --   "yamatsum/nvim-nonicons",
-    --   config = function()
-    --     local icons = require "nvim-nonicons"
-    --     icons.get("file")
-    --   end
-    -- }
-
     -- Git integration
     use {
       --[[
         I'm hopping between Fugitive and Neogit these days, Neogit has a better interface
         and the diffview is very nice, but it doesn't work very well with symlinks
       --]]
-      -- {"tpope/vim-fugitive"},
-      {
-        "TimUntersberger/neogit",
-        config = function()
-          require("plug.neogit")
-        end,
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "sindrets/diffview.nvim"
-        }
-      },
+      {"tpope/vim-fugitive"},
+      -- {
+      --   "TimUntersberger/neogit",
+      --   config = function()
+      --     require("plug.neogit")
+      --   end,
+      --   requires = {
+      --     "nvim-lua/plenary.nvim",
+      --     "sindrets/diffview.nvim"
+      --   }
+      -- },
       {
         "lewis6991/gitsigns.nvim",
         config = function()
@@ -174,7 +166,6 @@ return require("packer").startup(
     -- Trouble for pretty quickfix lists
     use {
       "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("plug.trouble")
       end
@@ -264,20 +255,6 @@ return require("packer").startup(
 
     -- Codi scratchpad
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
-
-    -- Database management
-    use {
-      "tpope/vim-dadbod",
-      config = function()
-        require("plug.dadbod")
-      end,
-      requires = {
-        "kristijanhusak/vim-dadbod-ui",
-        "kristijanhusak/vim-dadbod-completion"
-      },
-      opt = true,
-      ft = "sql"
-    }
 
     -- Vimtex for latex
     use {"lervag/vimtex", opt = true, ft = "tex"}

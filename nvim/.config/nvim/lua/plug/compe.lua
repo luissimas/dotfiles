@@ -28,8 +28,7 @@ require("compe").setup {
     nvim_lua = true,
     vsnip = true,
     ultisnips = false,
-    treesitter = true,
-    vim_dadbod_completion = true
+    treesitter = true
   }
 }
 
