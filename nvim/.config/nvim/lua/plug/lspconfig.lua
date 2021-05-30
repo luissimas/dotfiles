@@ -16,6 +16,9 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- Lspconfig's util module
+local util = require("lspconfig.util")
+
 -- Bash
 require("lspconfig").bashls.setup {
   cmd = {"bash-language-server", "start"},
@@ -55,6 +58,7 @@ require("lspconfig").hls.setup {
     end
     return ""
   end,
+  root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
   settings = {
     languageServerHaskell = {
       formattingProvider = "ormolu"
@@ -64,35 +68,53 @@ require("lspconfig").hls.setup {
 
 -- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
-
-require("lspconfig").sumneko_lua.setup {
-  cmd = {sumneko_binary},
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = vim.split(package.path, ";")
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim"}
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-          -- Adding nvim lua api types
-          [vim.fn.expand("$HOME/.local/share/nvim/site/pack/packer/start/lua-dev.nvim/types")] = true
-        }
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {enable = false}
+local luadev =
+  require("lua-dev").setup(
+  {
+    library = {
+      vimruntime = true, -- runtime path
+      types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+      plugins = true -- installed opt or start plugins in packpath
+      -- you can also specify the list of plugins to make available as a workspace library
+      -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+    },
+    -- pass any additional options that will be merged in the final lsp config
+    lspconfig = {
+      cmd = {sumneko_binary}
     }
   }
-}
+)
+
+require("lspconfig").sumneko_lua.setup(luadev)
+
+-- require("lspconfig").sumneko_lua.setup {
+--   cmd = {sumneko_binary},
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--         version = "LuaJIT",
+--         -- Setup your lua path
+--         path = vim.split(package.path, ";")
+--       },
+--       diagnostics = {
+--         -- Get the language server to recognize the `vim` global
+--         globals = {"vim"}
+--       },
+--       workspace = {
+--         -- Make the server aware of Neovim runtime files
+--         library = {
+--           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+--           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+--           -- Adding nvim lua api types
+--           [vim.fn.expand("$HOME/.local/share/nvim/site/pack/packer/start/lua-dev.nvim/types")] = true
+--         }
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {enable = false}
+--     }
+--   }
+-- }
 
 -- R
 require("lspconfig").r_language_server.setup {}
