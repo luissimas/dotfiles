@@ -256,6 +256,17 @@ return require("packer").startup(
     -- Codi scratchpad
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
 
+    -- Luapad
+    use {"rafcamlet/nvim-luapad"}
+
+    -- ZenMode
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("plug.zenmode")
+      end
+    }
+
     -- Vimtex for latex
     use {"lervag/vimtex", opt = true, ft = "tex"}
 
@@ -273,17 +284,17 @@ return require("packer").startup(
     }
 
     -- Markdown compile
-    use {
-      "vim-pandoc/vim-pandoc",
-      config = function()
-        require("plug.pandoc")
-      end,
-      opt = true,
-      -- ft = "markdown",
-      requires = {
-        "vim-pandoc/vim-pandoc-syntax"
-      }
-    }
+    -- use {
+    --   "vim-pandoc/vim-pandoc",
+    --   config = function()
+    --     require("plug.pandoc")
+    --   end,
+    --   opt = true,
+    --   ft = "markdown",
+    --   requires = {
+    --     "vim-pandoc/vim-pandoc-syntax"
+    --   }
+    -- }
 
     -- Startup time log
     use {"dstein64/vim-startuptime"}
@@ -297,6 +308,7 @@ return require("packer").startup(
     use {"marko-cerovac/material.nvim"}
 
     -- My custom plugins (testing stuff)
-    -- use "~/fun/lua/plugins/pomodoro"
+    use "~/fun/lua/plugins/pandoc"
+    use "~/fun/lua/plugins/pomodoro"
   end
 )
