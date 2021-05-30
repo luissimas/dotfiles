@@ -66,6 +66,9 @@ vim.api.nvim_exec(
     autocmd Filetype pandoc nmap <leader>o :Pandoc pdf<Enter>
     autocmd Filetype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
 
+    autocmd Filetype markdown nnoremap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>
+    autocmd Filetype markdown nnoremap <leader>o :Pandoc pdf<Enter>
+
     autocmd Filetype rmd nmap <silent> <leader>o :!Rscript -e "rmarkdown::render('%')" >/dev/null<Enter>
     autocmd Filetype rmd nmap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>
 
