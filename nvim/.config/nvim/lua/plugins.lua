@@ -145,17 +145,17 @@ return require("packer").startup(
         I'm hopping between Fugitive and Neogit these days, Neogit has a better interface
         and the diffview is very nice, but it doesn't work very well with symlinks
       --]]
-      -- {"tpope/vim-fugitive"},
-      {
-        "TimUntersberger/neogit",
-        config = function()
-          require("plug.neogit")
-        end,
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "sindrets/diffview.nvim"
-        }
-      },
+      {"tpope/vim-fugitive"},
+      -- {
+      --   "TimUntersberger/neogit",
+      --   config = function()
+      --     require("plug.neogit")
+      --   end,
+      --   requires = {
+      --     "nvim-lua/plenary.nvim",
+      --     "sindrets/diffview.nvim"
+      --   }
+      -- },
       {
         "lewis6991/gitsigns.nvim",
         config = function()
