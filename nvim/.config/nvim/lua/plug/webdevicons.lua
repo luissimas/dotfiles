@@ -34,6 +34,11 @@ require("nvim-web-devicons").setup {
       icon = "",
       color = "#DA4217",
       name = "Zip"
+    },
+    ["test.js"] = {
+      icon = "ﭧ",
+      color = "#cbcb41",
+      name = "JavascriptTest"
     }
   },
   default = true
