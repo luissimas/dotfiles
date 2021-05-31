@@ -11,8 +11,7 @@
 
  All the information about the servers can be found here:
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
--- ]]
--- Capabilities for snippet support in servers
+-- ]] -- Capabilities for snippet support in servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -79,9 +78,7 @@ local luadev =
       -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
     },
     -- pass any additional options that will be merged in the final lsp config
-    lspconfig = {
-      cmd = {sumneko_binary}
-    }
+    lspconfig = {cmd = {sumneko_binary}}
   }
 )
 
@@ -142,15 +139,10 @@ require("lspconfig").texlab.setup {
         executable = "latexmk",
         isContinuous = false
       },
-      chktex = {
-        onEdit = false,
-        onOpenAndSave = false
-      },
+      chktex = {onEdit = false, onOpenAndSave = false},
       diagnosticsDelay = 300,
       formatterLineLength = 80,
-      forwardSearch = {
-        args = {}
-      }
+      forwardSearch = {args = {}}
     }
   }
 }
