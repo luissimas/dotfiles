@@ -22,7 +22,7 @@ vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 
 -- Automatically close tree buffer when a file is opened
-vim.g.nvim_tree_quit_on_open = 1
+vim.g.nvim_tree_quit_on_open = 0
 
 -- Automatically close tree buffer when it's the last buffer
 vim.g.nvim_tree_auto_close = 1

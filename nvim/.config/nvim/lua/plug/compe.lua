@@ -26,14 +26,16 @@ require("compe").setup {
     emoji = false,
     nvim_lsp = true,
     nvim_lua = true,
-    vsnip = true,
-    ultisnips = false,
+    vsnip = false,
+    ultisnips = true,
     treesitter = false
   }
 }
 
 -- Enabling lspkind icons
 require("lspkind").init()
+
+--TODO: UltiSnips integration
 
 -- Vsnip integration
 local t = function(str)
