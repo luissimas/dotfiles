@@ -30,6 +30,16 @@ require("nvim-web-devicons").setup {
       color = "#FFA500",
       name = "Makefile"
     },
+    ["routes.js"] = {
+      icon = "數",
+      color = "#43A047",
+      name = "Routes"
+    },
+    ["yarn.lock"] = {
+      icon = "",
+      color = "#2C8EBB",
+      name = "YarnLock"
+    },
     zip = {
       icon = "",
       color = "#DA4217",
@@ -37,8 +47,23 @@ require("nvim-web-devicons").setup {
     },
     ["test.js"] = {
       icon = "ﭧ",
-      color = "#cbcb41",
-      name = "JavascriptTest"
+      color = "#DCAF26",
+      name = "JsTest"
+    },
+    ["spec.js"] = {
+      icon = "",
+      color = "#DCAF26",
+      name = "JsSpec"
+    },
+    ["test.lua"] = {
+      icon = "ﭧ",
+      color = "#51a0cf",
+      name = "LuaTest"
+    },
+    ["spec.lua"] = {
+      icon = "",
+      color = "#51a0cf",
+      name = "LuaSpec"
     }
   },
   default = true

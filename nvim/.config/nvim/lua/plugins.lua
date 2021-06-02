@@ -21,11 +21,7 @@ return require("packer").startup(
       "neovim/nvim-lspconfig",
       config = function()
         require("plug.lspconfig")
-      end,
-      requires = {
-        -- Docs and signatures for nvim lua API
-        {"folke/lua-dev.nvim"}
-      }
+      end
     }
 
     -- Better LSP experience
@@ -101,8 +97,8 @@ return require("packer").startup(
 
     -- File tree
     use {
-      -- "kyazdani42/nvim-tree.lua",
-      "~/repos/nvim-tree.lua",
+      "kyazdani42/nvim-tree.lua",
+      -- "~/repos/nvim-tree.lua",
       config = function()
         require("plug.tree")
       end
@@ -251,6 +247,12 @@ return require("packer").startup(
 
     -- Luapad
     use {"rafcamlet/nvim-luapad"}
+
+    -- Docs and signatures for nvim lua API
+    use {"folke/lua-dev.nvim"}
+
+    -- Lua 5.1 reference manual
+    use {"milisims/nvim-luaref"}
 
     -- ZenMode
     use {
