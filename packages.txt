@@ -10,6 +10,7 @@ bison
 brave-bin
 bspwm
 chromium-widevine
+colorpicker
 dbeaver
 discord
 djvu2pdf
@@ -70,7 +71,6 @@ mars-mips
 mesa
 mpv
 neofetch
-neovim-nightly-bin
 nerd-fonts-fira-code
 networkmanager
 nodejs
