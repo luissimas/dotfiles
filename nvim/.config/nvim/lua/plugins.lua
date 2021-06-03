@@ -69,6 +69,9 @@ return require("packer").startup(
       }
     }
 
+    -- Tabnine completion source
+    -- use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}
+
     -- Code format
     use {
       "mhartington/formatter.nvim",
@@ -92,7 +95,11 @@ return require("packer").startup(
       config = function()
         require("plug.telescope")
       end,
-      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"nvim-telescope/telescope-fzy-native.nvim"}}
+      requires = {
+        {"nvim-lua/popup.nvim"},
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-telescope/telescope-fzy-native.nvim"}
+      }
     }
 
     -- File tree
@@ -246,7 +253,7 @@ return require("packer").startup(
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
 
     -- Luapad
-    use {"rafcamlet/nvim-luapad"}
+    use {"rafcamlet/nvim-luapad", opt = true, ft = "lua"}
 
     -- Docs and signatures for nvim lua API
     use {"folke/lua-dev.nvim"}
@@ -297,9 +304,7 @@ return require("packer").startup(
     -- Colorschemes
     -- use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
     use {"dylanaraps/wal.vim"}
-    use {"shaunsingh/nord.nvim"}
     use {"folke/tokyonight.nvim"}
-    use {"eddyekofo94/gruvbox-flat.nvim"}
 
     -- My custom plugins (testing stuff)
     use "~/fun/lua/plugins/pandoc"
