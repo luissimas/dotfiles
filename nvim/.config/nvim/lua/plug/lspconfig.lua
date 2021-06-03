@@ -18,6 +18,22 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Lspconfig's util module
 local util = require("lspconfig.util")
 
+-- EFM language server
+require("lspconfig").efm.setup {
+  cmd = {"efm-langserver"},
+  capabilities = capabilities,
+  init_options = {documentFormatting = true},
+  filetypes = {"elixir"}
+  -- settings = {
+  --   rootMarkers = {".git/"},
+  --   languages = {
+  --     lua = {
+  --       {formatCommand = "lua-format -i", formatStdin = true}
+  --     }
+  --   }
+  -- }
+}
+
 -- Bash
 require("lspconfig").bashls.setup {
   cmd = {"bash-language-server", "start"},
@@ -29,6 +45,14 @@ require("lspconfig").clangd.setup {
   cmd = {"clangd", "--background-index"},
   filetypes = {"c", "cpp", "objc", "objcpp", "ch"},
   capabilities = capabilities
+}
+
+-- Elixir (https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/)
+require("lspconfig").elixirls.setup {
+  -- Unix
+  cmd = {"/home/padawan/repos/elixir-ls/language_server.sh"},
+  filetypes = {"elixir", "eelixir"},
+  root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
 }
 
 -- Python

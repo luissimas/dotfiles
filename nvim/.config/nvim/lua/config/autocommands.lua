@@ -36,10 +36,16 @@ vim.api.nvim_exec(
     autocmd BufWritePre * :call TrimWhitespace()
   augroup END
 
-  "augroup FormatAutogroup
-  "  autocmd!
-  "  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json FormatWrite
-  "augroup END
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json FormatWrite
+  augroup END
+
+  augroup ElixirFiletype
+    autocmd!
+    autocmd BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+    autocmd BufRead,BufNewFile *.eex set filetype=eelixir
+  augroup END
 
   augroup STATUSLINECOLORSYNC
     " Clears all autocommands from this group

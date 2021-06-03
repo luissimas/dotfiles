@@ -37,7 +37,7 @@ require("telescope").setup {
       }
     },
     -- Files to be ignored
-    file_ignore_patterns = {"node_modules", "%.png", "%.jpg", "%.jpeg", "%.pdf"}
+    file_ignore_patterns = {"node_modules", "_build", "%.png", "%.jpg", "%.jpeg", "%.pdf"}
   }
 }
 
