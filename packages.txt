@@ -1,5 +1,6 @@
 alacritty
 alsa-utils
+arc-gtk-theme
 autoconf
 automake
 base
@@ -15,6 +16,7 @@ dbeaver
 discord
 djvu2pdf
 dmenu
+elixir
 emacs
 exa
 fakeroot
@@ -62,6 +64,7 @@ logmein-hamachi
 lua
 lua-language-server
 luarocks
+lxappearance
 m4
 mailspring
 maim
@@ -83,7 +86,7 @@ obsidian-appimage
 pacman
 pamixer
 pandoc
-paru-git
+paru
 patch
 pcmanfm
 pdfjs

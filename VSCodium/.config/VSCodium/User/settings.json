@@ -1,70 +1,76 @@
 {
-    // Theme
-    "workbench.startupEditor": "none",
-    "workbench.colorTheme": "Palenight Theme",
-    "workbench.iconTheme": "material-icon-theme",
-
-    // Editor
-    "editor.mouseWheelZoom": true,
-    "editor.renderLineHighlight": "gutter",
-    "breadcrumbs.enabled": false,
-    "editor.tabSize": 2,
-    "editor.semanticHighlighting.enabled": true,
-    "editor.rulers": [80, 120],
-    "editor.minimap.enabled": false,
-
-    // Formatting
-    "editor.formatOnSave": true,
-    "files.trimTrailingWhitespace": true,
-    "files.trimFinalNewlines": true,
-
-    // File tree
-    "explorer.compactFolders": false,
-    "files.exclude": {
-      "**/.git": true,
-      "**/.svn": true,
-      "**/.hg": true,
-      "**/CVS": true,
-      "**/.DS_Store": true,
-      "**/node_modules": true
-    },
-
-    // Window
-    "window.menuBarVisibility": "toggle",
-    "window.autoDetectHighContrast": false,
-
-    // Font
-    "editor.fontFamily": "FiraCode Nerd Font",
-    "editor.fontWeight": 400,
-    "editor.fontLigatures": true,
-    "editor.fontSize": 14,
-    "editor.lineHeight": 22,
-
-    // Terminal
-    "terminal.integrated.fontSize": 12,
-    "terminal.integrated.shell.linux": "/bin/zsh",
-
-    // Neovim integration
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "workbench.editor.tabCloseButton": "off",
-
-    // Gitlens
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.currentLine.enabled": false,
-    "gitlens.defaultDateFormat": "DD/MM/YYYY, H:mm",
-    "gitlens.defaultDateShortFormat": "DD/MM/YYYY",
-    "gitlens.defaultTimeFormat": "H:mm",
-    "workbench.sideBar.location": "right",
-    "sync.gist": "08d15fa159b11fb683c52c8de4bb84b9",
-    "color-highlight.markerType": "dot-before",
-    "color-highlight.markRuler": false,
-    "color-highlight.enable": false,
-    "sync.autoDownload": true,
-    "sync.autoUpload": true,
-    "sync.quietSync": true,
-    "material-icon-theme.hidesExplorerArrows": true,
-    "files.associations": {
-      "*.rmd": "markdown"
-    },
-    "explorer.confirmDelete": false,
+  // Theme
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "Tokyo Night Storm",
+  "workbench.iconTheme": "material-icon-theme",
+  // Editor
+  "editor.mouseWheelZoom": true,
+  "editor.renderLineHighlight": "gutter",
+  "breadcrumbs.enabled": false,
+  "editor.tabSize": 2,
+  "editor.lineNumbers": "relative",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.minimap.enabled": false,
+  // Formatting
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  // File tree
+  "explorer.compactFolders": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  // Window
+  "window.menuBarVisibility": "toggle",
+  "window.autoDetectHighContrast": false,
+  "window.restoreWindows": "none",
+  // Font
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontWeight": 400,
+  "editor.fontLigatures": true,
+  "editor.fontSize": 13,
+  "editor.lineHeight": 22,
+  // Terminal
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  // Neovim integration
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
+  "workbench.editor.tabCloseButton": "off",
+  // Gitlens
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.defaultDateFormat": "DD/MM/YYYY, H:mm",
+  "gitlens.defaultDateShortFormat": "DD/MM/YYYY",
+  "gitlens.defaultTimeFormat": "H:mm",
+  "workbench.sideBar.location": "right",
+  "sync.gist": "08d15fa159b11fb683c52c8de4bb84b9",
+  "color-highlight.markerType": "dot-before",
+  "color-highlight.markRuler": false,
+  "color-highlight.enable": false,
+  "sync.autoDownload": true,
+  "sync.autoUpload": true,
+  "sync.quietSync": true,
+  "material-icon-theme.hidesExplorerArrows": true,
+  "files.associations": {
+    "*.rmd": "markdown"
+  },
+  "explorer.confirmDelete": false,
+  "vscode-neovim.useCtrlKeysForNormalMode": true,
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": false,
+  "cSpell.language": "en,pt-BR",
+  "cSpell.userWords": [
+    "confirmacao",
+    "email",
+    "usuario"
+  ],
 }
