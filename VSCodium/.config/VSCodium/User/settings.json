@@ -10,10 +10,7 @@
   "editor.tabSize": 2,
   "editor.lineNumbers": "relative",
   "editor.semanticHighlighting.enabled": true,
-  "editor.rulers": [
-    80,
-    120
-  ],
+  "editor.rulers": [80, 120],
   "editor.minimap.enabled": false,
   // Formatting
   "editor.formatOnSave": true,
@@ -40,7 +37,7 @@
   "editor.fontSize": 13,
   "editor.lineHeight": 22,
   // Terminal
-  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontSize": 13,
   "terminal.integrated.shell.linux": "/bin/zsh",
   // Neovim integration
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
@@ -51,7 +48,6 @@
   "gitlens.defaultDateFormat": "DD/MM/YYYY, H:mm",
   "gitlens.defaultDateShortFormat": "DD/MM/YYYY",
   "gitlens.defaultTimeFormat": "H:mm",
-  "workbench.sideBar.location": "right",
   "sync.gist": "08d15fa159b11fb683c52c8de4bb84b9",
   "color-highlight.markerType": "dot-before",
   "color-highlight.markRuler": false,
@@ -73,4 +69,5 @@
     "email",
     "usuario"
   ],
+  "workbench.sideBar.location": "right",
 }
