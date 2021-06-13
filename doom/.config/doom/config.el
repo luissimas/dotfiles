@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 13)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
@@ -65,12 +65,16 @@
 (map! :leader
       :desc "Clone indirect buffer other window" "b c" #'clone-indirect-buffer-other-window)
 
+;; Setting git-gutter signcolumn width
+(after! git-gutter-fringe
+  (set-fringe-mode '(1 . 0)))
+
 ;; Centaur-tabs config
 (setq centaur-tabs-set-icons t
       centaur-tabs-height 15)
 
-(map! :n "C-," #'centaur-tabs-forward
-      :n "C-." #'centaur-tabs-backward
+(map! :n "C-," #'centaur-tabs-backward
+      :n "C-." #'centaur-tabs-forward
       :n "M-." #'centaur-tabs-move-current-tab-to-right
       :n "M-," #'centaur-tabs-move-current-tab-to-left)
 
@@ -91,8 +95,11 @@
 (projectile-add-known-project "~/dotfiles")
 (projectile-add-known-project "~/cati/projetos/fight4you/backend")
 
-;; Ligatures
-(after! elixir-mode-hook
-  (set-ligatures! 'elixir-mode))
+;; Ligatures, I don't actually know how this works
+;; (after! elixir-mode-hook
+;;   (set-ligatures! 'elixir-mode))
 
 ;; Company
+(setq company-idle-delay 0.2
+      company-minimum-prefix-length 1
+      company-box-scrollbar nil)
