@@ -82,7 +82,11 @@
 (map! :n "C-h" #'evil-window-left
       :n "C-j" #'evil-window-down
       :n "C-k" #'evil-window-up
-      :n "C-l" #'evil-window-right)
+      :n "C-l" #'evil-window-right
+      :n "M-h" #'evil-window-increase-width
+      :n "M-j" #'evil-window-decrease-height
+      :n "M-k" #'evil-window-increase-height
+      :n "M-l" #'evil-window-decrease-width)
 
 ;; Evil mode
 (setq +evil-want-o/O-to-continue-comments nil)
@@ -100,6 +104,6 @@
 ;;   (set-ligatures! 'elixir-mode))
 
 ;; Company
-(setq company-idle-delay 0.2
+(setq company-idle-delay 0
       company-minimum-prefix-length 1
       company-box-scrollbar nil)
