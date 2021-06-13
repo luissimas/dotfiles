@@ -5,13 +5,13 @@ require("lspsaga").init_lsp_saga(
     warn_sign = "",
     hint_sign = "",
     infor_sign = "",
-    dianostic_header_icon = "   ",
+    dianostic_header_icon = " ",
     code_action_icon = " ",
     code_action_prompt = {
       enable = true,
       sign = true,
       sign_priority = 20,
-      virtual_text = true
+      virtual_text = false
     },
     finder_definition_icon = "  ",
     finder_reference_icon = "  ",
@@ -19,7 +19,7 @@ require("lspsaga").init_lsp_saga(
     finder_action_keys = {
       open = "o",
       vsplit = "s",
-      split = "i",
+      split = "x",
       quit = "q",
       scroll_down = "<C-f>",
       scroll_up = "<C-b>" -- quit can be a table
@@ -33,7 +33,7 @@ require("lspsaga").init_lsp_saga(
       exec = "<CR>" -- quit can be a table
     },
     definition_preview_icon = "  ",
-    border_style = "single",
+    border_style = "single", -- "single" "double" "round" "plus"
     rename_prompt_prefix = "➤"
   }
 )

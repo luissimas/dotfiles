@@ -64,6 +64,16 @@ require("nvim-web-devicons").setup {
       icon = "",
       color = "#51a0cf",
       name = "LuaSpec"
+    },
+    [".env"] = {
+      icon = "",
+      color = "#404040",
+      name = "DotEnv"
+    },
+    ["jest.config.js"] = {
+      icon = "",
+      color = "#F4511E",
+      name = "JestConfig"
     }
   },
   default = true

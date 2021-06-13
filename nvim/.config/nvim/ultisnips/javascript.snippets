@@ -1,0 +1,11 @@
+snippet knexmigration "Knex migration"
+exports.up = function (knex) {
+  return knex.schema.createTable('$1', (table) => {
+		$0
+  });
+};
+
+exports.down = function (knex) {
+  return knex.schema.dropTable('$1');
+};
+endsnippet

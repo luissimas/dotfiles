@@ -11,7 +11,8 @@
 
  All the information about the servers can be found here:
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#html
--- ]] -- Capabilities for snippet support in servers
+-- ]]
+-- Capabilities for snippet support in servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -23,15 +24,15 @@ require("lspconfig").efm.setup {
   cmd = {"efm-langserver"},
   capabilities = capabilities,
   init_options = {documentFormatting = true},
-  filetypes = {"elixir"}
-  -- settings = {
-  --   rootMarkers = {".git/"},
-  --   languages = {
-  --     lua = {
-  --       {formatCommand = "lua-format -i", formatStdin = true}
-  --     }
-  --   }
-  -- }
+  filetypes = {"elixir"},
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      lua = {
+        {formatCommand = "lua-format -i", formatStdin = true}
+      }
+    }
+  }
 }
 
 -- Bash
@@ -49,7 +50,6 @@ require("lspconfig").clangd.setup {
 
 -- Elixir (https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/)
 require("lspconfig").elixirls.setup {
-  -- Unix
   cmd = {"/home/padawan/repos/elixir-ls/language_server.sh"},
   filetypes = {"elixir", "eelixir"},
   root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
@@ -61,7 +61,8 @@ require("lspconfig").pyright.setup {}
 -- JavaScript/TypeScript
 require("lspconfig").tsserver.setup {
   cmd = {"typescript-language-server", "--stdio"},
-  filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"}
+  filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+  root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
 
 -- Vim script
@@ -71,23 +72,23 @@ require("lspconfig").vimls.setup {}
 require("lspconfig").jsonls.setup {}
 
 -- Haskell
-require("lspconfig").hls.setup {
-  cmd = {"haskell-language-server-wrapper", "--lsp"},
-  filetypes = {"haskell", "lhaskell"},
-  lspinfo = function(cfg)
-    -- return "specific"
-    if cfg.settings.languageServerHaskell.logFile or false then
-      return "logfile: " .. cfg.settings.languageServerHaskell.logFile
-    end
-    return ""
-  end,
-  root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
-  settings = {
-    languageServerHaskell = {
-      formattingProvider = "ormolu"
-    }
-  }
-}
+-- require("lspconfig").hls.setup {
+--   cmd = {"haskell-language-server-wrapper", "--lsp"},
+--   filetypes = {"haskell", "lhaskell"},
+--   lspinfo = function(cfg)
+--     -- return "specific"
+--     if cfg.settings.languageServerHaskell.logFile or false then
+--       return "logfile: " .. cfg.settings.languageServerHaskell.logFile
+--     end
+--     return ""
+--   end,
+--   root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
+--   settings = {
+--     languageServerHaskell = {
+--       formattingProvider = "ormolu"
+--     }
+--   }
+-- }
 
 -- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
