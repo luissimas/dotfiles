@@ -22,6 +22,7 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 13)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -70,13 +71,13 @@
   (set-fringe-mode '(1 . 0)))
 
 ;; Centaur-tabs config
-(setq centaur-tabs-set-icons t
-      centaur-tabs-height 15)
+;; (setq centaur-tabs-set-icons t
+;;       centaur-tabs-height 15)
 
-(map! :n "C-," #'centaur-tabs-backward
-      :n "C-." #'centaur-tabs-forward
-      :n "M-." #'centaur-tabs-move-current-tab-to-right
-      :n "M-," #'centaur-tabs-move-current-tab-to-left)
+;; (map! :n "C-," #'centaur-tabs-backward
+;;       :n "C-." #'centaur-tabs-forward
+;;       :n "M-." #'centaur-tabs-move-current-tab-to-right
+;;       :n "M-," #'centaur-tabs-move-current-tab-to-left)
 
 ;; Window mappings
 (map! :n "C-h" #'evil-window-left
@@ -95,9 +96,7 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-(projectile-add-known-project "~/exercism/elixir")
-(projectile-add-known-project "~/dotfiles")
-(projectile-add-known-project "~/cati/projetos/fight4you/backend")
+(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
 
 ;; Ligatures, I don't actually know how this works
 ;; (after! elixir-mode-hook
@@ -107,3 +106,6 @@
 (setq company-idle-delay 0
       company-minimum-prefix-length 1
       company-box-scrollbar nil)
+
+;; Dashboard
+(setq fancy-splash-image "~/.config/doom/logo.png")
