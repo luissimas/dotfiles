@@ -97,7 +97,7 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
+;;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
 
 ;; Ligatures, I don't actually know how this works
 ;; (after! elixir-mode-hook
@@ -117,3 +117,10 @@
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+;; Configuring path for elixir-ls
+(add-to-list 'exec-path (expand-file-name "~/repos/elixir-ls/"))
+
+;; lsp-ui
+(after! lsp-ui
+  (setq lsp-ui-doc-mode-enable t))
