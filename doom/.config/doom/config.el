@@ -70,7 +70,8 @@
       :desc "Clone indirect buffer other window" "b c" #'clone-indirect-buffer-other-window)
 
 ;; Setting git-gutter signcolumn width
-(after! git-gutter-fringe
+(use-package! git-gutter-fringe
+  :config
   (set-fringe-mode '(1 . 0)))
 
 ;; Centaur-tabs config
@@ -106,9 +107,11 @@
 ;;   (set-ligatures! 'elixir-mode))
 
 ;; Company
-(setq company-idle-delay 0.1
-      company-minimum-prefix-length 1
-      company-box-scrollbar nil)
+(use-package! company
+  :config
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 1
+        company-box-scrollbar nil))
 
 ;; Dashboard
 (setq fancy-splash-image "~/.config/doom/logo.png")
@@ -124,7 +127,8 @@
 (add-to-list 'exec-path (expand-file-name "~/repos/elixir-ls/"))
 
 ;; lsp-ui
-(after! lsp-ui
+(use-package! lsp-ui
+  :config
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-delay 1
         lsp-ui-doc-position 'at-point
@@ -132,3 +136,13 @@
         lsp-ui-doc-max-height 200
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-diagnostics t))
+
+;; Eslint
+(use-package! lsp
+  :config
+  (setq lsp-eslint-package-manager 'yarn))
+
+(use-package! treemacs
+  :config
+  (setq treemacs-position 'right
+        treemacs-width 30))
