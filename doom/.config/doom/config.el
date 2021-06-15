@@ -19,9 +19,10 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 13)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+      doom-variable-big-font (font-spec :family "JetBrains Mono" :size 16))
+
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -39,7 +40,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/dox/org/")
+(setq org-directory "~/dox/org/"
+      org-hide-emphasis-markers t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -97,14 +99,14 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-;;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
+;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
 
 ;; Ligatures, I don't actually know how this works
 ;; (after! elixir-mode-hook
 ;;   (set-ligatures! 'elixir-mode))
 
 ;; Company
-(setq company-idle-delay 0
+(setq company-idle-delay 0.1
       company-minimum-prefix-length 1
       company-box-scrollbar nil)
 
@@ -123,4 +125,11 @@
 
 ;; lsp-ui
 (after! lsp-ui
-  (setq lsp-ui-doc-mode-enable t))
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-delay 1
+        lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-enable t
+        lsp-ui-doc-max-width 400
+        lsp-ui-doc-max-height 200
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-diagnostics t))

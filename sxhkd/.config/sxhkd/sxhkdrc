@@ -8,7 +8,7 @@ super + {_,shift} + Return
 
 # program launcher
 super + p
-	rofi -show run
+	rofi -show drun
 
 # power prompt
 super + shift + q
