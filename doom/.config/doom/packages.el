@@ -51,3 +51,6 @@
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+;; Disabling hl-line-mode
+(package! hl-line :disable t)

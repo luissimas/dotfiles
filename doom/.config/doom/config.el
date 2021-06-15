@@ -128,7 +128,6 @@
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-delay 1
         lsp-ui-doc-position 'at-point
-        lsp-ui-sideline-enable t
         lsp-ui-doc-max-width 400
         lsp-ui-doc-max-height 200
         lsp-ui-sideline-enable t
