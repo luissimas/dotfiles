@@ -26,6 +26,7 @@
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
+        doom-themes-treemacs-theme "doom-colors"
         doom-themes-enable-italic t))
 
 (custom-set-faces!

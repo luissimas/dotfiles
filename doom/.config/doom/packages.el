@@ -51,6 +51,7 @@
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(package! treemacs-all-the-icons)
 
 ;; Disabling hl-line-mode
 (package! hl-line :disable t)
