@@ -19,10 +19,9 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-big-font (font-spec :family "JetBrains Mono" :size 16))
-
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
+      doom-variable-big-font (font-spec :family "JetBrains Mono" :size 14))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -37,7 +36,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-palenight)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -65,6 +64,8 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Setting tabs properly
+(setq tab-width 2)
 
 ;; Make cloning buffers indirect
 (map! :leader
@@ -75,14 +76,25 @@
   :config
   (set-fringe-mode '(1 . 0)))
 
-;; Centaur-tabs config
-;; (setq centaur-tabs-set-icons t
-;;       centaur-tabs-height 15)
+;; Centaur-tabs config. I'm trying to avoid using these for navigation,
+;; but is nice to see the tabs open in the workspace
+(after! centaur-tabs
+  :init
+  (setq centaur-tabs-set-icons t
+        centaur-tabs-set-bar 'under
+        centaur-tabs-set-close-button nil
+        centaur-tabs-modified-marker ""
+        centaur-tabs-show-new-tab-button nil
+        centaur-tabs-enable-key-bindings nil
+        centaur-tabs-height 30)
+  (centaur-tabs-group-by-projectile-project))
 
+;; :bind
 ;; (map! :n "C-," #'centaur-tabs-backward
 ;;       :n "C-." #'centaur-tabs-forward
 ;;       :n "M-." #'centaur-tabs-move-current-tab-to-right
-;;       :n "M-," #'centaur-tabs-move-current-tab-to-left)
+;;       :n "M-," #'centaur-tabs-move-current-tab-to-left))
+
 
 ;; Window mappings
 (map! :n "C-h" #'evil-window-left
@@ -95,17 +107,15 @@
       :n "M-l" #'evil-window-decrease-width)
 
 ;; Evil mode
-(setq +evil-want-o/O-to-continue-comments nil)
+(use-package! evil
+  :config
+  (setq +evil-want-o/O-to-continue-comments nil))
 
 (map! :n "L" #'evil-end-of-line
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
-
-;; Ligatures, I don't actually know how this works
-;; (after! elixir-mode-hook
-;;   (set-ligatures! 'elixir-mode))
+                                        ;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
 
 ;; Company
 (use-package! company
@@ -134,7 +144,7 @@
         lsp-ui-doc-delay 1
         lsp-ui-doc-position 'at-point
         lsp-ui-doc-max-width 400
-        lsp-ui-doc-max-height 200
+        lsp-ui-doc-max-height 30
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-diagnostics t))
 
@@ -147,3 +157,45 @@
   :config
   (setq treemacs-position 'right
         treemacs-width 30))
+
+;; TODO: Configure ligatures properly
+(after! prettify-symbols
+  :config
+  (plist-put! +ligatures-extra-symbols
+              ;; org
+              :name          "»"
+              :src_block     "»"
+              :src_block_end "«"
+              :quote         "“"
+              :quote_end     "”"
+              ;; Functional
+              :lambda        "λ"
+              :def           "ƒ"
+              :composition   "∘"
+              :map           "↦"
+              ;; Types
+              :null          nil
+              :true          nil
+              :false         nil
+              :int           nil
+              :float         nil
+              :str           nil
+              :bool          nil
+              :list          nil
+              ;; Flow
+              :not           "￢"
+              :in            "∈"
+              :not-in        "∉"
+              :and           "∧"
+              :or            "∨"
+              :for           "∀"
+              :some          "∃"
+              :return        "⟼"
+              :yield         "⟻"
+              ;; Other
+              :union         "⋃"
+              :intersect     "∩"
+              :diff          "∖"
+              :tuple         "⨂"
+              :pipe          "" ;; FIXME: find a non-private char
+              :dot           "•"))  ;; you could also add your own if you want
