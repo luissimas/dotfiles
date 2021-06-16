@@ -56,3 +56,7 @@
 
 ;; Disabling hl-line-mode
 (package! hl-line :disable t)
+
+;; Code screenshots
+(package! screenshot
+  :recipe (:host github :repo "tecosaur/screenshot"))

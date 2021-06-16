@@ -79,7 +79,6 @@
 ;; Centaur-tabs config. I'm trying to avoid using these for navigation,
 ;; but is nice to see the tabs open in the workspace
 (after! centaur-tabs
-  :init
   (setq centaur-tabs-set-icons t
         centaur-tabs-set-bar 'under
         centaur-tabs-set-close-button nil
@@ -199,3 +198,8 @@
               :tuple         "⨂"
               :pipe          "" ;; FIXME: find a non-private char
               :dot           "•"))  ;; you could also add your own if you want
+
+;; Screenshot
+(use-package! screenshot
+  :config
+  (map! :leader :desc "Code screenshot" "c s" #'screenshot))
