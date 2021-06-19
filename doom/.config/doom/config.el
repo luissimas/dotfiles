@@ -113,7 +113,7 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
+(setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir"))
 
 ;; Company
 (use-package! company
@@ -124,6 +124,12 @@
 
 ;; Dashboard
 (setq fancy-splash-image "~/.config/doom/logo.png")
+
+(defun fortune-cowsay ()
+  (insert "\n"
+           (shell-command-to-string "fortune")))
+
+;;(add-to-list '+doom-dashboard-functions 'fortune-cowsay)
 
 ;; Treesitter
 (use-package! tree-sitter
@@ -138,13 +144,15 @@
 ;; lsp-ui
 (use-package! lsp-ui
   :config
-  (setq lsp-ui-doc-enable t
+  (setq lsp-ui-doc-enable nil ;; Disabling this for now, I'm trying to use only eldoc
+        lsp-ui-doc-use-childframe t
         lsp-ui-doc-delay 1
         lsp-ui-doc-position 'at-point
         lsp-ui-doc-max-width 400
         lsp-ui-doc-max-height 30
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-diagnostics t))
+
 
 ;; Eslint
 (use-package! lsp
