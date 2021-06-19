@@ -40,8 +40,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/dox/org/"
-      org-hide-emphasis-markers t)
+(setq org-directory "~/dox/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -114,7 +113,7 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile projects
-                                        ;(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
+(setq projectile-project-search-path '("~/fun" "~/cati" "~/dox/ufscar" "~/exercism"))
 
 ;; Company
 (use-package! company
@@ -152,54 +151,17 @@
   :config
   (setq lsp-eslint-package-manager 'yarn))
 
+;; Treemacs
 (use-package! treemacs
   :config
   (setq treemacs-position 'right
         treemacs-width 30))
 
-;; TODO: Configure ligatures properly
-(after! prettify-symbols
-  :config
-  (plist-put! +ligatures-extra-symbols
-              ;; org
-              :name          "»"
-              :src_block     "»"
-              :src_block_end "«"
-              :quote         "“"
-              :quote_end     "”"
-              ;; Functional
-              :lambda        "λ"
-              :def           "ƒ"
-              :composition   "∘"
-              :map           "↦"
-              ;; Types
-              :null          nil
-              :true          nil
-              :false         nil
-              :int           nil
-              :float         nil
-              :str           nil
-              :bool          nil
-              :list          nil
-              ;; Flow
-              :not           "￢"
-              :in            "∈"
-              :not-in        "∉"
-              :and           "∧"
-              :or            "∨"
-              :for           "∀"
-              :some          "∃"
-              :return        "⟼"
-              :yield         "⟻"
-              ;; Other
-              :union         "⋃"
-              :intersect     "∩"
-              :diff          "∖"
-              :tuple         "⨂"
-              :pipe          "" ;; FIXME: find a non-private char
-              :dot           "•"))  ;; you could also add your own if you want
-
 ;; Screenshot
 (use-package! screenshot
   :config
   (map! :leader :desc "Code screenshot" "c s" #'screenshot))
+
+;; Org mode
+(after! org
+  (setq org-hide-emphasis-markers t))
