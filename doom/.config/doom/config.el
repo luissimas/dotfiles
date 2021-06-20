@@ -112,8 +112,11 @@
 (map! :n "L" #'evil-end-of-line
       :n "H" #'evil-beginning-of-line)
 
-;; Projectile projects
+;; Projectile
 (setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir"))
+
+(after! projectile
+    (pushnew! projectile-globally-ignored-directories "deps" "_build")) ;; Elixir folders
 
 ;; Company
 (use-package! company
