@@ -167,10 +167,10 @@
 
 ;; Formatting
 (after! format-all
-  (setq +format-on-save-enabled-modes t)
+  ;;(setq +format-on-save-enabled-modes t)
   (setq-hook! 'rjsx-mode-hook +format-with-lsp nil))
 
-(add-hook 'before-save-hook #'format-all-buffer)
+;;(add-hook 'before-save-hook #'format-all-buffer)
 
 ;; Treemacs
 (use-package! treemacs
