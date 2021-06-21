@@ -145,7 +145,7 @@
 ;; Configuring path for elixir-ls
 (add-to-list 'exec-path (expand-file-name "~/repos/elixir-ls/"))
 
-;; lsp-ui
+;; Lsp-ui
 (use-package! lsp-ui
   :config
   (setq lsp-ui-doc-enable nil ;; Disabling this for now, I'm trying to use only eldoc
@@ -186,3 +186,6 @@
 ;; Org mode
 (after! org
   (setq org-hide-emphasis-markers t))
+
+;; Compile using Makefile
+(map! :leader :desc "Compile" "c c" #'+make/run)
