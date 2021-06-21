@@ -116,7 +116,8 @@
 (setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir"))
 
 (after! projectile
-    (pushnew! projectile-globally-ignored-directories "deps" "_build")) ;; Elixir folders
+  (pushnew! projectile-globally-ignored-directories "deps" "_build" "node_modules" ".git")
+  (pushnew! projectile-globally-ignored-files "*-lock.json" ".zip" ".tar.gz"))
 
 ;; Company
 (use-package! company
@@ -130,7 +131,7 @@
 
 (defun fortune-cowsay ()
   (insert "\n"
-           (shell-command-to-string "fortune")))
+          (shell-command-to-string "fortune")))
 
 ;;(add-to-list '+doom-dashboard-functions 'fortune-cowsay)
 
@@ -156,11 +157,20 @@
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-diagnostics t))
 
-
 ;; Eslint
 (use-package! lsp
   :config
-  (setq lsp-eslint-package-manager 'yarn))
+  (setq lsp-eslint-enable t
+        lsp-eslint-format t
+        lsp-eslint-package-manager 'yarn
+        lsp-eslint-auto-fix-on-save t))
+
+;; Formatting
+(after! format-all
+  (setq +format-on-save-enabled-modes t)
+  (setq-hook! 'rjsx-mode-hook +format-with-lsp nil))
+
+(add-hook 'before-save-hook #'format-all-buffer)
 
 ;; Treemacs
 (use-package! treemacs
