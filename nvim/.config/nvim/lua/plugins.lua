@@ -24,7 +24,7 @@ return require("packer").startup(
       end
     }
 
-    -- Better LSP experience
+    -- Better LSP experience - Do I really need this?
     use {
       {
         "glepnir/lspsaga.nvim",
@@ -69,10 +69,7 @@ return require("packer").startup(
       }
     }
 
-    -- Tabnine completion source
-    -- use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}
-
-    -- Code format
+    -- Code format - Check Neoformat or EFM
     use {
       "mhartington/formatter.nvim",
       config = function()
@@ -80,7 +77,7 @@ return require("packer").startup(
       end
     }
 
-    -- Snippets
+    -- Snippets - Yeah, Ultissnips is the best currently
     use {
       "SirVer/ultisnips",
       config = function()
@@ -89,7 +86,7 @@ return require("packer").startup(
       requires = {{"honza/vim-snippets"}}
     }
 
-    -- Telescope
+    -- Telescope - Yep
     use {
       "nvim-telescope/telescope.nvim",
       config = function()
@@ -102,7 +99,7 @@ return require("packer").startup(
       }
     }
 
-    -- File tree
+    -- File tree - Get rid of this in the future
     use {
       "kyazdani42/nvim-tree.lua",
       -- "~/repos/nvim-tree.lua",
@@ -119,7 +116,7 @@ return require("packer").startup(
       end
     }
 
-    -- Barbar tabline
+    -- Barbar tabline - Get rid of this for a buffer-centered workflow, tabs are for vscode plebs
     use {
       "romgrk/barbar.nvim",
       config = function()
@@ -191,7 +188,7 @@ return require("packer").startup(
       end
     }
 
-    -- Dashboard startpage
+    -- Dashboard startpage - Customize this
     use {
       "glepnir/dashboard-nvim",
       config = function()
@@ -224,7 +221,7 @@ return require("packer").startup(
       branch = "lua"
     }
 
-    -- Toggle terminal
+    -- Toggle terminal - Find a better way to integrate terminals
     use {
       "akinsho/nvim-toggleterm.lua",
       config = function()
@@ -246,10 +243,10 @@ return require("packer").startup(
     -- Surroundings
     use "tpope/vim-surround"
 
-    -- Reload utility
+    -- Reload utility - Don't need this
     use "famiu/nvim-reload"
 
-    -- Codi scratchpad
+    -- Codi scratchpad - Don't need this
     use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
 
     -- Luapad
@@ -307,7 +304,7 @@ return require("packer").startup(
     use {"folke/tokyonight.nvim"}
 
     -- My custom plugins (testing stuff)
-    use "~/fun/lua/plugins/pandoc"
-    use "~/fun/lua/plugins/pomodoro"
+    -- use "~/fun/lua/plugins/pandoc"
+    -- use "~/fun/lua/plugins/pomodoro"
   end
 )

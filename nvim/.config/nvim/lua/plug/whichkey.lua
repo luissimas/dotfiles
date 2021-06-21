@@ -66,6 +66,10 @@ whichkey.register(
         c = {'<cmd>lua require("telescope_custom.colorscheme").colorscheme()<Enter>', "Colorscheme"},
         w = {'<cmd>lua require("telescope_custom.colorscheme").wal()<Enter>', "Pywal"}
       },
+      b = {
+        '<cmd>lua require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({}))<Enter>',
+        "Buffer"
+      },
       -- Trouble
       t = {
         name = "Trouble",

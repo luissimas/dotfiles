@@ -16,6 +16,9 @@
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {
+  "source.fixAll.eslint": true
+  },
   // File tree
   "explorer.compactFolders": false,
   "files.exclude": {
@@ -65,9 +68,14 @@
   "bracket-pair-colorizer-2.showVerticalScopeLine": false,
   "cSpell.language": "en,pt-BR",
   "cSpell.userWords": [
+    "ano",
     "confirmacao",
     "email",
+    "lancamento",
     "usuario"
   ],
   "workbench.sideBar.location": "right",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
