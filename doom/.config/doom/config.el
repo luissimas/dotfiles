@@ -123,7 +123,7 @@
 (use-package! company
   :config
   (setq company-idle-delay 0.1
-        company-minimum-prefix-length 1
+        company-minimum-prefix-length 2
         company-box-scrollbar nil))
 
 ;; Dashboard
@@ -154,6 +154,7 @@
         lsp-ui-doc-position 'at-point
         lsp-ui-doc-max-width 400
         lsp-ui-doc-max-height 30
+        lsp-headerline-breadcrumb-enable nil
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-diagnostics t))
 

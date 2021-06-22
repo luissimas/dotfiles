@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Header template
+# key: <h
+# --
+
+/*
+
+Autor(es): Luís Augusto Simas do Nascimento
+Data de Criação: `(format-time-string "%d/%m/%Y")`
+Data de Atualização: `(format-time-string "%d/%m/%Y")`
+
+Objetivos: $1
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+$0
