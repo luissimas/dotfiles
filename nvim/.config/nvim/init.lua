@@ -14,7 +14,6 @@
 
 -- General
 require("config.sets")
-require("config.autocommands")
 require("config.keymaps")
 
 -- Plugins
