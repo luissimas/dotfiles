@@ -17,8 +17,8 @@ require("telescope").setup {
     mappings = {
       i = {
         ["<C-s>"] = actions.file_vsplit,
-        ["<C-k>"] = actions.preview_scrolling_up,
-        ["<C-j>"] = actions.preview_scrolling_down,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
         ["<C-t>"] = trouble.open_with_trouble
       },
       n = {

@@ -11,6 +11,14 @@ vim.g.mapleader = " "
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})
 
+-- CURSED!!!
+vim.api.nvim_set_keymap(
+  "n",
+  "<M-x>",
+  '<cmd>lua require("telescope.builtin").commands(require("telescope.themes").get_ivy({ previewer = false, results_height=0.5 }))<Enter>',
+  {noremap = true, silent = true}
+)
+
 -- Close window
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})
 
