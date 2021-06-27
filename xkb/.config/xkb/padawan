@@ -59,6 +59,8 @@ xkb_symbols "padawan" {
 
     key <LSGT> { [ backslash,   bar,            backslash,      bar ] };
 
+    key <RTSH> { [ dead_grave, dead_tilde,         grave,   asciitilde ] };
+
     include "level3(ralt_switch)"
 };
 
