@@ -22,3 +22,22 @@ require("plugins")
 
 -- Setting colorscheme
 vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)
+
+-- Config for plugins TODO: Manage this better
+require("plug.colorizer")
+require("plug.compe")
+require("plug.formatter")
+require("plug.gitsigns")
+require("plug.illuminate")
+require("plug.lspconfig")
+require("plug.lspkind")
+require("plug.lualine")
+require("plug.pears")
+require("plug.telescope")
+require("plug.todocomments")
+require("plug.tree")
+require("plug.treesitter")
+require("plug.trouble")
+require("plug.ultisnips")
+require("plug.webdevicons")
+require("plug.whichkey")

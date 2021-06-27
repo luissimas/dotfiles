@@ -13,298 +13,50 @@ end
 
 return require("packer").startup(
   function(use)
-    -- Packer auto-manager
-    use {"wbthomason/packer.nvim", opt = true}
+    -- Misc
+    use {"wbthomason/packer.nvim", opt = true} -- Packer auto-manager
+    use "nvim-lua/popup.nvim" -- Ui API for plugins
+    use "nvim-lua/plenary.nvim" -- Utility functions for various plugins
 
-    -- Lsp Config layer
-    use {
-      "neovim/nvim-lspconfig",
-      config = function()
-        require("plug.lspconfig")
-      end
-    }
+    -- Editor
+    use "neovim/nvim-lspconfig" -- Lsp Config layer
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- Treesitter
+    use "mhartington/formatter.nvim" -- Code format - TODO: Check Neoformat or EFM
+    use "SirVer/ultisnips" -- Snippets engine
+    use "honza/vim-snippets" -- Snippets collection
+    use "kyazdani42/nvim-tree.lua" -- File tree
+    use "hoob3rt/lualine.nvim" -- Better status line
+    use "folke/which-key.nvim" -- Never forget your keymaps
+    use "steelsojka/pears.nvim" -- I like autopairs
+    use "folke/trouble.nvim" -- Amazing quickfix lists
+    use "tpope/vim-commentary" -- Comment lines
+    use "tpope/vim-surround" -- Surround
 
-    -- Better LSP experience - Do I really need this?
-    use {
-      {
-        "glepnir/lspsaga.nvim",
-        config = function()
-          require("plug.lspsaga")
-        end
-      },
-      {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-          require("plug.lsp_signature")
-        end
-      }
-    }
+    -- Completion
+    use "hrsh7th/nvim-compe" -- Completion backend
+    use "nvim-telescope/telescope.nvim" -- The ultimate fuzzy finder
+    use "nvim-telescope/telescope-fzy-native.nvim" -- Fzy extension for telescope
 
-    -- Treesitter
-    use {
-      {
-        "nvim-treesitter/nvim-treesitter",
-        config = function()
-          require("plug.treesitter")
-        end,
-        run = ":TSUpdate"
-      }, -- Color pairs
-      {"p00f/nvim-ts-rainbow"}
-    }
+    -- UI
+    use "kyazdani42/nvim-web-devicons" -- General icons
+    use "onsails/lspkind-nvim" -- Completion icons
+    use "norcalli/nvim-colorizer.lua" -- Colors in hex color codes
+    use "p00f/nvim-ts-rainbow" -- Color brackets
+    use "RRethy/vim-illuminate" -- Highlight words under cursor
+    use "folke/todo-comments.nvim" -- Highlight comments
 
-    -- Autocompletion
-    use {
-      "hrsh7th/nvim-compe",
-      config = function()
-        require("plug.compe")
-      end,
-      -- Lspkind completion popup icons
-      requires = {
-        {
-          "onsails/lspkind-nvim",
-          config = function()
-            require("plug.lspkind")
-          end
-        }
-      }
-    }
-
-    -- Code format - Check Neoformat or EFM
-    use {
-      "mhartington/formatter.nvim",
-      config = function()
-        require("plug.formatter")
-      end
-    }
-
-    -- Snippets - Yeah, Ultissnips is the best currently
-    use {
-      "SirVer/ultisnips",
-      config = function()
-        require("plug.ultisnips")
-      end,
-      requires = {{"honza/vim-snippets"}}
-    }
-
-    -- Telescope - Yep
-    use {
-      "nvim-telescope/telescope.nvim",
-      config = function()
-        require("plug.telescope")
-      end,
-      requires = {
-        {"nvim-lua/popup.nvim"},
-        {"nvim-lua/plenary.nvim"},
-        {"nvim-telescope/telescope-fzy-native.nvim"}
-      }
-    }
-
-    -- File tree - Get rid of this in the future
-    use {
-      "kyazdani42/nvim-tree.lua",
-      -- "~/repos/nvim-tree.lua",
-      config = function()
-        require("plug.tree")
-      end
-    }
-
-    -- Lualine statusline
-    use {
-      "hoob3rt/lualine.nvim",
-      config = function()
-        require("plug.lualine")
-      end
-    }
-
-    -- Barbar tabline - Get rid of this for a buffer-centered workflow, tabs are for vscode plebs
-    use {
-      "romgrk/barbar.nvim",
-      config = function()
-        require("plug.barbar")
-      end
-    }
-
-    -- Icons
-    use {
-      "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("plug.webdevicons")
-      end
-    }
-
-    -- Git integration
-    use {
-      --[[
-        I'm hopping between Fugitive and Neogit these days, Neogit has a better interface
-        and the diffview is very nice, but it doesn't work very well with symlinks
-      --]]
-      {"tpope/vim-fugitive"}, -- {
-      --   "TimUntersberger/neogit",
-      --   config = function()
-      --     require("plug.neogit")
-      --   end,
-      --   requires = {
-      --     "nvim-lua/plenary.nvim",
-      --     "sindrets/diffview.nvim"
-      --   }
-      -- },
-      {
-        "lewis6991/gitsigns.nvim",
-        config = function()
-          require("plug.gitsigns")
-        end
-      }
-    }
-
-    -- Trouble for pretty quickfix lists
-    use {
-      "folke/trouble.nvim",
-      config = function()
-        require("plug.trouble")
-      end
-    }
-
-    -- Which-key
-    use {
-      "folke/which-key.nvim",
-      config = function()
-        require("plug.whichkey")
-      end
-    }
-
-    -- Autopairs
-    use {
-      "steelsojka/pears.nvim",
-      config = function()
-        require("plug.pears")
-      end
-    }
-
-    -- Smooth scrolling
-    use {
-      "karb94/neoscroll.nvim",
-      config = function()
-        require("plug.neoscroll")
-      end
-    }
-
-    -- Dashboard startpage - Customize this
-    use {
-      "glepnir/dashboard-nvim",
-      config = function()
-        require("plug.dashboard")
-      end
-    }
-
-    -- Color highlight
-    use {
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("plug.colorizer")
-      end
-    }
-
-    -- Highlight words under cursor
-    use {
-      "RRethy/vim-illuminate",
-      config = function()
-        require("plug.illuminate")
-      end
-    }
-
-    -- Indent lines
-    use {
-      "lukas-reineke/indent-blankline.nvim",
-      config = function()
-        require("plug.indent")
-      end,
-      branch = "lua"
-    }
-
-    -- Toggle terminal - Find a better way to integrate terminals
-    use {
-      "akinsho/nvim-toggleterm.lua",
-      config = function()
-        require("plug.toggleterm")
-      end
-    }
-
-    -- Todo comments highlight
-    use {
-      "folke/todo-comments.nvim",
-      config = function()
-        require("plug.todocomments")
-      end
-    }
-
-    -- Comment lines
-    use "tpope/vim-commentary"
-
-    -- Surroundings
-    use "tpope/vim-surround"
-
-    -- Reload utility - Don't need this
-    use "famiu/nvim-reload"
-
-    -- Codi scratchpad - Don't need this
-    use {"metakirby5/codi.vim", opt = true, ft = "javascript"}
-
-    -- Luapad
-    use {"rafcamlet/nvim-luapad", opt = true, ft = "lua"}
-
-    -- Docs and signatures for nvim lua API
-    use {"folke/lua-dev.nvim"}
-
-    -- Lua 5.1 reference manual
-    use {"milisims/nvim-luaref"}
-
-    -- ZenMode
-    use {
-      "folke/zen-mode.nvim",
-      config = function()
-        require("plug.zenmode")
-      end
-    }
-
-    -- Vimtex for latex
-    use {"lervag/vimtex", opt = true, ft = "tex"}
-
-    -- Markdown preview
-    use {
-      "iamcco/markdown-preview.nvim",
-      run = function()
-        vim.fn["mkdp#util#install"]()
-      end,
-      opt = true,
-      ft = {"markdown", "vim-plug", "pandoc"},
-      config = function()
-        require("plug.markdownpreview")
-      end
-    }
-
-    -- Markdown compile
-    -- use {
-    --   "vim-pandoc/vim-pandoc",
-    --   config = function()
-    --     require("plug.pandoc")
-    --   end,
-    --   opt = true,
-    --   ft = "markdown",
-    --   requires = {
-    --     "vim-pandoc/vim-pandoc-syntax"
-    --   }
-    -- }
-
-    -- Startup time log
-    use {"dstein64/vim-startuptime"}
+    -- Tools
+    use "tpope/vim-fugitive" -- The best git integration plugin
+    -- use "TimUntersberger/neogit" -- The *other* best git integration plugin
+    use "lewis6991/gitsigns.nvim"
+    use "folke/lua-dev.nvim" -- Docs and completion for nvim lua API
+    use "milisims/nvim-luaref" -- Lua 5.1 reference manual
+    use {"lervag/vimtex", opt = true, ft = "tex"} -- Vimtex for latex
+    use {"dstein64/vim-startuptime"} -- Startup time log
 
     -- Colorschemes
-    -- use {"folke/lsp-colors.nvim"} -- Adds LSP colors for themes that don't yet support them
-    use {"dylanaraps/wal.vim"}
-    use {"folke/tokyonight.nvim"}
-
-    -- My custom plugins (testing stuff)
-    -- use "~/fun/lua/plugins/pandoc"
-    -- use "~/fun/lua/plugins/pomodoro"
+    -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
+    use "dylanaraps/wal.vim"
+    use "folke/tokyonight.nvim"
   end
 )
