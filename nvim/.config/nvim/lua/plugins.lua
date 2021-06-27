@@ -34,6 +34,7 @@ return require("packer").startup(
 
     -- Completion
     use "hrsh7th/nvim-compe" -- Completion backend
+    use "ray-x/lsp_signature.nvim" -- Function signature docs
     use "nvim-telescope/telescope.nvim" -- The ultimate fuzzy finder
     use "nvim-telescope/telescope-fzy-native.nvim" -- Fzy extension for telescope
 
