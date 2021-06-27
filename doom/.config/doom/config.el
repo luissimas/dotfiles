@@ -31,12 +31,15 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+
 (setq global-prettify-symbols-mode t)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
+
 (setq doom-theme 'doom-palenight)
+;; (setq doom-theme 'modus-operandi)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -113,9 +116,11 @@
       :n "H" #'evil-beginning-of-line)
 
 ;; Projectile
-(setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir"))
-
-(after! projectile
+(use-package! projectile
+  :init
+  (setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir"))
+  :config
+  (setq projectile-auto-discover t)
   (pushnew! projectile-globally-ignored-directories "deps" "_build" "node_modules" ".git")
   (pushnew! projectile-globally-ignored-files "*-lock.json" ".zip" ".tar.gz"))
 
@@ -123,7 +128,7 @@
 (use-package! company
   :config
   (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2
+        company-minimum-prefix-length 1
         company-box-scrollbar nil))
 
 ;; Dashboard
@@ -136,11 +141,11 @@
 ;;(add-to-list '+doom-dashboard-functions 'fortune-cowsay)
 
 ;; Treesitter
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Configuring path for elixir-ls
 (add-to-list 'exec-path (expand-file-name "~/repos/elixir-ls/"))
