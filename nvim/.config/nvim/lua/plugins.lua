@@ -31,6 +31,7 @@ return require("packer").startup(
     use "folke/trouble.nvim" -- Amazing quickfix lists
     use "tpope/vim-commentary" -- Comment lines
     use "tpope/vim-surround" -- Surround
+    use "ahmedkhalf/lsp-rooter.nvim" -- Change cwd based on the project's root directory
 
     -- Completion
     use "hrsh7th/nvim-compe" -- Completion backend
@@ -45,10 +46,11 @@ return require("packer").startup(
     use "p00f/nvim-ts-rainbow" -- Color brackets
     use "RRethy/vim-illuminate" -- Highlight words under cursor
     use "folke/todo-comments.nvim" -- Highlight comments
+    -- use "tversteeg/registers.nvim" -- Registers preview
 
     -- Tools
-    use "tpope/vim-fugitive" -- The best git integration plugin
-    -- use "TimUntersberger/neogit" -- The *other* best git integration plugin
+    -- use "tpope/vim-fugitive" -- The best git integration plugin
+    use "TimUntersberger/neogit" -- The *other* best git integration plugin
     use "lewis6991/gitsigns.nvim"
     use "folke/lua-dev.nvim" -- Docs and completion for nvim lua API
     use "milisims/nvim-luaref" -- Lua 5.1 reference manual
@@ -59,6 +61,6 @@ return require("packer").startup(
     -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "dylanaraps/wal.vim"
     use "folke/tokyonight.nvim"
-    use "siduck76/nvim-base16.lua"
+    use "NTBBloodbath/doom-one.nvim"
   end
 )

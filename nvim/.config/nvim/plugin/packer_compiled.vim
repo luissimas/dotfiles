@@ -72,6 +72,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["doom-one.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/doom-one.nvim"
+  },
   ["formatter.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/formatter.nvim"
@@ -79,6 +83,10 @@ _G.packer_plugins = {
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["lsp-rooter.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lsp-rooter.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -96,9 +104,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  ["nvim-base16.lua"] = {
+  neogit = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-base16.lua"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neogit"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -176,10 +184,6 @@ _G.packer_plugins = {
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-commentary"
-  },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-illuminate"] = {
     loaded = true,

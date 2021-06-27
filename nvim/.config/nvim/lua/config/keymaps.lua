@@ -11,7 +11,7 @@ vim.g.mapleader = " "
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})
 
--- CURSED!!!
+-- Emacs-like M-x
 vim.api.nvim_set_keymap(
   "n",
   "<M-x>",
@@ -20,17 +20,17 @@ vim.api.nvim_set_keymap(
 )
 
 -- Close window
-vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})
 
 -- Write buffer
-vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", {noremap = true, silent = false})
+-- vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", {noremap = true, silent = false})
 
 -- Splits
 vim.api.nvim_set_keymap("n", "<C-s>", ":vsplit<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", {noremap = true, silent = true})
 
 -- Enable spellcheck
-vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
 
 -- Move to begin/end of line with L and H
 vim.api.nvim_set_keymap("n", "<S-l>", "$", {noremap = true, silent = true})
@@ -39,10 +39,10 @@ vim.api.nvim_set_keymap("v", "<S-l>", "$", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "<S-h>", "0", {noremap = true, silent = true})
 
 -- Use j and k for visual lines
-vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "k", "gk", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "j", "gj", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "k", "gk", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "k", "gk", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("v", "j", "gj", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("v", "k", "gk", {noremap = true, silent = true})
 
 -- Auto spell corretion
 vim.api.nvim_set_keymap("i", "<C-l>", "<Esc>[s1z=`]a", {noremap = true, silent = true})
