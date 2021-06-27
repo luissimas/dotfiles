@@ -53,10 +53,10 @@ vim.api.nvim_command("autocmd FileType c,cpp nnoremap <silent> <leader>sh :Clang
 vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {noremap = true, silent = true})
 
 -- Navigation and resizing splits
-vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<A-h>", ":vertical resize +5<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<A-j>", ":resize +5<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<A-k>", ":resize -5<Enter>", {noremap = true, silent = true})

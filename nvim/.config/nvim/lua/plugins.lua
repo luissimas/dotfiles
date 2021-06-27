@@ -56,6 +56,7 @@ return require("packer").startup(
     use "milisims/nvim-luaref" -- Lua 5.1 reference manual
     use {"lervag/vimtex", opt = true, ft = "tex"} -- Vimtex for latex
     use {"dstein64/vim-startuptime"} -- Startup time log
+    use "numToStr/Navigator.nvim" -- Navigate tmux splits
 
     -- Colorschemes
     -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
