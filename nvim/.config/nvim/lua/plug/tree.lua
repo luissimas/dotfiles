@@ -34,7 +34,7 @@ vim.g.nvim_tree_hide_dotfiles = 0
 vim.g.nvim_tree_show_icons = {git = 0, folders = 1, files = 1}
 
 -- Highlight for git attributes
-vim.g.nvim_tree_git_hl = 0
+vim.g.nvim_tree_git_hl = 1
 
 -- Keeping netrw (it's useful for some other stuff)
 vim.g.nvim_tree_disable_netrw = 0 -- 1 by default, disables netrw
@@ -44,6 +44,9 @@ vim.g.nvim_tree_hijack_netrw = 1
 
 -- Visual trailing lines on folders
 vim.g.nvim_tree_add_trailing = 0
+
+--
+vim.g.nvim_tree_root_folder_modifier = ":t"
 
 -- Lsp diagnostics in the tree
 vim.g.nvim_tree_lsp_diagnostics = 0

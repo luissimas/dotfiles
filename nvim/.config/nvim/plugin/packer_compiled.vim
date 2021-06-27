@@ -92,9 +92,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  neogit = {
+  ["nvim-base16.lua"] = {
     loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/neogit"
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/nvim-base16.lua"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,

@@ -58,5 +58,6 @@ return require("packer").startup(
     -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "dylanaraps/wal.vim"
     use "folke/tokyonight.nvim"
+    use "siduck76/nvim-base16.lua"
   end
 )
