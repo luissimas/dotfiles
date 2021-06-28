@@ -40,6 +40,7 @@ return require("packer").startup(
     use "nvim-telescope/telescope-fzy-native.nvim" -- Fzy extension for telescope
 
     -- UI
+    use "glepnir/lspsaga.nvim" -- Better lsp UI
     use "kyazdani42/nvim-web-devicons" -- General icons
     use "onsails/lspkind-nvim" -- Completion icons
     use "norcalli/nvim-colorizer.lua" -- Colors in hex color codes
