@@ -14,7 +14,7 @@ vim.o.spelllang = "pt,en,la"
 vim.bo.spelllang = "pt,en,la"
 
 -- General config
-vim.o.encoding = "UTF-8"
+vim.o.encoding = "utf-8"
 vim.o.smartindent = true
 vim.o.autoindent = true
 vim.o.ignorecase = true
