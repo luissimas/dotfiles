@@ -17,7 +17,7 @@ discord
 djvu2pdf
 dmenu
 elixir
-emacs
+emacs-git
 exa
 fakeroot
 fd
@@ -40,7 +40,6 @@ grep
 groff
 grub
 gzip
-haskell-language-server
 htop
 inkscape
 insomnia
@@ -82,6 +81,7 @@ ntp
 nvidia
 nvidia-utils
 nvtop
+obs-studio
 obsidian-appimage
 pacman
 pamixer
@@ -114,6 +114,7 @@ rofi
 rstudio-desktop-bin
 scrot
 sed
+sfml
 spaceship-prompt-git
 spotify-tui
 spotifyd
@@ -137,6 +138,7 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 tk
+tmux
 tree
 tree-sitter
 ttf-jetbrains-mono
