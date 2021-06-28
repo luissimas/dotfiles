@@ -45,28 +45,12 @@ require "lspconfig".efm.setup {
   }
 }
 
--- Bash
-require("lspconfig").bashls.setup {
-  cmd = {"bash-language-server", "start"},
-  filetypes = {"sh", "zsh"}
-}
-
--- C/C++
-require("lspconfig").clangd.setup {
-  cmd = {"clangd", "--background-index"},
-  filetypes = {"c", "cpp", "objc", "objcpp", "ch"},
-  capabilities = capabilities
-}
-
 -- Elixir (https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/)
 require("lspconfig").elixirls.setup {
-  cmd = {"/home/padawan/repos/elixir-ls/language_server.sh"},
+  cmd = {vim.fn.expand("~/repos/elixir-ls/language_server.sh")},
   filetypes = {"elixir", "eelixir"},
   root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
 }
-
--- Python
-require("lspconfig").pyright.setup {}
 
 -- JavaScript/TypeScript
 require("lspconfig").tsserver.setup {
@@ -74,31 +58,6 @@ require("lspconfig").tsserver.setup {
   filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
   root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
-
--- Vim script
-require("lspconfig").vimls.setup {}
-
--- Json
-require("lspconfig").jsonls.setup {}
-
--- Haskell
--- require("lspconfig").hls.setup {
---   cmd = {"haskell-language-server-wrapper", "--lsp"},
---   filetypes = {"haskell", "lhaskell"},
---   lspinfo = function(cfg)
---     -- return "specific"
---     if cfg.settings.languageServerHaskell.logFile or false then
---       return "logfile: " .. cfg.settings.languageServerHaskell.logFile
---     end
---     return ""
---   end,
---   root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
---   settings = {
---     languageServerHaskell = {
---       formattingProvider = "ormolu"
---     }
---   }
--- }
 
 -- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
@@ -147,6 +106,47 @@ require("lspconfig").sumneko_lua.setup(luadev)
 --     }
 --   }
 -- }
+
+-- Python
+require("lspconfig").pyright.setup {}
+
+-- Bash
+require("lspconfig").bashls.setup {
+  cmd = {"bash-language-server", "start"},
+  filetypes = {"sh", "zsh"}
+}
+
+-- C/C++
+require("lspconfig").clangd.setup {
+  cmd = {"clangd", "--background-index"},
+  filetypes = {"c", "cpp", "objc", "objcpp", "ch"},
+  capabilities = capabilities
+}
+
+-- Haskell
+-- require("lspconfig").hls.setup {
+--   cmd = {"haskell-language-server-wrapper", "--lsp"},
+--   filetypes = {"haskell", "lhaskell"},
+--   lspinfo = function(cfg)
+--     -- return "specific"
+--     if cfg.settings.languageServerHaskell.logFile or false then
+--       return "logfile: " .. cfg.settings.languageServerHaskell.logFile
+--     end
+--     return ""
+--   end,
+--   root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"),
+--   settings = {
+--     languageServerHaskell = {
+--       formattingProvider = "ormolu"
+--     }
+--   }
+-- }
+
+-- Vim script
+require("lspconfig").vimls.setup {}
+
+-- Json
+require("lspconfig").jsonls.setup {}
 
 -- R
 require("lspconfig").r_language_server.setup {}
