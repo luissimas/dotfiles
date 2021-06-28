@@ -19,18 +19,28 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Lspconfig's util module
 local util = require("lspconfig.util")
 
+-- Eslint options
+local eslint = {
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %m"},
+  lintIgnoreExitCode = true,
+  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true
+}
+
 -- EFM language server
-require("lspconfig").efm.setup {
-  cmd = {"efm-langserver"},
-  capabilities = capabilities,
+require "lspconfig".efm.setup {
   init_options = {documentFormatting = true},
-  filetypes = {"elixir"},
+  filetypes = {"javascript", "typescript"},
+  root_dir = function(fname)
+    return util.root_pattern("tsconfig.json")(fname) or util.root_pattern(".eslintrc.js", ".git")(fname)
+  end,
   settings = {
-    rootMarkers = {".git/"},
+    rootMarkers = {".eslintrc.js", ".git/"},
     languages = {
-      lua = {
-        {formatCommand = "lua-format -i", formatStdin = true}
-      }
+      javascript = {eslint},
+      typescript = {eslint}
     }
   }
 }
