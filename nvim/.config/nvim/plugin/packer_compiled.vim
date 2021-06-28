@@ -76,10 +76,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/Navigator.nvim"
   },
-  ["doom-one.nvim"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/doom-one.nvim"
-  },
   ["formatter.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/formatter.nvim"

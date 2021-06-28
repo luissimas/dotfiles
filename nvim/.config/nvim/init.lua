@@ -44,3 +44,13 @@ require("plug.whichkey")
 require("plug.lsp_rooter")
 require("plug.neogit")
 require("plug.navigator")
+
+-- Disabling lsp signs
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+  vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = true,
+    signs = true
+  }
+)

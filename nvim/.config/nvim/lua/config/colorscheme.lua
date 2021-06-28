@@ -30,6 +30,16 @@ vim.g.tokyonight_hide_inactive_statusline = true
 vim.g.tokyonight_dark_sidebar = true
 vim.g.tokyonight_dark_float = true
 
+-- Material
+vim.g.material_style = "deep ocean"
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = true
+vim.g.material_italic_functions = true
+vim.g.material_italic_variables = true
+vim.g.material_contrast = true
+vim.g.material_borders = false
+vim.g.material_disable_background = false
+
 local M = {}
 
 -- M.lualine_colorscheme = "gruvbox-flat"
@@ -37,5 +47,8 @@ local M = {}
 
 M.lualine_colorscheme = "tokyonight"
 M.colorscheme = "tokyonight"
+
+-- M.lualine_colorscheme = "material"
+-- M.colorscheme = "material"
 
 return M
