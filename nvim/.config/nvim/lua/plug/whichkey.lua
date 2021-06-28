@@ -54,7 +54,6 @@ whichkey.register(
       b = {
         name = "Buffer",
         d = {"<cmd>bp <bar> vs <bar> bn <bar> bd <Enter>", "Kill buffer"},
-        b = {"", "Switch buffer"},
         l = {"", "Switch to last buffer"}
       },
       [","] = {
