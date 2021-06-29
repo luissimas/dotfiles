@@ -57,7 +57,7 @@ whichkey.register(
         l = {"", "Switch to last buffer"}
       },
       [","] = {
-        '<cmd>lua require("telescope.builtin").buffers(require("telescope.themes").get_ivy({ previewer = false }))<Enter>',
+        '<cmd>lua require("telepada").switch_buffer()<Enter>',
         "Switch buffer"
       },
       c = {
@@ -84,10 +84,10 @@ whichkey.register(
           "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorting_strategy='ascending', prompt_position = 'top'})<Enter>",
           "Search buffer"
         },
-        d = {'<cmd>lua require("telescope_custom.find").find_dotfiles()<Enter>', "Find in dotfiles"},
-        v = {'<cmd>lua require("telescope_custom.find").find_vault()<Enter>', "Find in vault"},
-        c = {'<cmd>lua require("telescope_custom.colorscheme").colorscheme()<Enter>', "Change colorscheme"},
-        w = {'<cmd>lua require("telescope_custom.colorscheme").wal()<Enter>', "Change pywal colorscheme"}
+        d = {'<cmd>lua require("telepada").find_dotfiles()<Enter>', "Find in dotfiles"},
+        v = {'<cmd>lua require("telepada").find_vault()<Enter>', "Find in vault"},
+        c = {'<cmd>lua require("telepada.colorscheme").colorscheme()<Enter>', "Change colorscheme"},
+        w = {'<cmd>lua require("telepada.colorscheme").wal()<Enter>', "Change pywal colorscheme"}
       },
       w = {"<cmd>w<Enter>", "Write buffer"},
       q = {"<cmd>q<Enter>", "Quit"},

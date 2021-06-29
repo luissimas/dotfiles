@@ -31,7 +31,7 @@ return require("packer").startup(
     use "folke/trouble.nvim" -- Amazing quickfix lists
     use "tpope/vim-commentary" -- Comment lines
     use "tpope/vim-surround" -- Surround
-    use "ahmedkhalf/lsp-rooter.nvim" -- Change cwd based on the project's root directory
+    -- use "ahmedkhalf/lsp-rooter.nvim" -- Change cwd based on the project's root directory
 
     -- Completion
     use "hrsh7th/nvim-compe" -- Completion backend
@@ -47,7 +47,6 @@ return require("packer").startup(
     use "p00f/nvim-ts-rainbow" -- Color brackets
     use "RRethy/vim-illuminate" -- Highlight words under cursor
     use "folke/todo-comments.nvim" -- Highlight comments
-    -- use "tversteeg/registers.nvim" -- Registers preview
 
     -- Tools
     -- use "tpope/vim-fugitive" -- The best git integration plugin

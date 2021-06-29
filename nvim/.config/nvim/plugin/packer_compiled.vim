@@ -84,10 +84,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
-  ["lsp-rooter.nvim"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lsp-rooter.nvim"
-  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
