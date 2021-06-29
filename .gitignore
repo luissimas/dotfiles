@@ -1,3 +1,4 @@
 nvim/.config/nvim/autoload
 nvim/.config/nvim/.netrwhist
 qutebrowser/.config/qutebrowser/qsettings/QtProject.conf
+*.log
