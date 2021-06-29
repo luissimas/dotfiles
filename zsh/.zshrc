@@ -78,6 +78,7 @@ alias vim='nvim'
 alias code='codium'
 alias icat='kitty +kitten icat'
 alias cat='bat'
+alias mux='tmuxp'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
 # Habitica cli tool
@@ -98,6 +99,9 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Accept autosuggestion
 bindkey '^ ' autosuggest-accept
+
+# Tmuxp completion
+eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
 
 # Enable prompt
 autoload -U promptinit

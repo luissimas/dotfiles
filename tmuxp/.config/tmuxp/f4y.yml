@@ -1,0 +1,15 @@
+session_name: F4Y
+start_directory: ~/cati/projetos/fight4you/backend
+
+windows:
+  - window_name: Vim
+    focus: true
+    panes:
+      - vim src/index.js
+  - window_name: Server
+    layout: main-vertical
+    options:
+      main-pane-width: 100
+    panes:
+      - la
+      - yarn start

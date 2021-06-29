@@ -139,6 +139,7 @@ texlive-publishers
 texlive-science
 tk
 tmux
+tmuxp
 tree
 tree-sitter
 ttf-jetbrains-mono
