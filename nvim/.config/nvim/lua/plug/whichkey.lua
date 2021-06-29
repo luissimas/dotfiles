@@ -65,7 +65,7 @@ whichkey.register(
       },
       s = {
         name = "Spell",
-        k = {"<cmd>set spell!", "Toggle spellcheck"}
+        k = {"<cmd>set spell!<Enter>", "Toggle spellcheck"}
       },
       t = {
         name = "Trouble",

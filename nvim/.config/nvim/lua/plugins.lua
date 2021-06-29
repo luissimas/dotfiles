@@ -57,7 +57,7 @@ return require("packer").startup(
     use "milisims/nvim-luaref" -- Lua 5.1 reference manual
     use {"lervag/vimtex", opt = true, ft = "tex"} -- Vimtex for latex
     use "dstein64/vim-startuptime" -- Startup time log
-    use "numToStr/Navigator.nvim" -- Navigate tmux splits
+    use "aserowy/tmux.nvim" -- Navigate and resize tmux and vim splits
     use "rmagatti/auto-session" -- Save and restore sessions
 
     -- Colorschemes

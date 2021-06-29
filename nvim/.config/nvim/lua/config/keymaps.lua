@@ -55,15 +55,15 @@ vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {n
 -- vim.api.nvim_set_keymap("n", "ca", ":lua vim.lsp.buf.code_action()<Enter>", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<Enter>", {noremap = true, silent = true})
 
--- Navigation and resizing splits
+-- Navigation and resizing splits (using tmux.nvim now)
 -- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<A-h>", ":vertical resize +5<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<A-j>", ":resize +5<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<A-k>", ":resize -5<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<A-l>", ":vertical resize -5<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<A-h>", ":vertical resize +5<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<A-j>", ":resize +5<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<A-k>", ":resize -5<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<A-l>", ":vertical resize -5<Enter>", {noremap = true, silent = true})
 
 -- Latin long vowels
 -- vim.api.nvim_set_keymap("i", "ä", "ā", {noremap = true, silent = true})

@@ -72,10 +72,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["Navigator.nvim"] = {
-    loaded = true,
-    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/Navigator.nvim"
-  },
   ["auto-session"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/auto-session"
@@ -172,6 +168,10 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/padawan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["tmux.nvim"] = {
+    loaded = true,
+    path = "/home/padawan/.local/share/nvim/site/pack/packer/start/tmux.nvim"
   },
   ["todo-comments.nvim"] = {
     loaded = true,
