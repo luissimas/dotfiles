@@ -29,10 +29,18 @@ local eslint = {
   formatStdin = true
 }
 
+-- Credo options
+local credo = {
+  lintCommand = "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %t: %m", "%f:%l: %t: %m"},
+  lintCategoryMap = {}
+}
+
 -- EFM language server
 require "lspconfig".efm.setup {
   init_options = {documentFormatting = true},
-  filetypes = {"javascript", "typescript"},
+  filetypes = {"javascript", "typescript", "elixir"},
   root_dir = function(fname)
     return util.root_pattern("tsconfig.json")(fname) or util.root_pattern(".eslintrc.js", ".git")(fname)
   end,
