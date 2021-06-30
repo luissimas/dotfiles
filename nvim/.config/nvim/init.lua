@@ -15,6 +15,7 @@
 -- General
 require("config.sets")
 require("config.keymaps")
+require("config.lsp")
 
 -- Plugins
 require("plugins")
