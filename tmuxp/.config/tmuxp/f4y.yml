@@ -11,5 +11,5 @@ windows:
     options:
       main-pane-width: 100
     panes:
-      - la
+      - git status
       - yarn start

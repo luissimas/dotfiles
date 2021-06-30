@@ -49,7 +49,7 @@ return require("packer").startup(
     use "folke/todo-comments.nvim" -- Highlight comments
 
     -- Tools
-    -- use "tpope/vim-fugitive" -- The best git integration plugin
+    use "tpope/vim-fugitive" -- The best git integration plugin
     use "TimUntersberger/neogit" -- The *other* best git integration plugin
     use "lewis6991/gitsigns.nvim"
     use "folke/lua-dev.nvim" -- Docs and completion for nvim lua API
