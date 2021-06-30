@@ -23,6 +23,7 @@ return require("packer").startup(
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- Treesitter
     use "mhartington/formatter.nvim" -- Code format - TODO: Check Neoformat or EFM
     use "SirVer/ultisnips" -- Snippets engine
+    use "ray-x/lsp_signature.nvim" -- Function signature docs
     use "honza/vim-snippets" -- Snippets collection
     use "kyazdani42/nvim-tree.lua" -- File tree
     use "hoob3rt/lualine.nvim" -- Better status line
