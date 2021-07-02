@@ -28,10 +28,9 @@ require("telescope").setup {
         ["<C-t>"] = trouble.open_with_trouble
       }
     },
-    prompt_position = "bottom",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
-    layout_defaults = {
+    layout_config = {
       horizontal = {
         preview_width = 0.6
       }

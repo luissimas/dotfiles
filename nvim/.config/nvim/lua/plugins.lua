@@ -229,10 +229,19 @@ return require("packer").startup(
       end
     }
 
+    -- Playing with lua?
+    use {
+      "rafcamlet/nvim-luapad",
+      opt = true,
+      filetype = "lua"
+    }
+
     -- Save and restore sessions
     use "rmagatti/auto-session"
 
-    -- Colorschemes
+    --[[
+      Colorschemes
+    --]]
     -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "dylanaraps/wal.vim"
     use "folke/tokyonight.nvim"

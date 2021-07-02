@@ -80,10 +80,7 @@ whichkey.register(
         f = {"<cmd>Telescope find_files<Enter>", "Find files"},
         g = {"<cmd>Telescope live_grep<Enter>", "Live grep"},
         r = {"<cmd>Telescope oldfiles", "Recent files"},
-        b = {
-          "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorting_strategy='ascending', prompt_position = 'top'})<Enter>",
-          "Search buffer"
-        },
+        b = {"<cmd>lua require('telepada').find_buffer()<Enter>", "Search buffer"},
         d = {'<cmd>lua require("telepada").find_dotfiles()<Enter>', "Find in dotfiles"},
         v = {'<cmd>lua require("telepada").find_vault()<Enter>', "Find in vault"},
         c = {'<cmd>lua require("telepada.colorscheme").colorscheme()<Enter>', "Change colorscheme"},

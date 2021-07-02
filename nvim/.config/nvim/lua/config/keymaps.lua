@@ -15,7 +15,7 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap(
   "n",
   "<M-x>",
-  '<cmd>lua require("telescope.builtin").commands(require("telescope.themes").get_ivy({ previewer = false, results_height=0.5 }))<Enter>',
+  '<cmd>lua require("telescope.builtin").commands(require("telepada").ivy())<Enter>',
   {noremap = true, silent = true}
 )
 
