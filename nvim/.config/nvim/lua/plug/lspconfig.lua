@@ -45,10 +45,11 @@ require "lspconfig".efm.setup {
     return util.root_pattern("tsconfig.json")(fname) or util.root_pattern(".eslintrc.js", ".git")(fname)
   end,
   settings = {
-    rootMarkers = {".eslintrc.js", ".git/"},
+    rootMarkers = {".eslintrc.js", ".git/", "mix.exs"},
     languages = {
       javascript = {eslint},
-      typescript = {eslint}
+      typescript = {eslint},
+      elixir = {credo}
     }
   }
 }
