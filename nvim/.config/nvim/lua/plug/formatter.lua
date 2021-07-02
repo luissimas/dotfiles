@@ -22,6 +22,15 @@ require("formatter").setup(
           }
         end
       },
+      elixir = {
+        function()
+          return {
+            exe = "mix format",
+            args = {},
+            stdin = false
+          }
+        end
+      },
       json = {
         -- jq
         function()

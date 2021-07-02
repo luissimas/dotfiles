@@ -35,7 +35,7 @@ augroup END
 
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json FormatWrite
+  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json,*.exs,*.ex FormatWrite
 augroup END
 
 augroup ElixirFiletype

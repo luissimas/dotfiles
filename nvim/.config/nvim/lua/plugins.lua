@@ -233,7 +233,7 @@ return require("packer").startup(
     use {
       "rafcamlet/nvim-luapad",
       opt = true,
-      filetype = "lua"
+      ft = "lua"
     }
 
     -- Save and restore sessions
