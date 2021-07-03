@@ -37,7 +37,6 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
 vim.wo.signcolumn = "yes"
-vim.wo.foldenable = false
 
 -- Tabs
 vim.o.tabstop = 2
@@ -49,6 +48,11 @@ vim.bo.expandtab = true
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus"
+
+-- Folding
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldenable = false
 
 -- Netrw
 vim.g.netrw_liststyle = 3

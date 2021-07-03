@@ -1,4 +1,6 @@
 nvim/.config/nvim/autoload
 nvim/.config/nvim/.netrwhist
+nvim/.config/nvim/plugin/packer_compiled.lua
+nvim/.config/nvim/plugin/packer_compiled.vim
 qutebrowser/.config/qutebrowser/qsettings/QtProject.conf
 *.log

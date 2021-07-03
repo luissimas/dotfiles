@@ -117,7 +117,9 @@ return require("packer").startup(
     --   end
     -- }
 
-    -- Completion
+    --[[
+      Completion
+    --]]
     -- Completion backend
     use {
       "hrsh7th/nvim-compe",
@@ -201,6 +203,9 @@ return require("packer").startup(
       end
     }
 
+    -- Better diff views
+    use "sindrets/diffview.nvim"
+
     -- Git blame and signs
     use {
       "lewis6991/gitsigns.nvim",
@@ -242,8 +247,10 @@ return require("packer").startup(
     --[[
       Colorschemes
     --]]
-    -- use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "dylanaraps/wal.vim"
+    use "joshdick/onedark.vim"
+    use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "folke/tokyonight.nvim"
+    use "shaunsingh/moonlight.nvim"
   end
 )

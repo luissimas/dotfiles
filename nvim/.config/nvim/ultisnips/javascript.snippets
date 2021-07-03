@@ -9,3 +9,30 @@ exports.down = function (knex) {
   return knex.schema.dropTable('$1');
 };
 endsnippet
+
+snippet apidoc "Api documentation"
+/**
+ * @swagger
+ * /$1:
+ *   $2:
+ *     summary: $3.
+ *     description: $4.
+ *     tags:
+ *       - $1
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              email:
+ *                type: string
+ *              senha:
+ *                type: string
+ *            required:
+ *              - email
+ *              - senha
+ *           example:
+ *             email: joaquim@hotmail.com
+ *             senha: banana
+ */
+endsnippet

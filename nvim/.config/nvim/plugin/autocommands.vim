@@ -53,7 +53,7 @@ augroup STATUSLINECOLORSYNC
 augroup END
 
 " Disable automatic comment insertion
-autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " File-specific compile commands
 augroup COMPILE_KEYMAPS

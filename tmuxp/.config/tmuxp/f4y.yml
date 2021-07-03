@@ -5,7 +5,7 @@ windows:
   - window_name: Vim
     focus: true
     panes:
-      - vim src/index.js
+      - vim
   - window_name: Server
     layout: main-vertical
     options:

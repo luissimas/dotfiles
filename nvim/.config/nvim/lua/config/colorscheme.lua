@@ -6,18 +6,6 @@
 --
 --
 
--- Gruvbox-flat
-vim.g.gruvbox_flat_style = "dark"
-vim.g.gruvbox_terminal_colors = true
-vim.g.gruvbox_italic_comments = true
-vim.g.gruvbox_italic_keywords = true
-vim.g.gruvbox_italic_functions = true
-vim.g.gruvbox_italic_variables = true
-vim.g.gruvbox_transparent = false
-vim.g.gruvbox_hide_inactive_statusline = true
-vim.g.gruvbox_dark_sidebar = true
-vim.g.gruvbox_dark_float = true
-
 -- Tokyonight
 vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_terminal_colors = true
@@ -30,25 +18,24 @@ vim.g.tokyonight_hide_inactive_statusline = true
 vim.g.tokyonight_dark_sidebar = true
 vim.g.tokyonight_dark_float = true
 
--- Material
-vim.g.material_style = "deep ocean"
-vim.g.material_italic_comments = true
-vim.g.material_italic_keywords = true
-vim.g.material_italic_functions = true
-vim.g.material_italic_variables = true
-vim.g.material_contrast = true
-vim.g.material_borders = false
-vim.g.material_disable_background = false
+-- Moonlight
+vim.g.moonlight_italic_comments = true
+vim.g.moonlight_italic_keywords = true
+vim.g.moonlight_italic_functions = true
+vim.g.moonlight_italic_variables = true
+vim.g.moonlight_contrast = true
+vim.g.moonlight_borders = false
+vim.g.moonlight_disable_background = false
 
 local M = {}
 
--- M.lualine_colorscheme = "gruvbox-flat"
--- M.colorscheme = "gruvbox-flat"
+M.lualine_colorscheme = "onedark"
+M.colorscheme = "onedark"
 
-M.lualine_colorscheme = "tokyonight"
-M.colorscheme = "tokyonight"
+-- M.lualine_colorscheme = "tokyonight"
+-- M.colorscheme = "tokyonight"
 
--- M.lualine_colorscheme = "material"
--- M.colorscheme = "material"
+-- M.lualine_colorscheme = "moonlight"
+-- M.colorscheme = "moonlight"
 
 return M

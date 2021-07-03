@@ -29,6 +29,9 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "<C-s>", ":vsplit<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", {noremap = true, silent = true})
 
+-- Folds
+vim.api.nvim_set_keymap("n", "<Tab>", "za", {noremap = true, silent = true})
+
 -- Enable spellcheck
 -- vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
 
