@@ -1,6 +1,7 @@
 require("neogit").setup {
   disable_signs = false,
   disable_context_highlighting = false,
+  disable_commit_confirmation = true,
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }

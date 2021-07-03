@@ -18,7 +18,9 @@ return require("packer").startup(
     use "nvim-lua/popup.nvim" -- Ui API for plugins
     use "nvim-lua/plenary.nvim" -- Utility functions for various plugins
 
-    -- Editor
+    --[[
+      Editor
+    --]]
     -- Lsp Config layer
     use {
       "neovim/nvim-lspconfig",
@@ -53,7 +55,9 @@ return require("packer").startup(
     }
 
     -- Snippets collection
-    use "honza/vim-snippets"
+    use {
+      "honza/vim-snippets"
+    }
 
     -- Function signature docs
     use {
@@ -104,18 +108,22 @@ return require("packer").startup(
     }
 
     -- Comment lines
-    use "tpope/vim-commentary"
+    use {
+      "tpope/vim-commentary"
+    }
 
     -- Surround
-    use "tpope/vim-surround"
+    use {
+      "tpope/vim-surround"
+    }
 
     -- Change cwd based on the project's root directory
-    -- use {
-    --   "ahmedkhalf/lsp-rooter.nvim",
-    --   config = function()
-    --     require("plug.lsp_rooter")
-    --   end
-    -- }
+    use {
+      "ahmedkhalf/lsp-rooter.nvim",
+      config = function()
+        require("plug.lsp_rooter")
+      end
+    }
 
     --[[
       Completion
@@ -137,7 +145,9 @@ return require("packer").startup(
     }
 
     -- Fzy extension for telescope
-    use {"nvim-telescope/telescope-fzy-native.nvim"}
+    use {
+      "nvim-telescope/telescope-fzy-native.nvim"
+    }
 
     -- UI
     -- Better lsp UI
@@ -173,7 +183,9 @@ return require("packer").startup(
     }
 
     -- Color brackets
-    use {"p00f/nvim-ts-rainbow"}
+    use {
+      "p00f/nvim-ts-rainbow"
+    }
 
     -- Highlight words under cursor
     use {
@@ -193,7 +205,9 @@ return require("packer").startup(
 
     -- Tools
     -- The best git integration plugin
-    use "tpope/vim-fugitive"
+    use {
+      "tpope/vim-fugitive"
+    }
 
     -- The *other* best git integration plugin
     use {
@@ -204,7 +218,9 @@ return require("packer").startup(
     }
 
     -- Better diff views
-    use "sindrets/diffview.nvim"
+    use {
+      "sindrets/diffview.nvim"
+    }
 
     -- Git blame and signs
     use {
@@ -215,16 +231,26 @@ return require("packer").startup(
     }
 
     -- Docs and completion for nvim lua API
-    use "folke/lua-dev.nvim"
+    use {
+      "folke/lua-dev.nvim"
+    }
 
     -- Lua 5.1 reference manual
-    use "milisims/nvim-luaref"
+    use {
+      "milisims/nvim-luaref"
+    }
 
     -- Vimtex for latex
-    use {"lervag/vimtex", opt = true, ft = "tex"}
+    use {
+      "lervag/vimtex",
+      opt = true,
+      ft = "tex"
+    }
 
     -- Startup time log
-    use "dstein64/vim-startuptime"
+    use {
+      "dstein64/vim-startuptime"
+    }
 
     -- Navigate and resize tmux and vim splits
     use {
@@ -242,7 +268,9 @@ return require("packer").startup(
     }
 
     -- Save and restore sessions
-    use "rmagatti/auto-session"
+    use {
+      "rmagatti/auto-session"
+    }
 
     --[[
       Colorschemes
