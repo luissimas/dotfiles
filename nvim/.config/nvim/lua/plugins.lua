@@ -269,7 +269,8 @@ return require("packer").startup(
 
     -- Save and restore sessions
     use {
-      "rmagatti/auto-session"
+      "rmagatti/auto-session",
+      opt = true
     }
 
     --[[
