@@ -61,7 +61,10 @@ whichkey.register(
         "Switch buffer"
       },
       c = {
-        name = "Code"
+        name = "Code",
+        r = {"<cmd> Lspsaga rename<Enter>", "Rename"},
+        a = {"<cmd> Lspsaga code_action<Enter>", "Code actions"},
+        d = {"<cmd> Lspsaga show_line_diagnostics<Enter>", "Line diagnostics"}
       },
       s = {
         name = "Spell",
