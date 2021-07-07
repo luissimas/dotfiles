@@ -9,7 +9,7 @@ windows:
   - window_name: Server
     layout: main-vertical
     options:
-      main-pane-width: 100
+      main-pane-width: 120
     panes:
       - git status
       - yarn start
