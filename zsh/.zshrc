@@ -77,7 +77,7 @@ alias pacman='sudo pacman'
 alias vim='nvim'
 alias code='codium'
 alias icat='kitty +kitten icat'
-alias cat='bat'
+alias cat='bat -P'
 alias mux='tmuxp'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
