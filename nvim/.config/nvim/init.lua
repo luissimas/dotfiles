@@ -18,7 +18,7 @@ require("config.keymaps")
 require("config.lsp")
 
 -- Plugins
-require("plugins")
+-- require("plugins")
 
 -- Setting colorscheme
 vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)

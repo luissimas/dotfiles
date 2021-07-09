@@ -54,6 +54,10 @@ vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldenable = false
 
+-- Making floating and popup windows transparent
+vim.go.pumblend = 20
+vim.go.winblend = 20
+
 -- Netrw
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0

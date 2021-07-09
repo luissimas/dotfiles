@@ -39,7 +39,7 @@ require("telescope").setup {
     },
     -- Files to be ignored
     file_ignore_patterns = {"node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf"},
-    winblend = 25
+    winblend = 20
   },
   extensions = {
     fzy_native = {

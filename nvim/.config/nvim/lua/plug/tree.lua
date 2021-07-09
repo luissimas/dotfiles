@@ -7,7 +7,7 @@
 --
 
 -- Tree side
-vim.g.nvim_tree_side = "left"
+vim.g.nvim_tree_side = "right"
 
 -- Tree width
 vim.g.nvim_tree_width = 30
