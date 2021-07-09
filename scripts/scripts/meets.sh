@@ -1,12 +1,9 @@
 #!/bin/sh
 
-selected=$(echo -e "Probabilidade\nAtendimento LM\nIntroduction to Functional Programming" | rofi -dmenu -i -p "Class: ")
+selected=$(echo -e "F4Y\nIntroduction to Functional Programming" | rofi -dmenu -i -p "Class: ")
 
-case $selected in "Probabilidade")
-  brave https://meet.google.com/dgv-bvnd-rjs?authuser=1
-  ;;
-"Atendimento LM")
-  brave https://meet.google.com/yok-roat-gqg?authuser=1
+case $selected in "F4Y")
+  brave https://meet.google.com/zpo-nwqn-vrr?authuser=2
   ;;
 "Introduction to Functional Programming")
   brave https://meet.google.com/vcz-tcrs-stb?authuser=0
