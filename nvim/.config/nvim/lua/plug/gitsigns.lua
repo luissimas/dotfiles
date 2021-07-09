@@ -16,7 +16,7 @@ require("gitsigns").setup {
   watch_index = {
     interval = 1000
   },
-  current_line_blame = false,
+  current_line_blame = true,
   sign_priority = 6,
   signcolumn = true,
   update_debounce = 100,

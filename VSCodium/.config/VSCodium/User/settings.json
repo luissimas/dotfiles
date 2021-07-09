@@ -16,9 +16,6 @@
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  "editor.codeActionsOnSave": {
-  "source.fixAll.eslint": true
-  },
   // File tree
   "explorer.compactFolders": false,
   "files.exclude": {
@@ -75,7 +72,4 @@
     "usuario"
   ],
   "workbench.sideBar.location": "right",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
 }

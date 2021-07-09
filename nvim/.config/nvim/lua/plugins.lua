@@ -144,8 +144,9 @@ return require("packer").startup(
       end
     }
 
-    -- Fzy extension for telescope
+    -- Telescope extensions
     use {
+      "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-fzy-native.nvim"
     }
 

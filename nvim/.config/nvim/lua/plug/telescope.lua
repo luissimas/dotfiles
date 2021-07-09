@@ -28,6 +28,8 @@ require("telescope").setup {
         ["<C-t>"] = trouble.open_with_trouble
       }
     },
+    prompt_prefix = " ",
+    selection_caret = "  ",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
     layout_config = {
@@ -36,7 +38,21 @@ require("telescope").setup {
       }
     },
     -- Files to be ignored
-    file_ignore_patterns = {"node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf"}
+    file_ignore_patterns = {"node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf"},
+    winblend = 25
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true
+    },
+    project = {
+      base_dirs = {
+        {path = "~/fun", max_depth = 4},
+        {path = "~/cati", max_depth = 5},
+        {path = "~/exercism", max_depth = 5}
+      }
+    }
   }
 }
 

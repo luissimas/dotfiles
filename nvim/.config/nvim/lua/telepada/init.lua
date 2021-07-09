@@ -10,12 +10,20 @@ function M.ivy()
       layout_strategy = "bottom_pane",
       layout_config = {
         height = 8
-      },
-      previewer = false
+      }
     }
   )
 
   return theme
+end
+
+-- Find files with git_files and falling back to git_files
+function M.find_files()
+  local ok = pcall(require("telescope.builtin").git_files)
+
+  if not ok then
+    require("telescope.builtin").find_files()
+  end
 end
 
 -- Find in dotfiles custom picker

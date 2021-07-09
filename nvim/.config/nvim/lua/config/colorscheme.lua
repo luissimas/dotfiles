@@ -29,11 +29,11 @@ vim.g.moonlight_disable_background = false
 
 local M = {}
 
-M.lualine_colorscheme = "onedark"
-M.colorscheme = "onedark"
+-- M.lualine_colorscheme = "onedark"
+-- M.colorscheme = "onedark"
 
--- M.lualine_colorscheme = "tokyonight"
--- M.colorscheme = "tokyonight"
+M.lualine_colorscheme = "tokyonight"
+M.colorscheme = "tokyonight"
 
 -- M.lualine_colorscheme = "moonlight"
 -- M.colorscheme = "moonlight"

@@ -7,10 +7,10 @@
 --
 
 -- Tree side
-vim.g.nvim_tree_side = "right"
+vim.g.nvim_tree_side = "left"
 
 -- Tree width
-vim.g.nvim_tree_width = 25
+vim.g.nvim_tree_width = 30
 
 -- Update cursor when entering a buffer
 vim.g.nvim_tree_follow = 1
@@ -22,7 +22,7 @@ vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 
 -- Automatically close tree buffer when a file is opened
-vim.g.nvim_tree_quit_on_open = 0
+vim.g.nvim_tree_quit_on_open = 1
 
 -- Automatically close tree buffer when it's the last buffer
 vim.g.nvim_tree_auto_close = 1
