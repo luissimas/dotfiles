@@ -22,7 +22,7 @@ vim.o.smartcase = true
 vim.o.linebreak = true
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.updatetime = 1000
+vim.o.updatetime = 500
 vim.o.hlsearch = false
 vim.o.incsearch = true
 vim.o.scrolloff = 8
@@ -55,8 +55,11 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldenable = false
 
 -- Making floating and popup windows transparent
-vim.go.pumblend = 20
-vim.go.winblend = 20
+vim.go.pumblend = 10
+vim.go.winblend = 10
+
+-- Conceal
+vim.wo.conceallevel = 2
 
 -- Netrw
 vim.g.netrw_liststyle = 3

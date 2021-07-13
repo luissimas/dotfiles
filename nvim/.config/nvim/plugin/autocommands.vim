@@ -79,3 +79,9 @@ augroup COMPILE_KEYMAPS
   autocmd Filetype sql vmap <leader>o <Plug>(DBUI_ExecuteQuery)
 
 augroup END
+
+" Conceal
+augroup CONCEAL
+  autocmd!
+  autocmd Filetype elixir syntax keyword Identifier fn conceal cchar=λ
+augroup END
