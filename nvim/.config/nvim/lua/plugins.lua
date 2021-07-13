@@ -35,7 +35,10 @@ return require("packer").startup(
       run = ":TSUpdate",
       config = function()
         require("plug.treesitter")
-      end
+      end,
+      requires = {
+        "nvim-treesitter/playground"
+      }
     }
 
     -- Code format - TODO: Check Neoformat or EFM
@@ -125,6 +128,14 @@ return require("packer").startup(
       end
     }
 
+    -- Orgmode inside neovim? wtf TODO: Check this
+    -- use {
+    --   "kristijanhusak/orgmode.nvim",
+    --   config = function()
+    --     require("orgmode").setup {}
+    --   end
+    -- }
+
     --[[
       Completion
     --]]
@@ -147,10 +158,13 @@ return require("packer").startup(
     -- Telescope extensions
     use {
       "nvim-telescope/telescope-project.nvim",
-      "nvim-telescope/telescope-fzy-native.nvim"
+      "nvim-telescope/telescope-fzy-native.nvim",
+      "luissimas/telescope-nodescripts.nvim"
     }
 
-    -- UI
+    --[[
+      UI
+    --]]
     -- Better lsp UI
     use {
       "glepnir/lspsaga.nvim",
@@ -204,7 +218,17 @@ return require("packer").startup(
       end
     }
 
-    -- Tools
+    -- Smooth scrol
+    -- use {
+    --   "karb94/neoscroll.nvim",
+    --   config = function()
+    --     require("plug.neoscroll")
+    --   end
+    -- }
+
+    --[[
+      Tools
+    --]]
     -- The best git integration plugin
     use {
       "tpope/vim-fugitive"
@@ -283,5 +307,15 @@ return require("packer").startup(
     use "folke/tokyonight.nvim"
     use "shaunsingh/moonlight.nvim"
     use "yashguptaz/calvera-dark.nvim"
+
+    -- Personal plugins
+    use {
+      "~/fun/lua/plugins/eval",
+      config = function()
+        require("eval").setup({})
+
+        vim.api.nvim_set_keymap("v", "<leader>gr", ":Eval<Enter>", {noremap = true, silent = true})
+      end
+    }
   end
 )

@@ -83,6 +83,7 @@ whichkey.register(
         g = {"<cmd>Telescope live_grep<Enter>", "Live grep"},
         r = {"<cmd>Telescope oldfiles", "Recent files"},
         p = {"<cmd>lua require('telescope').extensions.project.project({})<Enter>", "Find projects"},
+        s = {"<cmd>lua require('telescope').extensions.nodescripts.run({})<Enter>", "Find scripts"},
         f = {"<cmd>lua require('telepada').find_files()<Enter>", "Find files"},
         b = {"<cmd>lua require('telepada').find_buffer()<Enter>", "Search buffer"},
         d = {'<cmd>lua require("telepada").find_dotfiles()<Enter>', "Find in dotfiles"},

@@ -25,10 +25,10 @@ require("compe").setup {
   -- Sources for completion
   source = {
     path = true,
-    spell = false,
+    spell = true,
     buffer = false,
     tags = false,
-    calc = true,
+    calc = false,
     omni = false,
     emoji = false,
     nvim_lsp = true,

@@ -52,12 +52,18 @@ require("telescope").setup {
         {path = "~/cati", max_depth = 5},
         {path = "~/exercism", max_depth = 5}
       }
+    },
+    nodescripts = {
+      command = "yarn",
+      display_method = "vsplit",
+      ignore_pre_post = true
     }
   }
 }
 
 -- Loading extensions
 require("telescope").load_extension("fzy_native")
+require("telescope").load_extension("nodescripts")
 
 -- Keymaps (currently it's all mapped by whichkey)
 -- vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", {noremap = true, silent = true})
