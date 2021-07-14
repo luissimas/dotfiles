@@ -120,10 +120,7 @@ return require("packer").startup(
     }
 
     -- Comment lines
-    use {
-      "tpope/vim-commentary",
-      cmd = "Commentary"
-    }
+    use "tpope/vim-commentary"
 
     -- Surround
     use {
