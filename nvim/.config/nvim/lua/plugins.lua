@@ -24,6 +24,7 @@ return require("packer").startup(
     -- Lsp Config layer
     use {
       "neovim/nvim-lspconfig",
+      event = "BufRead",
       config = function()
         require("plug.lspconfig")
       end
@@ -37,7 +38,8 @@ return require("packer").startup(
         require("plug.treesitter")
       end,
       requires = {
-        "nvim-treesitter/playground"
+        "nvim-treesitter/playground",
+        after = "nvim-treesitter"
       }
     }
 
@@ -52,19 +54,23 @@ return require("packer").startup(
     -- Snippets engine
     use {
       "SirVer/ultisnips",
+      event = "InsertCharPre",
       config = function()
         require("plug.ultisnips")
-      end
-    }
-
-    -- Snippets collection
-    use {
-      "honza/vim-snippets"
+      end,
+      requires = {
+        {
+          -- Snippets collection
+          "honza/vim-snippets",
+          event = "InsertCharPre"
+        }
+      }
     }
 
     -- Function signature docs
     use {
       "ray-x/lsp_signature.nvim",
+      event = "InsertCharPre",
       config = function()
         require("plug.lsp_signature")
       end
@@ -73,6 +79,7 @@ return require("packer").startup(
     -- File tree
     use {
       "kyazdani42/nvim-tree.lua",
+      cmd = "NvimTreeToggle",
       config = function()
         require("plug.tree")
       end
@@ -81,6 +88,7 @@ return require("packer").startup(
     -- Better status line
     use {
       "hoob3rt/lualine.nvim",
+      event = "BufRead",
       config = function()
         require("plug.lualine")
       end
@@ -97,6 +105,7 @@ return require("packer").startup(
     -- I like autopairs
     use {
       "steelsojka/pears.nvim",
+      after = "nvim-compe",
       config = function()
         require("plug.pears")
       end
@@ -112,17 +121,20 @@ return require("packer").startup(
 
     -- Comment lines
     use {
-      "tpope/vim-commentary"
+      "tpope/vim-commentary",
+      cmd = "Commentary"
     }
 
     -- Surround
     use {
-      "tpope/vim-surround"
+      "tpope/vim-surround",
+      event = "BufRead"
     }
 
     -- Change cwd based on the project's root directory
     use {
       "ahmedkhalf/lsp-rooter.nvim",
+      after = "nvim-lspconfig",
       config = function()
         require("plug.lsp_rooter")
       end
@@ -142,6 +154,7 @@ return require("packer").startup(
     -- Completion backend
     use {
       "hrsh7th/nvim-compe",
+      event = "InsertEnter",
       config = function()
         require("plug.compe")
       end
@@ -184,6 +197,7 @@ return require("packer").startup(
     -- Completion icons
     use {
       "onsails/lspkind-nvim",
+      after = "nvim-compe",
       config = function()
         require("plug.lspkind")
       end
@@ -192,6 +206,7 @@ return require("packer").startup(
     -- Colors in hex color codes
     use {
       "norcalli/nvim-colorizer.lua",
+      event = "BufRead",
       config = function()
         require("plug.colorizer")
       end
@@ -199,12 +214,14 @@ return require("packer").startup(
 
     -- Color brackets
     use {
-      "p00f/nvim-ts-rainbow"
+      "p00f/nvim-ts-rainbow",
+      event = "BufRead"
     }
 
     -- Highlight words under cursor
     use {
       "RRethy/vim-illuminate",
+      event = "BufRead",
       config = function()
         require("plug.illuminate")
       end
@@ -213,6 +230,7 @@ return require("packer").startup(
     -- Highlight comments
     use {
       "folke/todo-comments.nvim",
+      after = "nvim-treesitter",
       config = function()
         require("plug.todocomments")
       end
@@ -231,12 +249,14 @@ return require("packer").startup(
     --]]
     -- The best git integration plugin
     use {
-      "tpope/vim-fugitive"
+      "tpope/vim-fugitive",
+      event = "BufRead"
     }
 
     -- The *other* best git integration plugin
     use {
       "TimUntersberger/neogit",
+      event = "BufRead",
       config = function()
         require("plug.neogit")
       end
@@ -244,12 +264,14 @@ return require("packer").startup(
 
     -- Better diff views
     use {
-      "sindrets/diffview.nvim"
+      "sindrets/diffview.nvim",
+      after = "neogit"
     }
 
     -- Git blame and signs
     use {
       "lewis6991/gitsigns.nvim",
+      event = "BufRead",
       config = function()
         require("plug.gitsigns")
       end
@@ -257,12 +279,14 @@ return require("packer").startup(
 
     -- Docs and completion for nvim lua API
     use {
-      "folke/lua-dev.nvim"
+      "folke/lua-dev.nvim",
+      ft = "lua"
     }
 
     -- Lua 5.1 reference manual
     use {
-      "milisims/nvim-luaref"
+      "milisims/nvim-luaref",
+      ft = "lua"
     }
 
     -- Vimtex for latex
@@ -273,9 +297,7 @@ return require("packer").startup(
     }
 
     -- Startup time log
-    use {
-      "dstein64/vim-startuptime"
-    }
+    use {"tweekmonster/startuptime.vim", cmd = "StartupTime"}
 
     -- Navigate and resize tmux and vim splits
     use {
@@ -293,24 +315,20 @@ return require("packer").startup(
     }
 
     -- Save and restore sessions
-    use {
-      "rmagatti/auto-session",
-      opt = true
-    }
+    -- use {
+    --   "rmagatti/auto-session"
+    -- }
 
     --[[
       Colorschemes
     --]]
-    use "dylanaraps/wal.vim"
-    use "joshdick/onedark.vim"
     use "folke/lsp-colors.nvim" -- Adds LSP colors for themes that don't yet support them
     use "folke/tokyonight.nvim"
-    use "shaunsingh/moonlight.nvim"
-    use "yashguptaz/calvera-dark.nvim"
 
     -- Personal plugins
     use {
       "~/fun/lua/plugins/eval",
+      cmd = "Eval",
       config = function()
         require("eval").setup({})
 

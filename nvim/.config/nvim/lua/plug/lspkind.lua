@@ -27,3 +27,6 @@ require("lspkind").init(
     }
   }
 )
+
+-- Enabling lspkind icons
+require("lspkind").init()

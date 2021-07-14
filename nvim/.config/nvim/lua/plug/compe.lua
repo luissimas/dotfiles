@@ -40,9 +40,6 @@ require("compe").setup {
   }
 }
 
--- Enabling lspkind icons
-require("lspkind").init()
-
 -- Completion toggle
 _G.compe_popup_toggle = function()
   if vim.fn.pumvisible() == 1 then

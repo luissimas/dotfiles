@@ -63,7 +63,6 @@ require("telescope").setup {
 
 -- Loading extensions
 require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("nodescripts")
 
 -- Keymaps (currently it's all mapped by whichkey)
 -- vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", {noremap = true, silent = true})
