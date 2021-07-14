@@ -42,6 +42,7 @@ augroup ElixirFiletype
   autocmd!
   autocmd BufRead,BufNewFile *.ex,*.exs set filetype=elixir
   autocmd BufRead,BufNewFile *.eex set filetype=eelixir
+  autocmd Filetype elixir :LspStart
 augroup END
 
 augroup STATUSLINECOLORSYNC

@@ -24,7 +24,6 @@ return require("packer").startup(
     -- Lsp Config layer
     use {
       "neovim/nvim-lspconfig",
-      event = "BufRead",
       config = function()
         require("plug.lspconfig")
       end
