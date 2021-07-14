@@ -166,12 +166,12 @@ return require("packer").startup(
       UI
     --]]
     -- Better lsp UI
-    use {
-      "glepnir/lspsaga.nvim",
-      config = function()
-        require("plug.lspsaga")
-      end
-    }
+    -- use {
+    --   "glepnir/lspsaga.nvim",
+    --   config = function()
+    --     require("plug.lspsaga")
+    --   end
+    -- }
 
     -- General icons
     use {
