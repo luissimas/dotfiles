@@ -250,13 +250,13 @@ return require("packer").startup(
     -- The best git integration plugin
     use {
       "tpope/vim-fugitive",
-      event = "BufRead"
+      cmd = "Git"
     }
 
     -- The *other* best git integration plugin
     use {
       "TimUntersberger/neogit",
-      event = "BufRead",
+      cmd = "Neogit",
       config = function()
         require("plug.neogit")
       end
@@ -279,8 +279,7 @@ return require("packer").startup(
 
     -- Docs and completion for nvim lua API
     use {
-      "folke/lua-dev.nvim",
-      ft = "lua"
+      "folke/lua-dev.nvim"
     }
 
     -- Lua 5.1 reference manual

@@ -92,7 +92,7 @@ whichkey.register(
       },
       w = {"<cmd>w<Enter>", "Write buffer"},
       q = {"<cmd>q<Enter>", "Quit"},
-      g = {"<cmd>lua require('neogit').open()<Enter>", "Neogit"},
+      g = {"<cmd>Neogit<Enter>", "Neogit"},
       -- g = {"<cmd>Git<Enter>", "Fugitive"},
       e = {"<cmd>NvimTreeToggle<Enter>", "Toggle tree"}
     }

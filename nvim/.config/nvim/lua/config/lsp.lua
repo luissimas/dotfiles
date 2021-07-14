@@ -10,7 +10,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     signs = true,
     -- virtual_text = {spacing = 4, prefix = "●"},
     virtual_text = false,
-    severity_sort = false
+    severity_sort = true
   }
 )
 
