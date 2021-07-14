@@ -40,8 +40,8 @@ require("lualine").setup {
     lualine_b = {"branch"},
     lualine_c = {{"filename", path = 1}},
     lualine_x = {{"diagnostics", sources = {"nvim_lsp"}}, {get_lsp_client}},
-    lualine_y = {"filetype", "progress", "location"},
-    lualine_z = {"encoding"}
+    lualine_y = {"filetype"},
+    lualine_z = {"progress", "location"}
   },
   extensions = {"nvim-tree"}
 }
