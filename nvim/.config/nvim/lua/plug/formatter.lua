@@ -26,8 +26,8 @@ require("formatter").setup(
         function()
           return {
             exe = "mix format",
-            args = {},
-            stdin = false
+            args = {"-"},
+            stdin = true
           }
         end
       },

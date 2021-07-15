@@ -53,7 +53,7 @@ return require("packer").startup(
     -- Snippets engine
     use {
       "SirVer/ultisnips",
-      event = "InsertCharPre",
+      after = "nvim-compe",
       config = function()
         require("plug.ultisnips")
       end,
@@ -61,7 +61,7 @@ return require("packer").startup(
         {
           -- Snippets collection
           "honza/vim-snippets",
-          event = "InsertCharPre"
+          after = "ultisnips"
         }
       }
     }
@@ -119,7 +119,12 @@ return require("packer").startup(
     }
 
     -- Comment lines
-    use "tpope/vim-commentary"
+    use {
+      "b3nj5m1n/kommentary",
+      config = function()
+        require("plug.kommentary")
+      end
+    }
 
     -- Surround
     use {

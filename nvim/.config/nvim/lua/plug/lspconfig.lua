@@ -58,7 +58,12 @@ require "lspconfig".efm.setup {
 require("lspconfig").elixirls.setup {
   cmd = {vim.fn.expand("~/repos/elixir-ls/language_server.sh")},
   filetypes = {"elixir", "eelixir"},
-  root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir()
+  root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = true
+    }
+  }
 }
 
 -- JavaScript/TypeScript
