@@ -53,7 +53,7 @@ return require("packer").startup(
     -- Snippets engine
     use {
       "SirVer/ultisnips",
-      after = "nvim-compe",
+      event = "InsertEnter",
       config = function()
         require("plug.ultisnips")
       end,
