@@ -9,6 +9,22 @@
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+local previewers = require("telescope.previewers")
+local putils = require("telescope.previewers.utils")
+local pfiletype = require("plenary.filetype")
+
+local new_maker = function(filepath, bufnr, opts)
+  opts = opts or {}
+  if opts.use_ft_detect == nil then
+    local ft = pfiletype.detect(filepath)
+    -- Here for example you can say: if ft == "xyz" then this_regex_highlighing else nothing end
+    if ft == "elixir" then
+      opts.use_ft_detect = false
+      putils.regex_highlighter(bufnr, ft)
+    end
+  end
+  previewers.buffer_previewer_maker(filepath, bufnr, opts)
+end
 
 -- Global customization affecting all pickers
 require("telescope").setup({
@@ -40,6 +56,7 @@ require("telescope").setup({
     -- Files to be ignored
     file_ignore_patterns = { "node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf" },
     winblend = 10,
+    buffer_previewer_maker = new_maker,
   },
   extensions = {
     fzy_native = {
