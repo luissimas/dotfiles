@@ -28,7 +28,7 @@ require("compe").setup({
     spell = true,
     buffer = false,
     tags = false,
-    calc = false,
+    calc = true,
     omni = false,
     emoji = false,
     nvim_lsp = true,
