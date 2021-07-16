@@ -7,7 +7,7 @@
 --
 --
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
   -- List of language parsers to always have installed
   ensure_installed = {
     "bash",
@@ -30,24 +30,24 @@ require("nvim-treesitter.configs").setup {
     "regex",
     "tsx",
     "verilog",
-    "yaml"
+    "yaml",
   },
   indent = {
-    enable = true
+    enable = true,
   },
   highlight = {
-    enable = true
+    enable = true,
   },
   -- Color pairs
   rainbow = {
     enable = true,
     extended_mode = true,
-    max_file_lines = 1000
+    max_file_lines = 1000,
     -- colors = {
     --   "#f7768e",
     --   "#e0af68",
     --   "#bb9af7",
     --   "#7dcfff"
     -- }
-  }
-}
+  },
+})

@@ -18,5 +18,5 @@ vim.g.Illuminate_ftblacklist = {
   "markdown",
   "pandoc",
   "lspinfo",
-  ""
+  "",
 }

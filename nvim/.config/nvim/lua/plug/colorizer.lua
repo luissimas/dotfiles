@@ -1,4 +1,4 @@
-require("colorizer").setup {
+require("colorizer").setup({
   "*",
   "!help",
   "!terminal",
@@ -9,5 +9,5 @@ require("colorizer").setup {
   "!NeogitStatus",
   "!packer",
   "!NvimTree",
-  "!lspinfo"
-}
+  "!lspinfo",
+})

@@ -1,80 +1,80 @@
-require("nvim-web-devicons").setup {
+require("nvim-web-devicons").setup({
   override = {
     sqlite3 = {
       icon = "",
       color = "#FFA500",
-      name = "Sqlite"
+      name = "Sqlite",
     },
     sqlite = {
       icon = "",
       color = "#FFA500",
-      name = "Sqlite"
+      name = "Sqlite",
     },
     wiki = {
       icon = "",
       color = "#006600",
-      name = "VimWiki"
+      name = "VimWiki",
     },
     Makefile = {
       icon = "",
       color = "#FFA500",
-      name = "Makefile"
+      name = "Makefile",
     },
     makefile = {
       icon = "",
       color = "#FFA500",
-      name = "Makefile"
+      name = "Makefile",
     },
     MAKEFILE = {
       icon = "",
       color = "#FFA500",
-      name = "Makefile"
+      name = "Makefile",
     },
     ["routes.js"] = {
       icon = "數",
       color = "#43A047",
-      name = "Routes"
+      name = "Routes",
     },
     ["yarn.lock"] = {
       icon = "",
       color = "#2C8EBB",
-      name = "YarnLock"
+      name = "YarnLock",
     },
     zip = {
       icon = "",
       color = "#DA4217",
-      name = "Zip"
+      name = "Zip",
     },
     ["test.js"] = {
       icon = "ﭧ",
       color = "#DCAF26",
-      name = "JsTest"
+      name = "JsTest",
     },
     ["spec.js"] = {
       icon = "",
       color = "#DCAF26",
-      name = "JsSpec"
+      name = "JsSpec",
     },
     ["test.lua"] = {
       icon = "ﭧ",
       color = "#51a0cf",
-      name = "LuaTest"
+      name = "LuaTest",
     },
     ["spec.lua"] = {
       icon = "",
       color = "#51a0cf",
-      name = "LuaSpec"
+      name = "LuaSpec",
     },
     [".env"] = {
       icon = "",
       color = "#404040",
-      name = "DotEnv"
+      name = "DotEnv",
     },
     ["jest.config.js"] = {
       icon = "",
       color = "#F4511E",
-      name = "JestConfig"
-    }
+      name = "JestConfig",
+    },
   },
-  default = true
-}
+  default = true,
+})

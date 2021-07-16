@@ -1,23 +1,23 @@
-require("gitsigns").setup {
+require("gitsigns").setup({
   signs = {
-    add = {hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn"},
-    change = {hl = "GitSignsChange", text = "│", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn"},
-    delete = {hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn"},
-    topdelete = {hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn"},
-    changedelete = {hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn"}
+    add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+    change = { hl = "GitSignsChange", text = "│", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
   numhl = false,
   linehl = false,
   keymaps = {
     noremap = true,
     buffer = true,
-    ["n B"] = '<cmd>lua require"gitsigns".blame_line()<CR>'
+    ["n B"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
   },
   watch_index = {
-    interval = 1000
+    interval = 1000,
   },
   preview_config = {
-    border = "none"
+    border = "none",
   },
   current_line_blame = false,
   sign_priority = 6,
@@ -36,8 +36,7 @@ require("gitsigns").setup {
     if blame_info.author == "Not Committed Yet" then
       text = blame_info.author
     else
-      text =
-        string.format(
+      text = string.format(
         "%s, %s - %s",
         blame_info.author,
         os.date("%d/%m/%Y", tonumber(blame_info["author_time"])),
@@ -45,6 +44,6 @@ require("gitsigns").setup {
       )
     end
 
-    return {{" " .. text, "GitSignsCurrentLineBlame"}}
-  end
-}
+    return { { " " .. text, "GitSignsCurrentLineBlame" } }
+  end,
+})

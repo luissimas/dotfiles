@@ -11,7 +11,7 @@ local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
 -- Global customization affecting all pickers
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     -- Custom mappings (defaults can be found at <telescopedir>/lua/telescope/mappings.lua)
     mappings = {
@@ -19,14 +19,14 @@ require("telescope").setup {
         ["<C-s>"] = actions.file_vsplit,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-j>"] = actions.move_selection_next,
-        ["<C-t>"] = trouble.open_with_trouble
+        ["<C-t>"] = trouble.open_with_trouble,
       },
       n = {
         ["<C-s>"] = actions.file_vsplit,
         ["<leader>q"] = actions.close,
         ["<leader>c"] = actions.close,
-        ["<C-t>"] = trouble.open_with_trouble
-      }
+        ["<C-t>"] = trouble.open_with_trouble,
+      },
     },
     prompt_prefix = " ",
     selection_caret = "  ",
@@ -34,32 +34,32 @@ require("telescope").setup {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
-        preview_width = 0.6
-      }
+        preview_width = 0.6,
+      },
     },
     -- Files to be ignored
-    file_ignore_patterns = {"node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf"},
-    winblend = 10
+    file_ignore_patterns = { "node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf" },
+    winblend = 10,
   },
   extensions = {
     fzy_native = {
       override_generic_sorter = true,
-      override_file_sorter = true
+      override_file_sorter = true,
     },
     project = {
       base_dirs = {
-        {path = "~/fun", max_depth = 4},
-        {path = "~/cati", max_depth = 5},
-        {path = "~/exercism", max_depth = 5}
-      }
+        { path = "~/fun", max_depth = 4 },
+        { path = "~/cati", max_depth = 5 },
+        { path = "~/exercism", max_depth = 5 },
+      },
     },
     nodescripts = {
       command = "yarn",
       display_method = "vsplit",
-      ignore_pre_post = true
-    }
-  }
-}
+      ignore_pre_post = true,
+    },
+  },
+})
 
 -- Loading extensions
 require("telescope").load_extension("fzy_native")

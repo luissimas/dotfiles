@@ -4,15 +4,12 @@ local M = {}
 
 -- Custom Ivy theme
 function M.ivy()
-  local theme =
-    require("telescope.themes").get_ivy(
-    {
-      layout_strategy = "bottom_pane",
-      layout_config = {
-        height = 8
-      }
-    }
-  )
+  local theme = require("telescope.themes").get_ivy({
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 8,
+    },
+  })
 
   return theme
 end
@@ -28,26 +25,26 @@ end
 
 -- Find in dotfiles custom picker
 function M.find_dotfiles()
-  require("telescope.builtin").git_files {
+  require("telescope.builtin").git_files({
     prompt_title = "Dotfiles",
-    cwd = "~/dotfiles"
-  }
+    cwd = "~/dotfiles",
+  })
 end
 
 -- Find in home directory
 function M.find_home()
-  require("telescope.builtin").find_files {
+  require("telescope.builtin").find_files({
     prompt_title = "All files",
-    cwd = "~"
-  }
+    cwd = "~",
+  })
 end
 
 -- Find in my vault directory
 function M.find_vault()
-  require("telescope.builtin").find_files {
+  require("telescope.builtin").find_files({
     prompt_title = "Notes",
-    cwd = "~/dox/vault"
-  }
+    cwd = "~/dox/vault",
+  })
 end
 
 -- Search in buffer
@@ -55,8 +52,8 @@ function M.find_buffer()
   local opts = {
     sorting_strategy = "ascending",
     layout_config = {
-      prompt_position = "top"
-    }
+      prompt_position = "top",
+    },
   }
 
   require("telescope.builtin").current_buffer_fuzzy_find(opts)

@@ -29,19 +29,19 @@ local get_lsp_client = function(msg)
   return msg
 end
 
-require("lualine").setup {
+require("lualine").setup({
   options = {
     theme = require("config.colorscheme").lualine_colorscheme,
-    section_separators = {"", ""},
-    component_separators = {"", ""}
+    section_separators = { "", "" },
+    component_separators = { "", "" },
   },
   sections = {
-    lualine_a = {"mode"},
-    lualine_b = {"branch"},
-    lualine_c = {{"filename", path = 1}},
-    lualine_x = {{"diagnostics", sources = {"nvim_lsp"}}, {get_lsp_client}},
-    lualine_y = {"filetype"},
-    lualine_z = {"progress", "location"}
+    lualine_a = { "mode" },
+    lualine_b = { "branch" },
+    lualine_c = { { "filename", path = 1 } },
+    lualine_x = { { "diagnostics", sources = { "nvim_lsp" } }, { get_lsp_client } },
+    lualine_y = { "filetype" },
+    lualine_z = { "progress", "location" },
   },
-  extensions = {"nvim-tree"}
-}
+  extensions = { "nvim-tree" },
+})

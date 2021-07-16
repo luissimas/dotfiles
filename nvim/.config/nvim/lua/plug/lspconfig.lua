@@ -23,72 +23,69 @@ local util = require("lspconfig.util")
 local eslint = {
   lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
   lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
+  lintFormats = { "%f:%l:%c: %m" },
   lintIgnoreExitCode = true,
   formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true
+  formatStdin = true,
 }
 
 -- Credo options
 local credo = {
   lintCommand = "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
   lintStdin = true,
-  lintFormats = {"%f:%l:%c: %t: %m", "%f:%l: %t: %m"},
-  lintCategoryMap = {}
+  lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
+  lintCategoryMap = {},
 }
 
 -- EFM language server
-require "lspconfig".efm.setup {
-  init_options = {documentFormatting = true},
-  filetypes = {"javascript", "typescript", "elixir"},
+require("lspconfig").efm.setup({
+  init_options = { documentFormatting = true },
+  filetypes = { "javascript", "typescript", "elixir" },
   root_dir = function(fname)
     return util.root_pattern("tsconfig.json")(fname) or util.root_pattern(".eslintrc.js", ".git")(fname)
   end,
   settings = {
-    rootMarkers = {".eslintrc.js", ".git/", "mix.exs"},
+    rootMarkers = { ".eslintrc.js", ".git/", "mix.exs" },
     languages = {
-      javascript = {eslint},
-      typescript = {eslint},
-      elixir = {credo}
-    }
-  }
-}
+      javascript = { eslint },
+      typescript = { eslint },
+      elixir = { credo },
+    },
+  },
+})
 
 -- Elixir (https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/)
-require("lspconfig").elixirls.setup {
-  cmd = {vim.fn.expand("~/repos/elixir-ls/language_server.sh")},
-  filetypes = {"elixir", "eelixir"},
+require("lspconfig").elixirls.setup({
+  cmd = { vim.fn.expand("~/repos/elixir-ls/language_server.sh") },
+  filetypes = { "elixir", "eelixir" },
   root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
   settings = {
     elixirLS = {
-      dialyzerEnabled = true
-    }
-  }
-}
+      dialyzerEnabled = true,
+    },
+  },
+})
 
 -- JavaScript/TypeScript
-require("lspconfig").tsserver.setup {
-  cmd = {"typescript-language-server", "--stdio"},
-  filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
-  root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
-}
+require("lspconfig").tsserver.setup({
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+})
 
 -- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
-local luadev =
-  require("lua-dev").setup(
-  {
-    library = {
-      vimruntime = true, -- runtime path
-      types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-      plugins = true -- installed opt or start plugins in packpath
-      -- you can also specify the list of plugins to make available as a workspace library
-      -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
-    },
-    -- pass any additional options that will be merged in the final lsp config
-    lspconfig = {cmd = {sumneko_binary}}
-  }
-)
+local luadev = require("lua-dev").setup({
+  library = {
+    vimruntime = true, -- runtime path
+    types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+    plugins = true, -- installed opt or start plugins in packpath
+    -- you can also specify the list of plugins to make available as a workspace library
+    -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+  },
+  -- pass any additional options that will be merged in the final lsp config
+  lspconfig = { cmd = { sumneko_binary } },
+})
 
 require("lspconfig").sumneko_lua.setup(luadev)
 
@@ -122,20 +119,20 @@ require("lspconfig").sumneko_lua.setup(luadev)
 -- }
 
 -- Python
-require("lspconfig").pyright.setup {}
+require("lspconfig").pyright.setup({})
 
 -- Bash
-require("lspconfig").bashls.setup {
-  cmd = {"bash-language-server", "start"},
-  filetypes = {"sh", "zsh"}
-}
+require("lspconfig").bashls.setup({
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "zsh" },
+})
 
 -- C/C++
-require("lspconfig").clangd.setup {
-  cmd = {"clangd", "--background-index"},
-  filetypes = {"c", "cpp", "objc", "objcpp", "ch"},
-  capabilities = capabilities
-}
+require("lspconfig").clangd.setup({
+  cmd = { "clangd", "--background-index" },
+  filetypes = { "c", "cpp", "objc", "objcpp", "ch" },
+  capabilities = capabilities,
+})
 
 -- Haskell
 -- require("lspconfig").hls.setup {
@@ -157,41 +154,41 @@ require("lspconfig").clangd.setup {
 -- }
 
 -- Vim script
-require("lspconfig").vimls.setup {}
+require("lspconfig").vimls.setup({})
 
 -- Json
-require("lspconfig").jsonls.setup {}
+require("lspconfig").jsonls.setup({})
 
 -- R
-require("lspconfig").r_language_server.setup {}
+require("lspconfig").r_language_server.setup({})
 
 -- HTML and CSS
-require("lspconfig").html.setup {capabilities = capabilities}
-require("lspconfig").cssls.setup {capabilities = capabilities}
+require("lspconfig").html.setup({ capabilities = capabilities })
+require("lspconfig").cssls.setup({ capabilities = capabilities })
 
 -- Docker
-require("lspconfig").dockerls.setup {
-  cmd = {"docker-langserver", "--stdio"},
-  filetypes = {"Dockerfile", "dockerfile"}
-}
+require("lspconfig").dockerls.setup({
+  cmd = { "docker-langserver", "--stdio" },
+  filetypes = { "Dockerfile", "dockerfile" },
+})
 
 -- Latex
-require("lspconfig").texlab.setup {
-  cmd = {"texlab"},
-  filetypes = {"tex", "bib"},
+require("lspconfig").texlab.setup({
+  cmd = { "texlab" },
+  filetypes = { "tex", "bib" },
   settings = {
     texlab = {
       auxDirectory = ".",
       bibtexFormatter = "texlab",
       build = {
-        args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"},
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
-        isContinuous = false
+        isContinuous = false,
       },
-      chktex = {onEdit = false, onOpenAndSave = false},
+      chktex = { onEdit = false, onOpenAndSave = false },
       diagnosticsDelay = 300,
       formatterLineLength = 80,
-      forwardSearch = {args = {}}
-    }
-  }
-}
+      forwardSearch = { args = {} },
+    },
+  },
+})

@@ -2,7 +2,7 @@
 vim.o.completeopt = "menuone,noinsert,noselect"
 
 -- Main config
-require("compe").setup {
+require("compe").setup({
   enabled = true,
   autocomplete = true,
   debug = false,
@@ -20,7 +20,7 @@ require("compe").setup {
     max_width = 120,
     min_width = 60,
     max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1
+    min_height = 1,
   },
   -- Sources for completion
   source = {
@@ -36,9 +36,9 @@ require("compe").setup {
     vsnip = false,
     ultisnips = true,
     treesitter = false,
-    tabnine = false
-  }
-}
+    tabnine = false,
+  },
+})
 
 -- Completion toggle
 _G.compe_popup_toggle = function()
@@ -50,13 +50,13 @@ _G.compe_popup_toggle = function()
 end
 
 -- Next/prev completion items keymaps
-vim.api.nvim_set_keymap("i", "<C-j>", "<C-n>", {noremap = true, expr = false})
-vim.api.nvim_set_keymap("s", "<C-j>", "<C-n>", {noremap = true, expr = false})
-vim.api.nvim_set_keymap("i", "<C-k>", "<C-p>", {noremap = true, expr = false})
-vim.api.nvim_set_keymap("s", "<C-k>", "<C-p>", {noremap = true, expr = false})
+vim.api.nvim_set_keymap("i", "<C-j>", "<C-n>", { noremap = true, expr = false })
+vim.api.nvim_set_keymap("s", "<C-j>", "<C-n>", { noremap = true, expr = false })
+vim.api.nvim_set_keymap("i", "<C-k>", "<C-p>", { noremap = true, expr = false })
+vim.api.nvim_set_keymap("s", "<C-k>", "<C-p>", { noremap = true, expr = false })
 
 -- Manual completion popup toggle
-vim.api.nvim_set_keymap("i", "<C-Space>", "v:lua.compe_popup_toggle()", {noremap = true, expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-Space>", "v:lua.compe_popup_toggle()", { noremap = true, expr = true, silent = true })
 
 -- Confirm
-vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {noremap = true, expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, expr = true, silent = true })

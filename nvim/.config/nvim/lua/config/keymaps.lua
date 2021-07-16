@@ -16,7 +16,7 @@ vim.api.nvim_set_keymap(
   "n",
   "<M-x>",
   '<cmd>lua require("telescope.builtin").commands(require("telepada").ivy())<Enter>',
-  {noremap = true, silent = true}
+  { noremap = true, silent = true }
 )
 
 -- Close window
@@ -26,20 +26,20 @@ vim.api.nvim_set_keymap(
 -- vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", {noremap = true, silent = false})
 
 -- Splits
-vim.api.nvim_set_keymap("n", "<C-s>", ":vsplit<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<C-s>", ":vsplit<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", { noremap = true, silent = true })
 
 -- Folds
-vim.api.nvim_set_keymap("n", "<Tab>", "za", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = true, silent = true })
 
 -- Enable spellcheck
 -- vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
 
 -- Move to begin/end of line with L and H
-vim.api.nvim_set_keymap("n", "<S-l>", "$", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<S-h>", "0", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<S-l>", "$", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<S-h>", "0", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<S-l>", "$", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-h>", "0", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-l>", "$", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
 
 -- Use j and k for visual lines
 -- vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
@@ -48,15 +48,15 @@ vim.api.nvim_set_keymap("v", "<S-h>", "0", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("v", "k", "gk", {noremap = true, silent = true})
 
 -- Auto spell corretion
-vim.api.nvim_set_keymap("i", "<C-l>", "<Esc>[s1z=`]a", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-l>", "<Esc>[s1z=`]a", { noremap = true, silent = true })
 
 --Lsp
-vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<Enter>", { noremap = true, silent = true })
 vim.api.nvim_command("autocmd FileType c,cpp nnoremap <silent> <leader>sh :ClangdSwitchSourceHeader<Enter>")
-vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<Enter>", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "ca", ":lua vim.lsp.buf.code_action()<Enter>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<Enter>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<Enter>", { noremap = true, silent = true })
 
 -- Navigation and resizing splits (using tmux.nvim now)
 -- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})

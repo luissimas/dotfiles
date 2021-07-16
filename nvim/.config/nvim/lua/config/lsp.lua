@@ -7,7 +7,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
     signs = true,
     -- virtual_text = {spacing = 4, prefix = "●"},
     virtual_text = false,
-    severity_sort = true
+    severity_sort = true,
   }
   local uri = params.uri
   local bufnr = vim.uri_to_bufnr(uri)
@@ -32,21 +32,21 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
 end
 
 -- Overriding default signs
-local signs = {Error = " ", Warning = " ", Hint = " ", Information = " "}
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
-  vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = ""})
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
 -- Adding borders for signature help and hover popup
-vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
-vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+vim.cmd([[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]])
+vim.cmd([[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
 
 local border = "solid"
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 
 -- Show diagnostics on cursor hold
 vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border = '" .. border .. "'})")

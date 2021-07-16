@@ -1,18 +1,18 @@
-require("neogit").setup {
+require("neogit").setup({
   disable_signs = false,
   disable_context_highlighting = false,
   disable_commit_confirmation = true,
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }
-    section = {"○", "●"},
-    item = {"○", "●"},
-    hunk = {"", ""}
+    section = { "○", "●" },
+    item = { "○", "●" },
+    hunk = { "", "" },
   },
   integrations = {
     -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs you can use `sindrets/diffview.nvim`.
     -- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
-    diffview = true
+    diffview = true,
   },
   -- override/add mappings
   mappings = {
@@ -43,7 +43,7 @@ require("neogit").setup {
       ["c"] = "CommitPopup",
       ["L"] = "LogPopup",
       ["Z"] = "StashPopup",
-      ["b"] = "BranchPopup"
-    }
-  }
-}
+      ["b"] = "BranchPopup",
+    },
+  },
+})

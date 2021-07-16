@@ -44,87 +44,63 @@ end
 
 -- Pywal
 function M.wal()
-  require("telescope.builtin").find_files(
-    require("telescope.themes").get_dropdown(
-      {
-        prompt_title = "Image",
-        -- No preview
-        previewer = false,
-        -- Clear ignore patterns filter (so we can find the images)
-        file_ignore_patterns = {},
-        cwd = "~/.wal/",
-        attach_mappings = function(prompt_bufnr, map)
-          local function set_theme(close)
-            local file = require("telescope.actions.state").get_selected_entry(bufnr)
+  require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
+    prompt_title = "Image",
+    -- No preview
+    previewer = false,
+    -- Clear ignore patterns filter (so we can find the images)
+    file_ignore_patterns = {},
+    cwd = "~/.wal/",
+    attach_mappings = function(prompt_bufnr, map)
+      local function set_theme(close)
+        local file = require("telescope.actions.state").get_selected_entry(bufnr)
 
-            change_theme(file.cwd .. file.value, "wal")
-            --print(file.cwd..file.value)
+        change_theme(file.cwd .. file.value, "wal")
+        --print(file.cwd..file.value)
 
-            if close then
-              require("telescope.actions").close(prompt_bufnr)
-            end
-          end
-
-          map(
-            "i",
-            "<CR>",
-            function(bufnr)
-              set_theme(true)
-            end
-          )
-
-          map(
-            "n",
-            "<CR>",
-            function(bufnr)
-              set_theme(true)
-            end
-          )
-
-          return true
+        if close then
+          require("telescope.actions").close(prompt_bufnr)
         end
-      }
-    )
-  )
+      end
+
+      map("i", "<CR>", function(bufnr)
+        set_theme(true)
+      end)
+
+      map("n", "<CR>", function(bufnr)
+        set_theme(true)
+      end)
+
+      return true
+    end,
+  }))
 end
 
 -- Neovim's colorschemes
 function M.colorscheme()
-  require("telescope.builtin").colorscheme(
-    require("telescope.themes").get_dropdown(
-      {
-        attach_mappings = function(prompt_bufnr, map)
-          local function set_colorscheme(close)
-            local themeName = require("telescope.actions.state").get_selected_entry(bufnr)
+  require("telescope.builtin").colorscheme(require("telescope.themes").get_dropdown({
+    attach_mappings = function(prompt_bufnr, map)
+      local function set_colorscheme(close)
+        local themeName = require("telescope.actions.state").get_selected_entry(bufnr)
 
-            change_theme(themeName.value, "name")
+        change_theme(themeName.value, "name")
 
-            if close then
-              require("telescope.actions").close(prompt_bufnr)
-            end
-          end
-
-          map(
-            "i",
-            "<CR>",
-            function(bufnr)
-              set_colorscheme(true)
-            end
-          )
-
-          map(
-            "n",
-            "<CR>",
-            function(bufnr)
-              set_colorscheme(true)
-            end
-          )
-
-          return true
+        if close then
+          require("telescope.actions").close(prompt_bufnr)
         end
-      }
-    )
-  )
+      end
+
+      map("i", "<CR>", function(bufnr)
+        set_colorscheme(true)
+      end)
+
+      map("n", "<CR>", function(bufnr)
+        set_colorscheme(true)
+      end)
+
+      return true
+    end,
+  }))
 end
 
 return M
