@@ -9,7 +9,29 @@
 
 require("nvim-treesitter.configs").setup {
   -- List of language parsers to always have installed
-  ensure_installed = "maintained",
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "elixir",
+    "erlang",
+    "fennel",
+    "c",
+    "haskell",
+    "html",
+    "javascript",
+    "jsdoc",
+    "json",
+    "latex",
+    "lua",
+    "python",
+    "r",
+    "regex",
+    "tsx",
+    "verilog",
+    "yaml"
+  },
   indent = {
     enable = true
   },
