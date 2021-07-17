@@ -1,3 +1,5 @@
+local options = require("config.lsp.options")
+
 -- Updating diagnostics. See: https://github.com/neovim/nvim-lspconfig/wiki/UI-customization
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
   local config = {
@@ -43,10 +45,8 @@ end
 vim.cmd([[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]])
 vim.cmd([[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
 
-local border = "solid"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, options)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, options)
 
 -- Show diagnostics on cursor hold
 vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics(require('config.lsp.options'))")
