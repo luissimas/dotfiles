@@ -27,6 +27,7 @@ local eslint = {
   lintIgnoreExitCode = true,
   formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
   formatStdin = true,
+  rootMarkers = { "package.json", ".git/" },
 }
 
 -- Credo options
@@ -34,18 +35,15 @@ local credo = {
   lintCommand = "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
   lintStdin = true,
   lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
-  lintCategoryMap = {},
+  rootMarkers = { "mix.exs" },
 }
 
 -- EFM language server
 require("lspconfig").efm.setup({
   init_options = { documentFormatting = true },
   filetypes = { "javascript", "typescript", "elixir" },
-  root_dir = function(fname)
-    return util.root_pattern("tsconfig.json")(fname) or util.root_pattern(".eslintrc.js", ".git")(fname)
-  end,
+  root_dir = util.root_pattern("package.json", ".git", "mix.exs"),
   settings = {
-    rootMarkers = { ".eslintrc.js", ".git/", "mix.exs" },
     languages = {
       javascript = { eslint },
       typescript = { eslint },

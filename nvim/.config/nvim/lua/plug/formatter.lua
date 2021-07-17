@@ -44,8 +44,8 @@ require("formatter").setup({
     elixir = {
       function()
         return {
-          exe = "mix format",
-          args = { "-" },
+          exe = "mix",
+          args = { "format -" },
           stdin = true,
         }
       end,
