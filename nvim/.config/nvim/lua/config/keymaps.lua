@@ -41,6 +41,10 @@ vim.api.nvim_set_keymap("n", "<S-h>", "0", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<S-l>", "$", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
 
+-- Move visually selected lines up and down
+vim.api.nvim_set_keymap("v", "<S-j>", ":m '>+1<Enter>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-k>", ":m '<-2<Enter>gv=gv", { noremap = true, silent = true })
+
 -- Use j and k for visual lines
 -- vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "k", "gk", {noremap = true, silent = true})
