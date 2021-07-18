@@ -7,8 +7,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
     underline = true,
     update_in_insert = true,
     signs = true,
-    -- virtual_text = {spacing = 4, prefix = "●"},
-    virtual_text = false,
+    virtual_text = { spacing = 4, prefix = "●" },
+    -- virtual_text = false,
     severity_sort = true,
   }
   local uri = params.uri
@@ -19,9 +19,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
   end
 
   local diagnostics = params.diagnostics
+  print(vim.inspect(diagnostics))
 
   for i, v in ipairs(diagnostics) do
-    diagnostics[i].message = string.format("%s: %s", v.source, v.message)
+    if v.source then
+      diagnostics[i].message = string.format("%s: %s", v.source, v.message)
+    end
   end
 
   vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
@@ -49,4 +52,4 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, op
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, options)
 
 -- Show diagnostics on cursor hold
-vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics(require('config.lsp.options'))")
+-- vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics(require('config.lsp.options'))")

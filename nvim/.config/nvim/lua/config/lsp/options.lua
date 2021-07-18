@@ -1,6 +1,4 @@
-local border = "solid"
-
 return {
-  border = border,
+  border = "solid",
   show_header = false,
 }
