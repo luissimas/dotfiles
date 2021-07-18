@@ -19,6 +19,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
   end
 
   local diagnostics = params.diagnostics
+  print(vim.inspect(diagnostics))
 
   for i, v in ipairs(diagnostics) do
     if v.source then
