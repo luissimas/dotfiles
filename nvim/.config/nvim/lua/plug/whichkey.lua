@@ -75,7 +75,6 @@ whichkey.register({
       q = { "<cmd>TroubleToggle quickfix<Enter>", "Quickfix list" },
       l = { "<cmd>TroubleToggle loclist<Enter>", "Local list" },
     },
-    h = { "<cmd>Telescope help_tags<Enter>", "Help" },
     f = {
       name = "Find",
       g = { "<cmd>Telescope live_grep<Enter>", "Live grep" },
@@ -88,6 +87,8 @@ whichkey.register({
       v = { '<cmd>lua require("telepada").find_vault()<Enter>', "Find in vault" },
       c = { '<cmd>lua require("telepada.colorscheme").colorscheme()<Enter>', "Change colorscheme" },
       w = { '<cmd>lua require("telepada.colorscheme").wal()<Enter>', "Change pywal colorscheme" },
+      h = { "<cmd>Telescope help_tags<Enter>", "Help" },
+      m = { "<cmd>Telescope man_pages<Enter>", "Man pages" },
     },
     w = { "<cmd>w<Enter>", "Write buffer" },
     q = { "<cmd>q<Enter>", "Quit" },

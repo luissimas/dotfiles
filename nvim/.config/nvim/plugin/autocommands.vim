@@ -44,6 +44,11 @@ augroup ElixirFiletype
   autocmd BufRead,BufNewFile *.eex set filetype=eelixir
 augroup END
 
+augroup ErlangFiletype
+  autocmd!
+  autocmd BufRead,BufNewFile *.yrl,*.xrl set filetype=erlang
+augroup END
+
 augroup STATUSLINECOLORSYNC
   " Clears all autocommands from this group
   autocmd!
