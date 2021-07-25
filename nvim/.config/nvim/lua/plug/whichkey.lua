@@ -62,7 +62,10 @@ whichkey.register({
     c = {
       name = "Code",
       r = { "<cmd> lua vim.lsp.buf.rename()<Enter>", "Rename" },
-      d = { "<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<Enter>", "Line diagnostics" },
+    },
+    d = {
+      "<cmd> lua vim.lsp.diagnostic.show_line_diagnostics(require('config.lsp.options'))<Enter>",
+      "Diagnostics",
     },
     s = {
       name = "Spell",

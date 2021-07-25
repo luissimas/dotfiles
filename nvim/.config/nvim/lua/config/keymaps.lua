@@ -61,12 +61,6 @@ vim.api.nvim_set_keymap("n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", { 
 -- vim.api.nvim_set_keymap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<Enter>", {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap("n", "ca", ":lua vim.lsp.buf.code_action()<Enter>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-  "n",
-  "J",
-  ":lua vim.lsp.diagnostic.show_line_diagnostics(require('config.lsp.options'))<Enter>",
-  { noremap = true, silent = true }
-)
 
 -- Navigation and resizing splits (using tmux.nvim now)
 -- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true, silent = true})
