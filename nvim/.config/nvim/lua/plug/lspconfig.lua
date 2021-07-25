@@ -85,6 +85,12 @@ local luadev = require("lua-dev").setup({
   lspconfig = { cmd = { sumneko_binary } },
 })
 
+-- Ocaml
+require("lspconfig").ocamllsp.setup({
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" },
+  root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune"),
+})
+
 require("lspconfig").sumneko_lua.setup(luadev)
 
 -- require("lspconfig").sumneko_lua.setup {

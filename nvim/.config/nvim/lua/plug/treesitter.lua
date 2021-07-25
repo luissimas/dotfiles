@@ -25,6 +25,7 @@ require("nvim-treesitter.configs").setup({
     "json",
     "latex",
     "lua",
+    "ocaml",
     "python",
     "r",
     "regex",

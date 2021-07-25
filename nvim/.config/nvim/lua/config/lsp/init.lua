@@ -7,8 +7,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
     underline = true,
     update_in_insert = true,
     signs = true,
-    virtual_text = { spacing = 4, prefix = "●" },
-    -- virtual_text = false,
+    -- virtual_text = { spacing = 4, prefix = "●" },
+    virtual_text = false,
     severity_sort = true,
   }
   local uri = params.uri

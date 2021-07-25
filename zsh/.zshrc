@@ -158,3 +158,6 @@ SPACESHIP_TERRAFORM_SHOW=false
 
 # Setting spaceship as the prompt
 prompt spaceship
+
+# opam configuration
+test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
