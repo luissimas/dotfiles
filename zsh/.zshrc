@@ -128,10 +128,10 @@ SPACESHIP_VI_MODE_SHOW=false
 
 # Removing all package manager prompt stuff
 SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_NODE_SHOW=false
+SPACESHIP_NODE_SHOW=true
 SPACESHIP_RUBY_SHOW=false
 SPACESHIP_ELM_SHOW=false
-SPACESHIP_ELIXIR_SHOW=false
+SPACESHIP_ELIXIR_SHOW=true
 SPACESHIP_XCODE_SHOW_LOCAL=false
 SPACESHIP_SWIFT_SHOW_LOCAL=false
 SPACESHIP_GOLANG_SHOW=false
@@ -161,3 +161,8 @@ prompt spaceship
 
 # opam configuration
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

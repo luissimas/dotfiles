@@ -6,36 +6,24 @@
 --
 --
 
--- Tokyonight
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_terminal_colors = true
-vim.g.tokyonight_italic_comments = true
-vim.g.tokyonight_italic_keywords = true
-vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_italic_variables = true
-vim.g.tokyonight_transparent = false
-vim.g.tokyonight_hide_inactive_statusline = true
-vim.g.tokyonight_dark_sidebar = true
-vim.g.tokyonight_dark_float = true
+local v = vim.g
 
--- Moonlight
-vim.g.moonlight_italic_comments = true
-vim.g.moonlight_italic_keywords = true
-vim.g.moonlight_italic_functions = true
-vim.g.moonlight_italic_variables = true
-vim.g.moonlight_contrast = true
-vim.g.moonlight_borders = false
-vim.g.moonlight_disable_background = false
+-- Tokyonight
+v.tokyonight_style = "storm"
+v.tokyonight_terminal_colors = true
+v.tokyonight_italic_comments = true
+v.tokyonight_italic_keywords = true
+v.tokyonight_italic_functions = true
+v.tokyonight_italic_variables = true
+v.tokyonight_transparent = false
+v.tokyonight_hide_inactive_statusline = true
+v.tokyonight_dark_sidebar = true
+v.tokyonight_dark_float = true
+v.tokyonight_lualine_bold = false
 
 local M = {}
 
--- M.lualine_colorscheme = "onedark"
--- M.colorscheme = "onedark"
-
 M.lualine_colorscheme = "tokyonight"
 M.colorscheme = "tokyonight"
-
--- M.lualine_colorscheme = "moonlight"
--- M.colorscheme = "moonlight"
 
 return M
