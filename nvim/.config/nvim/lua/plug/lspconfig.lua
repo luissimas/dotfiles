@@ -59,7 +59,7 @@ require("lspconfig").elixirls.setup({
   root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
   settings = {
     elixirLS = {
-      dialyzerEnabled = false,
+      dialyzerEnabled = true,
     },
   },
 })

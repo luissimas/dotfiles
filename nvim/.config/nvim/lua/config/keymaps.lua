@@ -11,6 +11,15 @@ vim.g.mapleader = " "
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})
 
+-- Make Y behave like the other capital letters
+vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true, silent = true})
+
+-- Undo break points
+vim.api.nvim_set_keymap("i", ",", ",<C-g>u", {noremap=true, silent= true})
+vim.api.nvim_set_keymap("i", ".", ".<C-g>u", {noremap=true, silent= true})
+vim.api.nvim_set_keymap("i", "!", "!<C-g>u", {noremap=true, silent= true})
+vim.api.nvim_set_keymap("i", "?", "?<C-g>u", {noremap=true, silent= true})
+
 -- Emacs-like M-x
 vim.api.nvim_set_keymap(
   "n",
@@ -30,7 +39,7 @@ vim.api.nvim_set_keymap("n", "<C-s>", ":vsplit<Enter>", { noremap = true, silent
 vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", { noremap = true, silent = true })
 
 -- Folds
-vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = true, silent = true })
 
 -- Enable spellcheck
 -- vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
@@ -42,8 +51,8 @@ vim.api.nvim_set_keymap("v", "<S-l>", "$", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
 
 -- Move visually selected lines up and down
-vim.api.nvim_set_keymap("v", "<S-j>", ":m '>+1<Enter>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-k>", ":m '<-2<Enter>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "J", ":m '>+1<Enter>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "K", ":m '<-2<Enter>gv=gv", { noremap = true, silent = true })
 
 -- Use j and k for visual lines
 -- vim.api.nvim_set_keymap("n", "j", "gj", {noremap = true, silent = true})
