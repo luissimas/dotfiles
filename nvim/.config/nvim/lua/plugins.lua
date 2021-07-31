@@ -323,7 +323,6 @@ return require("packer").startup(function(use)
     --]]
   use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
   use("folke/tokyonight.nvim")
-  use("kmonad/kmonad-vim")
 
   -- Personal plugins
   use({

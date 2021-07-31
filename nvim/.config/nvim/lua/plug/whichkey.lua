@@ -95,7 +95,7 @@ whichkey.register({
     },
     w = { "<cmd>w<Enter>", "Write buffer" },
     q = { "<cmd>q<Enter>", "Quit" },
-    g = { "<cmd>Neogit<Enter>", "Neogit" },
+    g = { "<cmd>Neogit kind=split<Enter>", "Neogit" },
     -- g = {"<cmd>Git<Enter>", "Fugitive"},
     e = { "<cmd>NvimTreeToggle<Enter>", "Toggle tree" },
   },
