@@ -17,9 +17,13 @@ v.tokyonight_italic_functions = true
 v.tokyonight_italic_variables = true
 v.tokyonight_transparent = false
 v.tokyonight_hide_inactive_statusline = true
-v.tokyonight_dark_sidebar = true
-v.tokyonight_dark_float = true
+v.tokyonight_dark_sidebar = false
+v.tokyonight_dark_float = false
 v.tokyonight_lualine_bold = false
+
+v.tokyonight_colors = {
+  bg_statusline = "bg"
+}
 
 local M = {}
 
