@@ -35,7 +35,7 @@ augroup END
 
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json,*.exs,*.ex silent FormatWrite
+  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json,*.exs,*.ex,*.ml silent FormatWrite
 augroup END
 
 augroup ElixirFiletype
@@ -58,7 +58,7 @@ augroup STATUSLINECOLORSYNC
 augroup END
 
 " Disable automatic comment insertion
-" autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " File-specific compile commands
 augroup COMPILE_KEYMAPS

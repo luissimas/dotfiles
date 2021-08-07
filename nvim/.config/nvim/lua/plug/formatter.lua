@@ -50,6 +50,15 @@ require("formatter").setup({
         }
       end,
     },
+    ocaml = {
+      function()
+        return {
+          exe = "ocamlformat",
+          args = { "--name", vim.api.nvim_buf_get_name(0), "-" },
+          stdin = true,
+        }
+      end,
+    },
     json = {
       -- jq
       function()
