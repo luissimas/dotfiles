@@ -40,37 +40,27 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  themelight=$(echo -e 'Dark\nLight' | rofi -dmenu -i -p "Select")
+  selected=$(echo -e 'Tokyonight\nRosé Pine\nGruvbox\nOne\nNord\nDracula' | rofi -dmenu -i -p "Source")
 
-  case $themelight in "Dark")
-    selected=$(echo -e 'Tokyonight\nGruvbox\nOne\nNord\nDracula' | rofi -dmenu -i -p "Source")
-
-    case $selected in "Gruvbox") theme="base16-gruvbox-hard";;
-    "Nord") theme="base16-nord";;
-    "One") theme="base16-onedark";;
-    "Dracula") theme="base16-dracula";;
-    "Tokyonight") theme=~/.config/wal/colorschemes/tokyonight.json;;
-    *) printf "No option selected."
-    esac
-
-    wal --theme $theme
-  ;;
-  "Light")
-    selected=$(echo -e 'Gruvbox' | rofi -dmenu -i -p "Source")
-
-    case $selected in "Gruvbox") theme="base16-gruvbox-medium";;
-    "Nord") theme="base16-nord";;
-    "Dracula") theme="base16-dracula";;
-    *) printf "No option selected."
-    esac
-
-    wal -l --theme $theme
-  ;;
+  case $selected in "Gruvbox") theme="base16-gruvbox-hard";;
+  "Nord") theme="base16-nord";;
+  "One") theme="base16-onedark";;
+  "Dracula") theme="base16-dracula";;
+  "Rosé Pine")
+    theme=~/.config/wal/colorschemes/rosepine.json
+    feh --bg-fill ~/.wal/pinkrose.png
+    ;;
+  "Tokyonight")
+    theme=~/.config/wal/colorschemes/tokyonight.json
+    feh --bg-fill ~/.wal/traintunnel.jpg
+    ;;
+  *) printf "No option selected."
   esac
 
+  wal --theme $theme
 
-    # Update bspwm colors
-    ~/scripts/bspwm/bspwmcolors.sh
+  # Update bspwm colors
+  ~/scripts/bspwm/bspwmcolors.sh
   ;;
 "Wallpaper")
   selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")

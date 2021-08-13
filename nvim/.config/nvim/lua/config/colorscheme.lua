@@ -22,12 +22,16 @@ v.tokyonight_dark_float = false
 v.tokyonight_lualine_bold = false
 
 v.tokyonight_colors = {
-  bg_statusline = "bg"
+	bg_statusline = "bg",
 }
+
+vim.g.rose_pine_variant = "base"
+vim.g.rose_pine_enable_italics = true
+vim.g.rose_pine_disable_background = false
 
 local M = {}
 
-M.lualine_colorscheme = "tokyonight"
-M.colorscheme = "tokyonight"
+M.lualine_colorscheme = "rose-pine"
+M.colorscheme = "rose-pine"
 
 return M

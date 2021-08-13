@@ -37,6 +37,7 @@ require("compe").setup({
     ultisnips = true,
     treesitter = false,
     tabnine = false,
+    orgmode = true,
   },
 })
 

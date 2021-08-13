@@ -118,7 +118,7 @@
 ;; Projectile
 (use-package! projectile
   :init
-  (setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir" "~/fun"))
+  (setq projectile-project-search-path '("~/cati/projetos/fight4you" "~/exercism/elixir" "~/fun" "~/fun/ocaml"))
   :config
   (setq projectile-auto-discover t)
   (pushnew! projectile-globally-ignored-directories "deps" "_build" "node_modules" ".git")
