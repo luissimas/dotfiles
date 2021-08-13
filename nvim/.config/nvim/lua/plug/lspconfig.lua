@@ -21,74 +21,74 @@ local util = require("lspconfig.util")
 
 -- Eslint options
 local eslint = {
-	lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-	lintStdin = true,
-	lintFormats = { "%f:%l:%c: %m" },
-	lintIgnoreExitCode = true,
-	formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-	formatStdin = true,
-	rootMarkers = { "package.json", ".git/" },
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = { "%f:%l:%c: %m" },
+  lintIgnoreExitCode = true,
+  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true,
+  rootMarkers = { "package.json", ".git/" },
 }
 
 -- Credo options
 local credo = {
-	lintCommand = "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
-	lintStdin = true,
-	lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
-	rootMarkers = { "mix.exs" },
+  lintCommand = "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
+  lintStdin = true,
+  lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
+  rootMarkers = { "mix.exs" },
 }
 
 -- EFM language server
 require("lspconfig").efm.setup({
-	init_options = { documentFormatting = true },
-	filetypes = { "javascript", "typescript", "elixir" },
-	root_dir = util.root_pattern("package.json", ".git", "mix.exs"),
-	settings = {
-		languages = {
-			javascript = { eslint },
-			typescript = { eslint },
-			elixir = { credo },
-		},
-	},
+  init_options = { documentFormatting = true },
+  filetypes = { "javascript", "typescript", "elixir" },
+  root_dir = util.root_pattern("package.json", ".git", "mix.exs"),
+  settings = {
+    languages = {
+      javascript = { eslint },
+      typescript = { eslint },
+      elixir = { credo },
+    },
+  },
 })
 
 -- Elixir (https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/)
 require("lspconfig").elixirls.setup({
-	cmd = { vim.fn.expand("~/repos/elixir-ls/language_server.sh") },
-	filetypes = { "elixir", "eelixir" },
-	root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
-	settings = {
-		elixirLS = {
-			dialyzerEnabled = true,
-		},
-	},
+  cmd = { vim.fn.expand("~/repos/elixir-ls/language_server.sh") },
+  filetypes = { "elixir", "eelixir" },
+  root_dir = util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = false,
+    },
+  },
 })
 
 -- JavaScript/TypeScript
 require("lspconfig").tsserver.setup({
-	cmd = { "typescript-language-server", "--stdio" },
-	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-	root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 })
 
 -- Lua
 local sumneko_binary = "/usr/bin/lua-language-server"
 local luadev = require("lua-dev").setup({
-	library = {
-		vimruntime = true, -- runtime path
-		types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-		plugins = true, -- installed opt or start plugins in packpath
-		-- you can also specify the list of plugins to make available as a workspace library
-		-- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
-	},
-	-- pass any additional options that will be merged in the final lsp config
-	lspconfig = { cmd = { sumneko_binary } },
+  library = {
+    vimruntime = true, -- runtime path
+    types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+    plugins = true, -- installed opt or start plugins in packpath
+    -- you can also specify the list of plugins to make available as a workspace library
+    -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+  },
+  -- pass any additional options that will be merged in the final lsp config
+  lspconfig = { cmd = { sumneko_binary } },
 })
 
 -- Ocaml
 require("lspconfig").ocamllsp.setup({
-	filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" },
-	root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune"),
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason" },
+  root_dir = util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune"),
 })
 
 require("lspconfig").sumneko_lua.setup(luadev)
@@ -127,15 +127,15 @@ require("lspconfig").pyright.setup({})
 
 -- Bash
 require("lspconfig").bashls.setup({
-	cmd = { "bash-language-server", "start" },
-	filetypes = { "sh", "zsh" },
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "zsh" },
 })
 
 -- C/C++
 require("lspconfig").clangd.setup({
-	cmd = { "clangd", "--background-index" },
-	filetypes = { "c", "cpp", "objc", "objcpp", "ch" },
-	capabilities = capabilities,
+  cmd = { "clangd", "--background-index" },
+  filetypes = { "c", "cpp", "objc", "objcpp", "ch" },
+  capabilities = capabilities,
 })
 
 -- Haskell
@@ -172,27 +172,27 @@ require("lspconfig").cssls.setup({ capabilities = capabilities })
 
 -- Docker
 require("lspconfig").dockerls.setup({
-	cmd = { "docker-langserver", "--stdio" },
-	filetypes = { "Dockerfile", "dockerfile" },
+  cmd = { "docker-langserver", "--stdio" },
+  filetypes = { "Dockerfile", "dockerfile" },
 })
 
 -- Latex
 require("lspconfig").texlab.setup({
-	cmd = { "texlab" },
-	filetypes = { "tex", "bib" },
-	settings = {
-		texlab = {
-			auxDirectory = ".",
-			bibtexFormatter = "texlab",
-			build = {
-				args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-				executable = "latexmk",
-				isContinuous = false,
-			},
-			chktex = { onEdit = false, onOpenAndSave = false },
-			diagnosticsDelay = 300,
-			formatterLineLength = 80,
-			forwardSearch = { args = {} },
-		},
-	},
+  cmd = { "texlab" },
+  filetypes = { "tex", "bib" },
+  settings = {
+    texlab = {
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
+      build = {
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = "latexmk",
+        isContinuous = false,
+      },
+      chktex = { onEdit = false, onOpenAndSave = false },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
+      forwardSearch = { args = {} },
+    },
+  },
 })
