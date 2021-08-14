@@ -21,3 +21,6 @@ require("project_nvim").setup({
   -- directory.
   silent_chdir = false,
 })
+
+-- Loading telescope extension
+require("telescope").load_extension("projects")
