@@ -48,7 +48,7 @@ case $option in "Pywal")
   "Dracula") theme="base16-dracula";;
   "Rosé Pine")
     theme=~/.config/wal/colorschemes/rosepine.json
-    feh --bg-fill ~/.wal/pinkrose.png
+    feh --bg-fill ~/.wal/sunset.png
     ;;
   "Tokyonight")
     theme=~/.config/wal/colorschemes/tokyonight.json

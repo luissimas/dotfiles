@@ -7,299 +7,297 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-	execute("packadd packer.nvim")
+  fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
+  execute("packadd packer.nvim")
 end
 
 return require("packer").startup(function(use)
-	-- Packer auto-manager
-	use({ "wbthomason/packer.nvim", opt = true })
+  -- Packer auto-manager
+  use({ "wbthomason/packer.nvim", opt = true })
 
-	-- Ui API for plugins
-	use("nvim-lua/popup.nvim")
+  -- Ui API for plugins
+  use("nvim-lua/popup.nvim")
 
-	-- Utility functions for various plugins
-	use("nvim-lua/plenary.nvim")
+  -- Utility functions for various plugins
+  use("nvim-lua/plenary.nvim")
 
-	-- Lsp Config layer
-	use({
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("plug.lspconfig")
-		end,
-	})
+  -- Lsp Config layer
+  use({
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("plug.lspconfig")
+    end,
+  })
 
-	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		config = function()
-			require("plug.treesitter")
-		end,
-		requires = {
-			{
-				"nvim-treesitter/playground",
-				after = "nvim-treesitter",
-			},
-			{
-				"p00f/nvim-ts-rainbow",
-				after = "nvim-treesitter",
-			},
-		},
-	})
+  -- Treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("plug.treesitter")
+    end,
+    requires = {
+      {
+        "nvim-treesitter/playground",
+        after = "nvim-treesitter",
+      },
+      {
+        "p00f/nvim-ts-rainbow",
+        after = "nvim-treesitter",
+      },
+    },
+  })
 
-	-- Code format
-	use({
-		"mhartington/formatter.nvim",
-		config = function()
-			require("plug.formatter")
-		end,
-	})
+  -- Code format
+  use({
+    "mhartington/formatter.nvim",
+    config = function()
+      require("plug.formatter")
+    end,
+  })
 
-	-- Snippets
-	use({
-		"SirVer/ultisnips",
-		event = "InsertEnter",
-		config = function()
-			require("plug.ultisnips")
-		end,
-		requires = {
-			{
-				-- Snippets collection
-				"honza/vim-snippets",
-				after = "ultisnips",
-			},
-		},
-	})
+  -- Snippets
+  use({
+    "SirVer/ultisnips",
+    event = "InsertEnter",
+    config = function()
+      require("plug.ultisnips")
+    end,
+    requires = {
+      {
+        -- Snippets collection
+        "honza/vim-snippets",
+        after = "ultisnips",
+      },
+    },
+  })
 
-	-- Function signature
-	use({
-		"ray-x/lsp_signature.nvim",
-		event = "InsertCharPre",
-		config = function()
-			require("plug.lsp_signature")
-		end,
-	})
+  -- Function signature
+  use({
+    "ray-x/lsp_signature.nvim",
+    event = "InsertCharPre",
+    config = function()
+      require("plug.lsp_signature")
+    end,
+  })
 
-	-- File tree
-	use({
-		"kyazdani42/nvim-tree.lua",
-		cmd = "NvimTreeToggle",
-		config = function()
-			require("plug.tree")
-		end,
-	})
+  -- File tree
+  use({
+    "kyazdani42/nvim-tree.lua",
+    cmd = "NvimTreeToggle",
+    config = function()
+      require("plug.tree")
+    end,
+  })
 
-	-- Better status line
-	use({
-		"hoob3rt/lualine.nvim",
-		event = "BufRead",
-		config = function()
-			require("plug.lualine")
-		end,
-	})
+  -- Better status line
+  use({
+    "hoob3rt/lualine.nvim",
+    event = "BufRead",
+    config = function()
+      require("plug.lualine")
+    end,
+  })
 
-	-- Never forget your keymaps
-	use({
-		"folke/which-key.nvim",
-		config = function()
-			require("plug.whichkey")
-		end,
-	})
+  -- Never forget your keymaps
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      require("plug.whichkey")
+    end,
+  })
 
-	-- I like autopairs
-	use({
-		"steelsojka/pears.nvim",
-		after = "nvim-compe",
-		config = function()
-			require("plug.pears")
-		end,
-	})
+  -- I like autopairs
+  use({
+    "steelsojka/pears.nvim",
+    after = "nvim-compe",
+    config = function()
+      require("plug.pears")
+    end,
+  })
 
-	-- Better quickfix lists
-	use({
-		"folke/trouble.nvim",
-		config = function()
-			require("plug.trouble")
-		end,
-	})
+  -- Better quickfix lists
+  use({
+    "folke/trouble.nvim",
+    config = function()
+      require("plug.trouble")
+    end,
+  })
 
-	-- Comment lines
-	use({
-		"b3nj5m1n/kommentary",
-		config = function()
-			require("plug.kommentary")
-		end,
-	})
+  -- Comment lines
+  use({
+    "b3nj5m1n/kommentary",
+    config = function()
+      require("plug.kommentary")
+    end,
+  })
 
-	-- Surround
-	use({
-		"tpope/vim-surround",
-		event = "BufRead",
-	})
+  -- Surround
+  use({
+    "tpope/vim-surround",
+    event = "BufRead",
+  })
 
-	-- Change cwd based on the project's root directory
-	use({
-		"ahmedkhalf/lsp-rooter.nvim",
-		after = "nvim-lspconfig",
-		config = function()
-			require("plug.lsp_rooter")
-		end,
-	})
+  -- Project management
+  use({
+    "ahmedkhalf/project.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("plug.project")
+    end,
+  })
 
-	-- Orgmode inside neovim? wtf
-	use({
-		"kristijanhusak/orgmode.nvim",
-		config = function()
-			require("orgmode").setup({})
-		end,
-		requires = {
-			"akinsho/org-bullets.nvim",
-			config = function()
-				require("org-bullets").setup({
-					symbols = { "◉", "○", "✸", "✿" },
-				})
-			end,
-		},
-	})
+  -- Orgmode inside neovim? wtf
+  use({
+    "kristijanhusak/orgmode.nvim",
+    config = function()
+      require("orgmode").setup({})
+    end,
+    requires = {
+      "akinsho/org-bullets.nvim",
+      config = function()
+        require("org-bullets").setup({
+          symbols = { "◉", "○", "✸", "✿" },
+        })
+      end,
+    },
+  })
 
-	-- Completion
-	use({
-		"hrsh7th/nvim-compe",
-		event = "InsertEnter",
-		config = function()
-			require("plug.compe")
-		end,
-	})
+  -- Completion
+  use({
+    "hrsh7th/nvim-compe",
+    event = "InsertEnter",
+    config = function()
+      require("plug.compe")
+    end,
+  })
 
-	-- The ultimate fuzzy finder
-	use({
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			require("plug.telescope")
-		end,
-		requires = {
+  -- The ultimate fuzzy finder
+  use({
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("plug.telescope")
+    end,
+    requires = {
+      "nvim-telescope/telescope-fzy-native.nvim",
+      "luissimas/telescope-nodescripts.nvim",
+    },
+  })
 
-			"nvim-telescope/telescope-project.nvim",
-			"nvim-telescope/telescope-fzy-native.nvim",
-			"luissimas/telescope-nodescripts.nvim",
-		},
-	})
+  -- General icons
+  use({
+    "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("plug.webdevicons")
+    end,
+  })
 
-	-- General icons
-	use({
-		"kyazdani42/nvim-web-devicons",
-		config = function()
-			require("plug.webdevicons")
-		end,
-	})
+  -- Completion icons
+  use({
+    "onsails/lspkind-nvim",
+    after = "nvim-compe",
+    config = function()
+      require("plug.lspkind")
+    end,
+  })
 
-	-- Completion icons
-	use({
-		"onsails/lspkind-nvim",
-		after = "nvim-compe",
-		config = function()
-			require("plug.lspkind")
-		end,
-	})
+  -- Colors in hex color codes
+  use({
+    "norcalli/nvim-colorizer.lua",
+    event = "BufRead",
+    config = function()
+      require("plug.colorizer")
+    end,
+  })
 
-	-- Colors in hex color codes
-	use({
-		"norcalli/nvim-colorizer.lua",
-		event = "BufRead",
-		config = function()
-			require("plug.colorizer")
-		end,
-	})
+  -- Highlight words under cursor
+  use({
+    "RRethy/vim-illuminate",
+    event = "BufRead",
+    config = function()
+      require("plug.illuminate")
+    end,
+  })
 
-	-- Highlight words under cursor
-	use({
-		"RRethy/vim-illuminate",
-		event = "BufRead",
-		config = function()
-			require("plug.illuminate")
-		end,
-	})
+  -- Highlight comments
+  use({
+    "folke/todo-comments.nvim",
+    after = "nvim-treesitter",
+    config = function()
+      require("plug.todocomments")
+    end,
+  })
 
-	-- Highlight comments
-	use({
-		"folke/todo-comments.nvim",
-		after = "nvim-treesitter",
-		config = function()
-			require("plug.todocomments")
-		end,
-	})
+  -- The best git integration plugin
+  use({
+    "tpope/vim-fugitive",
+    cmd = "Git",
+  })
 
-	-- The best git integration plugin
-	use({
-		"tpope/vim-fugitive",
-		cmd = "Git",
-	})
+  -- The *other* best git integration plugin
+  use({
+    "TimUntersberger/neogit",
+    cmd = "Neogit",
+    config = function()
+      require("plug.neogit")
+    end,
+    requires = {
+      "sindrets/diffview.nvim",
+      after = "neogit",
+    },
+  })
 
-	-- The *other* best git integration plugin
-	use({
-		"TimUntersberger/neogit",
-		cmd = "Neogit",
-		config = function()
-			require("plug.neogit")
-		end,
-		requires = {
-			"sindrets/diffview.nvim",
-			after = "neogit",
-		},
-	})
+  -- Git blame and signs
+  use({
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    config = function()
+      require("plug.gitsigns")
+    end,
+  })
 
-	-- Git blame and signs
-	use({
-		"lewis6991/gitsigns.nvim",
-		event = "BufRead",
-		config = function()
-			require("plug.gitsigns")
-		end,
-	})
+  -- Docs and completion for nvim lua API
+  use({
+    "folke/lua-dev.nvim",
+  })
 
-	-- Docs and completion for nvim lua API
-	use({
-		"folke/lua-dev.nvim",
-	})
+  -- Lua 5.1 reference manual
+  use({
+    "milisims/nvim-luaref",
+    ft = "lua",
+  })
 
-	-- Lua 5.1 reference manual
-	use({
-		"milisims/nvim-luaref",
-		ft = "lua",
-	})
+  -- Vimtex for latex
+  use({
+    "lervag/vimtex",
+    ft = "tex",
+  })
 
-	-- Vimtex for latex
-	use({
-		"lervag/vimtex",
-		ft = "tex",
-	})
+  -- Startup time log
+  use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
 
-	-- Startup time log
-	use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
+  -- Navigate and resize tmux and vim splits
+  use({
+    "aserowy/tmux.nvim",
+    config = function()
+      require("plug.tmux")
+    end,
+  })
 
-	-- Navigate and resize tmux and vim splits
-	use({
-		"aserowy/tmux.nvim",
-		config = function()
-			require("plug.tmux")
-		end,
-	})
+  -- Colorschemes
+  use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
+  use("folke/tokyonight.nvim")
+  -- use({ "rose-pine/neovim", as = "rose-pine" })
+  use({ "rose-pine/neovim", as = "rose-pine" })
 
-	-- Colorschemes
-	use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
-	use("folke/tokyonight.nvim")
-	-- use({ "rose-pine/neovim", as = "rose-pine" })
-	use({ "rose-pine/neovim", as = "rose-pine" })
+  -- Personal plugins
+  use({
+    "~/fun/lua/plugins/eval",
+    cmd = "Eval",
+    config = function()
+      require("eval").setup({})
 
-	-- Personal plugins
-	use({
-		"~/fun/lua/plugins/eval",
-		cmd = "Eval",
-		config = function()
-			require("eval").setup({})
-
-			vim.api.nvim_set_keymap("v", "<leader>gr", ":Eval<Enter>", { noremap = true, silent = true })
-		end,
-	})
+      vim.api.nvim_set_keymap("v", "<leader>gr", ":Eval<Enter>", { noremap = true, silent = true })
+    end,
+  })
 end)

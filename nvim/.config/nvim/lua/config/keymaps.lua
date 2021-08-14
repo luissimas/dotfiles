@@ -21,12 +21,7 @@ vim.api.nvim_set_keymap("i", "!", "!<C-g>u", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "?", "?<C-g>u", { noremap = true, silent = true })
 
 -- Emacs-like M-x
-vim.api.nvim_set_keymap(
-  "n",
-  "<M-x>",
-  '<cmd>lua require("telescope.builtin").commands(require("telepada").ivy())<Enter>',
-  { noremap = true, silent = true }
-)
+vim.api.nvim_set_keymap("n", "<M-x>", '<cmd>lua require("telepada").mx()<Enter>', { noremap = true, silent = true })
 
 -- Close window
 -- vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})

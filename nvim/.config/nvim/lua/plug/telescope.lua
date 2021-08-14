@@ -63,13 +63,6 @@ require("telescope").setup({
       override_generic_sorter = true,
       override_file_sorter = true,
     },
-    project = {
-      base_dirs = {
-        { path = "~/fun", max_depth = 4 },
-        { path = "~/cati", max_depth = 5 },
-        { path = "~/exercism", max_depth = 5 },
-      },
-    },
     nodescripts = {
       command = "yarn",
       display_method = "vsplit",

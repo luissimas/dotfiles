@@ -73,7 +73,12 @@ end
 
 -- Buffer switcher with ivy theme
 function M.switch_buffer()
-  require("telescope.builtin").buffers(M.ivy({}, 8))
+  require("telescope.builtin").buffers(M.ivy({}))
+end
+
+-- Emacs-like M-x
+function M.mx()
+  require("telescope.builtin").commands(M.ivy({}, 8))
 end
 
 return M
