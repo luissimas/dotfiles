@@ -1,11 +1,18 @@
 #!/bin/sh
 
-selected=$(echo -e "F4Y\nIntroduction to Functional Programming" | rofi -dmenu -i -p "Class: ")
+selected=$(echo -e "SO\nMD\nF4Y\nIFP" | rofi -dmenu -i -p "Class: ")
 
-case $selected in "F4Y")
+case $selected in
+  "SO")
+  brave https://meet.google.com/tzx-ojdd-xqk?authuser=1
+  ;;
+  "MD")
+  brave meet.google.com/vzr-qkpu-iec?authuser=1
+  ;;
+  "F4Y")
   brave https://meet.google.com/oij-tpte-ufw?authuser=2
   ;;
-"Introduction to Functional Programming")
+  "IFP")
   brave https://meet.google.com/vcz-tcrs-stb?authuser=0
   ;;
 esac

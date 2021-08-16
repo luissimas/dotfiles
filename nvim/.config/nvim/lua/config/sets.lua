@@ -31,12 +31,11 @@ vim.o.cmdheight = 1
 vim.o.termguicolors = true
 vim.o.timeoutlen = 400
 
-vim.wo.signcolumn = "yes"
 -- vim.wo.colorcolumn = "80,120"
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.wrap = false
-vim.wo.signcolumn = "yes"
+vim.wo.signcolumn = "auto"
 
 -- Tabs
 vim.o.tabstop = 2
