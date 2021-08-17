@@ -20,45 +20,45 @@ end
 
 -- Find files with git_files and falling back to git_files
 function M.find_files()
-  local ok = pcall(require("telescope.builtin").git_files, M.ivy())
+  local ok = pcall(require("telescope.builtin").git_files)
 
   if not ok then
-    require("telescope.builtin").find_files(M.ivy())
+    require("telescope.builtin").find_files()
   end
 end
 
 -- Find in dotfiles custom picker
 function M.find_dotfiles()
-  require("telescope.builtin").git_files(M.ivy({
+  require("telescope.builtin").git_files({
     prompt_title = "Dotfiles",
     cwd = "~/dotfiles",
-  }))
+  })
 end
 
 -- Find in home directory
 function M.find_home()
-  require("telescope.builtin").find_files(M.ivy({
+  require("telescope.builtin").find_files({
     prompt_title = "All files",
     cwd = "~",
-  }))
+  })
 end
 
 -- Find in my vault directory
 function M.find_vault()
-  require("telescope.builtin").find_files(M.ivy({
+  require("telescope.builtin").find_files({
     prompt_title = "Notes",
     cwd = "~/dox/vault",
-  }))
+  })
 end
 
 -- Live grep
 function M.live_grep()
-  require("telescope.builtin").live_grep(M.ivy())
+  require("telescope.builtin").live_grep()
 end
 
 -- Old files
 function M.old_files()
-  require("telescope.builtin").oldfiles(M.ivy())
+  require("telescope.builtin").oldfiles()
 end
 
 -- Search in buffer
@@ -73,7 +73,7 @@ end
 
 -- Buffer switcher with ivy theme
 function M.switch_buffer()
-  require("telescope.builtin").buffers(M.ivy({}))
+  require("telescope.builtin").buffers()
 end
 
 -- Emacs-like M-x
