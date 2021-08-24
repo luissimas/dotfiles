@@ -10,7 +10,7 @@ case $selected in
   brave meet.google.com/vzr-qkpu-iec?authuser=1
   ;;
   "F4Y")
-  brave https://meet.google.com/oij-tpte-ufw?authuser=2
+  brave https://meet.google.com/zpo-nwqn-vrr?authuser=2
   ;;
   "IFP")
   brave https://meet.google.com/vcz-tcrs-stb?authuser=0

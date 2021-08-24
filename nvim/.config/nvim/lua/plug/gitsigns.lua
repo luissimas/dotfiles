@@ -21,7 +21,7 @@ require("gitsigns").setup({
   },
   current_line_blame = false,
   sign_priority = 6,
-  signcolumn = false,
+  signcolumn = true,
   update_debounce = 100,
   status_formatter = nil, -- Use default
   use_decoration_api = true,
