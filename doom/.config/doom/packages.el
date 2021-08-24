@@ -60,3 +60,6 @@
 ;; Code screenshots
 (package! screenshot
   :recipe (:host github :repo "tecosaur/screenshot"))
+
+;; Epub reader
+(package! nov)

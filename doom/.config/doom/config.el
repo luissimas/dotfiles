@@ -21,7 +21,7 @@
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-big-font (font-spec :family "JetBrains Mono" :size 14))
+      doom-big-font (font-spec :family "JetBrains Mono" :size 20))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -179,10 +179,10 @@
 ;;(add-hook 'before-save-hook #'format-all-buffer)
 
 ;; Treemacs
-(use-package! treemacs
-  :config
-  (setq treemacs-position 'right
-        treemacs-width 30))
+;; (use-package! treemacs
+;;   :config
+;;   (setq treemacs-position 'right
+;;         treemacs-width 30))
 
 ;; Screenshot
 (use-package! screenshot
@@ -195,3 +195,22 @@
 
 ;; Compile using Makefile
 (map! :leader :desc "Compile" "c c" #'+make/run)
+
+;; Don't open new workspaces in new emacsclient sessions
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
+
+;; Battery in modeline
+(unless (equal "Battery status not available"
+               (battery))
+  (display-battery-mode 1))
+
+;; Time in modeline
+(display-time-mode 1)
+
+(use-package! nov
+  :config
+  (setq nov-text-width t)
+  (setq visual-fill-column-center-text t)
+  (add-hook 'nov-mode-hook 'visual-line-mode)
+  (add-hook 'nov-mode-hook 'visual-fill-column-mode))
