@@ -16,6 +16,6 @@ if [ -e "/sys/class/power_supply/BAT1" ]; then
     icon=" "
   fi
 
-  printf "$icon$capacity%%"
+  printf " $icon$capacity%%"
 fi
 
