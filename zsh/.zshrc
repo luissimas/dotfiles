@@ -87,8 +87,7 @@ alias hbt='python ~/fun/python/habitica-cli-py/main.py'
 
 # Custom cd function
 customcd () {
-  cd $1
-  exa -la --no-user --time-style long-iso --icons
+  cd $1 && exa -la --no-user --time-style long-iso --icons
 }
 
 
