@@ -2,7 +2,6 @@ require("formatter").setup({
   logging = false,
   filetype = {
     javascript = {
-      -- prettier
       function()
         return {
           exe = "prettier",
@@ -12,15 +11,6 @@ require("formatter").setup({
       end,
     },
     lua = {
-      -- luafmt
-      -- function()
-      --   return {
-      --     exe = "luafmt",
-      --     args = {"--indent-count", 2, "--stdin"},
-      --     stdin = true
-      --   }
-      -- end
-      -- stylua
       function()
         return {
           exe = "stylua",
@@ -55,6 +45,14 @@ require("formatter").setup({
         return {
           exe = "ocamlformat",
           args = { "--align-cases", "--break-cases=nested", "--name", vim.api.nvim_buf_get_name(0), "-" },
+          stdin = true,
+        }
+      end,
+    },
+    c = {
+      function()
+        return {
+          exe = "clang-format",
           stdin = true,
         }
       end,
