@@ -11,9 +11,6 @@ vim.g.mapleader = " "
 -- Close buffer and keep the split
 -- vim.api.nvim_set_keymap("n", "<leader>c", ":bp <bar> vs <bar> bn <bar> bd <Enter>", {noremap = true})
 
--- Make Y behave like the other capital letters
-vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true, silent = true })
-
 -- Undo break points
 vim.api.nvim_set_keymap("i", ",", ",<C-g>u", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", ".", ".<C-g>u", { noremap = true, silent = true })

@@ -35,7 +35,7 @@ augroup END
 
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json,*.exs,*.ex,*.h,*.c,*.cpp silent FormatWrite
+  autocmd BufWritePost *.js,*.rs,*.lua,*.py,*.json,*.exs,*.ex,*.h,*.c,*.cpp,*.ml silent FormatWrite
 augroup END
 
 augroup ElixirFiletype
@@ -75,7 +75,7 @@ augroup COMPILE_KEYMAPS
   autocmd Filetype pandoc nmap <leader>of :!zathura %:r.pdf&<Enter>
 
   autocmd Filetype markdown nnoremap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>
-  autocmd Filetype markdown nnoremap <leader>o :Pandoc pdf<Enter>
+  " autocmd Filetype markdown nnoremap <leader>o :Pandoc pdf<Enter>
 
   autocmd Filetype rmd nmap <silent> <leader>o :!Rscript -e "rmarkdown::render('%')" >/dev/null<Enter>
   autocmd Filetype rmd nmap <silent> <leader>of :!zathura %:r.pdf&<Enter><Enter>

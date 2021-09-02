@@ -44,7 +44,7 @@ require("formatter").setup({
       function()
         return {
           exe = "ocamlformat",
-          args = { "--align-cases", "--break-cases=nested", "--name", vim.api.nvim_buf_get_name(0), "-" },
+          args = { "--enable-outside-detected-project", "--name", vim.api.nvim_buf_get_name(0), "-" },
           stdin = true,
         }
       end,

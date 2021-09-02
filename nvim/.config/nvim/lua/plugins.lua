@@ -48,6 +48,27 @@ return require("packer").startup(function(use)
     },
   })
 
+  -- Completion
+  use({
+    "hrsh7th/nvim-compe",
+    event = "InsertEnter",
+    config = function()
+      require("plug.compe")
+    end,
+  })
+
+  -- The ultimate fuzzy finder
+  use({
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("plug.telescope")
+    end,
+    requires = {
+      "nvim-telescope/telescope-fzy-native.nvim",
+      "luissimas/telescope-nodescripts.nvim",
+    },
+  })
+
   -- Code format
   use({
     "mhartington/formatter.nvim",
@@ -107,12 +128,11 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- I like autopairs
+  -- Navigate and resize tmux and vim splits
   use({
-    "steelsojka/pears.nvim",
-    after = "nvim-compe",
+    "aserowy/tmux.nvim",
     config = function()
-      require("plug.pears")
+      require("plug.tmux")
     end,
   })
 
@@ -132,6 +152,15 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Autopairs
+  use({
+    "steelsojka/pears.nvim",
+    after = "nvim-compe",
+    config = function()
+      require("plug.pears")
+    end,
+  })
+
   -- Surround
   use({
     "tpope/vim-surround",
@@ -147,7 +176,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Orgmode inside neovim? wtf
+  -- Orgmode inside neovim?
   use({
     "kristijanhusak/orgmode.nvim",
     config = function()
@@ -160,27 +189,6 @@ return require("packer").startup(function(use)
           symbols = { "◉", "○", "✸", "✿" },
         })
       end,
-    },
-  })
-
-  -- Completion
-  use({
-    "hrsh7th/nvim-compe",
-    event = "InsertEnter",
-    config = function()
-      require("plug.compe")
-    end,
-  })
-
-  -- The ultimate fuzzy finder
-  use({
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require("plug.telescope")
-    end,
-    requires = {
-      "nvim-telescope/telescope-fzy-native.nvim",
-      "luissimas/telescope-nodescripts.nvim",
     },
   })
 
@@ -267,27 +275,12 @@ return require("packer").startup(function(use)
     ft = "lua",
   })
 
-  -- Vimtex for latex
-  use({
-    "lervag/vimtex",
-    ft = "tex",
-  })
-
   -- Startup time log
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
-
-  -- Navigate and resize tmux and vim splits
-  use({
-    "aserowy/tmux.nvim",
-    config = function()
-      require("plug.tmux")
-    end,
-  })
 
   -- Colorschemes
   use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
   use("folke/tokyonight.nvim")
-  -- use({ "rose-pine/neovim", as = "rose-pine" })
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Personal plugins
