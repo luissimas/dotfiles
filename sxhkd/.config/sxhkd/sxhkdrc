@@ -34,6 +34,13 @@ super + a
 super + shift + {equal,minus}
   pamixer --allow-boost {-i,-d} 5
 
+# screen brightness
+XF86MonBrightnessUp
+  light -A 10
+
+XF86MonBrightnessDown
+  light -U 10
+
 # mute volume
 super + shift + m
 	pamixer -t
