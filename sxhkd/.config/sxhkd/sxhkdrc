@@ -34,16 +34,22 @@ super + a
 super + shift + {equal,minus}
   pamixer --allow-boost {-i,-d} 5
 
+{XF86AudioRaiseVolume, XF86AudioLowerVolume}
+  pamixer --allow-boost {-i,-d} 5
+
+# mute volume
+super + shift + m
+	pamixer -t
+
+XF86AudioMute
+	pamixer -t
+
 # screen brightness
 XF86MonBrightnessUp
   light -A 10
 
 XF86MonBrightnessDown
   light -U 10
-
-# mute volume
-super + shift + m
-	pamixer -t
 
 # lock screen
 #super + alt + q
