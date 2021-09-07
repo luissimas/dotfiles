@@ -155,7 +155,6 @@ return require("packer").startup(function(use)
   -- Autopairs
   use({
     "steelsojka/pears.nvim",
-    after = "nvim-compe",
     config = function()
       require("plug.pears")
     end,
