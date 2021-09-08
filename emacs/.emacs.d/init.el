@@ -1,16 +1,24 @@
 ;; Disabling init screen
+(setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message "padawan")
+(setq initial-scratch-message nil)
+
+;; Empty echo area startup message to clean it
+(defun display-startup-echo-area-message ()
+  (message ""))
 
 ;; Disabling main UI components 
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (tooltip-mode t)
-(set-fringe-mode 0)
+(set-fringe-mode 10)
 
 ;; Setting custom directory
 (setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file)
+(when (file-exists-p (concat user-emacs-directory "custom.el"))
+      (load custom-file))
 
 ;; Setting font
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 110)
@@ -20,6 +28,19 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Line numbers
+(column-number-mode)
+
+;; Enable line numbers only on programming modes
+(add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+
+;; Disable line numbers for some modes
+;;(dolist (mode '(org-mode-hook
+;;		term-mode-hook
+;;		shell-mode-hook
+;;		eshell-mode-hook))
+;;  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Configuring MELPA
 (require 'package)
@@ -38,7 +59,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Ivy
+;; Ivy and Counsel
 (use-package ivy
   :diminish
   :bind (:map ivy-minibuffer-map
@@ -48,6 +69,19 @@
   :config
   (setq ivy-use-virtual-buffers t)
   (ivy-mode 1))
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file))
+  :config
+  (setq ivy-initial-inputs-alist nil))
+
+(use-package ivy-rich
+  :after counsel
+  :config
+  (ivy-rich-mode))
+
 
 ;; Themes
 (use-package doom-themes)
@@ -71,3 +105,11 @@
 ;; Doom modeline
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
+
+;; Which-key
+(use-package which-key
+  :config (which-key-mode))
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
