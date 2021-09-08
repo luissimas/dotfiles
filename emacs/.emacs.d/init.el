@@ -63,23 +63,50 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; General for keybindings
+(use-package general
+  :config
+  (general-create-definer pada/nmap
+    :keymaps '(normal emacs)
+    :prefix "SPC"))
+
+;; Evil-mode
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-undo-system 'undo-redo)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
 ;; Ivy and Counsel
 (use-package ivy
+  :demand
   :diminish
   :bind (:map ivy-minibuffer-map
 	 ("C-j" . ivy-next-line)
 	 ("C-k" . ivy-previous-line))
-  :demand
   :config
   (setq ivy-use-virtual-buffers t)
   (ivy-mode 1))
 
 (use-package counsel
+  :demand
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
 	 ("C-x C-f" . counsel-find-file))
   :config
-  (setq ivy-initial-inputs-alist nil))
+  (setq ivy-initial-inputs-alist nil)
+  (pada/nmap
+    "f" '(:ignore t :which-key "find")
+    "ff" 'counsel-find-file
+    "fb" 'counsel-ibuffer))
 
 (use-package ivy-rich
   :after counsel
@@ -101,23 +128,12 @@
 (use-package doom-themes
   :init (load-theme 'doom-palenight t))
 
-;; Evil-mode
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-undo-system 'undo-redo)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
 ;; Magit
-(use-package magit)
+(use-package magit
+  :config
+  (pada/nmap
+    "g" '(:ignore t :which-key "git")
+    "gs" 'magit-status))
 
 ;; Icons
 (use-package all-the-icons)
