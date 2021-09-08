@@ -2,7 +2,7 @@
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message "padawan")
-(setq initial-scratch-message nil)
+;; (setq initial-scratch-message nil)
 
 ;; Empty echo area startup message to clean it
 (defun display-startup-echo-area-message ()
@@ -23,11 +23,15 @@
 ;; Setting font
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 110)
 
-;; Setting theme
-(load-theme 'doom-palenight)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Window movement
+;; (global-set-key (kbd "C-h") 'windmove-left)
+;; (global-set-key (kbd "C-j") 'windmove-down)
+;; (global-set-key (kbd "C-k") 'windmove-up)
+;; (global-set-key (kbd "C-l") 'windmove-right)
+;; (global-set-key (kbd "C-s") 'split-window-horizontally)
 
 ;; Line numbers
 (column-number-mode)
@@ -82,15 +86,28 @@
   :config
   (ivy-rich-mode))
 
+;; Better help pages
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-key] . helpful-key))
 
 ;; Themes
-(use-package doom-themes)
+(use-package doom-themes
+  :init (load-theme 'doom-palenight t))
 
 ;; Evil-mode
 (use-package evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-undo-system 'undo-redo)
   :config
   (evil-mode 1))
 
@@ -101,6 +118,9 @@
 
 ;; Magit
 (use-package magit)
+
+;; Icons
+(use-package all-the-icons)
 
 ;; Doom modeline
 (use-package doom-modeline
