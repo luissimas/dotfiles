@@ -8,6 +8,10 @@
 (tooltip-mode t)
 (set-fringe-mode 0)
 
+;; Setting custom directory
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+
 ;; Setting font
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 110)
 
