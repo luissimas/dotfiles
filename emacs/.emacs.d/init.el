@@ -128,8 +128,23 @@
 (use-package doom-themes
   :init (load-theme 'doom-palenight t))
 
+;; Projectile
+(use-package projectile
+  :init
+  (setq projectile-keymap-prefix (kbd "C-c p"))
+  :custom (projectile-completion-system 'ivy)
+  (when (file-directory-p "~/fun")
+    (setq projectile-project-search-path '("~/fun")))
+  (setq projectile-switch-project-action #'projectile-dired)
+  :config (projectile-mode))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
 ;; Magit
 (use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
   (pada/nmap
     "g" '(:ignore t :which-key "git")
