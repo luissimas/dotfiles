@@ -78,6 +78,8 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-undo-system 'undo-redo)
   :config
+  (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
+  (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
   (evil-mode 1))
 
 (use-package evil-collection
@@ -106,7 +108,9 @@
   (pada/nmap
     "f" '(:ignore t :which-key "find")
     "ff" 'counsel-find-file
-    "fb" 'counsel-ibuffer))
+    "." 'counsel-find-file
+    "fb" 'counsel-ibuffer
+    "," 'counsel-ibuffer))
 
 (use-package ivy-rich
   :after counsel
