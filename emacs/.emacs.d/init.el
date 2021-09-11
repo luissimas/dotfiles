@@ -174,3 +174,37 @@
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Eglot LSP client
+(use-package eglot
+  :config
+  (add-hook 'js-mode-hook 'eglot-ensure))
+
+;; Company completion
+(use-package company
+  :hook
+  (prog-mode . company-mode)
+  :config
+  (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
+
+;; Setup tabs and other things for projects
+(use-package editorconfig
+  :config
+  (editorconfig-mode))
+
+;; Treesitter for better syntax highlight
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs)
+
+;; Git line status
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :custom
+  (git-gutter:update-interval 1)
+  (git-gutter:modified-sign "│")
+  (git-gutter:added-sign "│")
+  (git-gutter:deleted-sign "│"))
