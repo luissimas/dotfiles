@@ -14,6 +14,8 @@ else
   xrandr --output HDMI-0 --left-of DVI-D-0 &
 fi
 
+setxkbmap -option caps:escape
+
 unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
