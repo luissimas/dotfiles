@@ -8,7 +8,7 @@
 (defun display-startup-echo-area-message ()
   (message ""))
 
-;; Disabling main UI components 
+;; Disabling main UI components
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
@@ -25,6 +25,9 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Delete trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Window movement
 ;; (global-set-key (kbd "C-h") 'windmove-left)
@@ -143,7 +146,6 @@
   :custom (projectile-completion-system 'ivy)
   (when (file-directory-p "~/fun")
     (setq projectile-project-search-path '("~/fun")))
-  (setq projectile-switch-project-action #'projectile-dired)
   :config (projectile-mode))
 
 (use-package counsel-projectile
