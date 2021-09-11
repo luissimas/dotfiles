@@ -96,7 +96,11 @@
 	 ("C-k" . ivy-previous-line))
   :config
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (ivy-mode 1))
+
+;; FLX to sort ivy's fzf results
+(use-package flx)
 
 (use-package counsel
   :demand
