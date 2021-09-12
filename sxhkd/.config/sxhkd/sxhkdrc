@@ -19,8 +19,8 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # applications
-super + shift + {w,r,o,d,z}
-	{$BROWSER,kitty -e lf,obsidian,discord,zathura}
+super + shift + {w,r,o,d,z,e}
+	{$BROWSER,kitty -e lf,obsidian,discord,zathura,emacsclient -c}
 
 # scripts
 super + shift + {t,b,p,y,s,a,c}
