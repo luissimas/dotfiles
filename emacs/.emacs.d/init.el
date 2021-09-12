@@ -18,7 +18,7 @@
 ;; Setting custom directory
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
-      (load custom-file))
+  (load custom-file))
 
 ;; Setting font
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 110)
@@ -28,6 +28,11 @@
 
 ;; Delete trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Setting up tabs
+(setq-default indent-tabs-mode nil)
+(setq tab-stop-list (number-sequence 2 200 2))
+(setq tab-width 2)
 
 ;; Window movement
 ;; (global-set-key (kbd "C-h") 'windmove-left)
@@ -103,11 +108,11 @@
   :demand
   :diminish
   :bind (:map ivy-minibuffer-map
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line))
+	      ("C-j" . ivy-next-line)
+	      ("C-k" . ivy-previous-line))
   :custom
   (ivy-re-builders-alist
-	'((t . ivy--regex-fuzzy)))
+   '((t . ivy--regex-fuzzy)))
   :config
   (setq ivy-use-virtual-buffers t)
   (ivy-mode 1))
@@ -202,6 +207,11 @@
 (use-package flycheck
   :config
   (global-flycheck-mode))
+
+;; Code formatter
+(use-package format-all
+  :hook (prog-mode . format-all-mode)
+  :hook (format-all-mode . format-all-ensure-formatter))
 
 ;; Setup tabs and other things for projects
 (use-package editorconfig
