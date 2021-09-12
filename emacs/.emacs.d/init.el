@@ -187,8 +187,9 @@
 
 ;; Eglot LSP client
 (use-package eglot
-  :config
-  (add-hook 'js-mode-hook 'eglot-ensure))
+  :hook
+  (js-mode . eglot-ensure)
+  (tuareg-mode . eglot-ensure))
 
 ;; Company completion
 (use-package company
@@ -196,6 +197,11 @@
   (prog-mode . company-mode)
   :config
   (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
+
+;; Flycheck for syntax checking
+(use-package flycheck
+  :config
+  (global-flycheck-mode))
 
 ;; Setup tabs and other things for projects
 (use-package editorconfig
@@ -218,3 +224,21 @@
   (git-gutter:modified-sign "│")
   (git-gutter:added-sign "│")
   (git-gutter:deleted-sign "│"))
+
+;; Prettier integration
+(use-package prettier-js
+  :hook (js-mode . prettier-js-mode))
+
+;; Making emacs search for binaries in node_modules
+(use-package add-node-modules-path
+  :hook (js-mode . add-node-modules-path))
+
+;; Ocaml setup
+(use-package tuareg
+  :config
+  (put 'tuareg-mode 'eglot--language-id "ocaml"))
+
+(use-package utop
+  :config
+  (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+  (setq utop-command "opam config exec -- dune utop . -- -emacs"))
