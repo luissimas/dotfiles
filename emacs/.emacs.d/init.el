@@ -252,3 +252,12 @@
   :config
   (add-hook 'tuareg-mode-hook 'utop-minor-mode)
   (setq utop-command "opam config exec -- dune utop . -- -emacs"))
+
+;; Display eldoc information in a floating window
+(use-package eldoc-box
+  :config
+  (eldoc-box-hover-at-point-mode))
+
+;; Displaying flymake errors on minibuffer
+(custom-set-variables
+ '(help-at-pt-display-when-idle t))
