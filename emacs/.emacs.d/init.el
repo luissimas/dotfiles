@@ -105,9 +105,11 @@
   :bind (:map ivy-minibuffer-map
 	 ("C-j" . ivy-next-line)
 	 ("C-k" . ivy-previous-line))
+  :custom
+  (ivy-re-builders-alist
+	'((t . ivy--regex-fuzzy)))
   :config
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (ivy-mode 1))
 
 ;; FLX to sort ivy's fzf results
