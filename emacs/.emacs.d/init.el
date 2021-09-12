@@ -193,7 +193,9 @@
   :hook
   (js-mode . eglot-ensure)
   (tuareg-mode . eglot-ensure)
-  (eglot-managed-mode . (lambda () (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
+  :config
+  (setq eglot-ignored-server-capabilities '(:hoverProvider)))
+
 
 ;; Company completion
 (use-package company
