@@ -42,6 +42,9 @@
 ;; Enable line numbers only on programming modes
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
+;; Enable autopairs on programming modes
+(add-hook 'prog-mode-hook 'electric-pair-mode)
+
 ;; Disable line numbers for some modes
 ;;(dolist (mode '(org-mode-hook
 ;;		term-mode-hook
@@ -65,6 +68,11 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+;; Setting up emacs path
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
 
 ;; General for keybindings
 (use-package general
@@ -137,16 +145,16 @@
 
 ;; Themes
 (use-package doom-themes
-  :init (load-theme 'doom-palenight t))
+  :config (load-theme 'doom-palenight t))
 
 ;; Projectile
 (use-package projectile
-  :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
   :custom (projectile-completion-system 'ivy)
   (when (file-directory-p "~/fun")
     (setq projectile-project-search-path '("~/fun")))
-  :config (projectile-mode))
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
