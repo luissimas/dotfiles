@@ -110,10 +110,9 @@
   :bind (:map ivy-minibuffer-map
 	      ("C-j" . ivy-next-line)
 	      ("C-k" . ivy-previous-line))
-  :custom
-  (ivy-re-builders-alist
-   '((t . ivy--regex-fuzzy)))
   :config
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t)
   (ivy-mode 1))
 
@@ -126,7 +125,6 @@
 	 ("C-x b" . counsel-ibuffer)
 	 ("C-x C-f" . counsel-find-file))
   :config
-  (setq ivy-initial-inputs-alist nil)
   (pada/nmap
     "f" '(:ignore t :which-key "find")
     "ff" 'counsel-find-file
