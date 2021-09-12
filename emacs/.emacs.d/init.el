@@ -192,7 +192,8 @@
 (use-package eglot
   :hook
   (js-mode . eglot-ensure)
-  (tuareg-mode . eglot-ensure))
+  (tuareg-mode . eglot-ensure)
+  (eglot-managed-mode . (lambda () (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
 
 ;; Company completion
 (use-package company
@@ -252,9 +253,9 @@
   (setq utop-command "opam config exec -- dune utop . -- -emacs"))
 
 ;; Display eldoc information in a floating window
-(use-package eldoc-box
-  :config
-  (eldoc-box-hover-at-point-mode))
+;;(use-package eldoc-box
+;;  :config
+;;  (eldoc-box-hover-at-point-mode))
 
 ;; Displaying flymake errors on minibuffer
 (custom-set-variables
