@@ -178,7 +178,14 @@
 
 ;; Doom modeline
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq display-time-day-and-date t
+        display-time-format "%a %d/%m %H:%M"
+        display-time-default-load-average nil
+        doom-modeline-buffer-encoding nil)
+  (display-time-mode)
+  (display-battery-mode))
 
 ;; Which-key
 (use-package which-key
