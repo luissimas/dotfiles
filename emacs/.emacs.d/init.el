@@ -269,3 +269,7 @@
 ;; Displaying flymake errors on minibuffer
 (custom-set-variables
  '(help-at-pt-display-when-idle t))
+
+;; Better pdf view and general tools
+(use-package pdf-tools
+  :config (pdf-tools-install))
