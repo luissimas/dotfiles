@@ -3,7 +3,7 @@
 wallpaperDirectory=/home/padawan/.wal/
 
 # Prompt if the script should use the wallpaper or the themes
-option=$(echo -e 'Wallpaper\nTheme\nPywal' | rofi -dmenu -i -p "Source")
+option=$(echo -e 'Theme\nWallpaper\nPywal' | rofi -dmenu -i -p "Source")
 
 case $option in "Pywal")
   selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")
@@ -40,12 +40,12 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Tokyonight\nRosé Pine\nGruvbox\nOne\nNord\nDracula' | rofi -dmenu -i -p "Source")
+  selected=$(echo -e 'Palenight\nTokyonight\nRosé Pine' | rofi -dmenu -i -p "Source")
 
-  case $selected in "Gruvbox") theme="base16-gruvbox-hard";;
-  "Nord") theme="base16-nord";;
-  "One") theme="base16-onedark";;
-  "Dracula") theme="base16-dracula";;
+  case $selected in "Palenight")
+    theme="base16-material-palenight"
+    feh --bg-fill ~/.wal/palenight2.jpg
+    ;;
   "Rosé Pine")
     theme=~/.config/wal/colorschemes/rosepine.json
     feh --bg-fill ~/.wal/sunset.png
