@@ -278,3 +278,20 @@
 ;; Better pdf view and general tools
 (use-package pdf-tools
   :config (pdf-tools-install))
+
+;; Display inline latex formulas and images
+(use-package texfrag
+  :hook
+  (texfrag-mode . texfrag-document)
+  (markdown-mode . texfrag-mode)
+  (latex-mode . texfrag-mode))
+
+(use-package markdown-mode
+  :init
+  (setq-default markdown-hide-markup t
+                markdown-enable-wiki-links t
+                markdown-enable-math t
+                markdown-wiki-link-alias-first nil
+                markdown-wiki-link-search-subdirectories t
+                markdown-link-space-sub-char " "))
+
