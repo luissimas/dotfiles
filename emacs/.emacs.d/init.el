@@ -21,7 +21,7 @@
   (load custom-file))
 
 ;; Setting font
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 110)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -119,6 +119,9 @@
 ;; FLX to sort ivy's fzf results
 (use-package flx)
 
+;; Smex to sort M-x by usage history
+(use-package smex)
+
 (use-package counsel
   :demand
   :bind (("M-x" . counsel-M-x)
@@ -200,6 +203,8 @@
   :hook
   (js-mode . eglot-ensure)
   (tuareg-mode . eglot-ensure)
+  (c-mode . eglot-ensure)
+  (c++-mode . eglot-ensure)
   :config
   (setq eglot-ignored-server-capabilities '(:hoverProvider)))
 
@@ -212,9 +217,9 @@
   (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
 
 ;; Flycheck for syntax checking
-(use-package flycheck
-  :config
-  (global-flycheck-mode))
+;;(use-package flycheck
+;;  :config
+;;  (global-flycheck-mode))
 
 ;; Code formatter
 (use-package format-all
