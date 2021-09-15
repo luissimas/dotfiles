@@ -286,6 +286,11 @@
 (use-package pdf-tools
   :config (pdf-tools-install))
 
+;; Disable border caused by cursor in pdf-view
+(add-hook 'pdf-view-mode-hook
+          (lambda ()
+            (set (make-local-variable 'evil-normal-state-cursor) (list nil))))
+
 ;; Display inline latex formulas and images
 (use-package texfrag
   :hook
@@ -302,3 +307,7 @@
                 markdown-wiki-link-search-subdirectories t
                 markdown-link-space-sub-char " "))
 
+(use-package olivetti
+  :hook
+  (markdown-mode . olivetti-mode)
+  (latex-mode . olivetti-mode))
