@@ -44,11 +44,16 @@
 ;; Line numbers
 (column-number-mode)
 
-;; Enable line numbers only on programming modes
-(add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+;; Enable line numbers and truncate lines only on programming modes
+(add-hook 'prog-mode-hook (lambda ()
+                            (setq display-line-numbers 'relative)
+                            (toggle-truncate-lines)))
 
 ;; Enable autopairs on programming modes
 (add-hook 'prog-mode-hook 'electric-pair-mode)
+
+;; Enable soft wrap for text modes
+(add-hook 'text-mode-hook 'visual-line-mode)
 
 ;; Disable line numbers for some modes
 ;;(dolist (mode '(org-mode-hook
@@ -96,6 +101,8 @@
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-mode 1))
 
 (use-package evil-collection
