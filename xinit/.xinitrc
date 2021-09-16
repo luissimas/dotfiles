@@ -20,6 +20,7 @@ unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
 picom &
+mopidy &
 emacs --daemon &
 
 # Redshift controlling backlight temperature and color

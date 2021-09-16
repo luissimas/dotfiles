@@ -1,6 +1,8 @@
 alacritty
 alsa-utils
 arc-gtk-theme
+aspell-en
+aspell-pt
 autoconf
 automake
 base
@@ -8,6 +10,7 @@ bat
 betterlockscreen-git
 binutils
 bison
+bpytop
 brave-bin
 bspwm
 chromium-widevine
@@ -16,8 +19,8 @@ dbeaver
 discord
 djvu2pdf
 dmenu
+efm-langserver
 elixir
-emacs-git
 exa
 fakeroot
 fd
@@ -25,7 +28,6 @@ feh
 figlet
 file
 findutils
-firefox
 flex
 fzf
 gawk
@@ -42,6 +44,7 @@ grub
 gzip
 htop
 inkscape
+inotify-tools
 insomnia
 iw
 java8-openjfx
@@ -54,6 +57,7 @@ latex-mk
 latin-words
 lf
 lib32-glibc
+libgccjit
 libtool
 light-git
 linux
@@ -68,9 +72,13 @@ m4
 mailspring
 maim
 make
+man-pages
 mariadb
 mars-mips
 mesa
+mopidy
+mopidy-mpris
+mopidy-spotify
 mpv
 neofetch
 nerd-fonts-fira-code
@@ -83,6 +91,7 @@ nvidia-utils
 nvtop
 obs-studio
 obsidian-appimage
+opam
 pacman
 pamixer
 pandoc
@@ -90,6 +99,7 @@ paru
 patch
 pcmanfm
 pdfjs
+peek
 pfetch-git
 picom-ibhagwan-git
 pkgconf
@@ -117,8 +127,8 @@ sed
 sfml
 spaceship-prompt-git
 spotify-tui
-spotifyd
 stow
+strace
 sudo
 sxhkd
 sxiv
@@ -132,16 +142,20 @@ texlive-formatsextra
 texlive-games
 texlive-humanities
 texlive-latexextra
+texlive-local-moderncv
 texlive-music
 texlive-pictures
 texlive-pstricks
 texlive-publishers
 texlive-science
 tk
+tllocalmgr-git
 tmux
 tmuxp
 tree
 tree-sitter
+ttc-iosevka
+ttf-iosevka-aile
 ttf-jetbrains-mono
 ttf-liberation
 unclutter
@@ -207,6 +221,7 @@ zathura
 zathura-djvu
 zathura-pdf-mupdf
 zip
+zoom
 zscroll-git
 zsh
 zsh-autosuggestions

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-player="spotifyd"
+player="mopidy"
 
 formatString="{{ title }} - {{ artist }}"
 

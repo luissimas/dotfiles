@@ -215,9 +215,8 @@ tail = true
 
 exec = ~/scripts/bar/spotify-status.sh
 
-exec-if = pgrep -x spotifyd
+exec-if = pgrep -x mopidy
 
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-

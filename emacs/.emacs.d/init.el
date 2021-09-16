@@ -21,7 +21,7 @@
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
   (load custom-file))
 
-;; Setting font
+;; Setting font faces
 (set-face-attribute 'default nil :font "Iosevka-12")
 (set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
 (set-face-attribute 'variable-pitch nil :font "Iosevka Aile-12")
@@ -322,3 +322,18 @@
   :hook
   (markdown-mode . olivetti-mode)
   (latex-mode . olivetti-mode))
+
+(use-package org-bullets
+  :hook (org . org-bullets-mode))
+
+(use-package counsel-spotify
+  :config
+  (setq counsel-spotify-client-id pada/spotify-client-id
+        counsel-spotify-client-secret pada/spotify-client-secret
+        counsel-spotify-service-name "mopidy"
+        counsel-spotify-use-system-bus-p nil)
+  (pada/nmap
+    "s" '(:ignore t :which-key "spotify")
+    "sp" 'counsel-spotify-toggle-play-pause
+    "st" 'counsel-spotify-search-track
+    "sa" 'counsel-spotify-search-album))
