@@ -12,6 +12,7 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+(blink-cursor-mode 0)
 (tooltip-mode t)
 (set-fringe-mode 10)
 
@@ -21,7 +22,9 @@
   (load custom-file))
 
 ;; Setting font
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 130)
+(set-face-attribute 'default nil :font "Iosevka-12")
+(set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile-12")
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
