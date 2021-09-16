@@ -287,12 +287,20 @@
 
 ;; Better pdf view and general tools
 (use-package pdf-tools
-  :config (pdf-tools-install))
+  :config
+  (pdf-tools-install)
+  ;; Disable border caused by cursor in pdf-view
+  (add-hook 'pdf-view-mode-hook
+            (lambda ()
+              (set (make-local-variable 'evil-normal-state-cursor) (list nil)))))
 
-;; Disable border caused by cursor in pdf-view
-(add-hook 'pdf-view-mode-hook
-          (lambda ()
-            (set (make-local-variable 'evil-normal-state-cursor) (list nil))))
+;; Remember pdf page
+(use-package pdf-view-restore
+  :after pdf-tools
+  :hook (pdf-view-mode . pdf-view-restore-mode)
+  :config
+  (setq pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
+
 
 ;; Display inline latex formulas and images
 (use-package texfrag
