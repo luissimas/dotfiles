@@ -9,7 +9,7 @@
 local v = vim.g
 
 -- Tokyonight
-v.tokyonight_style = "night"
+v.tokyonight_style = "storm"
 v.tokyonight_terminal_colors = true
 v.tokyonight_italic_comments = true
 v.tokyonight_italic_keywords = true

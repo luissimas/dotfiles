@@ -65,6 +65,9 @@
 ;; Delete trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Keymap to edit init.el
+(global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.el")))
+
 ;; Setting up tabs
 (setq-default indent-tabs-mode nil)
 (setq tab-stop-list (number-sequence 2 200 2))
