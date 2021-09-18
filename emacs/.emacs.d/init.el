@@ -22,9 +22,12 @@
   (load custom-file))
 
 ;; Setting font faces
-(set-face-attribute 'default nil :font "Iosevka-12")
-(set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile-12")
+(defun pada/set-fonts ()
+  (set-face-attribute 'default nil :font "Iosevka-12")
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile-12"))
+
+(add-hook 'server-after-make-frame-hook 'pada/set-fonts)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
