@@ -247,15 +247,43 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Eglot LSP client
-(use-package eglot
-  :hook
-  (js-mode . eglot-ensure)
-  (tuareg-mode . eglot-ensure)
-  (c-mode . eglot-ensure)
-  (c++-mode . eglot-ensure)
-  :config
-  (setq eglot-ignored-server-capabilities '(:hoverProvider)))
+;; (use-package eglot
+;;   :hook
+;;   (js-mode . eglot-ensure)
+;;   (tuareg-mode . eglot-ensure)
+;;   (c-mode . eglot-ensure)
+;;   (c++-mode . eglot-ensure)
+;;   :config
+;;   (setq eglot-ignored-server-capabilities '(:hoverProvider)))
 
+;; LSP-mode
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c c")
+  :hook
+  (js-mode . lsp)
+  (tuareg-mode . lsp)
+  :commands lsp
+  :config
+  (setq read-process-output-max (* 1024 1024)
+        gc-cons-threshold 100000000
+        lsp-headerline-breadcrumb-segments '(symbols)
+        lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable t
+        lsp-enable-symbol-highlighting t
+        lsp-eldoc-render-all nil)
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-position 'at-point
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-mouse nil
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-signature-render-documentation nil)
+  (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance))
 
 ;; Company completion
 (use-package company
@@ -312,6 +340,9 @@
   :config
   (add-hook 'tuareg-mode-hook 'utop-minor-mode)
   (setq utop-command "opam config exec -- dune utop . -- -emacs"))
+
+;; Elixir setup
+(use-package elixir-mode)
 
 ;; Display eldoc information in a floating window
 ;;(use-package eldoc-box
@@ -378,3 +409,9 @@
     "sp" 'counsel-spotify-toggle-play-pause
     "st" 'counsel-spotify-search-track
     "sa" 'counsel-spotify-search-album))
+
+;; Screenshots
+(use-package screenshot
+  :straight '(screenshot :host github :repo "tecosaur/screenshot")
+  :config
+  (global-set-key (kbd "C-c s") #'screenshot))
