@@ -263,7 +263,11 @@
   :hook
   (js-mode . lsp)
   (tuareg-mode . lsp)
+  (elixir-mode . lsp)
   :commands lsp
+  :custom
+  (lsp-lens-place-position 'above-line)
+  (lsp-elixir-dialyzer-enabled nil)
   :config
   (setq read-process-output-max (* 1024 1024)
         gc-cons-threshold 100000000
@@ -289,6 +293,9 @@
 (use-package company
   :hook
   (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
   :config
   (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
 
