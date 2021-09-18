@@ -275,7 +275,10 @@
         lsp-headerline-breadcrumb-enable nil
         lsp-lens-enable t
         lsp-enable-symbol-highlighting t
+        lsp-modeline-code-actions-enable nil
         lsp-eldoc-render-all nil)
+  (set-face-attribute 'lsp-details-face nil :height 0.9)
+  ;; (set-face-attribute 'lsp-signature-face nil :background 'unspecified)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 (use-package lsp-ui
@@ -286,8 +289,12 @@
         lsp-ui-doc-show-with-mouse nil
         lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil
+        lsp-ui-doc-use-childframe t
         lsp-signature-render-documentation nil)
-  (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance))
+  (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+  (define-key evil-normal-state-map (kbd "C-k") 'lsp-ui-doc-focus-frame)
+  (evil-define-key 'normal 'lsp-ui-doc-frame-mode
+    [?q] #'lsp-ui-doc-unfocus-frame))
 
 ;; Company completion
 (use-package company
