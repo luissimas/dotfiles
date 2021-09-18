@@ -68,22 +68,23 @@
 ;;		eshell-mode-hook))
 ;;  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Configuring MELPA
-(require 'package)
+;; Configuring straight
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(straight-use-package 'use-package)
 
-(package-initialize)
-
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Setting up use-package
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
+(setq straight-use-package-by-default t)
 
 ;; Setting up emacs path
 (use-package exec-path-from-shell
@@ -104,6 +105,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-undo-system 'undo-redo)
+  (setq evil-want-Y-yank-to-eol t)
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
@@ -230,9 +232,8 @@
   (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
 
 ;; Flycheck for syntax checking
-;;(use-package flycheck
-;;  :config
-;;  (global-flycheck-mode))
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode))
 
 ;; Code formatter
 (use-package format-all
@@ -319,21 +320,25 @@
                 markdown-enable-math t
                 markdown-wiki-link-alias-first nil
                 markdown-wiki-link-search-subdirectories t
+                markdown-wiki-link-search-parent-directories t
                 markdown-link-space-sub-char " "))
 
 (use-package olivetti
   :hook
   (markdown-mode . olivetti-mode)
-  (latex-mode . olivetti-mode))
+  (latex-mode . olivetti-mode)
+  :config
+  (add-hook 'olivetti-mode-on-hook (lambda () (olivetti-set-width 0.6))))
 
 (use-package org-bullets
-  :hook (org . org-bullets-mode))
+  :hook (org-mode . org-bullets-mode))
 
 (use-package counsel-spotify
   :config
   (setq counsel-spotify-client-id pada/spotify-client-id
         counsel-spotify-client-secret pada/spotify-client-secret
         counsel-spotify-service-name "mopidy"
+        counsel-spotify-use-notifications nil
         counsel-spotify-use-system-bus-p nil)
   (pada/nmap
     "s" '(:ignore t :which-key "spotify")
