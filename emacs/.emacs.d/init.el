@@ -446,3 +446,13 @@
 
 ;; Better teminal
 (use-package vterm)
+
+;; Reading EPUBs
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode))
+
+;; Habitica integration
+(use-package habitica
+  :config
+  (setq habitica-uid (get-private-key 'habitica-user-id)
+        habitica-token (get-private-key 'habitica-api-key)))
