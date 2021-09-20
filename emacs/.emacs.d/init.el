@@ -230,6 +230,9 @@
 ;; Doom modeline
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-enable-word-count t)
   :config
   (setq display-time-day-and-date t
         display-time-format "%a %d/%m %H:%M"
@@ -237,6 +240,10 @@
         doom-modeline-buffer-encoding nil)
   (display-time-mode)
   (display-battery-mode))
+
+(setq org-latex-pdf-process (quote ("texi2dvi --pdf --clean --verbose
+--batch %f" "biblatex %b" "texi2dvi --pdf --clean --verbose --batch %f"
+"texi2dvi --pdf --clean --verbose --batch %f")))
 
 ;; Which-key
 (use-package which-key
@@ -405,6 +412,7 @@
   :hook
   (markdown-mode . olivetti-mode)
   (latex-mode . olivetti-mode)
+  (org-mode . olivetti-mode)
   :config
   (add-hook 'olivetti-mode-on-hook (lambda () (olivetti-set-width 0.6))))
 
@@ -429,3 +437,6 @@
   :straight '(screenshot :host github :repo "tecosaur/screenshot")
   :config
   (global-set-key (kbd "C-c s") #'screenshot))
+
+;; Better teminal
+(use-package vterm)
