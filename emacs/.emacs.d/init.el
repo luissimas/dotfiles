@@ -419,10 +419,16 @@
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
 
+(require 'json)
+
+(defun get-private-key (key)
+  "Return the value of the `key` in ~/.emacs.d/secret.json"
+  (cdr (assoc key (json-read-file "~/.emacs.d/secret.json"))))
+
 (use-package counsel-spotify
   :config
-  (setq counsel-spotify-client-id pada/spotify-client-id
-        counsel-spotify-client-secret pada/spotify-client-secret
+  (setq counsel-spotify-client-id (get-private-key 'spotify-client-id)
+        counsel-spotify-client-secret (get-private-key 'spotify-client-secret)
         counsel-spotify-service-name "mopidy"
         counsel-spotify-use-notifications nil
         counsel-spotify-use-system-bus-p nil)
