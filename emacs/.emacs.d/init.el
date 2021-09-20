@@ -311,7 +311,7 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
   :config
-  (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete))
+  (evil-define-key 'insert 'company-mode (kbd "C-SPC") 'company-complete))
 
 ;; Flycheck for syntax checking
 (use-package flycheck
