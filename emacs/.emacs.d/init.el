@@ -144,6 +144,10 @@
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (setq evil-lookup-func (lambda ()
+                           (if lsp-mode
+                               (lsp-ui-doc-glance)
+                             (woman))))
   (evil-mode 1))
 
 (use-package evil-collection
@@ -241,10 +245,6 @@
   (display-time-mode)
   (display-battery-mode))
 
-(setq org-latex-pdf-process (quote ("texi2dvi --pdf --clean --verbose
---batch %f" "biblatex %b" "texi2dvi --pdf --clean --verbose --batch %f"
-"texi2dvi --pdf --clean --verbose --batch %f")))
-
 ;; Which-key
 (use-package which-key
   :config (which-key-mode))
@@ -271,6 +271,7 @@
   (js-mode . lsp)
   (tuareg-mode . lsp)
   (elixir-mode . lsp)
+  (c-mode . lsp)
   :commands lsp
   :custom
   (lsp-lens-place-position 'above-line)
@@ -298,7 +299,6 @@
         lsp-ui-sideline-enable nil
         lsp-ui-doc-use-childframe t
         lsp-signature-render-documentation nil)
-  (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
   (define-key evil-normal-state-map (kbd "C-k") 'lsp-ui-doc-focus-frame)
   (evil-define-key 'normal 'lsp-ui-doc-frame-mode
     [?q] #'lsp-ui-doc-unfocus-frame))
@@ -309,7 +309,7 @@
   (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
+  (company-idle-delay nil)
   :config
   (evil-define-key 'insert 'company-mode (kbd "C-SPC") 'company-complete))
 
@@ -456,3 +456,5 @@
   :config
   (setq habitica-uid (get-private-key 'habitica-user-id)
         habitica-token (get-private-key 'habitica-api-key)))
+
+(use-package org-ref)
