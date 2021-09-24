@@ -71,6 +71,12 @@
 ;; Keymap to edit init.el
 (global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.el")))
 
+;; Custom function to kill current buffer
+(defun pada/kill-buffer ()
+  (interactive) (kill-buffer (current-buffer)))
+
+(global-set-key (kbd "C-x k") 'pada/kill-buffer)
+
 ;; Setting up tabs
 (setq-default indent-tabs-mode nil)
 (setq tab-stop-list (number-sequence 2 200 2))
