@@ -154,9 +154,11 @@
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
-                           (if lsp-mode
-                               (lsp-ui-doc-glance)
-                             (woman))))
+                           (cond
+                            (lsp-ui-doc-frame-mode (lsp-ui-doc-focus-frame))
+                            (lsp-mode (lsp-ui-doc-glance))
+                            ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
+                            (t woman))))
   (evil-mode 1))
 
 (use-package evil-collection
@@ -208,9 +210,17 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-;; Themes
-(use-package doom-themes
-  :config (load-theme 'doom-palenight t))
+;; Rose-pine theme
+(use-package autothemer)
+
+(use-package rose-pine-emacs
+  :straight '(:host github
+                    :repo "thongpv87/rose-pine-emacs"
+                    :branch "master"))
+
+(use-package doom-themes)
+
+(load-theme 'doom-palenight t)
 
 ;; Projectile
 (use-package projectile
@@ -286,6 +296,8 @@
         lsp-lens-enable t
         lsp-enable-symbol-highlighting t
         lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-modeline-workspace-status-enable nil
         lsp-eldoc-render-all nil)
   (set-face-attribute 'lsp-details-face nil :height 0.9)
   ;; (set-face-attribute 'lsp-signature-face nil :background 'unspecified)
@@ -446,4 +458,5 @@
   (setq habitica-uid (get-private-key 'habitica-user-id)
         habitica-token (get-private-key 'habitica-api-key)))
 
+;; References in org-mode
 (use-package org-ref)
