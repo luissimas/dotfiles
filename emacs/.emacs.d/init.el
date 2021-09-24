@@ -1,3 +1,6 @@
+;;; Init.el --- My Emacs config -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 ;; Disabling init screen
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
@@ -155,51 +158,47 @@
   :config
   (evil-collection-init))
 
-;; Ivy and Counsel
-(use-package ivy
-  :demand
-  :diminish
-  :bind (:map ivy-minibuffer-map
-	      ("C-j" . ivy-next-line)
-	      ("C-k" . ivy-previous-line))
+;; Vertico as the completion UI
+(use-package vertico
+  :bind (:map vertico-map
+              ("C-j" . vertico-next)
+              ("C-k" . vertico-previous)
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char))
   :config
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
-  (setq ivy-use-virtual-buffers t)
-  (ivy-mode 1))
+  (setq vertico-cycle t)
+  (setq completion-styles '(basic substring flex))
 
-;; FLX to sort ivy's fzf results
-(use-package flx)
+  ;; Using vertico-directory extension
+  (add-to-list 'load-path "/home/padawan/.emacs.d/straight/build/vertico/extensions")
+  (require 'vertico-directory)
+  :init
+  (vertico-mode))
 
-;; Smex to sort M-x by usage history
-(use-package smex)
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
 
-(use-package counsel
-  :demand
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file))
+;; Richer completion annotations
+(use-package marginalia
+  :after vertico
+  :bind (:map minibuffer-local-map
+              ("M-a" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
+;; Better completion commands
+(use-package consult
+  :bind (("C-x b" . consult-buffer))
   :config
-  (pada/nmap
-    "f" '(:ignore t :which-key "find")
-    "ff" 'counsel-find-file
-    "." 'counsel-find-file
-    "fb" 'counsel-ibuffer
-    "," 'counsel-ibuffer))
-
-(use-package ivy-rich
-  :after counsel
-  :config
-  (ivy-rich-mode))
+  (setq consult-project-root-function projectile-project-root))
 
 ;; Better help pages
 (use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-variable] . helpful-variable)
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
@@ -209,15 +208,12 @@
 
 ;; Projectile
 (use-package projectile
-  :custom (projectile-completion-system 'ivy)
+  :custom (projectile-completion-system 'default)
   (when (file-directory-p "~/fun")
     (setq projectile-project-search-path '("~/fun")))
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode))
-
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
 
 ;; Magit
 (use-package magit
@@ -424,19 +420,6 @@
 (defun get-private-key (key)
   "Return the value of the `key` in ~/.emacs.d/secret.json"
   (cdr (assoc key (json-read-file "~/.emacs.d/secret.json"))))
-
-(use-package counsel-spotify
-  :config
-  (setq counsel-spotify-client-id (get-private-key 'spotify-client-id)
-        counsel-spotify-client-secret (get-private-key 'spotify-client-secret)
-        counsel-spotify-service-name "mopidy"
-        counsel-spotify-use-notifications nil
-        counsel-spotify-use-system-bus-p nil)
-  (pada/nmap
-    "s" '(:ignore t :which-key "spotify")
-    "sp" 'counsel-spotify-toggle-play-pause
-    "st" 'counsel-spotify-search-track
-    "sa" 'counsel-spotify-search-album))
 
 ;; Screenshots
 (use-package screenshot
