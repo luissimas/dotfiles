@@ -19,12 +19,12 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # applications
-super + shift + {w,r,o,d,z,e}
-	{$BROWSER,kitty -e lf,obsidian,discord,zathura,(emacsclient -e 0 > /dev/null || emacs --daemon --no-x-resources) && emacsclient -c -n}
+super + shift + {w,r,o,d,z}
+	{$BROWSER,kitty -e lf,obsidian,discord,zathura}
 
 # scripts
-super + shift + {t,b,p,y,s,a,c}
-	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh,spotify.sh,audiosink.sh,meets.sh}
+super + shift + {t,b,p,y,s,a,c,e}
+	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh,spotify.sh,audiosink.sh,meets.sh,emacs.sh}
 
 # quick screenshot to clipboard
 super + a
