@@ -23,12 +23,28 @@
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
   (load custom-file))
 
+;; Setting frame options
+(defun pada/set-window-divider ()
+  "Set window-divider options"
+  (setq window-divider-default-right-width 2)
+  (setq window-divider-default-bottom-width 0)
+  (setq window-divider-default-places 'right-only)
+  (window-divider-mode 1))
+
 ;; Setting font faces
 (defun pada/set-fonts ()
   "Set the main font faces."
   (set-face-attribute 'default nil :font "JetBrains Mono-11")
   (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-11")
   (set-face-attribute 'variable-pitch nil :font "Open Sans-12"))
+
+;; Setting frame options in both daemon (with hooks) or
+;; normal emacs startup (directly calling the functions)
+(if (daemonp)
+    (progn (add-hook 'server-after-make-frame-hook 'pada/set-fonts)
+           (add-hook 'server-after-make-frame-hook 'pada/set-window-divider))
+  (progn (pada/set-fonts)
+         (pada/set-window-divider)))
 
 ;; Setting font ligatures
 (let ((ligatures `((?-  . ,(regexp-opt '("-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->")))
@@ -60,8 +76,6 @@
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
-(add-hook 'server-after-make-frame-hook 'pada/set-fonts)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -82,13 +96,6 @@
 (setq tab-stop-list (number-sequence 2 200 2))
 (setq tab-width 2)
 
-;; Window movement
-;; (global-set-key (kbd "C-h") 'windmove-left)
-;; (global-set-key (kbd "C-j") 'windmove-down)
-;; (global-set-key (kbd "C-k") 'windmove-up)
-;; (global-set-key (kbd "C-l") 'windmove-right)
-;; (global-set-key (kbd "C-s") 'split-window-horizontally)
-
 ;; Line numbers
 (column-number-mode)
 
@@ -102,13 +109,6 @@
 
 ;; Enable soft wrap for text modes
 (add-hook 'text-mode-hook 'visual-line-mode)
-
-;; Disable line numbers for some modes
-;;(dolist (mode '(org-mode-hook
-;;		term-mode-hook
-;;		shell-mode-hook
-;;		eshell-mode-hook))
-;;  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Configuring straight
 (defvar bootstrap-version)
@@ -254,7 +254,30 @@ targets."
 
 (use-package doom-themes)
 
-;; (load-theme 'doom-palenight t)
+(use-package bespoke-themes
+  :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
+  :config
+  (setq bespoke-set-mode-line nil
+        bespoke-set-mode-line-cleaner t
+        bespoke-set-evil-cursors t
+        bespoke-set-italic-comments t
+        bespoke-set-italic-keywords nil))
+
+(load-theme 'bespoke t)
+
+;; Dim non-active windows
+(use-package dimmer
+  :straight (:host github :repo "gonewest818/dimmer.el")
+  :config
+  (setq dimmer-fraction 0.3)
+  (setq dimmer-adjustment-mode :foreground)
+  (setq dimmer-use-colorspace :rgb)
+  (setq dimmer-watch-frame-focus-events nil)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (dimmer-configure-posframe)
+  :init (dimmer-mode 1))
 
 ;; Projectile
 (use-package projectile
@@ -335,7 +358,6 @@ targets."
         lsp-modeline-workspace-status-enable nil
         lsp-eldoc-render-all nil)
   (set-face-attribute 'lsp-details-face nil :height 0.9)
-  ;; (set-face-attribute 'lsp-signature-face nil :background 'unspecified)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 (use-package lsp-ui
