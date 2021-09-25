@@ -7,10 +7,6 @@
 (setq inhibit-startup-echo-area-message "padawan")
 ;; (setq initial-scratch-message nil)
 
-;; Empty echo area startup message to clean it
-(defun display-startup-echo-area-message ()
-  (message ""))
-
 ;; Disabling main UI components
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -26,6 +22,7 @@
 
 ;; Setting font faces
 (defun pada/set-fonts ()
+  "Set the main font faces."
   (set-face-attribute 'default nil :font "JetBrains Mono-11")
   (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-11")
   (set-face-attribute 'variable-pitch nil :font "Open Sans-12"))
@@ -183,6 +180,12 @@
   (require 'vertico-directory)
   :init
   (vertico-mode))
+
+;; Completion style
+(use-package orderless
+  :custom (completion-styles '(orderless))
+  :config
+  (setq orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
