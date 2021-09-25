@@ -20,7 +20,7 @@ super + Escape
 
 # applications
 super + shift + {w,r,o,d,z,e}
-	{$BROWSER,kitty -e lf,obsidian,discord,zathura,(emacsclient -e 0 > /dev/null || emacs --daemon) && emacsclient -c -n}
+	{$BROWSER,kitty -e lf,obsidian,discord,zathura,(emacsclient -e 0 > /dev/null || emacs --daemon --no-x-resources) && emacsclient -c -n}
 
 # scripts
 super + shift + {t,b,p,y,s,a,c}

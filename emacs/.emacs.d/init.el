@@ -7,6 +7,9 @@
 (setq inhibit-startup-echo-area-message "padawan")
 ;; (setq initial-scratch-message nil)
 
+;; Disabling x-resources
+(setq inhibit-x-resources t)
+
 ;; Disabling main UI components
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -183,9 +186,9 @@
 
 ;; Completion style
 (use-package orderless
-  :custom (completion-styles '(orderless))
   :config
-  (setq orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
+  (setq completion-styles '(orderless)
+        orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -249,17 +252,9 @@ targets."
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-;; Rose-pine theme
-(use-package autothemer)
-
-(use-package rose-pine-emacs
-  :straight '(:host github
-                    :repo "thongpv87/rose-pine-emacs"
-                    :branch "master"))
-
 (use-package doom-themes)
 
-(load-theme 'doom-palenight t)
+;; (load-theme 'doom-palenight t)
 
 ;; Projectile
 (use-package projectile
@@ -319,6 +314,7 @@ targets."
   :init
   (setq lsp-keymap-prefix "C-c c")
   :hook
+
   (js-mode . lsp)
   (tuareg-mode . lsp)
   (elixir-mode . lsp)
