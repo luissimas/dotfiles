@@ -174,8 +174,9 @@
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char))
   :config
-  (setq vertico-cycle t)
-  (setq completion-styles '(basic substring flex))
+  (setq vertico-cycle t
+        completion-styles '(basic substring flex)
+        completion-ignore-case t)
 
   ;; Using vertico-directory extension
   (add-to-list 'load-path "/home/padawan/.emacs.d/straight/build/vertico/extensions")
@@ -196,9 +197,44 @@
   :init
   (marginalia-mode))
 
+;; Actions on completion items
+(use-package embark
+  :bind (("M-o" . embark-act)
+         ("C-h b" . embark-bindings))
+  :config
+  (defun embark-which-key-indicator ()
+    "An embark indicator that displays keymaps using which-key.
+The which-key help message will show the type and value of the
+current target followed by an ellipsis if there are further
+targets."
+    (lambda (&optional keymap targets prefix)
+      (if (null keymap)
+          (kill-buffer which-key--buffer)
+        (which-key--show-keymap
+         (if (eq (caar targets) 'embark-become)
+             "Become"
+           (format "Act on %s '%s'%s"
+                   (plist-get (car targets) :type)
+                   (embark--truncate-target (plist-get (car targets) :target))
+                   (if (cdr targets) "…" "")))
+         (if prefix (lookup-key keymap prefix) keymap)
+         nil nil t))))
+
+  (setq embark-indicators
+        '(embark-which-key-indicator
+          embark-highlight-indicator
+          embark-isearch-highlight-indicator)))
+
+(use-package embark-consult
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 ;; Better completion commands
 (use-package consult
-  :bind (("C-x b" . consult-buffer))
+  :bind (("C-x b" . consult-buffer)
+         ("C-s" . consult-line))
   :config
   (setq consult-project-root-function projectile-project-root))
 
