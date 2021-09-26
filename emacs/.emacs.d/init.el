@@ -76,6 +76,8 @@
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
+(global-prettify-symbols-mode 1)
+
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -369,6 +371,8 @@ targets."
         lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil
         lsp-ui-doc-use-childframe t
+        lsp-ui-doc-max-width 400
+        lsp-ui-doc-max-height 30
         lsp-signature-render-documentation nil)
   (define-key evil-normal-state-map (kbd "C-k") 'lsp-ui-doc-focus-frame)
   (evil-define-key 'normal 'lsp-ui-doc-frame-mode
@@ -425,6 +429,7 @@ targets."
 
 ;; Ocaml setup
 (use-package tuareg
+  :hook (tuareg-mode . (lambda () (add-to-list 'prettify-symbols-alist '("fun" . 955))))
   :config
   (put 'tuareg-mode 'eglot--language-id "ocaml"))
 
@@ -498,9 +503,8 @@ targets."
 
 ;; Screenshots
 (use-package screenshot
-  :straight '(screenshot :host github :repo "tecosaur/screenshot")
-  :config
-  (global-set-key (kbd "C-c s") #'screenshot))
+  :straight '(:host github :repo "tecosaur/screenshot")
+  :bind (("C-c s" . #'screenshot)))
 
 ;; Better teminal
 (use-package vterm)
@@ -517,3 +521,16 @@ targets."
 
 ;; References in org-mode
 (use-package org-ref)
+
+(defun pada/auto-theme ()
+  "Change the current bespoke theme variant based on the time of the day."
+  (let ((time (string-to-number (substring (current-time-string) 11 13))))
+    (cond ((and (>= time 18) (string-equal bespoke-set-theme "light"))
+           (bespoke/dark-theme))
+          ((and (< time 18) (string-equal bespoke-set-theme "dark"))
+           (bespoke/light-theme)))))
+
+;; Run auto-theme funcion every 5 minutes
+(run-with-timer 0 300 #'pada/auto-theme)
+
+;;; init.el ends here
