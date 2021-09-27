@@ -475,6 +475,8 @@ targets."
   (latex-mode . texfrag-mode))
 
 (use-package markdown-mode
+  :hook
+  (markdown-mode . flyspell-mode)
   :init
   (setq-default markdown-hide-markup t
                 markdown-enable-wiki-links t
@@ -532,5 +534,8 @@ targets."
 
 ;; Run auto-theme funcion every 5 minutes
 (run-with-timer 0 300 #'pada/auto-theme)
+
+;; Setting default dictionary
+(setq ispell-dictionary "brasileiro")
 
 ;;; init.el ends here
