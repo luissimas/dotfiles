@@ -604,7 +604,7 @@ c.colors.webpage.darkmode.policy.page = 'smart'
 ##   - bookmarks
 ##   - history
 ##   - filesystem
-# c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'history', 'filesystem']
+c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'filesystem']
 
 ## Move on to the next part when there's only one possible completion
 ## left.
@@ -2015,7 +2015,7 @@ c.content.pdfjs = True
 ## the search engine name to the search term, e.g. `:open google
 ## qutebrowser`.
 ## Type: Dict
-# c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
@@ -2370,7 +2370,7 @@ c.content.pdfjs = True
 # config.bind('y', 'prompt-accept yes', mode='yesno')
 
 ## Custom bindings 
-config.bind('M', 'hint links spawn mpv {hint-url}')
+config.bind('M', 'hint links spawn streamlink --player mpv {hint-url} best')
 config.bind('R', 'config-source')
 config.bind('zb', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 
