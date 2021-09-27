@@ -106,12 +106,16 @@ pkgconf
 playerctl
 polybar
 postgresql
+psutils
 pulseaudio
 pulseaudio-alsa
 pup
+python-adblock
+python-inotify-simple
 python-lookatme
 python-lookatme-ueberzug
 python-pip
+python-prctl
 python-pynvim
 python-pywal
 python-ueberzug-git
@@ -129,6 +133,7 @@ spaceship-prompt-git
 spotify-tui
 stow
 strace
+streamlink
 sudo
 sxhkd
 sxiv
