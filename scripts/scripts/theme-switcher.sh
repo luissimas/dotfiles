@@ -61,6 +61,9 @@ case $option in "Pywal")
 
   # Update bspwm colors
   ~/scripts/bspwm/bspwmcolors.sh
+
+  # Update qutebrowser colors
+  pgrep qutebrowser > /dev/null && qutebrowser :config-source
   ;;
 "Wallpaper")
   selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")

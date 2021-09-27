@@ -23,6 +23,9 @@
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
   (load custom-file))
 
+;; Setting unique buffer names
+(setq uniquify-buffer-name-style 'forward)
+
 ;; Setting frame options
 (defun pada/set-window-divider ()
   "Set window-divider options"
@@ -343,6 +346,7 @@ targets."
   (js-mode . lsp)
   (tuareg-mode . lsp)
   (elixir-mode . lsp)
+  (python-mode . lsp)
   (c-mode . lsp)
   :commands lsp
   :custom
