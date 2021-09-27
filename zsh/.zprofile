@@ -6,7 +6,7 @@ export GOPATH=$HOME/.local/go
 
 # Exports
 export TERM="screen-256color"
-export BROWSER="brave"
+export BROWSER="qutebrowser"
 export READER="zathura"
 export EDITOR="nvim"
 export LF_ICONS="\

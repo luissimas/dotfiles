@@ -538,4 +538,7 @@ targets."
 ;; Setting default dictionary
 (setq ispell-dictionary "brasileiro")
 
+;; Use frames instead of windows (trying this workflow with tiling wm)
+(use-package frames-only-mode)
+
 ;;; init.el ends here
