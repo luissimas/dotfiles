@@ -112,7 +112,7 @@ label-monocle = 
 type = internal/date
 interval = 10
 
-time = "%H:%M"
+time = "%H:%M "
 date = "%a %d/%m"
 
 label =   %date%   %time%

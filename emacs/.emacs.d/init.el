@@ -543,6 +543,7 @@ targets."
 (setq ispell-dictionary "brasileiro")
 
 ;; Use frames instead of windows (trying this workflow with tiling wm)
-(use-package frames-only-mode)
+(setq pop-up-frames 'graphic-only)
+(setq frame-auto-hide-function 'delete-frame)
 
 ;;; init.el ends here
