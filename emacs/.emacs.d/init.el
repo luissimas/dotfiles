@@ -257,7 +257,9 @@ targets."
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-(use-package doom-themes)
+(use-package doom-themes
+  :config
+  (load-theme 'doom-palenight t))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
