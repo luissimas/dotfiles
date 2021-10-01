@@ -559,6 +559,15 @@ targets."
 (global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
 (global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
 
+;; Kill magit diff buffer after commit
+(defun pada/kill-magit-diff-buffer ()
+  "Kill the magit-diff-buffer for the current repository, This function is meant to be added on `git-commit-setup-hook'."
+  (defun kill-magit-diff-buffer ()
+    (kill-buffer (magit-get-mode-buffer 'magit-diff-mode)))
+  (add-hook 'with-editor-post-finish-hook 'kill-magit-diff-buffer nil t))
+
+(add-hook 'git-commit-setup-hook 'pada/kill-magit-diff-buffer)
+
 ;; Org-mode
 (use-package org
   :hook
