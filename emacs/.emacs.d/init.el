@@ -541,10 +541,8 @@ targets."
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\`magit-diff:.*'"
-         (display-buffer-same-window))
-        (".*")
-        (display-buffer-pop-up-frame)))
+        ("\\`magit-diff:.*\\'"
+         (display-buffer-pop-up-window))))
 
 (setq frame-auto-hide-function (lambda (frame)
                                  (kill-buffer)
