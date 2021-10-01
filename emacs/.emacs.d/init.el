@@ -268,8 +268,6 @@ targets."
         bespoke-set-italic-comments t
         bespoke-set-italic-keywords nil))
 
-(load-theme 'bespoke t)
-
 ;; Dim non-active windows
 (use-package dimmer
   :straight (:host github :repo "gonewest818/dimmer.el")
@@ -498,9 +496,6 @@ targets."
   :config
   (add-hook 'olivetti-mode-on-hook (lambda () (olivetti-set-width 0.6))))
 
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
-
 (require 'json)
 
 (defun get-private-key (key)
@@ -525,9 +520,7 @@ targets."
   (setq habitica-uid (get-private-key 'habitica-user-id)
         habitica-token (get-private-key 'habitica-api-key)))
 
-;; References in org-mode
-(use-package org-ref)
-
+;; Change colorscheme variation based on the time of the day
 (defun pada/auto-theme ()
   "Change the current bespoke theme variant based on the time of the day."
   (let ((time (string-to-number (substring (current-time-string) 11 13))))
@@ -537,13 +530,36 @@ targets."
            (bespoke/light-theme)))))
 
 ;; Run auto-theme funcion every 5 minutes
-(run-with-timer 0 300 #'pada/auto-theme)
+;; (run-with-timer 0 300 #'pada/auto-theme)
 
 ;; Setting default dictionary
 (setq ispell-dictionary "brasileiro")
 
 ;; Use frames instead of windows (trying this workflow with tiling wm)
 (setq pop-up-frames 'graphic-only)
-(setq frame-auto-hide-function 'delete-frame)
+
+(setq display-buffer-alist
+      '(("\\`\\*Calendar\\*\\'"
+         (display-buffer-below-selected))
+        ("\\`magit-diff:.*'"
+         (display-buffer-same-window))
+        (".*")
+        (display-buffer-pop-up-frame)))
+
+(setq frame-auto-hide-function (lambda (frame)
+                                 (kill-buffer)
+                                 (delete-frame)))
+
+;; Org-mode
+(use-package org
+  :hook
+  (org-mode . flyspell-mode))
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
+
+;; References in org-mode
+(use-package org-ref)
+
 
 ;;; init.el ends here
