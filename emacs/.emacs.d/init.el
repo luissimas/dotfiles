@@ -271,18 +271,18 @@ targets."
         bespoke-set-italic-keywords nil))
 
 ;; Dim non-active windows
-(use-package dimmer
-  :straight (:host github :repo "gonewest818/dimmer.el")
-  :config
-  (setq dimmer-fraction 0.3)
-  (setq dimmer-adjustment-mode :foreground)
-  (setq dimmer-use-colorspace :rgb)
-  (setq dimmer-watch-frame-focus-events nil)
-  (dimmer-configure-which-key)
-  (dimmer-configure-magit)
-  (dimmer-configure-org)
-  (dimmer-configure-posframe)
-  :init (dimmer-mode 1))
+                                        ;(use-package dimmer
+                                        ;  :straight (:host github :repo "gonewest818/dimmer.el")
+                                        ;  :config
+                                        ;  (setq dimmer-fraction 0.3)
+                                        ;  (setq dimmer-adjustment-mode :foreground)
+                                        ;  (setq dimmer-use-colorspace :rgb)
+                                        ;  (setq dimmer-watch-frame-focus-events nil)
+                                        ;  (dimmer-configure-which-key)
+                                        ;  (dimmer-configure-magit)
+                                        ;  (dimmer-configure-org)
+                                        ;  (dimmer-configure-posframe)
+                                        ;  :init (dimmer-mode 1))
 
 ;; Projectile
 (use-package projectile
@@ -540,15 +540,24 @@ targets."
 ;; Use frames instead of windows (trying this workflow with tiling wm)
 (setq pop-up-frames 'graphic-only)
 
+(defun pada/display-helpful-buffer (buffer alist)
+  (if (s-matches-p "\\`\\*helpful.*\\'" (buffer-name))
+      (display-buffer-same-window buffer alist)
+
+    (display-buffer--maybe-pop-up-frame-or-window buffer alist)))
+
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
         ("\\`magit-diff:.*\\'"
-         (display-buffer-pop-up-window))))
+         (display-buffer-pop-up-window))
+        ("\\`\\*helpful.*\\'" (pada/display-helpful-buffer))))
 
-(setq frame-auto-hide-function (lambda (frame)
-                                 (kill-buffer)
-                                 (delete-frame)))
+(setq frame-auto-hide-function 'delete-frame)
+
+;; Always kill the buffer when quitting a window
+(global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
+(global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
 
 ;; Org-mode
 (use-package org
