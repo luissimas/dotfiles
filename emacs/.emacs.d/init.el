@@ -23,6 +23,16 @@
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
   (load custom-file))
 
+;; Setting backup and auto-save directories
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups" user-emacs-directory))))
+
+(make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves" user-emacs-directory) t)))
+
+(setq create-lockfiles nil)
+
 ;; Setting unique buffer names
 (setq uniquify-buffer-name-style 'forward)
 
@@ -111,6 +121,7 @@
 
 ;; Enable autopairs on programming modes
 (add-hook 'prog-mode-hook 'electric-pair-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
 
 ;; Enable soft wrap for text modes
 (add-hook 'text-mode-hook 'visual-line-mode)
@@ -579,5 +590,7 @@ targets."
 ;; References in org-mode
 (use-package org-ref)
 
+;; Practice typing
+(use-package speed-type)
 
 ;;; init.el ends here
