@@ -8,7 +8,7 @@ super + {_,shift} + Return
 
 # program launcher
 super + p
-	~/scripts/dmenu.sh
+	rofi -show drun
 
 # power prompt
 super + shift + q
@@ -73,7 +73,7 @@ super + m
 
 # show/hide polybar
 super + b
-  polybar-msg cmd toggle && bspc config -m DVI-D-0 top_padding {0,20}
+  polybar-msg cmd toggle && bspc config -m DVI-D-0 top_padding {0,25}
 
 # send the newest marked node to the newest preselected node
 super + y

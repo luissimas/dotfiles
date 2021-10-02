@@ -64,7 +64,7 @@
     border: 2px 0px 0px;
     border-color: @border-color;
     spacing: 2px;
-    scrollbar: true;
+    scrollbar: false;
     padding: 2px 0px 0px;
 }}
 

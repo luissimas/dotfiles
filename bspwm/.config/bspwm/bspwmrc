@@ -6,21 +6,10 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 ~/.config/polybar/launch.sh
 ~/scripts/bspwm/bspwmcolors.sh
 
-# Config
-if [ -e "/sys/class/power_supply/BAT1" ]; then
-  bspc monitor -d Δ Θ Π Ψ Ω
-else
-  bspc monitor DVI-D-0 -d Δ Θ Π Ψ Ω
-  bspc monitor HDMI-0 -d 6 7 8
-
-  bspc wm --reorder-monitors DVI-D-0 HDMI-0
-
-  # Remove top padding (bar space) from second monitor
-  bspc config -m HDMI-0 top_padding 0
-fi
+bspc monitor -d Δ Θ Π Ψ Ω
 
 bspc config border_width         0
-bspc config window_gap           0
+bspc config window_gap           5
 bspc config top_padding          0
 
 bspc config split_ratio          0.5
