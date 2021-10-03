@@ -321,14 +321,14 @@ targets."
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-height 25)
-  (doom-modeline-enable-word-count t)
-  :config
-  (setq display-time-day-and-date t
-        display-time-format "%a %d/%m %H:%M"
-        display-time-default-load-average nil
-        doom-modeline-buffer-encoding nil)
-  (display-time-mode)
-  (display-battery-mode))
+  (doom-modeline-enable-word-count t))
+;;  :config
+;;  (setq display-time-day-and-date t
+;;        display-time-format "%a %d/%m %H:%M"
+;;        display-time-default-load-average nil
+;;        doom-modeline-buffer-encoding nil)
+;;  (display-time-mode)
+;;  (display-battery-mode))
 
 ;; Which-key
 (use-package which-key
@@ -511,7 +511,7 @@ targets."
 
 (require 'json)
 
-(defun get-private-key (key)
+(defun pada/get-private-key (key)
   "Return the value of the `key` in ~/.emacs.d/secret.json"
   (cdr (assoc key (json-read-file "~/.emacs.d/secret.json"))))
 
@@ -530,8 +530,8 @@ targets."
 ;; Habitica integration
 (use-package habitica
   :config
-  (setq habitica-uid (get-private-key 'habitica-user-id)
-        habitica-token (get-private-key 'habitica-api-key)))
+  (setq habitica-uid (pada/get-private-key 'habitica-user-id)
+        habitica-token (pada/get-private-key 'habitica-api-key)))
 
 ;; Change colorscheme variation based on the time of the day
 (defun pada/auto-theme ()
@@ -593,4 +593,11 @@ targets."
 ;; Practice typing
 (use-package speed-type)
 
-;;; init.el ends here
+;; Spotify client
+(use-package consult-spotify
+  :config
+  (setq espotify-client-id (pada/get-private-key 'spotify-client-id)
+        espotify-client-secret (pada/get-private-key 'spotify-client-secret)
+        espotify-service-name "mopidy"))
+
+;;; Init.el ends here
