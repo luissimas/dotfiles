@@ -321,12 +321,12 @@ targets."
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-height 25)
-  (doom-modeline-enable-word-count t))
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-buffer-encoding nil))
 ;;  :config
 ;;  (setq display-time-day-and-date t
 ;;        display-time-format "%a %d/%m %H:%M"
-;;        display-time-default-load-average nil
-;;        doom-modeline-buffer-encoding nil)
+;;        display-time-default-load-average nil)
 ;;  (display-time-mode)
 ;;  (display-battery-mode))
 
