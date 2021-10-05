@@ -38,17 +38,20 @@
 
 ;; Setting frame options
 (defun pada/set-window-divider ()
-  "Set window-divider options"
+  "Set window-divider options."
   (setq window-divider-default-right-width 2)
   (setq window-divider-default-bottom-width 0)
   (setq window-divider-default-places 'right-only)
   (window-divider-mode 1))
 
+;; Loading font ligatures
+(load-file (expand-file-name "ligatures.el" user-emacs-directory))
+
 ;; Setting font faces
 (defun pada/set-fonts ()
   "Set the main font faces."
-  (set-face-attribute 'default nil :font "JetBrains Mono-11")
-  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-11")
+  (set-face-attribute 'default nil :font "Iosevka-12")
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
   (set-face-attribute 'variable-pitch nil :font "Open Sans-12"))
 
 ;; Setting frame options in both daemon (with hooks) or
@@ -58,38 +61,6 @@
            (add-hook 'server-after-make-frame-hook 'pada/set-window-divider))
   (progn (pada/set-fonts)
          (pada/set-window-divider)))
-
-;; Setting font ligatures
-(let ((ligatures `((?-  . ,(regexp-opt '("-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->")))
-                   (?/  . ,(regexp-opt '("/**" "/*" "///" "/=" "/==" "/>" "//")))
-                   (?*  . ,(regexp-opt '("*>" "***" "*/")))
-                   (?<  . ,(regexp-opt '("<-" "<<-" "<=>" "<=" "<|" "<||" "<|||::=" "<|>" "<:" "<>" "<-<"
-                                         "<<<" "<==" "<<=" "<=<" "<==>" "<-|" "<<" "<~>" "<=|" "<~~" "<~"
-                                         "<$>" "<$" "<+>" "<+" "</>" "</" "<*" "<*>" "<->" "<!--")))
-                   (?:  . ,(regexp-opt '(":>" ":<" ":::" "::" ":?" ":?>" ":=")))
-                   (?=  . ,(regexp-opt '("=>>" "==>" "=/=" "=!=" "=>" "===" "=:=" "==")))
-                   (?!  . ,(regexp-opt '("!==" "!!" "!=")))
-                   (?>  . ,(regexp-opt '(">]" ">:" ">>-" ">>=" ">=>" ">>>" ">-" ">=")))
-                   (?&  . ,(regexp-opt '("&&&" "&&")))
-                   (?|  . ,(regexp-opt '("|||>" "||>" "|>" "|]" "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||")))
-                   (?.  . ,(regexp-opt '(".." ".?" ".=" ".-" "..<" "...")))
-                   (?+  . ,(regexp-opt '("+++" "+>" "++")))
-                   (?\[ . ,(regexp-opt '("[||]" "[<" "[|")))
-                   (?\{ . ,(regexp-opt '("{|")))
-                   (?\? . ,(regexp-opt '("??" "?." "?=" "?:")))
-                   (?#  . ,(regexp-opt '("####" "###" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" "##")))
-                   (?\; . ,(regexp-opt '(";;")))
-                   (?_  . ,(regexp-opt '("_|_" "__")))
-                   (?\\ . ,(regexp-opt '("\\" "\\/")))
-                   (?~  . ,(regexp-opt '("~~" "~~>" "~>" "~=" "~-" "~@")))
-                   (?$  . ,(regexp-opt '("$>")))
-                   (?^  . ,(regexp-opt '("^=")))
-                   (?\] . ,(regexp-opt '("]#"))))))
-  (dolist (char-regexp ligatures)
-    (set-char-table-range composition-function-table (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
-
-(global-prettify-symbols-mode 1)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -282,18 +253,18 @@ targets."
         bespoke-set-italic-keywords nil))
 
 ;; Dim non-active windows
-                                        ;(use-package dimmer
-                                        ;  :straight (:host github :repo "gonewest818/dimmer.el")
-                                        ;  :config
-                                        ;  (setq dimmer-fraction 0.3)
-                                        ;  (setq dimmer-adjustment-mode :foreground)
-                                        ;  (setq dimmer-use-colorspace :rgb)
-                                        ;  (setq dimmer-watch-frame-focus-events nil)
-                                        ;  (dimmer-configure-which-key)
-                                        ;  (dimmer-configure-magit)
-                                        ;  (dimmer-configure-org)
-                                        ;  (dimmer-configure-posframe)
-                                        ;  :init (dimmer-mode 1))
+(use-package dimmer
+  :straight (:host github :repo "gonewest818/dimmer.el")
+  :config
+  (setq dimmer-fraction 0.3)
+  (setq dimmer-adjustment-mode :foreground)
+  (setq dimmer-use-colorspace :rgb)
+  (setq dimmer-watch-frame-focus-events t)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (dimmer-configure-posframe)
+  :init (dimmer-mode 1))
 
 ;; Projectile
 (use-package projectile
