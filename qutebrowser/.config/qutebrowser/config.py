@@ -604,7 +604,7 @@ c.colors.webpage.darkmode.policy.page = 'smart'
 ##   - bookmarks
 ##   - history
 ##   - filesystem
-c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks']
+c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'history']
 
 ## Move on to the next part when there's only one possible completion
 ## left.
