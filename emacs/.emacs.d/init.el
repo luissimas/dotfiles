@@ -44,15 +44,12 @@
   (setq window-divider-default-places 'right-only)
   (window-divider-mode 1))
 
-;; Loading font ligatures
-(load-file (expand-file-name "ligatures.el" user-emacs-directory))
-
 ;; Setting font faces
 (defun pada/set-fonts ()
   "Set the main font faces."
-  (set-face-attribute 'default nil :font "Iosevka-12")
-  (set-face-attribute 'fixed-pitch nil :font "Iosevka-12")
-  (set-face-attribute 'variable-pitch nil :font "Open Sans-12"))
+  (set-face-attribute 'default nil :font "Iosevka Padawan-12")
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka Padawan-12")
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Etoile-12"))
 
 ;; Setting frame options in both daemon (with hooks) or
 ;; normal emacs startup (directly calling the functions)
@@ -197,9 +194,9 @@
   :config
   (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key.
-The which-key help message will show the type and value of the
-current target followed by an ellipsis if there are further
-targets."
+                            The which-key help message will show the type and value of the
+                            current target followed by an ellipsis if there are further
+                            targets."
     (lambda (&optional keymap targets prefix)
       (if (null keymap)
           (kill-buffer which-key--buffer)
@@ -576,5 +573,20 @@ targets."
   (theme-magic-export-theme-mode)
   :config
   (setq theme-magic--theming-functions '(load-theme disable-theme)))
+
+;; Font ligatures
+(use-package ligature
+  :straight '(:host github :repo "mickeynp/ligature.el")
+  :config
+  ;; Iosevka ligatures
+  (ligature-set-ligatures 'prog-mode
+                          '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "-->" "--->" "->-" ">-" ">>-"
+                            "=<<" "=<" "=<=" "<==" "<===" "<<=" "<=" "=>" "==>" "===>" "=>=" ">=" ">>="
+                            "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "<!--" "<!---"
+                            "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "<>" "===" "!=="
+                            ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
+                            "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
+  (global-ligature-mode))
+
 
 ;;; Init.el ends here
