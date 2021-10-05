@@ -571,4 +571,10 @@ targets."
         espotify-client-secret (pada/get-private-key 'spotify-client-secret)
         espotify-service-name "mopidy"))
 
+(use-package theme-magic
+  :init
+  (theme-magic-export-theme-mode)
+  :config
+  (setq theme-magic--theming-functions '(load-theme disable-theme)))
+
 ;;; Init.el ends here

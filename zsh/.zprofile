@@ -2,7 +2,7 @@
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/scripts/:${HOME}/bin:${HOME}/.emacs.d/bin:${HOME}/repos/elixir-ls:${HOME}/.cargo/bin"
 export PATH=/home/$USER/.local/go/bin:$PATH
 export GOPATH=$HOME/.local/go
-
+export QUTEWAL_DYNAMIC_LOADING=True
 
 # Exports
 export TERM="screen-256color"
