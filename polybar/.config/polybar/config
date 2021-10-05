@@ -43,8 +43,9 @@ border-color = ${colors.foreground}
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0=Iosevka Nerd Font:style=Regular:pixelsize=10:antialias=true;2
-font-1=cryptocoins:style=Regular;0
+font-0=Iosevka Padawan:style=Regular:pixelsize=10:antialias=true;2
+font-1=Iosevka Nerd Font:style=Regular:pixelsize=10:antialias=true;2
+font-2=cryptocoins:style=Regular;0
 
 module-margin = 1
 

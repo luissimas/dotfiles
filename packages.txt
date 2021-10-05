@@ -81,6 +81,7 @@ mopidy-mpris
 mopidy-spotify
 mpv
 neofetch
+neovim
 nerd-fonts-fira-code
 networkmanager
 nodejs
@@ -104,6 +105,7 @@ pfetch-git
 picom-ibhagwan-git
 pkgconf
 playerctl
+polkit-dumb-agent-git
 polybar
 postgresql
 psutils
@@ -120,6 +122,7 @@ python-pynvim
 python-pywal
 python-ueberzug-git
 python2
+qmk
 qutebrowser
 r
 redshift
@@ -159,15 +162,18 @@ tmux
 tmuxp
 tree
 tree-sitter
-ttc-iosevka
 ttf-iosevka-aile
+ttf-iosevka-etoile
+ttf-iosevka-nerd
 ttf-jetbrains-mono
 ttf-liberation
+ttfautohint
 unclutter
 unrar
 unzip
 v4l2loopback-dc-dkms
 v4l2loopback-dkms
+via-bin
 vim
 vscodium-bin
 wget
