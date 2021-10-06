@@ -250,18 +250,18 @@
         bespoke-set-italic-keywords nil))
 
 ;; Dim non-active windows
-(use-package dimmer
-  :straight (:host github :repo "gonewest818/dimmer.el")
-  :config
-  (setq dimmer-fraction 0.3)
-  (setq dimmer-adjustment-mode :foreground)
-  (setq dimmer-use-colorspace :rgb)
-  (setq dimmer-watch-frame-focus-events t)
-  (dimmer-configure-which-key)
-  (dimmer-configure-magit)
-  (dimmer-configure-org)
-  (dimmer-configure-posframe)
-  :init (dimmer-mode 1))
+;;(use-package dimmer
+;;  :straight (:host github :repo "gonewest818/dimmer.el")
+;;  :config
+;;  (setq dimmer-fraction 0.3)
+;;  (setq dimmer-adjustment-mode :foreground)
+;;  (setq dimmer-use-colorspace :rgb)
+;;  (setq dimmer-watch-frame-focus-events t)
+;;  (dimmer-configure-which-key)
+;;  (dimmer-configure-magit)
+;;  (dimmer-configure-org)
+;;  (dimmer-configure-posframe)
+;;  :init (dimmer-mode 1))
 
 ;; Projectile
 (use-package projectile

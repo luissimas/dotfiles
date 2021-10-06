@@ -107,7 +107,7 @@ label-empty-padding = 1
 
 format = <label-state> <label-mode>
 
-label-monocle = 
+;label-monocle = 
 
 [module/time]
 type = internal/date
