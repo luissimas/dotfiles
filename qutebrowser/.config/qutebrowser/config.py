@@ -2314,6 +2314,8 @@ c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}'}
 # config.bind('<Shift-Tab>', 'completion-item-focus prev', mode='command')
 # config.bind('<Tab>', 'completion-item-focus next', mode='command')
 # config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
+config.bind('<Ctrl-k>', 'completion-item-focus prev', mode='command')
+config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
 
 ## Bindings for hint mode
 # config.bind('<Ctrl-B>', 'hint all tab-bg', mode='hint')
@@ -2374,4 +2376,5 @@ config.bind('M', 'hint links spawn streamlink --player mpv {hint-url} best')
 config.bind('R', 'config-source')
 config.bind('zb', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 
+## Sourcing pywal theme
 config.source('qutewal.py')
