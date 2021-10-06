@@ -595,7 +595,7 @@
 
 (defcustom pada/open-external-associations
   '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura"))
-  "A alist of association between file patterns and an external programs."
+  "A alist of association between file patterns and external programs."
   :group 'open-external
   :type "alist")
 
