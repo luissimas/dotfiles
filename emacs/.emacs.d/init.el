@@ -569,10 +569,9 @@
         espotify-service-name "mopidy"))
 
 (use-package theme-magic
-  :init
-  (theme-magic-export-theme-mode)
   :config
-  (setq theme-magic--theming-functions '(load-theme disable-theme)))
+  (setq theme-magic--theming-functions '(load-theme disable-theme))
+  (theme-magic-export-theme-mode))
 
 ;; Font ligatures
 (use-package ligature
@@ -588,5 +587,44 @@
                             "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
   (global-ligature-mode))
 
+;; Opening files in external commands based on the filename
+(defgroup pada/open-external nil
+  "Open files with external commands."
+  :group 'files
+  :group 'processes)
+
+(defcustom pada/open-external-associations
+  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura"))
+  "A alist of association between file patterns and an external programs."
+  :group 'open-external
+  :type "alist")
+
+(defun pada/run-shell-command (command)
+  "Run COMMAND in the default user shell."
+  (message command)
+  (start-process-shell-command "Open external process" nil (concat "exec nohup " command " >/dev/null")))
+
+(defun pada/open-external-advice (fun &rest args)
+  "Advice FUN with ARGS.
+Try to match filename in ARGS against patterns in `open-external-associations',
+if a pattern matches, then open the file using the specified command.  If no
+pattern matches, simply call FUN with ARGS.
+Note: This function is meant to be adviced around `find-file'."
+  (let ((file-name (car args))
+        (associations pada/open-external-associations)
+        (found nil))
+    (while associations
+      (let* ((current (car associations))
+             (pattern (car current))
+             (program (car (cdr current))))
+        (when (string-match-p pattern file-name)
+          (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
+          (setq found t)
+          (setq associations nil)))
+      (setq associations (cdr associations)))
+    (unless found
+      (apply fun args))))
+
+(advice-add 'find-file :around 'pada/open-external-advice)
 
 ;;; Init.el ends here
