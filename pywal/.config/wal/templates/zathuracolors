@@ -31,10 +31,3 @@ set render-loading-bg           "{foreground}" # Foreground
 
 set recolor-lightcolor          "{background}" # Background
 set recolor-darkcolor           "{foreground}" # Foreground
-
-set selection-clipboard "clipboard"
-
-set font "Fira Code Regular 9"
-
-map i recolor
-

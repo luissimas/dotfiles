@@ -1,1 +1,8 @@
-/home/padawan/.cache/wal/zathurarc
+include "/home/padawan/.cache/wal/zathuracolors"
+
+set selection-clipboard "clipboard"
+
+set font "Iosevka Padawan 10"
+set guioptions ""
+
+map i recolor
