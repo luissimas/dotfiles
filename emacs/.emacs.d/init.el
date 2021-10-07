@@ -574,9 +574,20 @@
 
 (use-package theme-magic
   :config
-  (setq theme-magic--theming-functions '(load-theme disable-theme))
+  (setq theme-magic--theming-functions '(load-theme))
   (advice-add 'theme-magic-from-emacs--wrapper :after 'pada/bspwm-colors)
   (theme-magic-export-theme-mode))
+
+(defun pada/load-theme (theme)
+  "Improvement over the default `load-theme'.  Load THEME and disable all themes that were loaded before."
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar #'symbol-name
+				     (custom-available-themes))))))
+  (load-theme theme t)
+  (dolist (theme (cdr custom-enabled-themes))
+    (disable-theme theme)))
 
 ;; Font ligatures
 (use-package ligature
