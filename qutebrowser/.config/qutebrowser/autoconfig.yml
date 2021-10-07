@@ -6,9 +6,5 @@
 
 config_version: 2
 settings:
-  content.media.audio_video_capture:
-    https://meet.google.com: false
-  content.notifications.enabled:
-    https://meet.google.com: false
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false

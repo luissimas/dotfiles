@@ -2375,6 +2375,7 @@ config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
 config.bind('M', 'hint links spawn streamlink --player mpv {hint-url} best')
 config.bind('R', 'config-source')
 config.bind('zb', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
+config.bind('zr', 'config-source')
 
 ## Sourcing pywal theme
 config.source('qutewal.py')

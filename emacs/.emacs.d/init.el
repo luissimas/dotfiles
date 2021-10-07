@@ -568,9 +568,14 @@
         espotify-client-secret (pada/get-private-key 'spotify-client-secret)
         espotify-service-name "mopidy"))
 
+(defun pada/bspwm-colors (&rest _)
+  "Apply pywal colors to bspwm."
+  (start-process-shell-command "Bspwm colors" nil "~/scripts/bspwm/bspwmcolors.sh >/dev/null"))
+
 (use-package theme-magic
   :config
   (setq theme-magic--theming-functions '(load-theme disable-theme))
+  (advice-add 'theme-magic-from-emacs--wrapper :after 'pada/bspwm-colors)
   (theme-magic-export-theme-mode))
 
 ;; Font ligatures
