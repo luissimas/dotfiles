@@ -55,7 +55,6 @@ jre8-openjdk-headless
 kitty
 latex-mk
 latin-words
-lf
 lib32-glibc
 libgccjit
 libtool
