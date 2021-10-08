@@ -1,6 +1,9 @@
 # Path
-export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/scripts/:${HOME}/bin:${HOME}/.emacs.d/bin:${HOME}/repos/elixir-ls:${HOME}/.cargo/bin"
-export PATH=/home/$USER/.local/go/bin:$PATH
+export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/bin:${HOME}/.emacs.d/bin:${HOME}/repos/elixir-ls:${HOME}/.cargo/bin"
+export PATH=$HOME/.local/go/bin:$PATH
+export PATH=$HOME/.config/bspwm/scripts:$PATH
+export PATH=$HOME/.config/polybar/scripts:$PATH
+export PATH=$HOME/scripts:$PATH
 export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
 

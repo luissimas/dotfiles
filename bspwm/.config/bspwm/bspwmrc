@@ -3,6 +3,7 @@
 # Startup
 xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd > /dev/null || sxhkd &
+
 ~/.config/polybar/launch.sh
 ~/scripts/bspwm/bspwmcolors.sh
 

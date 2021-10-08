@@ -49,8 +49,7 @@ font-2=cryptocoins:style=Regular;0
 
 module-margin = 1
 
-modules-left = bspwm
-modules-center = spotify
+modules-left = bspwm spotify
 modules-right = packages battery network temperature cpu pulseaudio time
 
 scroll-up = bspwn-wsnext
@@ -168,7 +167,7 @@ format-full = <ramp-capacity>  <label-full>
 [module/temperature]
 type = custom/script
 
-exec = ~/scripts/bar/temp.sh
+exec = temp.sh
 
 interval = 5
 
@@ -195,18 +194,18 @@ format = <label>
 [module/packages]
 type = custom/script
 
-exec = ~/scripts/bar/packages.sh
+exec = packages.sh
 
 exec-if = sudo pacman -Sy
 
 interval = 3600
 
-click-left = ~/scripts/bar/packages.sh
+click-left = packages.sh
 
 [module/network]
 type = custom/script
 
-exec = ~/scripts/bar/network.sh
+exec = network.sh
 
 interval = 3
 
@@ -214,7 +213,7 @@ interval = 3
 type = custom/script
 tail = true
 
-exec = ~/scripts/bar/spotify-status.sh
+exec = spotify-status.sh
 
 exec-if = pgrep -x mopidy
 

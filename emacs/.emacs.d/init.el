@@ -570,7 +570,7 @@
 
 (defun pada/bspwm-colors (&rest _)
   "Apply pywal colors to bspwm."
-  (start-process-shell-command "Bspwm colors" nil "~/scripts/bspwm/bspwmcolors.sh >/dev/null"))
+  (start-process-shell-command "Bspwm colors" nil "~/.config/bspwm/scripts/bspwmcolors.sh >/dev/null"))
 
 (use-package theme-magic
   :config

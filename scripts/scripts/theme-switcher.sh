@@ -30,7 +30,7 @@ case $option in "Pywal")
       printf "Done.\n\n"
 
       # Update bspwm colors
-      ~/scripts/bspwm/bspwmcolors.sh
+      bspwmcolors.sh
 
       # Update betterlockscreen (takes a while)
       printf "Setting lock screen...\n"
@@ -60,7 +60,7 @@ case $option in "Pywal")
   wal --theme $theme
 
   # Update bspwm colors
-  ~/scripts/bspwm/bspwmcolors.sh
+  bspwmcolors.sh
 
   # Update qutebrowser colors
   pgrep qutebrowser > /dev/null && qutebrowser :config-source
