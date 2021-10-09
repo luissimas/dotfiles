@@ -139,8 +139,8 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
                            (cond
-                            (lsp-ui-doc-frame-mode (lsp-ui-doc-focus-frame))
-                            (lsp-mode (lsp-ui-doc-glance))
+                            ((and (boundp 'lsp-ui-doc-frame-mode) lsp-ui-doc-frame-mode) (lsp-ui-doc-focus-frame))
+                            ((and (boundp 'lsp-mode) lsp-mode) (lsp-ui-doc-glance))
                             ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
                             (t woman))))
   (evil-mode 1))
@@ -238,7 +238,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-palenight t))
+  (load-theme 'doom-spacegrey t))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")

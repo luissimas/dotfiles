@@ -21,7 +21,7 @@ require("config.lsp")
 -- require("plugins")
 
 -- Setting colorscheme
--- vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)
+vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)
 
 -- Pretty useful, command to close all buffers except the current one, maybe I'll put this in a keymap later
 vim.cmd("command ClearBuffers %bd<bar>e#<bar>bd#")

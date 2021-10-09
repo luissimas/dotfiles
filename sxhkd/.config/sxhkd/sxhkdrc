@@ -2,10 +2,6 @@
 #wm independent hotkeys#
 ########################
 
-# terminal emulator
-super + {_,shift} + Return
-	{kitty, st}
-
 # program launcher
 super + p
 	rofi -show drun
@@ -19,8 +15,8 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # applications
-super + shift + {w,o,d,z}
-	{$BROWSER,obsidian,discord,zathura}
+super + shift + {w,o,d,z,t}
+	{$BROWSER,obsidian,discord,zathura,kitty}
 
 # scripts
 super + shift + {t,b,p,y,s,a,c,e}
