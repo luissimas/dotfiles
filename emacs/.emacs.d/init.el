@@ -117,12 +117,32 @@
   :config
   (exec-path-from-shell-initialize))
 
+(defun pada/find-file ()
+  "Wrapper around `find-file'.  If the current file is in a project, use `projectile-find-file', otherwise use the built-in `find-file'."
+  (interactive)
+  (if (projectile-project-p)
+      (projectile-find-file)
+    (call-interactively 'find-file)))
+
 ;; General for keybindings
 (use-package general
   :config
   (general-create-definer pada/nmap
-    :keymaps '(normal emacs)
-    :prefix "SPC"))
+    :keymaps 'normal
+    :prefix "SPC")
+  (pada/nmap
+    "x" '(execute-extended-command :which-key "M-x")
+    "h" (general-simulate-key "C-h" :which-key "Help")
+    "f" '(:ignore t :which-key "Find")
+    "ff" '(pada/find-file :which-key "Find file")
+    "fs" '(save-buffer :which-key "Save file")
+    "b" '(:ignore t :which-key "Buffer")
+    "bb" '(consult-buffer :which-key "Switch buffer")
+    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+    "bK" '(kill-buffer :which-key "Kill buffer")
+    "bi" '(ibuffer :which-key "Ibuffer")))
+
+(global-set-key (kbd "C-x k") 'pada/kill-buffer)
 
 ;; Evil-mode
 (use-package evil
@@ -269,7 +289,8 @@
   (when (file-directory-p "~/fun")
     (setq projectile-project-search-path '("~/fun")))
   :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (pada/nmap
+    "p" '(:keymap projectile-command-map :package projectile :which-key "Projectile"))
   (projectile-mode))
 
 ;; Magit
@@ -278,7 +299,7 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
   (pada/nmap
-    "g" '(:ignore t :which-key "git")
+    "g" '(:ignore t :which-key "Git")
     "gs" 'magit-status))
 
 ;; Icons
