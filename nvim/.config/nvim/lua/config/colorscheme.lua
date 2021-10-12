@@ -29,9 +29,13 @@ vim.g.rose_pine_variant = "base"
 vim.g.rose_pine_enable_italics = true
 vim.g.rose_pine_disable_background = false
 
+vim.g.palenight_terminal_italics = true
+
+local colorscheme = "palenight"
+
 local M = {}
 
-M.lualine_colorscheme = "tokyonight"
-M.colorscheme = "tokyonight"
+M.lualine_colorscheme = colorscheme
+M.colorscheme = colorscheme
 
 return M

@@ -51,7 +51,7 @@ vim.o.clipboard = "unnamedplus"
 -- Folding
 -- vim.wo.foldmethod = "expr"
 -- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.wo.foldenable = false
+vim.wo.foldenable = false
 
 -- Making floating and popup windows transparent
 vim.go.pumblend = 10

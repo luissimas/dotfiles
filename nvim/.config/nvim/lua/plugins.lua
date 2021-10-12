@@ -49,13 +49,28 @@ return require("packer").startup(function(use)
   })
 
   -- Completion
+  -- use({
+  --   "hrsh7th/nvim-compe",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("plug.compe")
+  --   end,
+  -- })
+
   use({
-    "hrsh7th/nvim-compe",
-    event = "InsertEnter",
+    "hrsh7th/nvim-cmp",
     config = function()
-      require("plug.compe")
+      require("plug.cmp")
     end,
   })
+
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-nvim-lua")
+  use("hrsh7th/cmp-calc")
+  use("f3fora/cmp-spell")
+  use("quangnguyen30192/cmp-nvim-ultisnips")
 
   -- The ultimate fuzzy finder
   use({
@@ -202,7 +217,6 @@ return require("packer").startup(function(use)
   -- Completion icons
   use({
     "onsails/lspkind-nvim",
-    after = "nvim-compe",
     config = function()
       require("plug.lspkind")
     end,
@@ -280,6 +294,8 @@ return require("packer").startup(function(use)
   -- Colorschemes
   use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
   use("folke/tokyonight.nvim")
+  use("dylanaraps/wal.vim")
+  use("drewtempelmeyer/palenight.vim")
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Personal plugins
