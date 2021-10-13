@@ -59,8 +59,7 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Aliases
 alias l='exa -l --no-user --time-style long-iso --icons'
 alias la='exa -la --no-user --time-style long-iso --icons'
-alias t='exa -T --icons'
-alias ta='exa -Ta --icons'
+alias tree='exa -T --icons'
 alias grep='rg'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -80,6 +79,7 @@ alias code='codium'
 alias icat='kitty +kitten icat'
 alias cat='bat -P'
 alias mux='tmuxp'
+alias ta='tmux attach'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
 # Habitica cli tool
@@ -161,7 +161,6 @@ prompt spaceship
 
 # opam configuration
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

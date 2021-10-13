@@ -117,6 +117,14 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Type signature as virtual text
+  use({
+    "jubnzv/virtual-types.nvim",
+    config = function()
+      vim.cmd("hi! link TypeAnnot Comment")
+    end,
+  })
+
   -- File tree
   use({
     "kyazdani42/nvim-tree.lua",
@@ -288,14 +296,25 @@ return require("packer").startup(function(use)
     ft = "lua",
   })
 
+  -- Spellcheck with treesitter
+  use({
+    "lewis6991/spellsitter.nvim",
+    config = function()
+      require("spellsitter").setup({
+        hl = "SpellBad",
+        captures = { "comment" }, -- set to {} to spellcheck everything
+      })
+    end,
+  })
+
   -- Startup time log
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
 
   -- Colorschemes
   use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
   use("folke/tokyonight.nvim")
-  use("dylanaraps/wal.vim")
-  use("drewtempelmeyer/palenight.vim")
+  use("ishan9299/modus-theme-vim")
+  use("EdenEast/nightfox.nvim")
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Personal plugins

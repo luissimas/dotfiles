@@ -13,3 +13,7 @@ settings:
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false
     https://mail.protonmail.com?to=%25s: false
+  statusbar.show:
+    global: always
+  tabs.show:
+    global: always

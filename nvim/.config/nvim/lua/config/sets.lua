@@ -25,6 +25,7 @@ vim.o.splitright = true
 vim.o.updatetime = 500
 vim.o.hlsearch = false
 vim.o.incsearch = true
+vim.o.inccommand = "nosplit"
 vim.o.scrolloff = 8
 vim.o.hidden = true
 vim.o.cmdheight = 1
