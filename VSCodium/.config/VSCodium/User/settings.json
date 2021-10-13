@@ -1,7 +1,7 @@
 {
   // Theme
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+  "workbench.colorTheme": "Community Material Theme Palenight",
   "workbench.iconTheme": "material-icon-theme",
   // Editor
   "editor.mouseWheelZoom": true,

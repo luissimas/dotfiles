@@ -135,6 +135,8 @@
     "h" (general-simulate-key "C-h" :which-key "Help")
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
+    "fF" '(find-file :which-key "Find file in CWD")
+    "fc" '((lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.el")) :which-key "Find config")
     "fs" '(save-buffer :which-key "Save file")
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
@@ -258,7 +260,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-spacegrey t))
+  (load-theme 'doom-palenight t))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
