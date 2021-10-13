@@ -118,10 +118,10 @@
   (exec-path-from-shell-initialize))
 
 (defun pada/find-file ()
-  "Wrapper around `find-file'.  If the current file is in a project, use `projectile-find-file', otherwise use the built-in `find-file'."
+  "Wrapper around `find-file'.  If the current file is in a project, use `project-find-file', otherwise use the built-in `find-file'."
   (interactive)
-  (if (projectile-project-p)
-      (projectile-find-file)
+  (if (project-current)
+      (project-find-file)
     (call-interactively 'find-file)))
 
 ;; General for keybindings
@@ -286,14 +286,40 @@
 ;;  :init (dimmer-mode 1))
 
 ;; Projectile
-(use-package projectile
-  :custom (projectile-completion-system 'default)
-  (when (file-directory-p "~/fun")
-    (setq projectile-project-search-path '("~/fun")))
+;; (use-package projectile
+;;   :custom (projectile-completion-system 'default)
+;;   (when (file-directory-p "~/fun")
+;;     (setq projectile-project-search-path '("~/fun")))
+;;   :config
+;;   (pada/nmap
+;;     "p" '(:keymap projectile-command-map :package projectile :which-key "Projectile"))
+;;   (projectile-mode))
+(use-package project
   :config
+  (setq project-switch-commands
+        '((project-find-file "Find file")
+          (project-find-regexp "Find regexp")
+          (project-switch-to-buffer "Switch to buffer")
+          (project-dired "Dired")
+          (project-eshell "Eshell")))
   (pada/nmap
-    "p" '(:keymap projectile-command-map :package projectile :which-key "Projectile"))
-  (projectile-mode))
+    "p" '(:ignore t :which-key "Project")
+    "p!" 'project-shell-command
+    "pa" 'project-async-shell-command
+    "pf" 'project-find-file
+    "pF" 'project-or-external-find-file
+    "pb" 'project-switch-to-buffer
+    "ps" 'project-shell
+    "pd" 'project-dired
+    "pv" 'project-vc-dir
+    "pc" 'project-compile
+    "pe" 'project-eshell
+    "pk" 'project-kill-buffers
+    "pp" 'project-switch-project
+    "pg" 'project-find-regexp
+    "pG" 'project-or-external-find-regexp
+    "pr" 'project-query-replace-regexp
+    "px" 'project-execute-extended-command))
 
 ;; Magit
 (use-package magit
