@@ -1,6 +1,10 @@
 ;;; Init.el --- My Emacs config -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+
+;; Setting the correct native compilation path
+(add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
+
 ;; Disabling init screen
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
@@ -66,7 +70,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Keymap to edit init.el
-(global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.el")))
+(global-set-key (kbd "C-c d") (lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))))
 
 ;; Custom function to kill current buffer
 (defun pada/kill-buffer ()
@@ -136,7 +140,7 @@
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
     "fF" '(find-file :which-key "Find file in CWD")
-    "fc" '((lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.el")) :which-key "Find config")
+    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
     "fs" '(save-buffer :which-key "Save file")
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
@@ -185,7 +189,7 @@
         completion-ignore-case t)
 
   ;; Using vertico-directory extension
-  (add-to-list 'load-path "/home/padawan/.emacs.d/straight/build/vertico/extensions")
+  (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
   (require 'vertico-directory)
   :init
   (vertico-mode))
@@ -483,20 +487,20 @@
  '(help-at-pt-display-when-idle t))
 
 ;; Better pdf view and general tools
-(use-package pdf-tools
-  :config
-  (pdf-tools-install)
-  ;; Disable border caused by cursor in pdf-view
-  (add-hook 'pdf-view-mode-hook
-            (lambda ()
-              (set (make-local-variable 'evil-normal-state-cursor) (list nil)))))
+;; (use-package pdf-tools
+;;   :config
+;;   (pdf-tools-install)
+;;   ;; Disable border caused by cursor in pdf-view
+;;   (add-hook 'pdf-view-mode-hook
+;;             (lambda ()
+;;               (set (make-local-variable 'evil-normal-state-cursor) (list nil)))))
 
 ;; Remember pdf page
-(use-package pdf-view-restore
-  :after pdf-tools
-  :hook (pdf-view-mode . pdf-view-restore-mode)
-  :config
-  (setq pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
+;; (use-package pdf-view-restore
+;;   :after pdf-tools
+;;   :hook (pdf-view-mode . pdf-view-restore-mode)
+;;   :config
+;;   (setq pdf-view-restore-filename "~/.emacs.d/.pdf-view-restore"))
 
 
 ;; Display inline latex formulas and images
@@ -529,8 +533,8 @@
 (require 'json)
 
 (defun pada/get-private-key (key)
-  "Return the value of the `key` in ~/.emacs.d/secret.json"
-  (cdr (assoc key (json-read-file "~/.emacs.d/secret.json"))))
+  "Return the value of the `key` in secret.json"
+  (cdr (assoc key (json-read-file (expand-file-name "secret.json" user-emacs-directory)))))
 
 ;; Screenshots
 (use-package screenshot
@@ -545,10 +549,10 @@
   :mode ("\\.epub\\'" . nov-mode))
 
 ;; Habitica integration
-(use-package habitica
-  :config
-  (setq habitica-uid (pada/get-private-key 'habitica-user-id)
-        habitica-token (pada/get-private-key 'habitica-api-key)))
+;; (use-package habitica
+;;   :config
+;;   (setq habitica-uid (pada/get-private-key 'habitica-user-id)
+;;         habitica-token (pada/get-private-key 'habitica-api-key)))
 
 ;; Change colorscheme variation based on the time of the day
 (defun pada/auto-theme ()
@@ -605,17 +609,17 @@
   :hook (org-mode . org-bullets-mode))
 
 ;; References in org-mode
-(use-package org-ref)
+;; (use-package org-ref)
 
 ;; Practice typing
 (use-package speed-type)
 
 ;; Spotify client
-(use-package consult-spotify
-  :config
-  (setq espotify-client-id (pada/get-private-key 'spotify-client-id)
-        espotify-client-secret (pada/get-private-key 'spotify-client-secret)
-        espotify-service-name "mopidy"))
+;; (use-package consult-spotify
+;;   :config
+;;   (setq espotify-client-id (pada/get-private-key 'spotify-client-id)
+;;         espotify-client-secret (pada/get-private-key 'spotify-client-secret)
+;;         espotify-service-name "mopidy"))
 
 (defun pada/bspwm-colors (&rest _)
   "Apply pywal colors to bspwm."

@@ -20,7 +20,7 @@
 ;; `:files' in the `:recipe':
 ;(package! this-package
 ;  :recipe (:host github :repo "username/repo"
-;        :files ("some-file.el" "src/lisp/*.el")))
+;           :files ("some-file.el" "src/lisp/*.el")))
 
 ;; If you'd like to disable a package included with Doom, you can do so here
 ;; with the `:disable' property:
@@ -49,17 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; (package! tree-sitter)
-;; (package! tree-sitter-langs)
-
-(package! treemacs-all-the-icons)
-
-;; Disabling hl-line-mode
-(package! hl-line :disable t)
-
-;; Code screenshots
-(package! screenshot
-  :recipe (:host github :repo "tecosaur/screenshot"))
-
-;; Epub reader
-(package! nov)
+;; Treesitter for better syntax highlight
+(package! tree-sitter)
+(package! tree-sitter-langs)
