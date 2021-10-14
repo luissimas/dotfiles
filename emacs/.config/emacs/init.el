@@ -435,8 +435,11 @@
 
 ;; Code formatter
 (use-package format-all
-  :hook (prog-mode . format-all-mode)
-  :hook (format-all-mode . format-all-ensure-formatter))
+  :hook
+  (prog-mode . format-all-mode)
+  (format-all-mode . format-all-ensure-formatter)
+  :config
+  (setq format-all-show-errors 'never))
 
 ;; Setup tabs and other things for projects
 (use-package editorconfig
@@ -461,8 +464,10 @@
   (git-gutter:deleted-sign "│"))
 
 ;; Prettier integration
-(use-package prettier-js
-  :hook (js-mode . prettier-js-mode))
+;; (use-package prettier-js
+;;   :hook (js-mode . prettier-js-mode)
+;;   :config
+;;   (setq prettier-js-show-errors nil))
 
 ;; Making emacs search for binaries in node_modules
 (use-package add-node-modules-path
