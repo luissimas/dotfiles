@@ -161,6 +161,7 @@
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
+  (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
@@ -252,7 +253,10 @@
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line))
   :config
-  (setq consult-project-root-function projectile-project-root))
+  (setq consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project))))))
 
 ;; Better help pages
 (use-package helpful
@@ -330,6 +334,7 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
+  (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
   (pada/nmap
     "g" '(:ignore t :which-key "Git")
     "gs" 'magit-status))
