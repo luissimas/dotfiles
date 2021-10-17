@@ -8,7 +8,7 @@ selected=$(echo -e 'Obsidian\nScreenshot' | rofi -dmenu -p "Type")
 killall unclutter
 
 # Kill picom to avoid transparency bugs
-killall picom
+# killall picom
 
 # Launch scrot
 if [[ "$selected" == "Obsidian" ]]; then
@@ -26,4 +26,4 @@ maim -su $filePath$fileName.png
 unclutter&
 
 # Relaunch picom
-picom&
+# picom&
