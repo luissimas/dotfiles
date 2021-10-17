@@ -149,7 +149,6 @@ texlive-formatsextra
 texlive-games
 texlive-humanities
 texlive-latexextra
-texlive-local-moderncv
 texlive-music
 texlive-pictures
 texlive-pstricks
