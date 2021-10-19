@@ -113,7 +113,7 @@ return require("packer").startup(function(use)
   use({
     "jubnzv/virtual-types.nvim",
     config = function()
-      vim.cmd("hi! link TypeAnnot Comment")
+      vim.cmd("autocmd FileType ocaml hi! link TypeAnnot Comment")
     end,
   })
 

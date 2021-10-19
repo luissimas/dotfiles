@@ -13,7 +13,7 @@ export BROWSER="qutebrowser"
 export READER="zathura"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40% --preview 'bat {} --color=always -p'"
+export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40%" # --preview 'bat {} --color=always -p'"
 
 
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
