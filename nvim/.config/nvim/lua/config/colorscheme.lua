@@ -35,7 +35,7 @@ vim.g.nord_italic = true
 
 local M = {}
 
-M.lualine_colorscheme = "tokyonight"
-M.colorscheme = "tokyonight"
+M.colorscheme = "base16-material-palenight"
+M.lualine_colorscheme = "palenight"
 
 return M

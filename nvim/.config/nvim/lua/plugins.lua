@@ -49,14 +49,6 @@ return require("packer").startup(function(use)
   })
 
   -- Completion
-  -- use({
-  --   "hrsh7th/nvim-compe",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("plug.compe")
-  --   end,
-  -- })
-
   use({
     "hrsh7th/nvim-cmp",
     config = function()
@@ -239,15 +231,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Highlight words under cursor
-  use({
-    "RRethy/vim-illuminate",
-    event = "BufRead",
-    config = function()
-      require("plug.illuminate")
-    end,
-  })
-
   -- Highlight comments
   use({
     "folke/todo-comments.nvim",
@@ -290,12 +273,6 @@ return require("packer").startup(function(use)
     "folke/lua-dev.nvim",
   })
 
-  -- Lua 5.1 reference manual
-  use({
-    "milisims/nvim-luaref",
-    ft = "lua",
-  })
-
   -- Spellcheck with treesitter
   use({
     "lewis6991/spellsitter.nvim",
@@ -314,9 +291,9 @@ return require("packer").startup(function(use)
   use("folke/lsp-colors.nvim") -- Adds LSP colors for themes that don't yet support them
   use("folke/tokyonight.nvim")
   use("ishan9299/modus-theme-vim")
-  use("EdenEast/nightfox.nvim")
   use("shaunsingh/nord.nvim")
   use("projekt0n/github-nvim-theme")
+  use("RRethy/nvim-base16")
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Personal plugins
