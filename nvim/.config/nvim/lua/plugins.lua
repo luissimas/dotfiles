@@ -315,6 +315,8 @@ return require("packer").startup(function(use)
   use("folke/tokyonight.nvim")
   use("ishan9299/modus-theme-vim")
   use("EdenEast/nightfox.nvim")
+  use("shaunsingh/nord.nvim")
+  use("projekt0n/github-nvim-theme")
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Personal plugins

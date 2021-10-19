@@ -9,7 +9,7 @@
 --
 --
 -- This is the main file init.lua, here we can source all the other config
---  files. The idea is to keep things more modular and extensible.
+-- files. The idea is to keep things more modular and extensible.
 --
 
 -- General
@@ -23,5 +23,5 @@ require("config.lsp")
 -- Setting colorscheme
 vim.cmd("colorscheme " .. require("config.colorscheme").colorscheme)
 
--- Pretty useful, command to close all buffers except the current one, maybe I'll put this in a keymap later
+-- Pretty useful command to close all buffers except the current one, maybe I'll put this in a keymap later
 vim.cmd("command ClearBuffers %bd<bar>e#<bar>bd#")

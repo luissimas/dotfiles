@@ -15,8 +15,14 @@ fun! TrimWhitespace()
   call winrestview(l:save)
 endfun
 
-autocmd Filetype markdown :set nowrap&
-autocmd Filetype pandoc :set nowrap&
+augroup Markdown
+  autocmd!
+  autocmd Filetype markdown :set nowrap&
+  autocmd Filetype pandoc :set nowrap&
+
+  autocmd Filetype markdown :nnoremap j gj
+  autocmd Filetype markdown :nnoremap k gk
+augroup END
 
 " Hidding tabline in vimwiki buffers
 autocmd Filetype vimwiki :setlocal showtabline=0

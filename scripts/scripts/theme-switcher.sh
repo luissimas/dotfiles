@@ -44,7 +44,7 @@ case $option in "Pywal")
 
   case $selected in "Palenight")
     theme="base16-material-palenight"
-    feh --bg-fill ~/.wal/palenight2.jpg
+    feh --bg-fill ~/.wal/palenight.jpg
     ;;
   "Rosé Pine")
     theme=~/.config/wal/colorschemes/rosepine.json

@@ -137,6 +137,7 @@
   (pada/nmap
     "x" '(execute-extended-command :which-key "M-x")
     "h" (general-simulate-key "C-h" :which-key "Help")
+    "w" (general-simulate-key "C-w" :which-key "Window")
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
     "fF" '(find-file :which-key "Find file in CWD")
@@ -625,11 +626,12 @@
 (use-package speed-type)
 
 ;; Spotify client
-;; (use-package consult-spotify
-;;   :config
-;;   (setq espotify-client-id (pada/get-private-key 'spotify-client-id)
-;;         espotify-client-secret (pada/get-private-key 'spotify-client-secret)
-;;         espotify-service-name "mopidy"))
+(use-package consult-spotify
+  :config
+  (setq espotify-client-id (pada/get-private-key 'spotify-client-id)
+        espotify-client-secret (pada/get-private-key 'spotify-client-secret)
+        espotify-service-name "mopidy"
+        espotify-use-system-bus-p nil))
 
 (defun pada/bspwm-colors (&rest _)
   "Apply pywal colors to bspwm."
