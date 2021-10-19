@@ -33,12 +33,14 @@ require("telescope").setup({
     mappings = {
       i = {
         ["<C-s>"] = actions.file_vsplit,
+        ["<C-x>"] = actions.file_split,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-t>"] = trouble.open_with_trouble,
       },
       n = {
         ["<C-s>"] = actions.file_vsplit,
+        ["<C-x>"] = actions.file_split,
         ["<leader>q"] = actions.close,
         ["<leader>c"] = actions.close,
         ["<C-t>"] = trouble.open_with_trouble,
