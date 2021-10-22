@@ -8,7 +8,7 @@ export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
 
 # Exports
-export TERM="screen-256color"
+export TERM="xterm-256color"
 export BROWSER="qutebrowser"
 export READER="zathura"
 export EDITOR="nvim"
