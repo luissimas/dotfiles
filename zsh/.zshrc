@@ -71,7 +71,6 @@ alias tree='exa -T --icons'
 alias grep='rg'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias c='customcd'
 alias addall='git add -A'
 alias commit='git commit'
 alias pull='git pull origin'
@@ -94,7 +93,7 @@ alias recompile='sudo ~/scripts/recompile-suckless.sh'
 alias hbt='python ~/fun/python/habitica-cli-py/main.py'
 
 # Custom cd function
-customcd () {
+c () {
   cd $1 && exa -la --no-user --time-style long-iso --icons
 }
 
@@ -169,7 +168,3 @@ prompt spaceship
 
 # opam configuration
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
