@@ -91,6 +91,7 @@ nvidia-utils
 nvtop
 obs-studio
 obsidian-appimage
+onboard
 opam
 pacman
 pamixer
@@ -179,6 +180,7 @@ which
 wine
 wireless_tools
 xclip
+xdotool
 xf86-video-amdgpu
 xf86-video-vesa
 xorg-bdftopcf

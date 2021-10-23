@@ -18,7 +18,7 @@ vim.api.nvim_set_keymap("i", "!", "!<C-g>u", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "?", "?<C-g>u", { noremap = true, silent = true })
 
 -- Emacs-like M-x
-vim.api.nvim_set_keymap("n", "<M-x>", '<cmd>lua require("telepada").mx()<Enter>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>x", '<cmd>lua require("telepada").mx()<Enter>', { noremap = true, silent = true })
 
 -- Close window
 -- vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", {noremap = true, silent = true})
@@ -37,10 +37,10 @@ vim.api.nvim_set_keymap("n", "<C-x>", ":split<Enter>", { noremap = true, silent 
 -- vim.api.nvim_set_keymap("n", "<leader>sk", ":set spell!<Enter>", {noremap = true, silent = true})
 
 -- Move to begin/end of line with L and H
-vim.api.nvim_set_keymap("n", "<S-l>", "$", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-h>", "0", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-l>", "$", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-l>", "g$", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-h>", "g0", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-l>", "g$", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-h>", "g0", { noremap = true, silent = true })
 
 -- Move visually selected lines up and down
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<Enter>gv=gv", { noremap = true, silent = true })

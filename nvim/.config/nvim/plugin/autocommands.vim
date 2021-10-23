@@ -22,6 +22,7 @@ augroup Markdown
 
   autocmd Filetype markdown :nnoremap j gj
   autocmd Filetype markdown :nnoremap k gk
+  autocmd Filetype markdown :set spell
 augroup END
 
 " Hidding tabline in vimwiki buffers

@@ -16,10 +16,9 @@ return require("packer").startup(function(use)
   use({ "wbthomason/packer.nvim", opt = true })
 
   -- Ui API for plugins
-  use("nvim-lua/popup.nvim")
+  --  use("nvim-lua/popup.nvim")
 
   -- Utility functions for various plugins
-  use("nvim-lua/plenary.nvim")
 
   -- Lsp Config layer
   use({
@@ -54,15 +53,16 @@ return require("packer").startup(function(use)
     config = function()
       require("plug.cmp")
     end,
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-calc",
+      "f3fora/cmp-spell",
+      "quangnguyen30192/cmp-nvim-ultisnips",
+    },
   })
-
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-nvim-lua")
-  use("hrsh7th/cmp-calc")
-  use("f3fora/cmp-spell")
-  use("quangnguyen30192/cmp-nvim-ultisnips")
 
   -- The ultimate fuzzy finder
   use({
@@ -71,6 +71,7 @@ return require("packer").startup(function(use)
       require("plug.telescope")
     end,
     requires = {
+      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzy-native.nvim",
       "luissimas/telescope-nodescripts.nvim",
     },
@@ -225,7 +226,6 @@ return require("packer").startup(function(use)
   -- Colors in hex color codes
   use({
     "norcalli/nvim-colorizer.lua",
-    event = "BufRead",
     config = function()
       require("plug.colorizer")
     end,
@@ -260,13 +260,13 @@ return require("packer").startup(function(use)
   })
 
   -- Git blame and signs
-  use({
-    "lewis6991/gitsigns.nvim",
-    event = "BufRead",
-    config = function()
-      require("plug.gitsigns")
-    end,
-  })
+  -- use({
+  --   "lewis6991/gitsigns.nvim",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("plug.gitsigns")
+  --   end,
+  -- })
 
   -- Docs and completion for nvim lua API
   use({
@@ -293,6 +293,10 @@ return require("packer").startup(function(use)
   use("ishan9299/modus-theme-vim")
   use("shaunsingh/nord.nvim")
   use("projekt0n/github-nvim-theme")
+  use({
+    "mcchrish/zenbones.nvim",
+    requires = "rktjmp/lush.nvim",
+  })
   use("RRethy/nvim-base16")
   use({ "rose-pine/neovim", as = "rose-pine" })
 

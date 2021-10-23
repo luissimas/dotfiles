@@ -24,18 +24,26 @@ v.tokyonight_colors = {
   bg_statusline = "bg",
 }
 
-vim.g.rose_pine_variant = "base"
-vim.g.rose_pine_enable_italics = true
-vim.g.rose_pine_disable_background = false
+v.rose_pine_variant = "base"
+v.rose_pine_enable_italics = true
+v.rose_pine_disable_background = false
 
-vim.g.nord_contrast = true
-vim.g.nord_borders = false
-vim.g.nord_disable_background = false
-vim.g.nord_italic = true
+v.nord_contrast = true
+v.nord_borders = false
+v.nord_disable_background = false
+v.nord_italic = true
+
+v.zenflesh_darkness = "stark"
 
 local M = {}
 
 M.colorscheme = "base16-material-palenight"
 M.lualine_colorscheme = "palenight"
+
+-- M.colorscheme = "tokyonight"
+-- M.lualine_colorscheme = "tokyonight"
+
+-- M.colorscheme = "zenflesh"
+-- M.lualine_colorscheme = "zenflesh"
 
 return M

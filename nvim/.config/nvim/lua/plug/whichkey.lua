@@ -53,7 +53,7 @@ whichkey.register({
     b = {
       name = "Buffer",
       k = { "<cmd>bp <bar> vs <bar> bn <bar> bd <Enter>", "Kill buffer" },
-      l = { "", "Switch to last buffer" },
+      l = { "<C-^>", "Switch to last buffer" },
       b = { '<cmd>lua require("telepada").switch_buffer()<Enter>', "Switch buffer" },
     },
     c = {

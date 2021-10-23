@@ -38,13 +38,11 @@ cmp.setup({
   sources = {
     { name = "nvim_lsp" },
     { name = "ultisnips" },
-    { name = "buffer" },
     { name = "orgmode" },
     { name = "path" },
     { name = "nvim_lua" },
     { name = "calc" },
-    { name = "calc" },
-    { name = "spell" },
+    --{ name = "spell" },
   },
   experimental = {
     native_menu = false,
