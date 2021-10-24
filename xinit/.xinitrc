@@ -15,11 +15,11 @@ else
 fi
 
 unclutter --timeout 1 &
-~/.fehbg &
+#~/.fehbg &
 wal -R &
 #picom &
 mopidy &
-emacs --daemon &
+#emacs --daemon &
 
 # Redshift controlling backlight temperature and color
 redshift -b 1:0.5 -l -27.59667:-48.54917 &

@@ -30,7 +30,7 @@ case $option in "Pywal")
       printf "Done.\n\n"
 
       # Update bspwm colors
-      bspwmcolors.sh
+      bspwmcolors
 
       # Update betterlockscreen (takes a while)
       printf "Setting lock screen...\n"
@@ -40,19 +40,19 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Palenight\nTokyonight\nRosé Pine' | rofi -dmenu -i -p "Source")
+  selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine' | rofi -dmenu -i -p "Source")
 
   case $selected in "Palenight")
     theme="base16-material-palenight"
-    feh --bg-fill ~/.wal/palenight.jpg
+    ;;
+  "Gruvbox")
+    theme="base16-gruvbox-hard"
     ;;
   "Rosé Pine")
     theme=~/.config/wal/colorschemes/rosepine.json
-    feh --bg-fill ~/.wal/sunset.png
     ;;
   "Tokyonight")
     theme=~/.config/wal/colorschemes/tokyonight.json
-    feh --bg-fill ~/.wal/traintunnel.jpg
     ;;
   *) printf "No option selected."
   esac
@@ -60,7 +60,7 @@ case $option in "Pywal")
   wal --theme $theme
 
   # Update bspwm colors
-  bspwmcolors.sh
+  bspwmcolors
 
   # Update qutebrowser colors
   pgrep qutebrowser > /dev/null && qutebrowser :config-source

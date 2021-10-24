@@ -5,7 +5,7 @@ xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 ~/.config/polybar/launch.sh
-~/.config/bspwm/scripts/bspwmcolors.sh
+~/.config/bspwm/scripts/bspwmcolors
 
 #bspc monitor -d Δ Θ Π Ψ Ω
 bspc monitor -d 1 2 3 4 5
