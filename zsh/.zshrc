@@ -168,3 +168,6 @@ prompt spaceship
 
 # opam configuration
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# always attach to a tmux session
+ta
