@@ -17,7 +17,6 @@ vim.o.smartcase = true
 vim.o.incsearch = true
 
 -- Recover files
-vim.o.backup = false
 vim.o.swapfile = false
 vim.o.undofile = true
 
@@ -37,7 +36,7 @@ vim.o.showtabline = 0 -- never show tablines
 vim.o.signcolumn = "yes" -- set signcolumn display
 vim.o.completeopt = "menuone,noinsert" -- completion options
 -- vim.o.colorcolumn = "80" -- column for visual indent guideline
-vim.o.updatetime = 200 -- time for CursorHold event
+vim.o.updatetime = 2000 -- time for CursorHold event
 vim.o.clipboard = "unnamedplus" -- setting clipboard to system's
 vim.opt.shortmess = vim.opt.shortmess + "c" -- disable completion item messages
 vim.g.mapleader = " " -- leader key
@@ -57,7 +56,8 @@ function _G.gitbranch()
   return ""
 end
 
-vim.opt.statusline = " %{v:lua.gitbranch()}%f %m %r %= %y %p%% "
+-- vim.o.statusline = " %{v:lua.gitbranch()}%f %m %r %= %y %p%% "
+vim.o.statusline = " %f %m %r %= %y %p%% "
 
 -- Trim whitespace on save
 vim.api.nvim_exec(
@@ -200,7 +200,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local servers = {
-  "clangd", "tsserver", "elixirls", "bashls", "vimls", "jsonls", "html", "cssls", "ocamllsp", "bashls"
+  "clangd", "tsserver", "bashls", "vimls", "jsonls", "html", "cssls", "ocamllsp"
 }
 
 for _, server in ipairs(servers) do
@@ -238,6 +238,15 @@ nvim_lsp.sumneko_lua.setup {
       },
     },
   },
+}
+
+nvim_lsp.elixirls.setup {
+  cmd = { vim.fn.expand("~/repos/elixir-ls/language_server.sh") },
+    settings = {
+      elixirLS = {
+        dialyzerEnabled = false,
+      },
+    },
 }
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
