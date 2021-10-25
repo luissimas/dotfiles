@@ -36,7 +36,7 @@ vim.o.showtabline = 0 -- never show tablines
 vim.o.signcolumn = "yes" -- set signcolumn display
 vim.o.completeopt = "menuone,noinsert" -- completion options
 -- vim.o.colorcolumn = "80" -- column for visual indent guideline
-vim.o.updatetime = 2000 -- time for CursorHold event
+vim.o.updatetime = 200 -- time for CursorHold event
 vim.o.clipboard = "unnamedplus" -- setting clipboard to system's
 vim.opt.shortmess = vim.opt.shortmess + "c" -- disable completion item messages
 vim.g.mapleader = " " -- leader key
@@ -59,6 +59,48 @@ end
 -- vim.o.statusline = " %{v:lua.gitbranch()}%f %m %r %= %y %p%% "
 vim.o.statusline = " %f %m %r %= %y %p%% "
 
+-- Quickfixlist
+vim.api.nvim_exec(
+  [[
+  augroup QuickFixSettings
+    autocmd!
+    autocmd BufWrite,BufEnter,InsertLeave * lua vim.diagnostic.setloclist({ open = false })
+    autocmd FileType qf set nonumber
+    autocmd FileType qf set norelativenumber
+    autocmd FileType qf set signcolumn="no"
+    autocmd FileType qf map <buffer> q :cclose<Enter>
+  augroup end
+]],
+    false
+)
+
+vim.api.nvim_set_keymap("n", "<C-q>", ":copen<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<C-n>", ":cnext<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<C-p>", ":cprev<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>l", ":lopen<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>n", ":lnext<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>p", ":lprev<Enter>", { noremap=true, silent=true })
+
+-- Netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 15
+vim.g.netrw_browse_split = 4
+vim.g.netrw_hide = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_list_hide = [[node_modules,\.git]]
+
+vim.api.nvim_exec(
+  [[
+  augroup NetrwSettings
+    autocmd!
+    autocmd FileType netrw setlocal bufhidden=wipe
+  augroup end
+]],
+  false
+)
+
+vim.api.nvim_set_keymap("n", "<leader>e", ":Lexplore<Enter>", { noremap=true, silent=true })
+
 -- Trim whitespace on save
 vim.api.nvim_exec(
   [[
@@ -73,7 +115,19 @@ vim.api.nvim_exec(
     autocmd BufWritePre * call TrimWhitespace()
   augroup end
 ]],
-false)
+  false
+)
+
+-- Highlight on yank
+vim.api.nvim_exec(
+  [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank({ timeout = 100 })
+  augroup end
+]],
+  false
+)
 
 -- Packer bootstrap
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -96,16 +150,17 @@ vim.api.nvim_exec(
 -- Plugins
 require("packer").startup({function(use)
   use "wbthomason/packer.nvim" -- Package manager
-  use "nvim-treesitter/nvim-treesitter" -- Treesitter
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- Treesitter
   use "neovim/nvim-lspconfig" -- LSP client configuration
   use "hrsh7th/nvim-cmp" -- Autocompletion
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
   use "hrsh7th/cmp-path"
-  use "RRethy/nvim-base16" -- Colorschemes
-  use "aserowy/tmux.nvim" -- Tmux navigation
   use "SirVer/UltiSnips" -- Snippets engine
   use "honza/vim-snippets" -- Snippets collection
+  use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } } -- Fuzzy finder
+  use "aserowy/tmux.nvim" -- Tmux navigation
+  use "RRethy/nvim-base16" -- Colorschemes
 
   -- Automatically set up packer after cloning it
   if Bootstraped then
@@ -258,12 +313,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = true,
 })
 
+-- UltiSnips
 vim.g.UltiSniptsEditSplit = "normal"
 vim.g.UltiSnipsSnippetDirectories = { "ultisnips" }
 vim.g.UltiSnipsExpandTrigger = "<C-e>"
 vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
 vim.g.UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
+-- Cmp
 local cmp = require("cmp")
 
 cmp.setup({
@@ -295,3 +352,41 @@ cmp.setup({
       ghost_text = true,
     },
 })
+
+-- Telescope
+require("telescope").setup {
+  defaults = {
+    prompt_prefix = " ",
+        selection_caret = " ",
+        entry_prefix = " ",
+        sorting_strategy = "descending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            preview_width = 0.6,
+          },
+        },
+        mappings = {
+          i = {
+            ["<C-s>"] = "file_vsplit",
+            ["<C-x>"] = "file_split",
+            ["<C-k>"] = "move_selection_previous",
+            ["<C-j>"] = "move_selection_next",
+          },
+          n = {
+            ["<C-s>"] = "file_vsplit",
+            ["<C-x>"] = "file_split",
+            ["<leader>q"] = "close",
+          }
+        },
+        file_ignore_patterns = { "node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf" },
+      }
+}
+
+vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>fs", ":Telescope grep_string<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>fh", ":Telescope help_tags<Enter>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<leader>fm", ":Telescope man_pages<Enter>", { noremap=true, silent=true })
+
