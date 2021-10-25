@@ -166,6 +166,18 @@ vim.cmd "colorscheme base16-gruvbox-dark-hard"
 vim.cmd "hi VertSplit guifg=bg"
 vim.cmd "hi NonText guifg=bg"
 
+-- Treesitter
+require("nvim-treesitter.configs").setup({
+  ensure_installed = "all",
+
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+})
+
 -- LSP settings
 local nvim_lsp = require("lspconfig")
 local on_attach = function(_, bufnr)
@@ -185,7 +197,7 @@ local on_attach = function(_, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local servers = {
   "clangd", "tsserver", "elixirls", "bashls", "vimls", "jsonls", "html", "cssls", "ocamllsp", "bashls"
@@ -228,15 +240,27 @@ nvim_lsp.sumneko_lua.setup {
   },
 }
 
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+})
+
+vim.g.UltiSniptsEditSplit = "normal"
+vim.g.UltiSnipsSnippetDirectories = { "ultisnips" }
+vim.g.UltiSnipsExpandTrigger = "<C-e>"
+vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<S-tab>"
+
 local cmp = require("cmp")
 
 cmp.setup({
   completion = {
-    keyword_lenght = 3,
+    keyword_length = 3,
   },
   snippet = {
     expand = function(args)
-      -- For `ultisnips` user.
       vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
