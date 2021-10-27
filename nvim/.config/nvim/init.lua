@@ -255,6 +255,12 @@ require("neogit").setup {
     item = { "○", "●" },
     hunk = { "", "" },
   },
+  mappings = {
+    status = {
+      ["P"] = "PullPopup",
+      ["p"] = "PushPopup",
+    },
+  },
 }
 
 vim.api.nvim_set_keymap("n", "<leader>gs", ":Neogit <Enter>", { noremap = true, silent = true })

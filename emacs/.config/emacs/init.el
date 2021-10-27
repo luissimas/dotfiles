@@ -269,7 +269,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-palenight t))
+  (load-theme 'doom-gruvbox t))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
