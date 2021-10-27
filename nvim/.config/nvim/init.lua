@@ -250,6 +250,7 @@ require("gitsigns").setup {
 
 -- Neogit
 require("neogit").setup {
+  disable_commit_confirmation = true,
   signs = {
     section = { "○", "●" },
     item = { "○", "●" },
