@@ -69,6 +69,9 @@ require("packer").startup {
     use "RRethy/nvim-base16"
     use "onsails/lspkind-nvim"
     use "lewis6991/gitsigns.nvim"
+    use "TimUntersberger/neogit"
+    use "windwp/nvim-autopairs"
+    use "b3nj5m1n/kommentary"
 
     -- Automatically set up packer after cloning it
     if Bootstraped then
@@ -244,3 +247,33 @@ require("gitsigns").setup {
     ["n <leader>gb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
   },
 }
+
+-- Neogit
+require("neogit").setup {
+  signs = {
+    section = { "○", "●" },
+    item = { "○", "●" },
+    hunk = { "", "" },
+  },
+}
+
+vim.api.nvim_set_keymap("n", "<leader>gs", ":Neogit <Enter>", { noremap = true, silent = true })
+
+-- Autopairs
+require("nvim-autopairs").setup()
+
+require("nvim-autopairs.completion.cmp").setup {
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = false, -- it will auto insert `(` (map_char) after select function or method item
+  auto_select = false, -- automatically select the first item
+  insert = false, -- use insert confirm behavior instead of replace
+  map_char = { -- modifies the function or method delimiter by filetypes
+    all = "(",
+    tex = "{",
+  },
+}
+
+-- Comments
+require("kommentary.config").configure_language("default", {
+  prefer_single_line_comments = true,
+})
