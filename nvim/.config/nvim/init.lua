@@ -30,6 +30,17 @@ vim.api.nvim_exec(
   false
 )
 
+-- Disable comment continuation
+vim.api.nvim_exec(
+  [[
+  augroup DisableCommentContinuation
+    autocmd!
+    autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  augroup end
+  ]],
+  false
+)
+
 -- Packer bootstrap
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
@@ -260,20 +271,19 @@ require("gitsigns").setup {
 }
 
 -- Neogit
-require("neogit").setup {
+local neogit = require "neogit"
+
+neogit.setup {
   disable_commit_confirmation = true,
+  disable_hint = true,
   signs = {
     section = { "○", "●" },
     item = { "○", "●" },
     hunk = { "", "" },
   },
-  mappings = {
-    status = {
-      ["P"] = "PullPopup",
-      ["p"] = "PushPopup",
-    },
-  },
 }
+
+neogit.config.use_magit_keybindings()
 
 vim.api.nvim_set_keymap("n", "<leader>gs", ":Neogit <Enter>", { noremap = true, silent = true })
 
