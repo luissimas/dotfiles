@@ -28,7 +28,23 @@ local null_ls = require "null-ls"
 
 null_ls.config {
   sources = {
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettier.with {
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "svelte",
+        "css",
+        "scss",
+        "less",
+        "html",
+        "json",
+        "yaml",
+        "graphql",
+      },
+    },
     null_ls.builtins.formatting.mix,
     null_ls.builtins.formatting.sqlformat,
     null_ls.builtins.formatting.stylua,
