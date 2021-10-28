@@ -36,7 +36,6 @@ null_ls.config {
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.vint,
   },
 }
 
@@ -58,7 +57,12 @@ local on_attach = function(client, bufnr)
 
   -- Enabling only null-ls formatting
   if client.name == "null-ls" and client.resolved_capabilities.document_formatting then
-    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
+    vim.cmd [[
+    augroup LspFormatting
+      autocmd!
+      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+    augroup end
+    ]]
   else
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false

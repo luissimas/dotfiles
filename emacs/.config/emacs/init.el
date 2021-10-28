@@ -200,7 +200,7 @@
 (use-package orderless
   :config
   (setq completion-styles '(orderless)
-        orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
+        orderless-matching-styles '(orderless-flex orderless-regexp)))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist

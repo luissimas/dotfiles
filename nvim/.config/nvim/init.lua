@@ -72,6 +72,7 @@ require("packer").startup {
     use "TimUntersberger/neogit"
     use "windwp/nvim-autopairs"
     use "b3nj5m1n/kommentary"
+    use "ahmedkhalf/project.nvim"
 
     -- Automatically set up packer after cloning it
     if Bootstraped then
@@ -130,11 +131,18 @@ require("tmux").setup {
   },
 }
 
-vim.cmd "colorscheme base16-gruvbox-dark-hard"
+vim.api.nvim_exec(
+  [[
+  augroup ColorschemeHighlights
+    autocmd!
+    autocmd ColorScheme * hi VertSplit guifg=bg
+    autocmd ColorScheme * hi NonText guifg=bg
+  augroup end
+  ]],
+  false
+)
 
--- Setting highlights
-vim.cmd "hi VertSplit guifg=bg"
-vim.cmd "hi NonText guifg=bg"
+vim.cmd "colorscheme base16-material-palenight"
 
 -- Treesitter
 require("nvim-treesitter.configs").setup {
@@ -234,12 +242,15 @@ require("telescope").setup {
   },
 }
 
+require("telescope").load_extension "projects"
+
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fw", ":Telescope grep_string<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bb", ":Telescope buffers<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fh", ":Telescope help_tags<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fm", ":Telescope man_pages<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope projects<Enter>", { noremap = true, silent = true })
 
 -- Gitsigns
 require("gitsigns").setup {
@@ -269,18 +280,13 @@ vim.api.nvim_set_keymap("n", "<leader>gs", ":Neogit <Enter>", { noremap = true, 
 -- Autopairs
 require("nvim-autopairs").setup()
 
-require("nvim-autopairs.completion.cmp").setup {
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = false, -- it will auto insert `(` (map_char) after select function or method item
-  auto_select = false, -- automatically select the first item
-  insert = false, -- use insert confirm behavior instead of replace
-  map_char = { -- modifies the function or method delimiter by filetypes
-    all = "(",
-    tex = "{",
-  },
-}
-
 -- Comments
 require("kommentary.config").configure_language("default", {
   prefer_single_line_comments = true,
 })
+
+-- Projects
+require("project_nvim").setup {
+  ignore_lsp = { "null-ls" },
+  show_hidden = true,
+}
