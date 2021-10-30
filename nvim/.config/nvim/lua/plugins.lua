@@ -17,7 +17,7 @@ vim.api.nvim_exec(
 )
 
 local function cfg(plugin)
-  require("config." .. plugin)
+  return "require('config." .. plugin .. "')"
 end
 
 -- Plugins
@@ -37,6 +37,7 @@ require("packer").startup {
     use { "SirVer/UltiSnips", config = cfg "ultisnips" }
     use "honza/vim-snippets"
     use { "nvim-telescope/telescope.nvim", config = cfg "telescope" }
+    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "aserowy/tmux.nvim", config = cfg "tmux" }
     use "RRethy/nvim-base16"
     use "onsails/lspkind-nvim"

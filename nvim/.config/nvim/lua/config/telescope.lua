@@ -27,6 +27,7 @@ require("telescope").setup {
   },
 }
 
+require('telescope').load_extension('fzf')
 require("telescope").load_extension "projects"
 
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<Enter>", { noremap = true, silent = true })

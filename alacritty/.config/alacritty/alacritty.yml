@@ -47,6 +47,9 @@ selection:
 
 background_opacity: 1
 
+env:
+  TERM: xterm-256color
+
 # Colors (pywal)
 import:
   - /home/padawan/.cache/wal/colors-alacritty.yml
