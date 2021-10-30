@@ -269,7 +269,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'doom-palenight t))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
@@ -637,11 +637,11 @@
   "Apply pywal colors to bspwm."
   (start-process-shell-command "Bspwm colors" nil "~/.config/bspwm/scripts/bspwmcolors.sh >/dev/null"))
 
-(use-package theme-magic
-  :config
-  (setq theme-magic--theming-functions '(load-theme))
-  (advice-add 'theme-magic-from-emacs--wrapper :after 'pada/bspwm-colors)
-  (theme-magic-export-theme-mode))
+;; (use-package theme-magic
+;;   :config
+;;   (setq theme-magic--theming-functions '(load-theme))
+;;   (advice-add 'theme-magic-from-emacs--wrapper :after 'pada/bspwm-colors)
+;;   (theme-magic-export-theme-mode))
 
 (defun pada/load-theme (theme)
   "Improvement over the default `load-theme'.  Load THEME and disable all themes that were loaded before."

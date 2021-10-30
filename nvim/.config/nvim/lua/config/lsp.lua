@@ -1,4 +1,3 @@
--- LSP settings
 local nvim_lsp = require "lspconfig"
 local border = "single"
 
@@ -71,8 +70,8 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<leader>rn", ":lua vim.lsp.buf.rename()<Enter>", opts)
   map(bufnr, "n", "<leader>ca", ":lua vim.lsp.buf.code_action()<Enter>", opts)
 
-  -- Enabling only null-ls formatting
-  if client.name == "null-ls" and client.resolved_capabilities.document_formatting then
+  -- Enabling formatting
+  if (client.name == "null-ls" or client.name == "clangd") and client.resolved_capabilities.document_formatting then
     vim.cmd [[
     augroup LspFormatting
       autocmd!
