@@ -26,6 +26,7 @@ telescope.setup {
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
     buffer_previewer_maker = custom_preview,
+    winblend = 30,
     layout_config = {
       horizontal = {
         preview_width = 0.6,
@@ -44,7 +45,31 @@ telescope.setup {
         ["<leader>q"] = "close",
       },
     },
-    file_ignore_patterns = { "node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf" },
+    file_ignore_patterns = { "^.git", "node_modules", "_build", ".elixir_ls", "%.png", "%.jpg", "%.jpeg", "%.pdf" },
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+    current_buffer_fuzzy_find = {
+      sorting_strategy = "ascending",
+      layout_config = {
+        prompt_position = "top",
+      },
+    },
+    git_branches = {
+      theme = "dropdown",
+    },
+    buffers = {
+      ignore_current_buffer = true,
+      cwd_only = true,
+      sort_mru = true,
+    },
+    colorscheme = {
+      enable_preview = true,
+      theme = "dropdown",
+      -- previewer = false,
+    },
   },
 }
 
@@ -66,6 +91,7 @@ vim.api.nvim_set_keymap("n", "<leader>fb", builtin "current_buffer_fuzzy_find", 
 vim.api.nvim_set_keymap("n", "<leader>fh", builtin "help_tags", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fm", builtin "man_pages", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>bb", builtin "buffers", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gb", builtin "git_branches", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fp", ":Telescope projects<Enter>", { noremap = true, silent = true })
 
 -- Custom pickers

@@ -25,6 +25,7 @@ require("packer").startup {
   function(use)
     use "wbthomason/packer.nvim"
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = cfg "treesitter" }
+    use "p00f/nvim-ts-rainbow"
     use { "neovim/nvim-lspconfig", config = cfg "lsp" }
     use "jose-elias-alvarez/null-ls.nvim"
     use "nvim-lua/plenary.nvim"
