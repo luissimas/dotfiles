@@ -70,7 +70,8 @@ vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
 -- Close transient windows with "q"
 vim.cmd [[
   augroup CloseWindows
-    autocmd FileType help,qf,lspinfo map <buffer><silent> q :quit<Enter>
+    autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :quit<Enter>
+    autocmd FileType netrw nnoremap <buffer><silent> q :blast<Enter>
   augroup end
 ]]
 
@@ -139,17 +140,21 @@ vim.cmd [[
 -- Netrw
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = -25
-vim.g.netrw_browse_split = 4
+-- vim.g.netrw_browse_split = 4
 vim.g.netrw_hide = 0
-vim.g.netrw_liststyle = 3
+vim.g.netrw_fastbrowse = 0
+-- vim.g.netrw_liststyle = 3
 vim.g.netrw_list_hide = [[node_modules,\.git]]
 
 vim.cmd [[
   augroup NetrwSettings
     autocmd!
+    autocmd FileType netrw silent! unmap <buffer> qf
+    autocmd FileType netrw silent! unmap <buffer> qb
+    autocmd FileType netrw silent! unmap <buffer> qL
+    autocmd FileType netrw silent! unmap <buffer> qF
     autocmd FileType netrw setlocal bufhidden=wipe
-    autocmd FileType netrw setlocal statusline=%=
   augroup end
 ]]
 
-vim.api.nvim_set_keymap("n", "<leader>e", ":Lexplore<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>e", ":Explore<Enter>", { noremap = true, silent = true })
