@@ -14,7 +14,7 @@ else
 fi
 
 unclutter --timeout 1 &
-#~/.fehbg &
+~/.fehbg &
 wal -R &
 #picom &
 mopidy &

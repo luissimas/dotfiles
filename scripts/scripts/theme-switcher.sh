@@ -44,20 +44,26 @@ case $option in "Pywal")
 
   case $selected in "Palenight")
     theme="base16-material-palenight"
+    bg=~/.wal/palenight.jpg
     ;;
   "Gruvbox")
     theme="base16-gruvbox-hard"
+    bg=~/.wal/forestfog.jpg
     ;;
   "Rosé Pine")
     theme=~/.config/wal/colorschemes/rosepine.json
+    bg=~/.wal/rosessky.jpg
     ;;
   "Tokyonight")
     theme=~/.config/wal/colorschemes/tokyonight.json
+    bg=~/.wal/traintunnel.jpg
     ;;
   *) printf "No option selected."
   esac
 
   wal --theme $theme
+
+  feh --bg-fill $bg
 
   # Update bspwm colors
   bspwmcolors
