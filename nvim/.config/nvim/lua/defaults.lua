@@ -67,6 +67,16 @@ vim.api.nvim_set_keymap("n", "<S-h>", "0", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<S-l>", "$", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<S-h>", "0", { noremap = true, silent = true })
 
+-- Keeping cursor centered after search movements
+vim.api.nvim_set_keymap("n", "n", "nzzzv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "N", "Nzzzv", { noremap = true, silent = true })
+
+-- Undo breakpoints
+vim.api.nvim_set_keymap("i", ",", ",<C-g>u", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", ".", ".<C-g>u", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "!", "!<C-g>u", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "?", "?<C-g>u", { noremap = true, silent = true })
+
 -- Close transient windows with "q"
 vim.cmd [[
   augroup CloseWindows
@@ -101,11 +111,11 @@ vim.cmd [[
 ]]
 
 vim.api.nvim_set_keymap("n", "<C-q>", ":copen<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-n>", ":cnext<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-p>", ":cprev<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-n>", ":cnext<Enter>zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-p>", ":cprev<Enter>zz", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>l", ":lopen<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>n", ":lnext<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>p", ":lprev<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>n", ":lnext<Enter>zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>p", ":lprev<Enter>zz", { noremap = true, silent = true })
 
 -- Trim whitespace on save
 vim.cmd [[
