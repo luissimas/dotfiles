@@ -19,6 +19,7 @@ cmp.setup {
     ["<CR>"] = cmp.mapping.confirm { select = true },
   },
   sources = {
+    { name = "orgmode" },
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "path" },

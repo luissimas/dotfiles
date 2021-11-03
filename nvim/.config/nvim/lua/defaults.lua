@@ -28,6 +28,14 @@ vim.o.undofile = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+-- Conceal
+vim.o.conceallevel = 2
+-- vim.o.concealcursor = "n"
+
+-- Transparency for popup windows
+vim.o.pumblend = 20
+vim.o.winblend = 20
+
 -- Misc
 vim.o.termguicolors = true -- enable true color support
 vim.o.wrap = false -- no line wrap
@@ -42,7 +50,9 @@ vim.o.completeopt = "menuone,noinsert" -- completion options
 -- vim.o.colorcolumn = "80" -- column for visual indent guideline
 vim.o.updatetime = 200 -- time for CursorHold event
 vim.o.clipboard = "unnamedplus" -- setting clipboard to system's
+vim.o.confirm = true -- prompt for saving files instead of throwing errors
 vim.opt.shortmess = vim.opt.shortmess + "c" -- disable completion item messages
+vim.o.spelllang = "pt,en,la" -- spellcheck languages
 
 -- Save and quit
 vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", { noremap = true, silent = true })

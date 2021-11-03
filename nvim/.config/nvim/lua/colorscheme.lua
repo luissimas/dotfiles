@@ -9,4 +9,4 @@ vim.api.nvim_exec(
   false
 )
 
-vim.cmd "colorscheme base16-material-palenight"
+vim.cmd "colorscheme modus-operandi"

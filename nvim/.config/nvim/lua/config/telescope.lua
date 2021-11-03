@@ -26,7 +26,7 @@ telescope.setup {
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
     buffer_previewer_maker = custom_preview,
-    winblend = 30,
+    winblend = 20,
     layout_config = {
       horizontal = {
         preview_width = 0.6,

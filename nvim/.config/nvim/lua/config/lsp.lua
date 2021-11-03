@@ -71,11 +71,13 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<leader>ca", ":lua vim.lsp.buf.code_action()<Enter>", opts)
 
   -- Enabling formatting
-  if (client.name == "null-ls" or client.name == "clangd") and client.resolved_capabilities.document_formatting then
+  if client.name == "null-ls" or client.name == "clangd" then
+    map(bufnr, "n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", opts)
+
     vim.cmd [[
     augroup LspFormatting
       autocmd!
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
     augroup end
     ]]
   else
@@ -84,8 +86,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local servers = {
   "null-ls",
