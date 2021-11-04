@@ -3,7 +3,7 @@ vim.api.nvim_exec(
   augroup ColorschemeHighlights
     autocmd!
     autocmd ColorScheme * hi VertSplit guifg=bg
-    autocmd ColorScheme * hi NonText guifg=bg
+    autocmd ColorScheme * hi EndOfBuffer guifg=bg
   augroup end
   ]],
   false
