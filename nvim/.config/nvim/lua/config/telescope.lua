@@ -85,6 +85,7 @@ local function config(picker)
 end
 
 vim.api.nvim_set_keymap("n", "<leader>ff", config "find_files", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>x", config "m_x", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", builtin "live_grep", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fw", builtin "grep_string", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fb", builtin "current_buffer_fuzzy_find", { noremap = true, silent = true })
@@ -103,6 +104,19 @@ M.find_files = function()
   if not ok then
     require("telescope.builtin").find_files()
   end
+end
+
+M.m_x = function()
+  local opts = {
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 10,
+    },
+  }
+
+  local theme = require("telescope.themes").get_ivy(opts)
+
+  require("telescope.builtin").commands(theme)
 end
 
 return M

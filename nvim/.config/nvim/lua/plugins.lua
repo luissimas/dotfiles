@@ -51,6 +51,7 @@ require("packer").startup {
     use { "lewis6991/spellsitter.nvim", config = cfg "spellsitter" }
     use "kyazdani42/nvim-web-devicons"
     use { "norcalli/nvim-colorizer.lua", config = cfg "colorizer" }
+    use { "folke/todo-comments.nvim", config = cfg "todocomments" }
 
     use "RRethy/nvim-base16"
     use "luissimas/modus-theme-vim"
