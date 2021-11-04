@@ -9,4 +9,4 @@ vim.api.nvim_exec(
   false
 )
 
-vim.cmd "colorscheme modus-operandi"
+vim.cmd "colorscheme modus-vivendi"

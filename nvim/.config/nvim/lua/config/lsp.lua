@@ -92,7 +92,6 @@ local servers = {
   "null-ls",
   "clangd",
   "tsserver",
-  "bashls",
   "vimls",
   "jsonls",
   "html",
@@ -146,4 +145,10 @@ nvim_lsp.elixirls.setup {
       dialyzerEnabled = false,
     },
   },
+}
+
+nvim_lsp.bashls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "sh", "zsh" },
 }

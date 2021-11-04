@@ -40,7 +40,7 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine' | rofi -dmenu -i -p "Source")
+  selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Source")
 
   case $selected in "Palenight")
     theme="base16-material-palenight"
@@ -57,6 +57,12 @@ case $option in "Pywal")
   "Tokyonight")
     theme=~/.config/wal/colorschemes/tokyonight.json
     bg=~/.wal/traintunnel.jpg
+    ;;
+  "Modus Vivendi")
+    theme=~/.config/wal/colorschemes/modus-vivendi.json
+    ;;
+  "Modus Operandi")
+    theme=~/.config/wal/colorschemes/modus-operandi.json
     ;;
   *) printf "No option selected."
   esac
