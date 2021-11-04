@@ -53,7 +53,7 @@ require("packer").startup {
     use { "norcalli/nvim-colorizer.lua", config = cfg "colorizer" }
 
     use "RRethy/nvim-base16"
-    use "ishan9299/modus-theme-vim"
+    use "luissimas/modus-theme-vim"
     use "https://gitlab.com/protesilaos/tempus-themes-vim.git"
 
     -- Automatically set up packer after cloning it
