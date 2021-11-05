@@ -22,3 +22,7 @@ require("nvim-treesitter.configs").setup {
 require("orgmode").setup {
   org_default_notes_file = "~/dox/org/",
 }
+
+require("org-bullets").setup {
+  symbols = { "◉", "○", "✸", "✿" },
+}

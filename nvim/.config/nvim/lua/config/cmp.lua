@@ -20,6 +20,7 @@ cmp.setup {
   },
   sources = {
     { name = "orgmode" },
+    { name = "vim-dadbod-completion" },
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "path" },
@@ -38,6 +39,7 @@ cmp.setup {
         path = "[Path]",
         latex_symbols = "[Latex]",
         ultisnips = "[UltiSnips]",
+        ["vim-dadbod-completion"] = "[DB]",
       },
     },
   },

@@ -47,11 +47,15 @@ require("packer").startup {
     use { "windwp/nvim-autopairs", config = cfg "autopairs" }
     use { "b3nj5m1n/kommentary", config = cfg "comment" }
     use { "ahmedkhalf/project.nvim", config = cfg "project" }
-    use { "kristijanhusak/orgmode.nvim", config = cfg "orgmode", branch = "tree-sitter" }
     use { "lewis6991/spellsitter.nvim", config = cfg "spellsitter" }
     use "kyazdani42/nvim-web-devicons"
     use { "norcalli/nvim-colorizer.lua", config = cfg "colorizer" }
     use { "folke/todo-comments.nvim", config = cfg "todocomments" }
+    use { "kristijanhusak/orgmode.nvim", config = cfg "orgmode", branch = "tree-sitter" }
+    use "akinsho/org-bullets.nvim"
+    use "tpope/vim-dadbod"
+    use "kristijanhusak/vim-dadbod-completion"
+    use { "kristijanhusak/vim-dadbod-ui", config = cfg "dadbod" }
 
     use "RRethy/nvim-base16"
     use "luissimas/modus-theme-vim"
