@@ -90,6 +90,7 @@ vim.api.nvim_set_keymap("i", "?", "?<C-g>u", { noremap = true, silent = true })
 -- Close transient windows with "q"
 vim.cmd [[
   augroup CloseWindows
+    autocmd!
     autocmd FileType help,qf,lspinfo nnoremap <buffer><silent> q :quit<Enter>
     autocmd FileType netrw nnoremap <buffer><silent> q :blast<Enter>
   augroup end
