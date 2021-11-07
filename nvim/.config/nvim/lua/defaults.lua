@@ -33,8 +33,8 @@ vim.o.conceallevel = 2
 -- vim.o.concealcursor = "n"
 
 -- Transparency for popup windows
-vim.o.pumblend = 20
-vim.o.winblend = 20
+vim.o.pumblend = 10
+vim.o.winblend = 10
 
 -- Misc
 vim.o.termguicolors = true -- enable true color support
