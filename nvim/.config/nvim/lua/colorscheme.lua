@@ -9,4 +9,11 @@ vim.api.nvim_exec(
   false
 )
 
-vim.cmd "colorscheme modus-operandi"
+local file = io.open(vim.fn.expand "~/.colorscheme", "r")
+
+if file then
+  local theme = file:read()
+  vim.cmd("colorscheme " .. theme)
+else
+  vim.cmd "colorscheme modus-vivendi"
+end

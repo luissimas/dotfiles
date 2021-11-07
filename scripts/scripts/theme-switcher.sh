@@ -43,26 +43,34 @@ case $option in "Pywal")
   selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Source")
 
   case $selected in "Palenight")
+    name=base16-material-palenight
     theme="base16-material-palenight"
     bg=~/.wal/palenight.jpg
     ;;
   "Gruvbox")
+    name=base16-gruvbox-dark-hard
     theme="base16-gruvbox-hard"
     bg=~/.wal/forestfog.jpg
     ;;
   "Rosé Pine")
+    name=rose-pine
     theme=~/.config/wal/colorschemes/rosepine.json
     bg=~/.wal/rosessky.jpg
     ;;
   "Tokyonight")
+    name=tokyonight
     theme=~/.config/wal/colorschemes/tokyonight.json
     bg=~/.wal/traintunnel.jpg
     ;;
   "Modus Vivendi")
+    name=modus-vivendi
     theme=~/.config/wal/colorschemes/modus-vivendi.json
+    bg=~/.wal/whitemountain.jpg
     ;;
   "Modus Operandi")
+    name=modus-operandi
     theme=~/.config/wal/colorschemes/modus-operandi.json
+    bg=~/.wal/whitemountain.jpg
     ;;
   *) printf "No option selected."
   esac
@@ -70,6 +78,8 @@ case $option in "Pywal")
   wal --theme $theme
 
   feh --bg-fill $bg
+
+  echo $name > ~/.colorscheme
 
   # Update bspwm colors
   bspwmcolors
