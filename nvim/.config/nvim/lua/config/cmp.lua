@@ -39,6 +39,7 @@ cmp.setup {
         path = "[Path]",
         latex_symbols = "[Latex]",
         ultisnips = "[UltiSnips]",
+        orgmode = "[Org]",
         ["vim-dadbod-completion"] = "[DB]",
       },
     },

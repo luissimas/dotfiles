@@ -58,6 +58,7 @@ require("packer").startup {
     use { "kristijanhusak/vim-dadbod-ui", config = cfg "dadbod" }
     use { "jpalardy/vim-slime", config = cfg "slime" }
     use "editorconfig/editorconfig-vim"
+    use { "folke/zen-mode.nvim", config = cfg "zen" }
 
     use "RRethy/nvim-base16"
     use "luissimas/modus-theme-vim"
