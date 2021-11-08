@@ -137,12 +137,13 @@
   (pada/nmap
     "x" '(execute-extended-command :which-key "M-x")
     "h" (general-simulate-key "C-h" :which-key "Help")
-    "w" (general-simulate-key "C-w" :which-key "Window")
+    ;; "w" (general-simulate-key "C-w" :which-key "Window")
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
     "fF" '(find-file :which-key "Find file in CWD")
     "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
     "fs" '(save-buffer :which-key "Save file")
+    "w" '(save-buffer :which-key "Save file")
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
     "bk" '(pada/kill-buffer :which-key "Kill current buffer")
@@ -163,6 +164,8 @@
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
   (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+  (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
+  (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
@@ -267,9 +270,14 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-(use-package doom-themes
-  :config
-  (load-theme 'doom-palenight t))
+;; (use-package doom-themes
+;;   :config
+;;   (load-theme 'doom-palenight t))
+
+(use-package modus-themes
+  :init
+  (modus-themes-load-themes)
+  :config (modus-themes-load-operandi))
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
@@ -344,12 +352,12 @@
 (use-package all-the-icons)
 
 ;; Doom modeline
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :custom
-  (doom-modeline-height 25)
-  (doom-modeline-enable-word-count t)
-  (doom-modeline-buffer-encoding nil))
+;; (use-package doom-modeline
+;;   :init (doom-modeline-mode 1)
+;;   :custom
+;;   (doom-modeline-height 25)
+;;   (doom-modeline-enable-word-count t)
+;;   (doom-modeline-buffer-encoding nil))
 ;;  :config
 ;;  (setq display-time-day-and-date t
 ;;        display-time-format "%a %d/%m %H:%M"
@@ -380,7 +388,6 @@
   :init
   (setq lsp-keymap-prefix "C-c c")
   :hook
-
   (js-mode . lsp)
   (tuareg-mode . lsp)
   (elixir-mode . lsp)
@@ -539,7 +546,7 @@
   (latex-mode . olivetti-mode)
   (org-mode . olivetti-mode)
   :config
-  (add-hook 'olivetti-mode-on-hook (lambda () (olivetti-set-width 0.6))))
+  (add-hook 'olivetti-mode-on-hook (lambda () (olivetti-set-width 0.8))))
 
 (require 'json)
 
