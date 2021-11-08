@@ -51,12 +51,13 @@ require("packer").startup {
     use "kyazdani42/nvim-web-devicons"
     use { "norcalli/nvim-colorizer.lua", config = cfg "colorizer" }
     use { "folke/todo-comments.nvim", config = cfg "todocomments" }
-    use { "kristijanhusak/orgmode.nvim", config = cfg "orgmode", branch = "tree-sitter" }
+    use { "kristijanhusak/orgmode.nvim", config = cfg "orgmode" }
     use "akinsho/org-bullets.nvim"
     use "tpope/vim-dadbod"
     use "kristijanhusak/vim-dadbod-completion"
     use { "kristijanhusak/vim-dadbod-ui", config = cfg "dadbod" }
     use { "jpalardy/vim-slime", config = cfg "slime" }
+    use "editorconfig/editorconfig-vim"
 
     use "RRethy/nvim-base16"
     use "luissimas/modus-theme-vim"
