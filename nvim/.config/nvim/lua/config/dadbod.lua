@@ -13,5 +13,6 @@ vim.cmd [[
     autocmd FileType dbui unmap <buffer> <C-j>
     autocmd FileType dbui unmap <buffer> <C-k>
     autocmd FileType sql nmap <silent><buffer> <leader><leader> <Plug>(DBUI_ExecuteQuery)
+    autocmd FileType sql vmap <silent><buffer> <leader><leader> <Plug>(DBUI_ExecuteQuery)
   augroup end
 ]]
