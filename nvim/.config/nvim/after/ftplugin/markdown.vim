@@ -6,3 +6,6 @@ setlocal spell
 setlocal signcolumn=no
 
 nnoremap <buffer><silent> <leader><leader> :MarkdownPreviewToggle<Enter>
+
+nnoremap <buffer><silent> <leader>c g<C-g>
+vnoremap <buffer><silent> <leader>c g<C-g>
