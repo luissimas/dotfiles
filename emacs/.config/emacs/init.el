@@ -270,9 +270,9 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-;; (use-package doom-themes
-;;   :config
-;;   (load-theme 'doom-palenight t))
+(use-package doom-themes
+  :config
+  (setq doom-gruvbox-dark-variant "hard"))
 
 (use-package modus-themes
   :init

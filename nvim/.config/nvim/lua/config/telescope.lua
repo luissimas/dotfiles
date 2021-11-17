@@ -51,6 +51,9 @@ telescope.setup {
     find_files = {
       hidden = true,
     },
+    file_browser = {
+      hidden = true,
+    },
     current_buffer_fuzzy_find = {
       sorting_strategy = "ascending",
       layout_config = {
@@ -86,6 +89,7 @@ end
 
 vim.api.nvim_set_keymap("n", "<leader>ff", config "find_files", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>x", config "m_x", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fF", builtin "file_browser", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", builtin "live_grep", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fw", builtin "grep_string", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fb", builtin "current_buffer_fuzzy_find", { noremap = true, silent = true })

@@ -9,11 +9,25 @@ vim.api.nvim_exec(
   false
 )
 
+vim.g.tokyonight_style = "night"
+vim.g.tokyonight_lualine_bold = true
+
 local file = io.open(vim.fn.expand "~/.colorscheme", "r")
+local lualine_theme = {
+  ["base16-material-palenight"] = "palenight",
+  ["base16-gruvbox-dark-hard"] = "gruvbox",
+  ["rose-pine"] = "rose-pine",
+  ["tokyonight"] = "tokyonight",
+}
+
+local M = {}
 
 if file then
   local theme = file:read()
+
+  M.lualine_theme = lualine_theme[theme]
+
   vim.cmd("colorscheme " .. theme)
-else
-  vim.cmd "colorscheme modus-vivendi"
 end
+
+return M

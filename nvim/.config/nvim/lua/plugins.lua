@@ -60,9 +60,12 @@ require("packer").startup {
     use "editorconfig/editorconfig-vim"
     use { "folke/zen-mode.nvim", config = cfg "zen" }
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown" }
+    use { "nvim-lualine/lualine.nvim", config = cfg "lualine" }
 
     use "RRethy/nvim-base16"
+    use "folke/tokyonight.nvim"
     use "luissimas/modus-theme-vim"
+    use { "rose-pine/neovim", as = "rose-pine" }
     use "https://gitlab.com/protesilaos/tempus-themes-vim.git"
 
     -- Automatically set up packer after cloning it

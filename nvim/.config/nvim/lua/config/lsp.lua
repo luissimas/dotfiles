@@ -74,12 +74,12 @@ local on_attach = function(client, bufnr)
   if client.name == "null-ls" or client.name == "clangd" then
     map(bufnr, "n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", opts)
 
-    vim.cmd [[
-    augroup LspFormatting
-      autocmd!
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-    augroup end
-    ]]
+    -- vim.cmd [[
+    -- augroup LspFormatting
+    --   autocmd!
+    --   autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+    -- augroup end
+    -- ]]
   else
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
