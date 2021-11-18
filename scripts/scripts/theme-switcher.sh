@@ -40,55 +40,59 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Source")
+  selected=$(echo -e 'Palenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Theme")
 
-  case $selected in "Palenight")
-    name=base16-material-palenight
-    theme="base16-material-palenight"
-    bg=~/.wal/palenight.jpg
-    ;;
-  "Gruvbox")
-    name=base16-gruvbox-dark-hard
-    theme="base16-gruvbox-hard"
-    bg=~/.wal/forestfog.jpg
-    ;;
-  "Rosé Pine")
-    name=rose-pine
-    theme=~/.config/wal/colorschemes/rosepine.json
-    bg=~/.wal/rosessky.jpg
-    ;;
-  "Tokyonight")
-    name=tokyonight
-    theme=~/.config/wal/colorschemes/tokyonight.json
-    bg=~/.wal/traintunnel.jpg
-    ;;
-  "Modus Vivendi")
-    name=modus-vivendi
-    theme=~/.config/wal/colorschemes/modus-vivendi.json
-    bg=~/.wal/whitemountain.jpg
-    ;;
-  "Modus Operandi")
-    name=modus-operandi
-    theme=~/.config/wal/colorschemes/modus-operandi.json
-    bg=~/.wal/whitemountain.jpg
-    ;;
-  *) printf "No option selected."
-  esac
+  if [[ -z $selected ]]; then
+    printf "No selection"
+  else
+    case $selected in "Palenight")
+      name=base16-material-palenight
+      theme="base16-material-palenight"
+      bg=~/.wal/palenight.jpg
+      ;;
+    "Gruvbox")
+      name=base16-gruvbox-dark-hard
+      theme="base16-gruvbox-hard"
+      bg=~/.wal/forestfog.jpg
+      ;;
+    "Rosé Pine")
+      name=rose-pine
+      theme=~/.config/wal/colorschemes/rosepine.json
+      bg=~/.wal/rosessky.jpg
+      ;;
+    "Tokyonight")
+      name=tokyonight
+      theme=~/.config/wal/colorschemes/tokyonight.json
+      bg=~/.wal/traintunnel.jpg
+      ;;
+    "Modus Vivendi")
+      name=modus-vivendi
+      theme=~/.config/wal/colorschemes/modus-vivendi.json
+      bg=~/.wal/whitemountain.jpg
+      ;;
+    "Modus Operandi")
+      name=modus-operandi
+      theme=~/.config/wal/colorschemes/modus-operandi.json
+      bg=~/.wal/whitemountain.jpg
+      ;;
+    *) printf "No option selected."
+    esac
 
-  wal --theme $theme
+    wal --theme $theme
 
-  feh --bg-fill $bg
+    feh --bg-fill $bg
 
-  echo $name > ~/.colorscheme
+    echo $name > ~/.colorscheme
 
-  # Update bspwm colors
-  bspwmcolors
+    # Update bspwm colors
+    bspwmcolors
 
-  # Update qutebrowser colors
-  pgrep qutebrowser > /dev/null && qutebrowser :config-source
+    # Update qutebrowser colors
+    pgrep qutebrowser > /dev/null && qutebrowser :config-source
+  fi
   ;;
 "Wallpaper")
-  selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")
+  selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "File")
 
   if [[ -z "$selected" ]]; then
     printf "No image selected\n"

@@ -38,13 +38,13 @@ require("packer").startup {
     use "quangnguyen30192/cmp-nvim-ultisnips"
     use { "SirVer/UltiSnips", config = cfg "ultisnips" }
     use "honza/vim-snippets"
+    use { "windwp/nvim-autopairs", config = cfg "autopairs" }
     use { "nvim-telescope/telescope.nvim", config = cfg "telescope" }
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "aserowy/tmux.nvim", config = cfg "tmux" }
     use "onsails/lspkind-nvim"
     use { "lewis6991/gitsigns.nvim", config = cfg "gitsigns" }
     use { "TimUntersberger/neogit", config = cfg "neogit" }
-    use { "windwp/nvim-autopairs", config = cfg "autopairs" }
     use { "b3nj5m1n/kommentary", config = cfg "comment" }
     use { "ahmedkhalf/project.nvim", config = cfg "project" }
     use { "lewis6991/spellsitter.nvim", config = cfg "spellsitter" }
