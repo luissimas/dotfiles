@@ -1,16 +1,16 @@
 local function lsp_client()
   local clients = vim.lsp.get_active_clients()
-
   if not next(clients) then
     return " "
   end
 
-  local msg = ""
   for _, client in ipairs(clients) do
-    msg = msg .. " " .. client.name
+    if client.name ~= "null-ls" then
+      return " " .. client.name
+    end
   end
 
-  return msg
+  return " "
 end
 
 local function diff()
@@ -23,6 +23,19 @@ local function diff()
       removed = gitsigns.removed,
     }
   end
+end
+
+local function enableDiff()
+  local filetype = vim.bo.filetype
+  local disabled = { "markdown", "org" }
+
+  for _, ft in ipairs(disabled) do
+    if filetype == ft then
+      return false
+    end
+  end
+
+  return true
 end
 
 local theme = require("colorscheme").lualine_theme or "auto"
@@ -38,7 +51,7 @@ require("lualine").setup {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff } },
+    lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff, cond = enableDiff } },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = { { "diagnostics", sources = { "nvim_lsp" } }, { lsp_client } },
     lualine_y = { "filetype" },
@@ -47,7 +60,7 @@ require("lualine").setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {},
+    lualine_c = { { "filename", path = 1 } },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {},
