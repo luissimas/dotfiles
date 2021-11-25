@@ -50,7 +50,6 @@ null_ls.config {
     null_ls.builtins.diagnostics.credo,
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.write_good,
   },
 }
 

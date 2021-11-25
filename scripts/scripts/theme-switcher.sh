@@ -27,10 +27,10 @@ case $option in "Pywal")
       ;;
       esac
 
-      printf "Done.\n\n"
-
       # Update bspwm colors
       bspwmcolors
+
+      echo "wally" > ~/.colorscheme
 
       # Update betterlockscreen (takes a while)
       printf "Setting lock screen...\n"

@@ -1,6 +1,6 @@
 configuration {
         modi: "run,drun";
-        font: "JetBrains Mono 11";
+        font: "Iosevka Padawan 12";
 /*      location: 0;*/
 /*      yoffset: 0;*/
 /*      xoffset: 0;*/
@@ -147,6 +147,13 @@ configuration {
 }
 
 @import "~/.cache/wal/rofi-custom"
+
+window {
+    background-color: @background;
+    text-color: @foreground;
+    width: 30%;
+    height: 30%;
+}
 
 entry {
   placeholder: "";

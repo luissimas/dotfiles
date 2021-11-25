@@ -61,9 +61,11 @@ require("packer").startup {
     use { "folke/zen-mode.nvim", config = cfg "zen" }
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown" }
     use { "nvim-lualine/lualine.nvim", config = cfg "lualine" }
+    use { "dhruvasagar/vim-table-mode", ft = "markdown" }
+    use "tpope/vim-surround"
 
     use "RRethy/nvim-base16"
-    use "folke/tokyonight.nvim"
+    use "luissimas/wally.nvim"
     use "luissimas/modus-theme-vim"
     use { "rose-pine/neovim", as = "rose-pine" }
     use "https://gitlab.com/protesilaos/tempus-themes-vim.git"
