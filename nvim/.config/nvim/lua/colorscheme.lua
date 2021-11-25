@@ -18,6 +18,7 @@ local lualine_theme = {
   ["base16-gruvbox-dark-hard"] = "gruvbox",
   ["rose-pine"] = "rose-pine",
   ["tokyonight"] = "tokyonight",
+  ["wally"] = "pywal",
 }
 
 local M = {}
