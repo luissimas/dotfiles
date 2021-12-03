@@ -87,6 +87,10 @@ vim.api.nvim_set_keymap("i", ".", ".<C-g>u", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "!", "!<C-g>u", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "?", "?<C-g>u", { noremap = true, silent = true })
 
+--  Move lines
+vim.api.nvim_set_keymap("v", "J", ":m '>+1<Enter>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "K", ":m '<-2<Enter>gv=gv", { noremap = true, silent = true })
+
 -- Close transient windows with "q"
 vim.cmd [[
   augroup CloseWindows
