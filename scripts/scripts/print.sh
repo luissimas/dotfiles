@@ -1,5 +1,5 @@
 #!/bin/zsh
-screenshotPath="/home/padawan/screenshots/"
+screenshotPath="/home/padawan/dotfiles/.screenshots/"
 obsidianPath="/home/padawan/dox/vault/Attachments/"
 
 selected=$(echo -e 'Obsidian\nScreenshot' | rofi -dmenu -p "Type")
