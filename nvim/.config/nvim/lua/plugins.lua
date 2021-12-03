@@ -65,7 +65,9 @@ require("packer").startup {
     use "tpope/vim-surround"
 
     use "RRethy/nvim-base16"
+    use "shaunsingh/nord.nvim"
     use "luissimas/wally.nvim"
+    use "folke/tokyonight.nvim"
     use "luissimas/modus-theme-vim"
     use { "rose-pine/neovim", as = "rose-pine" }
     use "https://gitlab.com/protesilaos/tempus-themes-vim.git"

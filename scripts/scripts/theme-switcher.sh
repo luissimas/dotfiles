@@ -30,6 +30,9 @@ case $option in "Pywal")
       # Update bspwm colors
       bspwmcolors
 
+      # Update qutebrowser colors
+      pgrep qutebrowser > /dev/null && qutebrowser :config-source
+
       echo "wally" > ~/.colorscheme
 
       # Update betterlockscreen (takes a while)

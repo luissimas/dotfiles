@@ -73,11 +73,15 @@ super + m
 
 # show/hide polybar
 super + b
-  polybar-msg cmd toggle && bspc config -m DVI-D-0 top_padding {0, 20}
+  polybar-msg cmd toggle && bspc config -m DVI-D-0 top_padding {0, 30}
 
 # send the newest marked node to the newest preselected node
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
+
+# window gaps
+super + alt + {equal,minus}
+  bspc config window_gap $((`bspc config window_gap` {+,-} 5))
 
 #
 # state/flags

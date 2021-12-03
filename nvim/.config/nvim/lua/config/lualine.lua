@@ -63,7 +63,7 @@ require("lualine").setup {
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = { "progress", "location" },
   },
   tabline = {},
   extensions = { "quickfix" },

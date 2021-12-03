@@ -19,6 +19,9 @@ local lualine_theme = {
   ["rose-pine"] = "rose-pine",
   ["tokyonight"] = "tokyonight",
   ["wally"] = "pywal",
+  ["modus-operandi"] = "modus-operandi",
+  ["modus-vivendi"] = "modus-vivendi",
+  ["nord"] = "nord",
 }
 
 local M = {}
