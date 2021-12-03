@@ -50,6 +50,17 @@ null_ls.config {
     null_ls.builtins.diagnostics.credo,
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.diagnostics.shellcheck,
+    {
+      method = null_ls.methods.FORMATTING,
+      filetypes = { "ocaml" },
+      name = "ocamlformat",
+      generator = require("null-ls.helpers").formatter_factory {
+        command = "ocamlformat",
+        args = { "--enable-outside-detected-project", "--name", "$FILENAME", "-" },
+        format = "raw",
+        to_stdin = true,
+      },
+    },
   },
 }
 
