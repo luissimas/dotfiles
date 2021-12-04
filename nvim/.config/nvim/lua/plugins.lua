@@ -45,7 +45,7 @@ require("packer").startup {
     use "onsails/lspkind-nvim"
     use { "lewis6991/gitsigns.nvim", config = cfg "gitsigns" }
     use { "TimUntersberger/neogit", config = cfg "neogit" }
-    use { "b3nj5m1n/kommentary", config = cfg "comment" }
+    use { "numToStr/Comment.nvim", config = cfg "comment" }
     use { "ahmedkhalf/project.nvim", config = cfg "project" }
     use { "lewis6991/spellsitter.nvim", config = cfg "spellsitter" }
     use "kyazdani42/nvim-web-devicons"
