@@ -56,7 +56,6 @@ require("packer").startup {
     use "tpope/vim-dadbod"
     use "kristijanhusak/vim-dadbod-completion"
     use { "kristijanhusak/vim-dadbod-ui", config = cfg "dadbod" }
-    use { "jpalardy/vim-slime", ft = { "ocaml" }, config = cfg "slime" }
     use "editorconfig/editorconfig-vim"
     use { "folke/zen-mode.nvim", config = cfg "zen" }
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown" }

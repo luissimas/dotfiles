@@ -68,6 +68,9 @@ local on_attach = function(client, bufnr)
   -- Setting lsp completion with omnifunc
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+  -- Highlights
+  vim.cmd "hi! link LspCodeLens TSComment"
+
   -- Mappings
   local map = vim.api.nvim_buf_set_keymap
   local opts = { noremap = true, silent = true }
@@ -79,6 +82,16 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<leader>d", ":lua vim.lsp.diagnostic.show_line_diagnostics()<Enter>", opts)
   map(bufnr, "n", "<leader>rn", ":lua vim.lsp.buf.rename()<Enter>", opts)
   map(bufnr, "n", "<leader>ca", ":lua vim.lsp.buf.code_action()<Enter>", opts)
+
+  -- Code lenses
+  if client.resolved_capabilities.code_lens then
+    vim.cmd [[
+      augroup LspCodeLens
+        autocmd!
+        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+      augroup end
+    ]]
+  end
 
   -- Enabling formatting
   if client.name == "null-ls" or client.name == "clangd" then

@@ -272,12 +272,10 @@
 
 (use-package doom-themes
   :config
-  (setq doom-gruvbox-dark-variant "hard"))
+  (setq doom-gruvbox-dark-variant "hard")
+  (load-theme 'doom-nord))
 
-(use-package modus-themes
-  :init
-  (modus-themes-load-themes)
-  :config (modus-themes-load-operandi))
+(use-package modus-themes)
 
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
@@ -352,18 +350,18 @@
 (use-package all-the-icons)
 
 ;; Doom modeline
-;; (use-package doom-modeline
-;;   :init (doom-modeline-mode 1)
-;;   :custom
-;;   (doom-modeline-height 25)
-;;   (doom-modeline-enable-word-count t)
-;;   (doom-modeline-buffer-encoding nil))
-;;  :config
-;;  (setq display-time-day-and-date t
-;;        display-time-format "%a %d/%m %H:%M"
-;;        display-time-default-load-average nil)
-;;  (display-time-mode)
-;;  (display-battery-mode))
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-buffer-encoding nil))
+;; :config
+;; (setq display-time-day-and-date t
+;;       display-time-format "%a %d/%m %H:%M"
+;;       display-time-default-load-average nil)
+;; (display-time-mode)
+;; (display-battery-mode))
 
 ;; Which-key
 (use-package which-key
@@ -432,8 +430,8 @@
   :hook
   (prog-mode . company-mode)
   :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay nil)
+  (company-minimum-prefix-length 2)
+  (company-idle-delay 0.2)
   :config
   (evil-define-key 'insert 'company-mode (kbd "C-SPC") 'company-complete))
 
