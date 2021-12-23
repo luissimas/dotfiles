@@ -35,6 +35,9 @@
 ;; Stop asking for following git symlink
 (setq vc-follow-symlinks t)
 
+;; Quick yes/no prompts
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Disabling init screen
 (setq inhibit-startup-screen t
 inhibit-startup-message t
@@ -49,15 +52,18 @@ inhibit-startup-echo-area-message t)
 (setq visible-bell nil)
 
 ;; Fringes
-(set-fringe-mode '(2 . 2))
+(set-fringe-mode '(10 . 10))
 
 ;; Remember cursor position
 (save-place-mode 1)
 
 ;; Spaces over tabs
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq standard-indent 2)
+(setq backward-delete-char-untabify-method 'hungry)
 (setq indent-line-function 'insert-tab)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+(setq-default electric-indent-inhibit t)
 
 ;; Unique buffer name formats
 (setq uniquify-buffer-name-style 'forward)
@@ -151,7 +157,6 @@ inhibit-startup-echo-area-message t)
   (pada/leader-key
    "x" '(execute-extended-command :which-key "M-x")
    "h" (general-simulate-key "C-h" :which-key "Help")
-   ;; "w" (general-simulate-key "C-w" :which-key "Window")
    "f" '(:ignore t :which-key "Find")
    "ff" '(pada/find-file :which-key "Find file")
    "fF" '(find-file :which-key "Find file in CWD")
@@ -170,8 +175,10 @@ inhibit-startup-echo-area-message t)
   (setq evil-want-integration t
   evil-want-keybinding nil
   evil-want-C-u-scroll t
-  evil-undo-system 'undo-redo
-  evil-want-Y-yank-to-eol t)
+  evil-undo-system 'undo-tree
+  evil-want-Y-yank-to-eol t
+  evil-shift-width tab-width)
+  (unbind-key "C-k" evil-insert-state-map)
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
@@ -186,10 +193,37 @@ inhibit-startup-echo-area-message t)
                             (t woman))))
   (evil-mode 1))
 
+(use-package evil-surround
+  :requires evil
+  :config
+  (global-evil-surround-mode))
+
+(use-package evil-nerd-commenter 
+  :config
+  (define-key evil-normal-state-map (kbd "gcc") 'evilnc-comment-or-uncomment-lines)
+  (define-key evil-visual-state-map (kbd "gc") 'evilnc-comment-or-uncomment-lines))
+
+(use-package evil-org
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(use-package evil-goggles
+  :config
+  (setq evil-goggles-duration 0.05) 
+  (evil-goggles-mode))
+
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
+
+;; Undo tree
+(use-package undo-tree
+  :ensure t
+  :config (global-undo-tree-mode))
 
 ;; Which key
 (use-package which-key
@@ -214,14 +248,12 @@ inhibit-startup-echo-area-message t)
    "g" '(:ignore t :which-key "Git")
    "gs" 'magit-status))
 
-;; Comment lines
-(use-package evil-nerd-commenter
-  :config
-  (define-key evil-normal-state-map (kbd "gcc") 'evilnc-comment-or-uncomment-lines)
-  (define-key evil-visual-state-map (kbd "gc") 'evilnc-comment-or-uncomment-lines))
-
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Show colors
+(use-package rainbow-mode
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Vertico as the completion UI
@@ -300,7 +332,36 @@ inhibit-startup-echo-area-message t)
     "px" 'project-execute-extended-command))
 
 (use-package modus-themes
+  :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
         modus-themes-mode-line '(borderless))
   (load-theme 'modus-operandi))
+
+;; Icons
+(use-package all-the-icons)
+
+(use-package all-the-icons-dired
+  :requires all-the-icons
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+;; Better syntax highlight
+(use-package tree-sitter
+  :hook (tree-sitter-after-on-hook . tree-sitter-hl-mode)
+  :config
+  (global-tree-sitter-mode))
+
+(use-package tree-sitter-langs)
+
+(use-package corfu
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-delay .5)
+  :config
+  (define-key evil-insert-state-map (kbd "C-SPC") 'completion-at-point)
+  :bind (:map corfu-map
+              ("C-j" . corfu-next)
+              ("C-k" . corfu-previous))
+  :hook (prog-mode . corfu-mode))
