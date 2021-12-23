@@ -343,12 +343,15 @@ inhibit-startup-echo-area-message t)
     "pr" 'project-query-replace-regexp
     "px" 'project-execute-extended-command))
 
+;; Themes
 (use-package modus-themes
   :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
         modus-themes-mode-line '(borderless))
   (load-theme 'modus-operandi))
+
+(use-package nord-theme)
 
 ;; Icons
 (use-package all-the-icons)
@@ -377,3 +380,86 @@ inhibit-startup-echo-area-message t)
               ("C-j" . corfu-next)
               ("C-k" . corfu-previous))
   :hook (prog-mode . corfu-mode))
+
+;; Setting font faces
+(defun pada/set-fonts ()
+  "Set the main font faces."
+  (set-face-attribute 'default nil :font "Iosevka Padawan 12")
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka Padawan 12")
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Padawan 12"))
+
+;; Setting frame options in both daemon (with hooks) or on
+;; normal emacs startup (directly calling the functions)
+(if (daemonp)
+    (progn (add-hook 'server-after-make-frame-hook 'pada/set-fonts))
+  (progn (pada/set-fonts)))
+
+;; Use frames instead of windows (better integration with tiling wm)
+(setq pop-up-frames 'graphic-only)
+
+(defun pada/display-helpful-buffer (buffer alist)
+  (if (s-matches-p "\\`\\*helpful.*\\'" (buffer-name))
+      (display-buffer-same-window buffer alist)
+    (display-buffer--maybe-pop-up-frame-or-window buffer alist)))
+
+(setq display-buffer-alist
+      '(("\\`\\*Calendar\\*\\'"
+         (display-buffer-below-selected))
+        ("\\`magit-diff:.*\\'"
+         (display-buffer-pop-up-window))
+        ("\\`\\*helpful.*\\'" (display-buffer-same-window))))
+
+(setq frame-auto-hide-function 'delete-frame)
+
+;; Always kill the buffer when quitting a window
+(global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
+(global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
+
+;; Kill magit diff buffer after commit
+(defun pada/kill-magit-diff-buffer ()
+  "Kill the magit-diff-buffer for the current repository, This function is meant to be added on `git-commit-setup-hook'."
+  (defun kill-magit-diff-buffer ()
+    (kill-buffer (magit-get-mode-buffer 'magit-diff-mode)))
+  (add-hook 'with-editor-post-finish-hook 'kill-magit-diff-buffer nil t))
+
+(add-hook 'git-commit-setup-hook 'pada/kill-magit-diff-buffer)
+
+;; Opening files in external commands based on the filename
+(defgroup pada/open-external nil
+  "Open files with external commands."
+  :group 'files
+  :group 'processes)
+
+(defcustom pada/open-external-associations
+  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura"))
+  "A alist of association between file patterns and external programs."
+  :group 'open-external
+  :type "alist")
+
+(defun pada/run-shell-command (command)
+  "Run COMMAND in the default user shell."
+  (message command)
+  (start-process-shell-command "Open external process" nil (concat "exec nohup " command " >/dev/null")))
+
+(defun pada/open-external-advice (fun &rest args)
+  "Advice FUN with ARGS.
+Try to match filename in ARGS against patterns in `open-external-associations',
+if a pattern matches, then open the file using the specified command.  If no
+pattern matches, simply call FUN with ARGS.
+Note: This function is meant to be adviced around `find-file'."
+  (let ((file-name (car args))
+        (associations pada/open-external-associations)
+        (found nil))
+    (while associations
+      (let* ((current (car associations))
+             (pattern (car current))
+             (program (car (cdr current))))
+        (when (string-match-p pattern file-name)
+          (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
+          (setq found t)
+          (setq associations nil)))
+      (setq associations (cdr associations)))
+    (unless found
+      (apply fun args))))
+
+(advice-add 'find-file :around 'pada/open-external-advice)
