@@ -226,7 +226,10 @@ inhibit-startup-echo-area-message t)
 ;; Undo tree
 (use-package undo-tree
   :ensure t
-  :config (global-undo-tree-mode))
+  :config
+  (setq undo-tree-auto-save-history t
+        undo-tree-history-directory-alist `(("." . ,(expand-file-name "undo" user-emacs-directory))))
+  (global-undo-tree-mode))
 
 ;; Which key
 (use-package which-key
