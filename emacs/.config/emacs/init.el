@@ -65,6 +65,9 @@ inhibit-startup-echo-area-message t)
 (setq-default indent-tabs-mode nil)
 (setq-default electric-indent-inhibit t)
 
+;; Delete trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; Unique buffer name formats
 (setq uniquify-buffer-name-style 'forward)
 
@@ -198,7 +201,7 @@ inhibit-startup-echo-area-message t)
   :config
   (global-evil-surround-mode))
 
-(use-package evil-nerd-commenter 
+(use-package evil-nerd-commenter
   :config
   (define-key evil-normal-state-map (kbd "gcc") 'evilnc-comment-or-uncomment-lines)
   (define-key evil-visual-state-map (kbd "gc") 'evilnc-comment-or-uncomment-lines))
@@ -212,7 +215,7 @@ inhibit-startup-echo-area-message t)
 
 (use-package evil-goggles
   :config
-  (setq evil-goggles-duration 0.05) 
+  (setq evil-goggles-duration 0.05)
   (evil-goggles-mode))
 
 (use-package evil-collection
@@ -247,6 +250,15 @@ inhibit-startup-echo-area-message t)
   (pada/leader-key
    "g" '(:ignore t :which-key "Git")
    "gs" 'magit-status))
+
+;; Git gutter
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :custom
+  (git-gutter:update-interval 1)
+  (git-gutter:modified-sign "│")
+  (git-gutter:added-sign "│")
+  (git-gutter:deleted-sign "│"))
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
