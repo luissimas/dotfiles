@@ -25,7 +25,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 -- Null-ls
 local null_ls = require "null-ls"
 
-null_ls.config {
+null_ls.setup {
   sources = {
     null_ls.builtins.formatting.prettier.with {
       filetypes = {
@@ -79,7 +79,7 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "K", ":lua vim.lsp.buf.hover()<Enter>", opts)
   map(bufnr, "n", "gi", ":lua vim.lsp.buf.implementation()<Enter>", opts)
   map(bufnr, "n", "gr", ":lua vim.lsp.buf.references()<Enter>", opts)
-  map(bufnr, "n", "<leader>d", ":lua vim.lsp.diagnostic.show_line_diagnostics()<Enter>", opts)
+  map(bufnr, "n", "<leader>dd", ":lua vim.lsp.diagnostic.show_line_diagnostics()<Enter>", opts)
   map(bufnr, "n", "<leader>rn", ":lua vim.lsp.buf.rename()<Enter>", opts)
   map(bufnr, "n", "<leader>ca", ":lua vim.lsp.buf.code_action()<Enter>", opts)
 
@@ -94,16 +94,16 @@ local on_attach = function(client, bufnr)
   end
 
   -- Enabling formatting
-  if client.name == "null-ls" or client.name == "clangd" then
-    map(bufnr, "n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", opts)
+  map(bufnr, "n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", opts)
 
-    -- vim.cmd [[
-    -- augroup LspFormatting
-    --   autocmd!
-    --   autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-    -- augroup end
-    -- ]]
-  else
+  -- vim.cmd [[
+  -- augroup LspFormatting
+  --   autocmd!
+  --   autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+  -- augroup end
+  -- ]]
+
+  if client.name ~= "clangd" then
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   end
@@ -112,7 +112,6 @@ end
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local servers = {
-  "null-ls",
   "clangd",
   "tsserver",
   "vimls",

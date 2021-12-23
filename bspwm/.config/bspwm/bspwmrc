@@ -20,7 +20,8 @@ bspc config gapless_monocle      false
 bspc config focus_follows_pointer true
 
 # Rules
-bspc rule -a spotify-tui state=tiled
+bspc rule -a qutebrowser desktop=^1
+bspc rule -a Brave-browser desktop=^1
 bspc rule -a Steam state=floating
 bspc rule -a discord desktop=^5 state=floating
 bspc rule -a Zathura state=tiled

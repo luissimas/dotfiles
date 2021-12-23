@@ -43,3 +43,15 @@ snippet apidoc "Api documentation"
  *        description: Erro interno no servidor
  */
 endsnippet
+
+snippet describe "Describe test suite" bA
+describe("$1", () => {
+	$0
+})
+endsnippet
+
+snippet it "Test" bA
+it("$1", $2 () => {
+	$0
+})
+endsnippet

@@ -171,4 +171,4 @@ vim.cmd [[
   augroup end
 ]]
 
-vim.api.nvim_set_keymap("n", "<leader>e", ":Explore<Enter>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>e", ":Explore<Enter>", { noremap = true, silent = true })

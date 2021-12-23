@@ -48,6 +48,7 @@ require("packer").startup {
     use { "numToStr/Comment.nvim", config = cfg "comment" }
     use { "ahmedkhalf/project.nvim", config = cfg "project" }
     use { "lewis6991/spellsitter.nvim", config = cfg "spellsitter" }
+    use { "kyazdani42/nvim-tree.lua", config = cfg "tree" }
     use "kyazdani42/nvim-web-devicons"
     use { "norcalli/nvim-colorizer.lua", config = cfg "colorizer" }
     use { "folke/todo-comments.nvim", config = cfg "todocomments" }
@@ -61,6 +62,7 @@ require("packer").startup {
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown" }
     use { "nvim-lualine/lualine.nvim", config = cfg "lualine" }
     use { "dhruvasagar/vim-table-mode", ft = "markdown" }
+    use "luissimas/telescope-nodescripts.nvim"
     use "tpope/vim-surround"
 
     use "RRethy/nvim-base16"
@@ -69,6 +71,7 @@ require("packer").startup {
     use "folke/tokyonight.nvim"
     use "luissimas/modus-theme-vim"
     use { "rose-pine/neovim", as = "rose-pine" }
+    use { "catppuccin/nvim", as = "catppuccin" }
     use "https://gitlab.com/protesilaos/tempus-themes-vim.git"
 
     -- Automatically set up packer after cloning it

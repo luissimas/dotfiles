@@ -43,7 +43,7 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Nord\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Theme")
+  selected=$(echo -e 'Nord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Theme")
 
   if [[ -z $selected ]]; then
     printf "No selection"
@@ -81,6 +81,11 @@ case $option in "Pywal")
     "Nord")
       name=nord
       theme=~/.config/wal/colorschemes/nord.json
+      bg=~/.wal/graymountain.jpeg
+      ;;
+    "Catppuccin")
+      name=catppuccin
+      theme=~/.config/wal/colorschemes/catppuccin.json
       bg=~/.wal/graymountain.jpeg
       ;;
     *) printf "No option selected."

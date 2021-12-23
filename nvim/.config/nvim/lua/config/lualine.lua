@@ -46,14 +46,13 @@ require("lualine").setup {
     theme = theme,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "" },
     always_divide_middle = true,
   },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff, cond = enableDiff } },
     lualine_c = { { "filename", path = 1 } },
-    lualine_x = { { "diagnostics", sources = { "nvim_lsp" } }, { lsp_client } },
+    lualine_x = { { "diagnostics", sources = { "nvim_diagnostic" } }, { lsp_client } },
     lualine_y = { "filetype" },
     lualine_z = { "progress", "location" },
   },
@@ -66,5 +65,5 @@ require("lualine").setup {
     lualine_z = { "progress", "location" },
   },
   tabline = {},
-  extensions = { "quickfix" },
+  extensions = { "quickfix", "nvim-tree" },
 }
