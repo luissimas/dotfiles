@@ -1,6 +1,9 @@
 ;; Setting garbage colector threshold
 (setq gc-cons-threshold (* 100 1024 1024))
 
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 8 1024 1024))))
+
 (defun pada/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
@@ -158,19 +161,25 @@ inhibit-startup-echo-area-message t)
     :keymaps '(normal visual)
     :prefix "SPC")
   (pada/leader-key
-   "x" '(execute-extended-command :which-key "M-x")
-   "h" (general-simulate-key "C-h" :which-key "Help")
-   "f" '(:ignore t :which-key "Find")
-   "ff" '(pada/find-file :which-key "Find file")
-   "fF" '(find-file :which-key "Find file in CWD")
-   "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
-   "fs" '(save-buffer :which-key "Save file")
-   "w" '(save-buffer :which-key "Save file")
-   "b" '(:ignore t :which-key "Buffer")
-   "bb" '(consult-buffer :which-key "Switch buffer")
-   "bk" '(pada/kill-buffer :which-key "Kill current buffer")
-   "bK" '(kill-buffer :which-key "Kill buffer")
-   "bi" '(ibuffer :which-key "Ibuffer")))
+    "x" '(execute-extended-command :which-key "M-x")
+    "h" (general-simulate-key "C-h" :which-key "Help")
+    "f" '(:ignore t :which-key "Find")
+    "ff" '(pada/find-file :which-key "Find file")
+    "fF" '(find-file :which-key "Find file in CWD")
+    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+    "fs" '(save-buffer :which-key "Save file")
+    "w" '(save-buffer :which-key "Save file")
+    "b" '(:ignore t :which-key "Buffer")
+    "bb" '(consult-buffer :which-key "Switch buffer")
+    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+    "bK" '(kill-buffer :which-key "Kill buffer")
+    "bi" '(ibuffer :which-key "Ibuffer"))
+  ;; Window resizing
+  (general-define-key
+   "M-h" 'shrink-window-horizontally
+   "M-j" 'shrink-window
+   "M-k" 'enlarge-window
+   "M-l" 'enlarge-window-horizontally))
 
 ;; Evil-mode
 (use-package evil
@@ -271,7 +280,7 @@ inhibit-startup-echo-area-message t)
 
 ;; Show colors
 (use-package rainbow-mode
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-mode))
 
 ;; Vertico as the completion UI
 (use-package vertico
@@ -412,7 +421,7 @@ inhibit-startup-echo-area-message t)
          (display-buffer-below-selected))
         ("\\`magit-diff:.*\\'"
          (display-buffer-pop-up-window))
-        ("\\`\\*helpful.*\\'" (display-buffer-same-window))))
+        ("\\`\\*helpful.*\\'" (display-buffer-pop-up-frame))))
 
 (setq frame-auto-hide-function 'delete-frame)
 
