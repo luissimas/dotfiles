@@ -403,11 +403,27 @@ inhibit-startup-echo-area-message t)
   (set-face-attribute 'fixed-pitch nil :font "Iosevka Padawan 12")
   (set-face-attribute 'variable-pitch nil :font "Iosevka Padawan 12"))
 
+(defvar pada/frame-parameters
+  '((width  72)
+    (height 40)
+    (internal-border-width 10)
+    (no-special-glyphs t)))
+
+(defun pada/set-frame-parameters ()
+  (interactive)
+  "Set parameters defined in `pada/frame-parameters' for the current frame."
+  (dolist (parameter pada/frame-parameters)
+    (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
+
 ;; Setting frame options in both daemon (with hooks) or on
 ;; normal emacs startup (directly calling the functions)
 (if (daemonp)
-    (progn (add-hook 'server-after-make-frame-hook 'pada/set-fonts))
-  (progn (pada/set-fonts)))
+    (progn
+      (add-hook 'server-after-make-frame-hook 'pada/set-fonts)
+      (add-hook 'server-after-make-frame-hook 'pada/set-frame-parameters))
+  (progn
+    (pada/set-fonts)
+    (pada/set-frame-parameters)))
 
 ;; Use frames instead of windows (better integration with tiling wm)
 (setq pop-up-frames 'graphic-only)
