@@ -182,10 +182,12 @@ inhibit-startup-echo-area-message t)
   evil-want-Y-yank-to-eol t
   evil-shift-width tab-width)
   (unbind-key "C-k" evil-insert-state-map)
+  :hook
+  (org-mode . (lambda () (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)))
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
-  (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+  (define-key evil-insert-state-map (kbd "<tab>") 'tab-to-tab-stop)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
