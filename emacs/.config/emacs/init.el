@@ -169,6 +169,7 @@ inhibit-startup-echo-area-message t)
     "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
     "fs" '(save-buffer :which-key "Save file")
     "w" '(save-buffer :which-key "Save file")
+    "q" '(evil-quit :which-key "Quit")
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
     "bk" '(pada/kill-buffer :which-key "Kill current buffer")
@@ -411,17 +412,29 @@ inhibit-startup-echo-area-message t)
 ;; Use frames instead of windows (better integration with tiling wm)
 (setq pop-up-frames 'graphic-only)
 
-(defun pada/display-helpful-buffer (buffer alist)
-  (if (s-matches-p "\\`\\*helpful.*\\'" (buffer-name))
-      (display-buffer-same-window buffer alist)
-    (display-buffer--maybe-pop-up-frame-or-window buffer alist)))
-
+;; NOTE: I really need to understand all of this better
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
+        ("\\`\\*Async Shell Command\\*\\'"
+         (display-buffer-no-window))
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|[Hh]elp.*\\|Messages\\)\\*"
+        (display-buffer-in-side-window)
+        (window-height . 0.3)
+        (side . bottom)
+        (slot . 0))
+        ("\\*\\(e?shell\\|vterm\\)\\*"
+        (display-buffer-in-side-window)
+        (window-height . 0.3)
+        (side . bottom)
+        (slot . -1))
         ("\\`magit-diff:.*\\'"
-         (display-buffer-pop-up-window))
-        ("\\`\\*helpful.*\\'" (display-buffer-pop-up-frame))))
+         (display-buffer-pop-up-window))))
+
+(setq display-buffer-base-action nil)
+      ;; '((display-buffer-reuse-window
+      ;;    display-buffer-reuse-mode-window
+      ;;    display-buffer-at-bottom) . ((mode . (helpful-mode help-mode)))))
 
 (setq frame-auto-hide-function 'delete-frame)
 
@@ -477,3 +490,20 @@ Note: This function is meant to be adviced around `find-file'."
       (apply fun args))))
 
 (advice-add 'find-file :around 'pada/open-external-advice)
+
+;; Font ligatures
+(use-package ligature
+  :straight '(:host github :repo "mickeynp/ligature.el")
+  :config
+  ;; Iosevka ligatures
+  (ligature-set-ligatures 'prog-mode
+                          '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "-->" "--->" "->-" ">-" ">>-"
+                            "=<<" "=<" "=<=" "<==" "<===" "<<=" "<=" "=>" "==>" "===>" "=>=" ">=" ">>="
+                            "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "<!--" "<!---"
+                            "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "<>" "===" "!=="
+                            ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
+                            "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
+  (global-ligature-mode))
+
+;; Better terminal
+(use-package vterm)
