@@ -55,7 +55,7 @@ inhibit-startup-echo-area-message t)
 (setq visible-bell nil)
 
 ;; Fringes
-(set-fringe-mode '(10 . 10))
+(set-fringe-mode '(5 . 5))
 
 ;; Remember cursor position
 (save-place-mode 1)
@@ -275,6 +275,13 @@ inhibit-startup-echo-area-message t)
   (git-gutter:added-sign "│")
   (git-gutter:deleted-sign "│"))
 
+(use-package git-gutter-fringe
+  :after git-gutter
+  :config
+  (fringe-helper-define 'git-gutter-fr:added nil "")
+  (fringe-helper-define 'git-gutter-fr:modified nil "")
+  (fringe-helper-define 'git-gutter-fr:deleted nil ""))
+
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -364,7 +371,7 @@ inhibit-startup-echo-area-message t)
   :init
   (setq modus-themes-subtle-line-numbers t
         modus-themes-mode-line '(borderless))
-  (load-theme 'modus-operandi))
+  (load-theme 'modus-vivendi))
 
 (use-package nord-theme)
 
@@ -403,10 +410,10 @@ inhibit-startup-echo-area-message t)
   (set-face-attribute 'fixed-pitch nil :font "Iosevka Padawan 12")
   (set-face-attribute 'variable-pitch nil :font "Iosevka Padawan 12"))
 
+;; Frame parameters
 (defvar pada/frame-parameters
   '((width  72)
     (height 40)
-    (internal-border-width 10)
     (no-special-glyphs t)))
 
 (defun pada/set-frame-parameters ()
@@ -434,10 +441,15 @@ inhibit-startup-echo-area-message t)
          (display-buffer-below-selected))
         ("\\`\\*Async Shell Command\\*\\'"
          (display-buffer-no-window))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|[Hh]elp.*\\|Messages\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Messages\\)\\*"
         (display-buffer-in-side-window)
         (window-height . 0.3)
         (side . bottom)
+        (slot . 0))
+        ("\\*\\([Hh]elp\\|info\\)\\*"
+        (display-buffer-in-side-window)
+        (window-width . 0.4)
+        (side . right)
         (slot . 0))
         ("\\*\\(e?shell\\|vterm\\)\\*"
         (display-buffer-in-side-window)
@@ -445,7 +457,7 @@ inhibit-startup-echo-area-message t)
         (side . bottom)
         (slot . -1))
         ("\\`magit-diff:.*\\'"
-         (display-buffer-pop-up-window))))
+        (display-buffer-pop-up-window))))
 
 (setq display-buffer-base-action nil)
       ;; '((display-buffer-reuse-window
@@ -520,6 +532,3 @@ Note: This function is meant to be adviced around `find-file'."
                             ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
                             "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
   (global-ligature-mode))
-
-;; Better terminal
-(use-package vterm)
