@@ -412,9 +412,7 @@ inhibit-startup-echo-area-message t)
 
 ;; Frame parameters
 (defvar pada/frame-parameters
-  '((width  72)
-    (height 40)
-    (no-special-glyphs t)))
+  '((no-special-glyphs t)))
 
 (defun pada/set-frame-parameters ()
   (interactive)
@@ -432,9 +430,6 @@ inhibit-startup-echo-area-message t)
     (pada/set-fonts)
     (pada/set-frame-parameters)))
 
-;; Use frames instead of windows (better integration with tiling wm)
-(setq pop-up-frames 'graphic-only)
-
 ;; NOTE: I really need to understand all of this better
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
@@ -446,7 +441,7 @@ inhibit-startup-echo-area-message t)
         (window-height . 0.3)
         (side . bottom)
         (slot . 0))
-        ("\\*\\([Hh]elp\\|info\\)\\*"
+        ("\\*\\([Hh]elp.*\\|info\\)\\*"
         (display-buffer-in-side-window)
         (window-width . 0.4)
         (side . right)
@@ -455,14 +450,7 @@ inhibit-startup-echo-area-message t)
         (display-buffer-in-side-window)
         (window-height . 0.3)
         (side . bottom)
-        (slot . -1))
-        ("\\`magit-diff:.*\\'"
-        (display-buffer-pop-up-window))))
-
-(setq display-buffer-base-action nil)
-      ;; '((display-buffer-reuse-window
-      ;;    display-buffer-reuse-mode-window
-      ;;    display-buffer-at-bottom) . ((mode . (helpful-mode help-mode)))))
+        (slot . -1))))
 
 (setq frame-auto-hide-function 'delete-frame)
 
