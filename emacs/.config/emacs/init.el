@@ -109,8 +109,6 @@ inhibit-startup-echo-area-message t)
 (defun pada/kill-buffer ()
   (interactive) (kill-buffer (current-buffer)))
 
-(global-set-key (kbd "C-x k") 'pada/kill-buffer)
-
 ;; Custom find-file
 (defun pada/find-file ()
   "Wrapper around `find-file'.  If the current file is in a project, use `project-find-file', otherwise use the built-in `find-file'."
@@ -118,8 +116,6 @@ inhibit-startup-echo-area-message t)
   (if (project-current)
       (project-find-file)
     (call-interactively 'find-file)))
-
-(global-set-key (kbd "C-x f") 'pada/find-file)
 
 (defun pada/load-theme (theme)
   "Improvement over the default `load-theme'.  Load THEME and disable all themes that were loaded before."
@@ -157,24 +153,27 @@ inhibit-startup-echo-area-message t)
 (use-package general
   :after evil
   :config
-  (general-create-definer pada/leader-key
-    :keymaps '(normal visual)
-    :prefix "SPC")
-  (pada/leader-key
-    "x" '(execute-extended-command :which-key "M-x")
-    "h" (general-simulate-key "C-h" :which-key "Help")
-    "f" '(:ignore t :which-key "Find")
-    "ff" '(pada/find-file :which-key "Find file")
-    "fF" '(find-file :which-key "Find file in CWD")
-    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
-    "fs" '(save-buffer :which-key "Save file")
-    "w" '(save-buffer :which-key "Save file")
-    "q" '(evil-quit :which-key "Quit")
-    "b" '(:ignore t :which-key "Buffer")
-    "bb" '(consult-buffer :which-key "Switch buffer")
-    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
-    "bK" '(kill-buffer :which-key "Kill buffer")
-    "bi" '(ibuffer :which-key "Ibuffer"))
+  ;; (general-create-definer pada/leader-key
+  ;;   :keymaps '(normal visual)
+  ;;   :prefix "SPC")
+  ;; (pada/leader-key
+  ;;   "x" '(execute-extended-command :which-key "M-x")
+  ;;   "h" (general-simulate-key "C-h" :which-key "Help")
+  ;;   "w" (general-simulate-key "C-w" :which-key "Window")
+  ;;   "f" '(:ignore t :which-key "Find")
+  ;;   "ff" '(pada/find-file :which-key "Find file")
+  ;;   "fF" '(find-file :which-key "Find file in CWD")
+  ;;   "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+  ;;   "fs" '(save-buffer :which-key "Save file")
+  ;;   "b" '(:ignore t :which-key "Buffer")
+  ;;   "bb" '(consult-buffer :which-key "Switch buffer")
+  ;;   "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+  ;;   "bK" '(kill-buffer :which-key "Kill buffer")
+  ;;   "bi" '(ibuffer :which-key "Ibuffer"))
+  (general-define-key
+  "C-c d" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Visit init.el")
+  "C-x k" '(pada/kill-buffer :which-key "Kill buffer")
+  "C-x f" '(pada/find-file :which-key "Find file"))
   ;; Window resizing
   (general-define-key
    "M-h" 'shrink-window-horizontally
@@ -262,9 +261,10 @@ inhibit-startup-echo-area-message t)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
   (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
-  (pada/leader-key
-   "g" '(:ignore t :which-key "Git")
-   "gs" 'magit-status))
+  (general-define-key
+   :prefix "C-c g"
+   "" '(nil :which-key "Git")
+   "s" 'magit-status))
 
 ;; Git gutter
 (use-package git-gutter
@@ -346,24 +346,25 @@ inhibit-startup-echo-area-message t)
           (project-switch-to-buffer "Switch to buffer")
           (project-dired "Dired")
           (project-eshell "Eshell")))
-  (pada/leader-key
-    "p" '(:ignore t :which-key "Project")
-    "p!" 'project-shell-command
-    "pa" 'project-async-shell-command
-    "pf" 'project-find-file
-    "pF" 'project-or-external-find-file
-    "pb" 'project-switch-to-buffer
-    "ps" 'project-shell
-    "pd" 'project-dired
-    "pv" 'project-vc-dir
-    "pc" 'project-compile
-    "pe" 'project-eshell
-    "pk" 'project-kill-buffers
-    "pp" 'project-switch-project
-    "pg" 'project-find-regexp
-    "pG" 'project-or-external-find-regexp
-    "pr" 'project-query-replace-regexp
-    "px" 'project-execute-extended-command))
+  (general-define-key
+   :prefix "C-c p"
+   "" '(nil :which-key "Project")
+   "!" 'project-shell-command
+   "a" 'project-async-shell-command
+   "f" 'project-find-file
+   "F" 'project-or-external-find-file
+   "b" 'project-switch-to-buffer
+   "s" 'project-shell
+   "d" 'project-dired
+   "v" 'project-vc-dir
+   "c" 'project-compile
+   "e" 'project-eshell
+   "k" 'project-kill-buffers
+   "p" 'project-switch-project
+   "g" 'project-find-regexp
+   "G" 'project-or-external-find-regexp
+   "r" 'project-query-replace-regexp
+   "x" 'project-execute-extended-command))
 
 ;; Themes
 (use-package modus-themes
@@ -385,7 +386,7 @@ inhibit-startup-echo-area-message t)
 
 ;; Better syntax highlight
 (use-package tree-sitter
-  :hook (tree-sitter-after-on-hook . tree-sitter-hl-mode)
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config
   (global-tree-sitter-mode))
 
@@ -434,9 +435,7 @@ inhibit-startup-echo-area-message t)
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\`\\*Async Shell Command\\*\\'"
-         (display-buffer-no-window))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Messages\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Messages\\|Async Shell Command\\)\\*"
         (display-buffer-in-side-window)
         (window-height . 0.3)
         (side . bottom)
@@ -520,3 +519,30 @@ Note: This function is meant to be adviced around `find-file'."
                             ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
                             "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
   (global-ligature-mode))
+
+;; MPC, most stuff grabed from here: https://pspiagicw.github.io/posts/the-weirdest-mode-in-emacs-mpc-mode/
+(defun pada/mpc-move-down ()
+  (interactive)
+  (evil-next-visual-line)
+  (mpc-select))
+
+(defun pada/mpc-move-up ()
+  (interactive)
+  (evil-previous-visual-line)
+  (mpc-select))
+
+(general-define-key
+ :keymaps 'mpc-mode-map
+ :states 'normal
+ "j" 'pada/mpc-move-down
+ "k" 'pada/mpc-move-up
+ "p" 'mpc-toggle-play
+ "r" 'mpc-toggle-repeat
+ "s" 'mpc-toggle-shuffle
+ "c" 'mpc-toggle-consume
+ "a" 'mpc-playlist-add
+ ">" 'mpc-next
+ "<" 'mpc-prev
+ "R" 'mpc-playlist-delete
+ "RET" 'mpc-select
+ "x" 'mpc-play-at-point)
