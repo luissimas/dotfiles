@@ -53,9 +53,18 @@ inhibit-startup-echo-area-message t)
 (scroll-bar-mode 0)
 (blink-cursor-mode 0)
 (setq visible-bell nil)
+(setq-default cursor-in-non-selected-windows nil)
+
+;; Emacs "updates" its ui more often than it needs to, so we slow it down
+;; slightly from 0.5s:
+(setq idle-update-delay 1.0)
 
 ;; Fringes
 (set-fringe-mode '(5 . 5))
+
+;; Cursor offset
+(setq scroll-margin 8
+      scroll-conservatively 101)
 
 ;; Remember cursor position
 (save-place-mode 1)
@@ -153,23 +162,24 @@ inhibit-startup-echo-area-message t)
 (use-package general
   :after evil
   :config
-  ;; (general-create-definer pada/leader-key
-  ;;   :keymaps '(normal visual)
-  ;;   :prefix "SPC")
-  ;; (pada/leader-key
-  ;;   "x" '(execute-extended-command :which-key "M-x")
-  ;;   "h" (general-simulate-key "C-h" :which-key "Help")
-  ;;   "w" (general-simulate-key "C-w" :which-key "Window")
-  ;;   "f" '(:ignore t :which-key "Find")
-  ;;   "ff" '(pada/find-file :which-key "Find file")
-  ;;   "fF" '(find-file :which-key "Find file in CWD")
-  ;;   "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
-  ;;   "fs" '(save-buffer :which-key "Save file")
-  ;;   "b" '(:ignore t :which-key "Buffer")
-  ;;   "bb" '(consult-buffer :which-key "Switch buffer")
-  ;;   "bk" '(pada/kill-buffer :which-key "Kill current buffer")
-  ;;   "bK" '(kill-buffer :which-key "Kill buffer")
-  ;;   "bi" '(ibuffer :which-key "Ibuffer"))
+  (general-create-definer pada/leader-key
+    :states '(normal motion visual)
+    :keymaps 'override
+    :prefix "SPC")
+  (pada/leader-key
+    "x" '(execute-extended-command :which-key "M-x")
+    "h" (general-simulate-key "C-h" :which-key "Help")
+    "w" (general-simulate-key "C-w" :which-key "Window")
+    "f" '(:ignore t :which-key "Find")
+    "ff" '(pada/find-file :which-key "Find file")
+    "fF" '(find-file :which-key "Find file in CWD")
+    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+    "fs" '(save-buffer :which-key "Save file")
+    "b" '(:ignore t :which-key "Buffer")
+    "bb" '(consult-buffer :which-key "Switch buffer")
+    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+    "bK" '(kill-buffer :which-key "Kill buffer")
+    "bi" '(ibuffer :which-key "Ibuffer"))
   (general-define-key
   "C-c d" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Visit init.el")
   "C-x k" '(pada/kill-buffer :which-key "Kill buffer")
@@ -185,11 +195,11 @@ inhibit-startup-echo-area-message t)
 (use-package evil
   :init
   (setq evil-want-integration t
-  evil-want-keybinding nil
-  evil-want-C-u-scroll t
-  evil-undo-system 'undo-tree
-  evil-want-Y-yank-to-eol t
-  evil-shift-width tab-width)
+        evil-want-keybinding nil
+        evil-want-C-u-scroll t
+        evil-undo-system 'undo-tree
+        evil-want-Y-yank-to-eol t
+        evil-shift-width tab-width)
   (unbind-key "C-k" evil-insert-state-map)
   :hook
   (org-mode . (lambda () (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)))
@@ -244,8 +254,11 @@ inhibit-startup-echo-area-message t)
 
 ;; Which key
 (use-package which-key
-  :config (which-key-mode)
-  (setq which-key-idle-delay 1))
+  :config
+  (which-key-setup-minibuffer)
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-add-column-padding 5)
+  (which-key-mode))
 
 ;; Helpful
 (use-package helpful
@@ -261,10 +274,9 @@ inhibit-startup-echo-area-message t)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
   (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
-  (general-define-key
-   :prefix "C-c g"
-   "" '(nil :which-key "Git")
-   "s" 'magit-status))
+  (pada/leader-key
+   "g" '(:ignore t :which-key "Git")
+   "gs" 'magit-status))
 
 ;; Git gutter
 (use-package git-gutter
@@ -346,33 +358,33 @@ inhibit-startup-echo-area-message t)
           (project-switch-to-buffer "Switch to buffer")
           (project-dired "Dired")
           (project-eshell "Eshell")))
-  (general-define-key
-   :prefix "C-c p"
-   "" '(nil :which-key "Project")
-   "!" 'project-shell-command
-   "a" 'project-async-shell-command
-   "f" 'project-find-file
-   "F" 'project-or-external-find-file
-   "b" 'project-switch-to-buffer
-   "s" 'project-shell
-   "d" 'project-dired
-   "v" 'project-vc-dir
-   "c" 'project-compile
-   "e" 'project-eshell
-   "k" 'project-kill-buffers
-   "p" 'project-switch-project
-   "g" 'project-find-regexp
-   "G" 'project-or-external-find-regexp
-   "r" 'project-query-replace-regexp
-   "x" 'project-execute-extended-command))
+  (pada/leader-key
+    "p" '(:ignore t :which-key "Project")
+    "p!" 'project-shell-command
+    "pa" 'project-async-shell-command
+    "pf" 'project-find-file
+    "pF" 'project-or-external-find-file
+    "pb" 'project-switch-to-buffer
+    "ps" 'project-shell
+    "pd" 'project-dired
+    "pv" 'project-vc-dir
+    "pc" 'project-compile
+    "pe" 'project-eshell
+    "pk" 'project-kill-buffers
+    "pp" 'project-switch-project
+    "pg" 'project-find-regexp
+    "pG" 'project-or-external-find-regexp
+    "pr" 'project-query-replace-regexp
+    "px" 'project-execute-extended-command))
 
 ;; Themes
 (use-package modus-themes
   :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
-        modus-themes-mode-line '(borderless))
-  (load-theme 'modus-vivendi))
+        modus-themes-mode-line '(borderless)))
+
+(use-package nano-theme)
 
 (use-package nord-theme)
 
@@ -392,17 +404,29 @@ inhibit-startup-echo-area-message t)
 
 (use-package tree-sitter-langs)
 
+;; At-point completion
 (use-package corfu
   :custom
   (corfu-cycle t)
   (corfu-auto t)
-  (corfu-auto-delay .5)
+  (corfu-auto-delay .2)
   :config
   (define-key evil-insert-state-map (kbd "C-SPC") 'completion-at-point)
   :bind (:map corfu-map
               ("C-j" . corfu-next)
               ("C-k" . corfu-previous))
   :hook (prog-mode . corfu-mode))
+
+;; (use-package corfu-doc
+;;   :straight '(:host github :repo "galeo/corfu-doc"))
+
+;; (use-package kind-icon
+;;   :requires svg-lib
+;;   :after corfu
+;;   :custom
+;;   (kind-icon-deafult-face 'corfu-default)
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 ;; Setting font faces
 (defun pada/set-fonts ()
@@ -414,6 +438,8 @@ inhibit-startup-echo-area-message t)
 ;; Frame parameters
 (defvar pada/frame-parameters
   '((no-special-glyphs t)))
+
+(setq frame-resize-pixelwise t)
 
 (defun pada/set-frame-parameters ()
   (interactive)
