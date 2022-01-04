@@ -17,8 +17,8 @@
 ;==========================================================
 
 [colors]
-#background = ${xrdb:background:#000}
-background = #00
+background = ${xrdb:background:#000}
+; background = #00
 foreground = ${xrdb:foreground:#111}
 highlight = ${xrdb:foreground:#222}
 
@@ -30,13 +30,15 @@ highlight = ${xrdb:foreground:#222}
 
 [bar/bar]
 enable-ipc=true
-height = 20
-width = 98.5%
-offset-x = 10
-offset-y = 10
+height = 25
+width = 100%
+offset-x = 0
+offset-y = 0
 radius = 0
-padding = 0
 line-size = 2
+
+padding-left = 0
+padding-right = 1
 
 border-size = 0
 border-color = ${colors.foreground}
@@ -85,16 +87,30 @@ label-maxlen = 50
 type = internal/bspwm
 enable-scroll = false
 
-label-focused = 
+; label-focused = 
+label-focused = %name%
+label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.foreground}
+
 label-focused-padding = 1
 
-label-occupied = 
+; label-occupied = 
+label-occupied = %name%
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.foreground}
+label-occupied-underline = ${colors.foreground}
+
 label-occupied-padding = 1
 
 label-urgent = %name%
+label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-underline = ${colors.foreground}
+
 label-urgent-padding = 1
 
-label-empty = 
+; label-empty = 
+label-empty = %name%
 label-empty-padding = 1
 
 format = <label-state> <label-mode>
