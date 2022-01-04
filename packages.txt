@@ -142,7 +142,6 @@ sed
 sfml
 shellcheck
 spaceship-prompt-git
-spotify-tui
 steam
 stow
 strace
@@ -190,7 +189,6 @@ vim
 vscodium-bin
 wget
 which
-wine
 wireless_tools
 xclip
 xdotool
