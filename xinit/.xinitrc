@@ -16,7 +16,7 @@ fi
 unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
-picom &
+# picom &
 mopidy &
 emacs --daemon &
 
