@@ -108,11 +108,16 @@
 ;; Enable soft wrap for text modes
 (add-hook 'text-mode-hook 'visual-line-mode)
 
+;; Desktop/Laptop distinction
+(defun pada/is-laptop ()
+  "Returns `t' if the current session is running on a laptop with battery, otherwise returns `nil'."
+  (file-exists-p "/sys/class/power_supply/BAT1"))
+
 ;; Font configuration
-(defvar pada/default-font-size 120)
+(defvar pada/default-font-size (if (pada/is-laptop) 100 120))
 (defvar pada/default-font-family "Iosevka Padawan")
 
-(defvar pada/variable-font-size 120)
+(defvar pada/variable-font-size (if (pada/is-laptop) 100 120))
 (defvar pada/variable-font-family "Iosevka Padawan")
 
 (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
@@ -650,7 +655,7 @@ Note: This function is meant to be adviced around `find-file'."
 
 ;; Flycheck for syntax checking
 (use-package flycheck
-  :hook (prog-mode . flycheck-mode))
+  :hook (js-mode . flycheck-mode))
 
 ;; Code formatter
 (use-package format-all
