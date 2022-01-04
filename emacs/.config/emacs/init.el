@@ -445,6 +445,7 @@
 ;; Setting font faces
 (defun pada/set-fonts ()
   "Set the main font faces."
+  (interactive)
   (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
   (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
   (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
@@ -457,8 +458,8 @@
 (setq frame-resize-pixelwise t)
 
 (defun pada/set-frame-parameters ()
-  (interactive)
   "Set parameters defined in `pada/frame-parameters' for the current frame."
+  (interactive)
   (dolist (parameter pada/frame-parameters)
     (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
 
