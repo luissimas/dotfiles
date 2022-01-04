@@ -115,7 +115,7 @@ label-empty-padding = 1
 
 format = <label-state> <label-mode>
 
-label-monocle =
+label-monocle = "类 "
 
 [module/time]
 type = internal/date
