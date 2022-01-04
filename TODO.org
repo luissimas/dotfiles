@@ -1,0 +1,25 @@
+* Dotfiles
+  - [X] Modeline
+  - [ ] Keymap setup
+    - [ ] Evil (https://github.com/noctuid/evil-guide)
+    - [ ] General.el
+    - [ ] Which-key
+  - [ ] Window system
+  - [ ] MPD client
+  - [ ] Completion
+    - [ ] Vertico
+    - [ ] Completion styles
+    - [ ] Orderless
+    - [ ] Marginalia
+    - [ ] Embark
+    - [ ] Corfu
+      - [ ] Kind-icon
+      - [ ] Corfu-doc
+  - [ ] Flycheck
+  - [ ] LSP and programming modes
+  - [ ] Database interaction
+  - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
+  - [ ] Org-mode
+  - [ ] Spellchecking
+  - [ ] Startup buffer
+  - [ ] Create my own theme
