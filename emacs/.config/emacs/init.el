@@ -73,6 +73,7 @@ inhibit-startup-echo-area-message t)
 (setq standard-indent 2)
 (setq backward-delete-char-untabify-method 'hungry)
 (setq indent-line-function 'insert-tab)
+(setq tab-always-indent nil)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 (setq-default electric-indent-inhibit t)
@@ -206,7 +207,7 @@ inhibit-startup-echo-area-message t)
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
-  (define-key evil-insert-state-map (kbd "<tab>") 'tab-to-tab-stop)
+  ;; (define-key evil-insert-state-map (kbd "<tab>") 'tab-to-tab-stop)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (setq evil-lookup-func (lambda ()
@@ -386,7 +387,7 @@ inhibit-startup-echo-area-message t)
 
 (use-package nano-theme)
 
-(use-package nord-theme)
+(use-package doom-themes)
 
 ;; Icons
 (use-package all-the-icons)
@@ -437,7 +438,8 @@ inhibit-startup-echo-area-message t)
 
 ;; Frame parameters
 (defvar pada/frame-parameters
-  '((no-special-glyphs t)))
+  '((no-special-glyphs t)
+    (internal-border-width 0)))
 
 (setq frame-resize-pixelwise t)
 
@@ -572,3 +574,25 @@ Note: This function is meant to be adviced around `find-file'."
  "R" 'mpc-playlist-delete
  "RET" 'mpc-select
  "x" 'mpc-play-at-point)
+
+;; Mode line
+(use-package doom-modeline
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 4)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  :init
+  (doom-modeline-mode))
+
+;; Time display format
+(setq display-time-format "%A %d %b, %H:%M")
+(setq display-time-default-load-average nil)
+;; (display-time-mode)
+
+;; Org mode
+(use-package org-bullets
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
