@@ -120,10 +120,6 @@
 (defvar pada/variable-font-size (if (pada/is-laptop) 100 120))
 (defvar pada/variable-font-family "Iosevka Padawan")
 
-(set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
-(set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
-(set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light)
-
 ;; Custom function to kill current buffer
 (defun pada/kill-buffer ()
   "Kill the current buffer."
@@ -449,9 +445,9 @@
 ;; Setting font faces
 (defun pada/set-fonts ()
   "Set the main font faces."
-  (set-face-attribute 'default nil :font "Iosevka Padawan 12")
-  (set-face-attribute 'fixed-pitch nil :font "Iosevka Padawan 12")
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Padawan 12"))
+  (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
+  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
+  (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
 
 ;; Frame parameters
 (defvar pada/frame-parameters
