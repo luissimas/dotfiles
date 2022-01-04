@@ -608,3 +608,76 @@ Note: This function is meant to be adviced around `find-file'."
 ;; Org mode
 (use-package org-bullets
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
+
+;; LSP-mode
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c c")
+  :hook
+  (js-mode . lsp)
+  :commands lsp
+  :custom
+  (lsp-lens-place-position 'above-line)
+  (lsp-elixir-dialyzer-enabled nil)
+  :config
+  (setq read-process-output-max (* 1024 1024)
+        lsp-headerline-breadcrumb-segments '(symbols)
+        lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable t
+        lsp-enable-symbol-highlighting t
+        lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-modeline-workspace-status-enable nil
+        lsp-eldoc-render-all nil)
+  (set-face-attribute 'lsp-details-face nil :height 0.9)
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-position 'at-point
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-mouse nil
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-max-width 400
+        lsp-ui-doc-max-height 30
+        lsp-signature-render-documentation nil)
+  (define-key evil-normal-state-map (kbd "C-k") 'lsp-ui-doc-focus-frame)
+  (evil-define-key 'normal 'lsp-ui-doc-frame-mode
+    [?q] #'lsp-ui-doc-unfocus-frame))
+
+;; Flycheck for syntax checking
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode))
+
+;; Code formatter
+(use-package format-all
+  :hook
+  (prog-mode . format-all-mode)
+  (format-all-mode . format-all-ensure-formatter)
+  :config
+  (setq format-all-show-errors 'never))
+
+;; Setup tabs and other things for projects
+(use-package editorconfig
+  :config
+  (editorconfig-mode))
+
+;; Making emacs search for binaries in node_modules
+(use-package add-node-modules-path
+  :hook (js-mode . add-node-modules-path))
+
+;; Highlight todo comments
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"       font-lock-constant-face bold)
+          ("WARNING"    warning bold)
+          ("FIXME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold))))
