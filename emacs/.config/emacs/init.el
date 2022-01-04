@@ -5,10 +5,11 @@
           (lambda () (setq gc-cons-threshold (* 8 1024 1024))))
 
 (defun pada/display-startup-time ()
+  "Display the startup time for the current section."
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
-                     (time-subtract after-init-time before-init-time)))
+                    (time-subtract after-init-time before-init-time)))
            gcs-done))
 
 (add-hook 'emacs-startup-hook 'pada/display-startup-time)
@@ -18,7 +19,7 @@
 
 ;; Supressing native compilation warnings
 (setq native-comp-async-report-warnings-errors nil
-  warning-minimum-level :emergency)
+      warning-minimum-level :emergency)
 
 ;; Setting custom directory
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -41,10 +42,13 @@
 ;; Quick yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Disable suggestion for keybindings in minibuffer
+(setq suggest-key-bindings nil)
+
 ;; Disabling init screen
 (setq inhibit-startup-screen t
-inhibit-startup-message t
-inhibit-startup-echo-area-message t)
+      inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
 
 ;; Disabling main UI components
 (menu-bar-mode 0)
@@ -60,7 +64,7 @@ inhibit-startup-echo-area-message t)
 (setq idle-update-delay 1.0)
 
 ;; Fringes
-(set-fringe-mode '(5 . 5))
+(set-fringe-mode '(10 . 10))
 
 ;; Cursor offset
 (setq scroll-margin 8
@@ -117,6 +121,7 @@ inhibit-startup-echo-area-message t)
 
 ;; Custom function to kill current buffer
 (defun pada/kill-buffer ()
+  "Kill the current buffer."
   (interactive) (kill-buffer (current-buffer)))
 
 ;; Custom find-file
@@ -133,7 +138,7 @@ inhibit-startup-echo-area-message t)
    (list
     (intern (completing-read "Load custom theme: "
                              (mapcar #'symbol-name
-				     (custom-available-themes))))))
+				                             (custom-available-themes))))))
   (load-theme theme t)
   (dolist (theme (cdr custom-enabled-themes))
     (disable-theme theme)))
@@ -173,6 +178,7 @@ inhibit-startup-echo-area-message t)
     "w" (general-simulate-key "C-w" :which-key "Window")
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
+    "fg" '(consult-ripgrep :which-key "Grep")
     "fF" '(find-file :which-key "Find file in CWD")
     "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
     "fs" '(save-buffer :which-key "Save file")
@@ -182,9 +188,9 @@ inhibit-startup-echo-area-message t)
     "bK" '(kill-buffer :which-key "Kill buffer")
     "bi" '(ibuffer :which-key "Ibuffer"))
   (general-define-key
-  "C-c d" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Visit init.el")
-  "C-x k" '(pada/kill-buffer :which-key "Kill buffer")
-  "C-x f" '(pada/find-file :which-key "Find file"))
+   "C-c d" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Visit init.el")
+   "C-x k" '(pada/kill-buffer :which-key "Kill buffer")
+   "C-x f" '(pada/find-file :which-key "Find file"))
   ;; Window resizing
   (general-define-key
    "M-h" 'shrink-window-horizontally
@@ -198,6 +204,7 @@ inhibit-startup-echo-area-message t)
   (setq evil-want-integration t
         evil-want-keybinding nil
         evil-want-C-u-scroll t
+        evil-want-minibuffer t
         evil-undo-system 'undo-tree
         evil-want-Y-yank-to-eol t
         evil-shift-width tab-width)
@@ -276,8 +283,8 @@ inhibit-startup-echo-area-message t)
   :config
   (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
   (pada/leader-key
-   "g" '(:ignore t :which-key "Git")
-   "gs" 'magit-status))
+    "g" '(:ignore t :which-key "Git")
+    "gs" 'magit-status))
 
 ;; Git gutter
 (use-package git-gutter
@@ -315,6 +322,10 @@ inhibit-startup-echo-area-message t)
         completion-styles '(basic substring flex)
         completion-ignore-case t)
 
+  (evil-define-key '(normal insert) 'minibuffer-mode-map (kbd "C-j") 'vertico-next)
+  (evil-define-key '(normal insert) 'minibuffer-mode-map (kbd "C-k") 'vertico-previous)
+  (evil-define-key 'normal 'minibuffer-mode-map (kbd "<escape>") 'abort-minibuffers)
+
   ;; Using vertico-directory extension
   (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
   (require 'vertico-directory)
@@ -345,6 +356,7 @@ inhibit-startup-echo-area-message t)
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line))
   :config
+  (setq consult-narrow-key (kbd "C-."))
   (setq consult-project-root-function
         (lambda ()
           (when-let (project (project-current))
@@ -464,20 +476,20 @@ inhibit-startup-echo-area-message t)
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
         ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Messages\\|Async Shell Command\\)\\*"
-        (display-buffer-in-side-window)
-        (window-height . 0.3)
-        (side . bottom)
-        (slot . 0))
+         (display-buffer-in-side-window)
+         (window-height . 0.3)
+         (side . bottom)
+         (slot . 0))
         ("\\*\\([Hh]elp.*\\|info\\)\\*"
-        (display-buffer-in-side-window)
-        (window-width . 0.4)
-        (side . right)
-        (slot . 0))
-        ("\\*\\(e?shell\\|vterm\\)\\*"
-        (display-buffer-in-side-window)
-        (window-height . 0.3)
-        (side . bottom)
-        (slot . -1))))
+         (display-buffer-in-side-window)
+         (window-width . 0.4)
+         (side . right)
+         (slot . 0))
+        ("\\*\\(.*e?shell\\|vterm\\)\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.3)
+         (side . bottom)
+         (slot . -1))))
 
 (setq frame-auto-hide-function 'delete-frame)
 
