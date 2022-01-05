@@ -4,7 +4,7 @@
 
 # program launcher
 super + p
-	rofi -show drun
+  dmenu_run
 
 # power prompt
 super + shift + q

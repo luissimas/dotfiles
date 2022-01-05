@@ -1,0 +1,6 @@
+#!/bin/sh
+
+dmenuDir=/home/padawan/repos/dmenu
+
+cd $dmenuDir
+make clean install > /dev/null 2>&1

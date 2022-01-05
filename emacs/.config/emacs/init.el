@@ -477,7 +477,7 @@
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|Messages\\|Async Shell Command\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)

@@ -81,7 +81,7 @@ case $option in "Pywal")
     "Nord")
       name=nord
       theme=~/.config/wal/colorschemes/nord.json
-      bg=~/.wal/graymountain.jpeg
+      bg=~/.wal/nordkanawaga.png
       ;;
     "Catppuccin")
       name=catppuccin
@@ -99,6 +99,9 @@ case $option in "Pywal")
 
     # Update bspwm colors
     bspwmcolors
+
+    # Recompiling dmenu
+    sudo recompile_dmenu 
 
     # Update qutebrowser colors
     pgrep qutebrowser > /dev/null && qutebrowser :config-source
