@@ -2,7 +2,7 @@
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
 obsidianPath="/home/padawan/dox/vault/Attachments/"
 
-selected=$(echo -e 'Obsidian\nScreenshot' | rofi -dmenu -p "Type")
+selected=$(echo -e 'Obsidian\nScreenshot' | dmenu -p "Type")
 
 # Kill unclutter to allow mouse selection
 killall unclutter
@@ -14,10 +14,10 @@ killall unclutter
 if [[ "$selected" == "Obsidian" ]]; then
   filePath=$obsidianPath
   echo $filePath
-  fileName=$(rofi -dmenu -p "File name" -l 0)
+  fileName=$(dmenu -p "File name" -l 0)
 elif [[ "$selected" == "Screenshot" ]]; then
   filePath=$screenshotPath
-  fileName=$(rofi -dmenu -p "File name" -l 0)
+  fileName=$(dmenu -p "File name" -l 0)
 fi
 
 maim -su $filePath$fileName.png

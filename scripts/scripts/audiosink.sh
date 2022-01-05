@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 
-selected=$(pamixer --list-sinks | grep alsa | rofi -dmenu -i -width 60 -p "Select output device" | awk '{print $1}')
+selected=$(pamixer --list-sinks | grep alsa | dmenu -i -p "Select output device" | awk '{print $1}')
 
 if [ -z "$selected" ]; then
   echo "No device selected"

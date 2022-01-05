@@ -3,15 +3,15 @@
 wallpaperDirectory=/home/padawan/.wal/
 
 # Prompt if the script should use the wallpaper or the themes
-option=$(echo -e 'Theme\nWallpaper\nPywal' | rofi -dmenu -i -p "Source")
+option=$(echo -e 'Theme\nWallpaper\nPywal' | dmenu -i -p "Source")
 
 case $option in "Pywal")
-  selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")
+  selected=$(ls $wallpaperDirectory | dmenu -i -p "Select a file")
 
   if [[ -z "$selected" ]]; then
     printf "No image selected\n"
   else
-    themelight=$(echo -e 'Dark\nLight' | rofi -dmenu -i -p "Select")
+    themelight=$(echo -e 'Dark\nLight' | dmenu -i -p "Select")
 
     if [[ -z "$themelight" ]]; then
       printf "No selection\n"
@@ -43,7 +43,7 @@ case $option in "Pywal")
   fi
   ;;
 "Theme")
-  selected=$(echo -e 'Nord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Theme")
+  selected=$(echo -e 'Nord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | dmenu -i -p "Theme")
 
   if [[ -z $selected ]]; then
     printf "No selection"
@@ -81,7 +81,7 @@ case $option in "Pywal")
     "Nord")
       name=nord
       theme=~/.config/wal/colorschemes/nord.json
-      bg=~/.wal/nordkanawaga.png
+      bg=~/.wal/nordkanagawa.png
       ;;
     "Catppuccin")
       name=catppuccin
@@ -108,7 +108,7 @@ case $option in "Pywal")
   fi
   ;;
 "Wallpaper")
-  selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "File")
+  selected=$(ls $wallpaperDirectory | dmenu -i -p "File")
 
   if [[ -z "$selected" ]]; then
     printf "No image selected\n"
