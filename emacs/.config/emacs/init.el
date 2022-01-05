@@ -515,7 +515,8 @@
   :group 'processes)
 
 (defcustom pada/open-external-associations
-  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura"))
+  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura")
+    ("\\.mkv\\'\\|\\.mp4\\'" "mpv"))
   "A alist of association between file patterns and external programs."
   :group 'open-external
   :type "alist")
