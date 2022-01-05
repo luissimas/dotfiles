@@ -133,6 +133,7 @@
       (project-find-file)
     (call-interactively 'find-file)))
 
+;; Theme utils
 (defun pada/load-theme (theme)
   "Improvement over the default `load-theme'.  Load THEME and disable all themes that were loaded before."
   (interactive
@@ -143,6 +144,34 @@
   (load-theme theme t)
   (dolist (theme (cdr custom-enabled-themes))
     (disable-theme theme)))
+
+(defcustom pada/system-theme-associations
+  '(("modus-operandi" modus-operandi)
+    ("modus-vivendi" modus-vivendi)
+    ("nord" doom-nord)
+    ("gruvbox" doom-gruvbox)
+    ("palenight" doom-palenight))
+  "A alist of association between file patterns and external programs."
+  :group 'system-theme
+  :type "alist")
+
+(defun pada/load-system-theme ()
+  "Read file ~/.colorscheme and load its theme."
+  (interactive)
+  (with-temp-buffer
+    (insert-file-contents "~/.colorscheme")
+    (let ((theme (string-trim (buffer-string)))
+          (associations pada/system-theme-associations))
+      (while associations
+        (let* ((current (pop associations))
+               (system-theme (car current))
+               (emacs-theme (car (cdr current))))
+          (when (string-match-p system-theme theme)
+            (pada/load-theme emacs-theme)
+            (setq associations nil)))))))
+
+;; Load system theme on startup
+(pada/load-system-theme)
 
 ;; Straight setup
 (defvar bootstrap-version)
@@ -400,7 +429,9 @@
 
 (use-package nano-theme)
 
-(use-package doom-themes)
+(use-package doom-themes
+  :custom
+  (doom-gruvbox-dark-variant "hard"))
 
 ;; Icons
 (use-package all-the-icons)
@@ -536,14 +567,13 @@ Note: This function is meant to be adviced around `find-file'."
         (associations pada/open-external-associations)
         (found nil))
     (while associations
-      (let* ((current (car associations))
+      (let* ((current (pop associations))
              (pattern (car current))
              (program (car (cdr current))))
         (when (string-match-p pattern file-name)
           (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
           (setq found t)
-          (setq associations nil)))
-      (setq associations (cdr associations)))
+          (setq associations nil))))
     (unless found
       (apply fun args))))
 

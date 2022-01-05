@@ -1,6 +1,6 @@
 * Dotfiles
   - [X] Modeline
-  - [ ] Integrate system-wide themes
+  - [X] Integrate system-wide themes
   - [ ] Keymap setup
     - [ ] Evil (https://github.com/noctuid/evil-guide)
     - [ ] General.el

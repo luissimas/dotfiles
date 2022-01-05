@@ -100,6 +100,9 @@ case $option in "Pywal")
     # Update bspwm colors
     bspwmcolors
 
+    # Update emacs colors
+    emacsclient -e "(pada/load-system-theme)"
+
     # Recompiling dmenu
     sudo recompile_dmenu 
 
