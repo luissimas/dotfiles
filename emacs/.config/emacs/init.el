@@ -170,9 +170,6 @@
             (pada/load-theme emacs-theme)
             (setq associations nil)))))))
 
-;; Load system theme on startup
-(pada/load-system-theme)
-
 ;; Straight setup
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -714,3 +711,6 @@ Note: This function is meant to be adviced around `find-file'."
           ("HACK"       font-lock-constant-face bold)
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold))))
+
+;; Load system theme on startup
+(pada/load-system-theme)
