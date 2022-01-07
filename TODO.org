@@ -5,6 +5,11 @@
     - [ ] Evil (https://github.com/noctuid/evil-guide)
     - [ ] General.el
     - [ ] Which-key
+  - [ ] Org-mode
+    - [ ] Basic setup
+    - [ ] Packages
+    - [ ] Org-roam
+    - [ ] Move obsidian vault to org-roam
   - [ ] Window system
   - [ ] MPD client
   - [ ] Completion
@@ -20,7 +25,7 @@
   - [ ] LSP and programming modes
   - [ ] Database interaction
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
-  - [ ] Org-mode
+  - [ ] Terminal modes
   - [ ] Spellchecking
   - [ ] Startup buffer
   - [ ] Create my own theme

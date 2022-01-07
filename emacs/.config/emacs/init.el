@@ -39,8 +39,9 @@
 ;; Stop asking for following git symlink
 (setq vc-follow-symlinks t)
 
-;; Quick yes/no prompts
+;; Prompts and confirmation
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setq confirm-kill-emacs 'y-or-n-p)
 
 ;; Disable suggestion for keybindings in minibuffer
 (setq suggest-key-bindings nil)
@@ -56,7 +57,8 @@
 (tooltip-mode  0)
 (scroll-bar-mode 0)
 (blink-cursor-mode 0)
-(setq visible-bell nil)
+(setq visible-bell nil
+      use-dialog-box nil)
 (setq-default cursor-in-non-selected-windows nil)
 
 ;; Emacs "updates" its ui more often than it needs to, so we slow it down
@@ -121,7 +123,7 @@
 (defvar pada/variable-font-family "Iosevka Padawan")
 
 ;; Custom function to kill current buffer
-(defun pada/kill-buffer ()
+(defun pada/kill-current-buffer ()
   "Kill the current buffer."
   (interactive) (kill-buffer (current-buffer)))
 
@@ -199,26 +201,47 @@
     :states '(normal motion visual)
     :keymaps 'override
     :prefix "SPC")
+  ;; Main keybingins, got a lot of inspiration from Doom Emacs (default/+evil-bindings.el)
   (pada/leader-key
+    "h" '(:keymap help-map :which-key "Help")
+    "w" '(:keymap evil-window-map :which-key "Window")
+
     "x" '(execute-extended-command :which-key "M-x")
-    "h" (general-simulate-key "C-h" :which-key "Help")
-    "w" (general-simulate-key "C-w" :which-key "Window")
+    "u" '(universal-argument :which-key "Universal argument")
+
     "f" '(:ignore t :which-key "Find")
     "ff" '(pada/find-file :which-key "Find file")
     "fg" '(consult-ripgrep :which-key "Grep")
     "fF" '(find-file :which-key "Find file in CWD")
     "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+    "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
     "fs" '(save-buffer :which-key "Save file")
+    "fS" '(write-file :which-key "Save file as...")
+
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
-    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+    "bk" '(pada/kill-current-buffer :which-key "Kill current buffer")
     "bK" '(kill-buffer :which-key "Kill buffer")
-    "bi" '(ibuffer :which-key "Ibuffer"))
-  (general-define-key
-   "C-c d" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Visit init.el")
-   "C-x k" '(pada/kill-buffer :which-key "Kill buffer")
-   "C-x f" '(pada/find-file :which-key "Find file"))
+    "bi" '(ibuffer :which-key "Ibuffer")
+    "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
+    "bn" '(next-buffer :which-key "Next buffer")
+    "bp" '(previous-buffer :which-key "Previous buffer")
+    "bN" '(evil-buffer-new :which-key "New buffer")
+    "br" '(revert-buffer :which-key "Revert buffer")
+
+    "g" '(:ignore t :which-key "Git")
+    "gs" '(magit-status :which-key "Magit status")
+    "gc" '(magit-clone :which-key "Magit clone")
+    "gl" '(magit-log-buffer-file :which-key "Magit buffer log")
+    "gi" '(magit-init :which-key "Magit init")
+
+    "p" '(:keymap project-prefix-map :which-key "Project")
+    ;; "p!" 'project-shell-command
+    "pa" 'project-async-shell-command
+    "p&" nil)
+
   ;; Window resizing
+  ;; TODO: Replace it with a hydra
   (general-define-key
    "M-h" 'shrink-window-horizontally
    "M-j" 'shrink-window
@@ -254,8 +277,8 @@
 
 (use-package evil-surround
   :requires evil
-  :config
-  (global-evil-surround-mode))
+  :hook
+  (evil-mode . evil-surround-mode))
 
 (use-package evil-nerd-commenter
   :config
@@ -264,7 +287,7 @@
 
 (use-package evil-org
   :after org
-  :hook (org-mode . (lambda () evil-org-mode))
+  :hook (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
@@ -308,10 +331,7 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
-  (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
-  (pada/leader-key
-    "g" '(:ignore t :which-key "Git")
-    "gs" 'magit-status))
+  (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle))
 
 ;; Git gutter
 (use-package git-gutter
@@ -321,13 +341,6 @@
   (git-gutter:modified-sign "│")
   (git-gutter:added-sign "│")
   (git-gutter:deleted-sign "│"))
-
-(use-package git-gutter-fringe
-  :after git-gutter
-  :config
-  (fringe-helper-define 'git-gutter-fr:added nil "")
-  (fringe-helper-define 'git-gutter-fr:modified nil "")
-  (fringe-helper-define 'git-gutter-fr:deleted nil ""))
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
@@ -397,25 +410,7 @@
           (project-find-regexp "Find regexp")
           (project-switch-to-buffer "Switch to buffer")
           (project-dired "Dired")
-          (project-eshell "Eshell")))
-  (pada/leader-key
-    "p" '(:ignore t :which-key "Project")
-    "p!" 'project-shell-command
-    "pa" 'project-async-shell-command
-    "pf" 'project-find-file
-    "pF" 'project-or-external-find-file
-    "pb" 'project-switch-to-buffer
-    "ps" 'project-shell
-    "pd" 'project-dired
-    "pv" 'project-vc-dir
-    "pc" 'project-compile
-    "pe" 'project-eshell
-    "pk" 'project-kill-buffers
-    "pp" 'project-switch-project
-    "pg" 'project-find-regexp
-    "pG" 'project-or-external-find-regexp
-    "pr" 'project-query-replace-regexp
-    "px" 'project-execute-extended-command))
+          (project-eshell "Eshell"))))
 
 ;; Themes
 (use-package modus-themes

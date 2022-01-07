@@ -10,6 +10,10 @@ super + p
 super + shift + q
   $HOME/scripts/power-prompt.sh
 
+# lock screen
+super + shift + l
+  betterlockscreen -l dim
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -50,10 +54,6 @@ XF86MonBrightnessUp
 
 XF86MonBrightnessDown
   light -U 10
-
-# lock screen
-#super + alt + q
-#  betterlockscreen -l dim
 
 ###############
 #bspwm hotkeys#
