@@ -707,5 +707,8 @@ Note: This function is meant to be adviced around `find-file'."
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold))))
 
+;; Better terminal emulator
+(use-package vterm)
+
 ;; Load system theme on startup
 (pada/load-system-theme)
