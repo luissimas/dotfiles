@@ -66,7 +66,7 @@
 (setq idle-update-delay 1.0)
 
 ;; Fringes
-(set-fringe-mode '(10 . 10))
+(set-fringe-mode '(5 . 5))
 
 ;; Cursor offset
 (setq scroll-margin 8
@@ -238,7 +238,12 @@
     "p" '(:keymap project-prefix-map :which-key "Project")
     ;; "p!" 'project-shell-command
     "pa" 'project-async-shell-command
-    "p&" nil)
+    "p&" nil
+
+    "t" '(:ignote t :which-key "Toggle")
+    "tt" '(pada/load-theme :which-key "Theme")
+    "tf" '(flycheck-mode :which-key "Flycheck")
+    "tg" '(evil-goggles-mode :which-key "Evil goggles"))
 
   ;; Window resizing
   ;; TODO: Replace it with a hydra
@@ -340,12 +345,22 @@
   (git-gutter:update-interval 1)
   (git-gutter:modified-sign "│")
   (git-gutter:added-sign "│")
-  (git-gutter:deleted-sign "│"))
+  (git-gutter:deleted-sign "│")
+  (set-face-attribute 'git-gutter:unchanged nil :background nil :inherit 'default))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [240] nil nil '(center t))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [240] nil nil '(center t))
+  (define-fringe-bitmap 'git-gutter-fr:modified [240] nil nil '(center t))
+  (set-face-attribute 'git-gutter-fr:added nil :inherit 'magit-diff-added-highlight)
+  (set-face-attribute 'git-gutter-fr:modified nil :inherit 'magit-diff-base-highlight)
+  (set-face-attribute 'git-gutter-fr:deleted nil :inherit 'magit-diff-removed-highlight))
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
 ;; Show colors
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
