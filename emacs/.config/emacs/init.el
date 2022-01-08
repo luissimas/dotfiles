@@ -103,9 +103,11 @@
                             (setq display-line-numbers 'relative)
                             (toggle-truncate-lines)))
 
-;; Enable autopairs on programming modes
-(add-hook 'prog-mode-hook 'electric-pair-mode)
-(add-hook 'prog-mode-hook 'show-paren-mode)
+;; Autopairs
+(add-hook 'prog-mode-hook 'electric-pair-local-mode)
+
+;; (setq show-paren-delay 0)
+;; (add-hook 'prog-mode-hook 'show-paren-mode)
 
 ;; Enable soft wrap for text modes
 (add-hook 'text-mode-hook 'visual-line-mode)
@@ -463,10 +465,15 @@
   (corfu-auto t)
   (corfu-auto-delay .2)
   :config
-  (define-key evil-insert-state-map (kbd "C-SPC") 'completion-at-point)
-  :bind (:map corfu-map
-              ("C-j" . corfu-next)
-              ("C-k" . corfu-previous))
+  (general-define-key
+   :states 'insert
+   :keymaps 'prog-mode-map
+   "C-SPC" 'completion-at-point)
+  (general-define-key
+   :states 'insert
+   :keymaps 'corfu-map
+   "C-j" 'corfu-next
+   "C-k" 'corfu-previous)
   :hook (prog-mode . corfu-mode))
 
 ;; (use-package corfu-doc

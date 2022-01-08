@@ -5,7 +5,6 @@
     - [X] Evil (https://github.com/noctuid/evil-guide)
     - [X] General.el
     - [X] Which-key
-  - [ ] Terminal modes
   - [ ] Org-mode
     - [ ] Basic setup
     - [ ] Packages
@@ -28,6 +27,7 @@
     - [ ] Flymake/Flycheck
     - [ ] Eldoc
     - [ ] Indentation setup
+  - [ ] Terminal modes
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
   - [ ] Database interaction
   - [ ] Spellchecking
