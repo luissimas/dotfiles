@@ -2,7 +2,6 @@
 # ~/.bashrc
 #
 
-
 # Exports
 export TERM="st"
 export BROWSER="qutebrowser"
@@ -15,32 +14,33 @@ export EDITOR="nvim"
 # Prompt Style
 PS1='\e[1m \w λ \e[m'
 
-#pywal
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/.scripts/"
 
-# Functions
+# Custom cd function
+c() {
+	cd $1 && exa -la --no-user --time-style long-iso --icons
+}
 
-print(){
-	if [ -z "$1" ] 
-	then
-		scrot -s -f ~/img/Screenshots/%Y_%m_%d_at_%H:%M:%S.png
-		echo "Screenshot saved at: ~/img/Screenshots"
+# Vterm
+vterm_printf() {
+	if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]); then
+		# Tell tmux to pass the escape sequences through
+		printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+	elif [ "${TERM%%-*}" = "screen" ]; then
+		# GNU screen (screen, screen-256color, screen-256color-bce)
+		printf "\eP\e]%s\007\e\\" "$1"
 	else
-		scrot -s -f "$1"
-		echo "Screenshot saved at: $1"
+		printf "\e]%s\e\\" "$1"
 	fi
 }
 
 # Aliases
-alias l='ls --color=auto'
-alias la='ls --color=auto -A'
-
-alias rm='rm -i'
-alias rd='rm -rf -i'
-
+alias l='exa -l --no-user --time-style long-iso --icons'
+alias la='exa -la --no-user --time-style long-iso --icons'
+alias tree='exa -T --icons'
+alias grep='rg'
 alias ..='cd ..'
 alias ...='cd ../..'
-
 alias addall='git add -A'
 alias commit='git commit'
 alias pull='git pull origin'
@@ -49,16 +49,15 @@ alias status='git status'
 alias diff='git diff'
 alias log='git log'
 alias clone='git clone'
-
 alias pacman='sudo pacman'
-
+alias v='nvim'
 alias vim='nvim'
+alias code='codium'
+alias icat='kitty +kitten icat'
+alias cat='bat -P'
+alias mux='tmuxp'
+alias ta='tmux attach'
+alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
-alias recompile='sudo recompile-suckless.sh'
-
-# Alias for dotfiles git bare repo
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Opam configuration
+test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh >/dev/null 2>/dev/null || true

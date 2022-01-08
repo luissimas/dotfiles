@@ -140,7 +140,7 @@ ramp-volume-0 = ""
 ramp-volume-1 = ""
 ramp-volume-2 = ""
 
-label-muted = "ﱝ     "
+label-muted = "ﱝ mute"
 
 [module/battery]
 type = internal/battery
