@@ -639,7 +639,6 @@ Note: This function is meant to be adviced around `find-file'."
 
 (setq-default mode-line-format
               `("%e"
-                (:eval evil-mode-line-tag)
                 mode-line-front-space
                 mode-line-mule-info
                 mode-line-modified
@@ -651,9 +650,9 @@ Note: This function is meant to be adviced around `find-file'."
                 mode-line-percent-position
                 "    "
                 ,pada/mode-line-vc
-                "    "
+                " "
                 mode-line-modes
-                "  "
+                " "
                 mode-line-misc-info
                 mode-line-end-spaces))
 
