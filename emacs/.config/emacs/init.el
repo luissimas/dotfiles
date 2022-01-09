@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Setting garbage colector threshold
 (setq gc-cons-threshold (* 100 1024 1024))
 
@@ -245,7 +246,8 @@
     "t" '(:ignote t :which-key "Toggle")
     "tt" '(pada/load-theme :which-key "Theme")
     "tf" '(flycheck-mode :which-key "Flycheck")
-    "tg" '(evil-goggles-mode :which-key "Evil goggles"))
+    "tg" '(git-gutter-mode :which-key "Git gutter")
+    "tm" '(minions-mode :which-key "Minions"))
 
   ;; Window resizing
   ;; TODO: Replace it with a hydra
@@ -268,6 +270,8 @@
   (unbind-key "C-k" evil-insert-state-map)
   :hook
   (org-mode . (lambda () (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)))
+  :custom
+  (evil-echo-state . nil)
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
@@ -390,10 +394,17 @@
   (vertico-mode))
 
 ;; Completion style
+(defun pada/orderless-literal-dispatcher (pattern _index _total)
+  "Literal style dispatcher for strings using the equal sign (`=') as a suffix."
+  (when (string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1))))
+
 (use-package orderless
   :config
   (setq completion-styles '(orderless)
-        orderless-matching-styles '(orderless-flex orderless-regexp)))
+        read-file-name-completion-ignore-case t
+        read-buffer-completion-ignore-case t
+        orderless-matching-styles '(orderless-flex orderless-regexp)
+        orderless-style-dispatchers '(pada/orderless-literal-dispatcher)))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -607,54 +618,58 @@ Note: This function is meant to be adviced around `find-file'."
                             "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
   (global-ligature-mode))
 
-;; MPC, most stuff grabed from here: https://pspiagicw.github.io/posts/the-weirdest-mode-in-emacs-mpc-mode/
-(defun pada/mpc-move-down ()
-  (interactive)
-  (evil-next-visual-line)
-  (mpc-select))
-
-(defun pada/mpc-move-up ()
-  (interactive)
-  (evil-previous-visual-line)
-  (mpc-select))
-
-(general-define-key
- :keymaps 'mpc-mode-map
- :states 'normal
- "j" 'pada/mpc-move-down
- "k" 'pada/mpc-move-up
- "p" 'mpc-toggle-play
- "r" 'mpc-toggle-repeat
- "s" 'mpc-toggle-shuffle
- "c" 'mpc-toggle-consume
- "a" 'mpc-playlist-add
- ">" 'mpc-next
- "<" 'mpc-prev
- "R" 'mpc-playlist-delete
- "RET" 'mpc-select
- "x" 'mpc-play-at-point)
-
 ;; Mode line
-(use-package doom-modeline
+(setq evil-mode-line-format '(after . mode-line-remote))
+(setq mode-line-position-column-line-format '(" %l,%c"))
+(setq mode-line-defining-kbd-macro
+      (propertize " Recording macro..." 'face 'mode-line-emphasis))
+
+(setq-default mode-line-format
+              '("%e"
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-modified
+                mode-line-remote
+                mode-line-frame-identification
+                mode-line-buffer-identification
+                " "
+                mode-line-position
+                (vc-mode vc-mode)
+                "  "
+                mode-line-modes
+                "  "
+                mode-line-misc-info
+                mode-line-end-spaces))
+
+(use-package minions
   :custom
-  (doom-modeline-height 25)
-  (doom-modeline-bar-width 4)
-  (doom-modeline-minor-modes nil)
-  (doom-modeline-indent-info nil)
-  (doom-modeline-buffer-encoding nil)
-  (doom-modeline-enable-word-count t)
-  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  (minions-mode-line-lighter ";")
+  (minions-prominent-modes '(defining-kbd-macro flymake-mode))
   :init
-  (doom-modeline-mode))
+  (minions-mode))
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
 (setq display-time-default-load-average nil)
-;; (display-time-mode)
 
 ;; Org mode
+(use-package org
+  :hook (org-mode . pada/org-mode-setup)
+  :custom
+  (org-hide-emphasis-markers t)
+  (org-return-follows-links t)
+  :config
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 ()
+                                  (compose-region (match-beginning 1) (match-end 1) "•")))))))
+
 (use-package org-bullets
-  :hook (org-mode . (lambda () (org-bullets-mode 1))))
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 ;; LSP-mode
 (use-package lsp-mode
@@ -662,6 +677,7 @@ Note: This function is meant to be adviced around `find-file'."
   (setq lsp-keymap-prefix "C-c c")
   :hook
   (js-mode . lsp)
+  (c-mode . lsp)
   :commands lsp
   :custom
   (lsp-lens-place-position 'above-line)

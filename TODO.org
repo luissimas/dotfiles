@@ -1,35 +1,41 @@
 * Dotfiles
-  - [X] Modeline
   - [X] Integrate system-wide themes
   - [X] Keymap setup
     - [X] Evil (https://github.com/noctuid/evil-guide)
     - [X] General.el
     - [X] Which-key
-  - [ ] Org-mode
-    - [ ] Basic setup
-    - [ ] Packages
-    - [ ] Org-roam
-    - [ ] Move obsidian vault to org-roam
-  - [ ] Completion
+  - [-] Completion
+    - [X] Completion styles
+    - [X] Orderless
+    - [ ] Consult
     - [ ] Vertico
-    - [ ] Completion styles
-    - [ ] Orderless
-    - [ ] Marginalia
-    - [ ] Embark
+    - [X] Marginalia
     - [ ] Completion at point
       - [ ] Vertico
       - [ ] Corfu
         - [ ] Kind-icon
         - [ ] Corfu-doc
+  - [ ] Modeline
   - [ ] Window system
   - [ ] MPD client
   - [ ] LSP and programming modes
     - [ ] Flymake/Flycheck
     - [ ] Eldoc
     - [ ] Indentation setup
-  - [ ] Terminal modes
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
+  - [ ] Terminal modes
+  - [ ] Dired
+  - [ ] Magit
   - [ ] Database interaction
+  - [ ] Org-mode
+    - [ ] Basic setup
+    - [ ] Faces
+    - [ ] https://codeberg.org/joostkremers/visual-fill-column
+    - [ ] Keymaps
+    - [ ] Packages
+    - [ ] Org-roam
+    - [ ] Move obsidian vault to org-roam
   - [ ] Spellchecking
+  - [ ] Embark
   - [ ] Startup buffer
   - [ ] Create my own theme
