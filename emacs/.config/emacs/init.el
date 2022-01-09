@@ -445,7 +445,7 @@
   :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
-        modus-themes-mode-line '(borderless)))
+        modus-themes-mode-line nil))
 
 (use-package nano-theme)
 
@@ -619,23 +619,39 @@ Note: This function is meant to be adviced around `find-file'."
   (global-ligature-mode))
 
 ;; Mode line
-(setq evil-mode-line-format '(after . mode-line-remote))
-(setq mode-line-position-column-line-format '(" %l,%c"))
+(setq evil-mode-line-format '(before . mode-line-front-space))
+(setq mode-line-position-column-line-format '("(%l,%c)"))
 (setq mode-line-defining-kbd-macro
       (propertize " Recording macro..." 'face 'mode-line-emphasis))
 
+
+(defvar pada/mode-line-vc
+  '(:eval (when vc-mode
+            (string-match ".*Git:\\(.*\\)" vc-mode)
+            (concat
+             (propertize (all-the-icons-octicon "git-branch")
+                         'display '(raise 0))
+             " " (propertize (match-string 1 vc-mode)
+                             'face 'vc-base-state)))))
+
+(defvar pada/mode-line-buffer-name
+  '(:eval (propertize "%12b" 'face 'mode-line-buffer-id 'help-echo (buffer-file-name))))
+
 (setq-default mode-line-format
-              '("%e"
+              `("%e"
+                (:eval evil-mode-line-tag)
                 mode-line-front-space
                 mode-line-mule-info
                 mode-line-modified
-                mode-line-remote
-                mode-line-frame-identification
-                mode-line-buffer-identification
                 " "
-                mode-line-position
-                (vc-mode vc-mode)
-                "  "
+                ,pada/mode-line-buffer-name
+                " "
+                mode-line-position-column-line-format
+                " "
+                mode-line-percent-position
+                "    "
+                ,pada/mode-line-vc
+                "    "
                 mode-line-modes
                 "  "
                 mode-line-misc-info
