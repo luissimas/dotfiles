@@ -627,7 +627,7 @@ Note: This function is meant to be adviced around `find-file'."
 
 (defvar pada/mode-line-vc
   '(:eval (when vc-mode
-            (string-match ".*Git:\\(.*\\)" vc-mode)
+            (string-match ".*Git[:-]\\(.*\\)" vc-mode)
             (concat
              (propertize (all-the-icons-octicon "git-branch")
                          'display '(raise 0))
