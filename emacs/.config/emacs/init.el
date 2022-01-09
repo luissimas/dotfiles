@@ -650,7 +650,7 @@ Note: This function is meant to be adviced around `find-file'."
                 mode-line-percent-position
                 "    "
                 ,pada/mode-line-vc
-                " "
+                "    "
                 mode-line-modes
                 " "
                 mode-line-misc-info
@@ -658,7 +658,8 @@ Note: This function is meant to be adviced around `find-file'."
 
 (use-package minions
   :custom
-  (minions-mode-line-lighter ";")
+  (minions-mode-line-lighter "")
+  (minions-mode-line-delimiters '("" . ""))
   (minions-prominent-modes '(defining-kbd-macro flymake-mode))
   :init
   (minions-mode))
