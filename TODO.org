@@ -7,11 +7,11 @@
   - [-] Completion
     - [X] Completion styles
     - [X] Orderless
-    - [ ] Consult
-    - [ ] Vertico
+    - [X] Consult
+    - [X] Vertico
     - [X] Marginalia
     - [ ] Completion at point
-      - [ ] Vertico
+      - [ ] Company vs corfu
       - [ ] Corfu
         - [ ] Kind-icon
         - [ ] Corfu-doc

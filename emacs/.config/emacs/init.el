@@ -373,23 +373,23 @@
 
 ;; Vertico as the completion UI
 (use-package vertico
-  :bind (:map vertico-map
-              ("C-j" . vertico-next)
-              ("C-k" . vertico-previous)
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-char))
+  :custom
+  (vertico-cycle t)
   :config
-  (setq vertico-cycle t
-        completion-styles '(basic substring flex)
-        completion-ignore-case t)
-
-  (evil-define-key '(normal insert) 'minibuffer-mode-map (kbd "C-j") 'vertico-next)
-  (evil-define-key '(normal insert) 'minibuffer-mode-map (kbd "C-k") 'vertico-previous)
-  (evil-define-key 'normal 'minibuffer-mode-map (kbd "<escape>") 'abort-minibuffers)
-
   ;; Using vertico-directory extension
   (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
   (require 'vertico-directory)
+  (general-define-key
+   :states '(normal insert)
+   :keymaps 'vertico-map
+   "C-j" 'vertico-next
+   "C-k" 'vertico-previous
+   "RET" 'vertico-directory-enter
+   "DEL" 'vertico-directory-delete-char)
+  (general-define-key
+   :states 'normal
+   :keymaps 'vertico-map
+   "<escape>" 'abort-minibuffers)
   :init
   (vertico-mode))
 
@@ -401,6 +401,7 @@
 (use-package orderless
   :config
   (setq completion-styles '(orderless)
+        completion-ignore-case t
         read-file-name-completion-ignore-case t
         read-buffer-completion-ignore-case t
         orderless-matching-styles '(orderless-flex orderless-regexp)
@@ -473,15 +474,21 @@
 (use-package corfu
   :custom
   (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-auto-delay .2)
+  (corfu-auto nil)
+  (corfu-quit-at-boundary t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current t)
   :config
+  ;; Unbinding default insert mappings
+  (general-define-key
+   :states 'insert
+   "C-j" nil
+   "C-k")
   (general-define-key
    :states 'insert
    :keymaps 'prog-mode-map
    "C-SPC" 'completion-at-point)
   (general-define-key
-   :states 'insert
    :keymaps 'corfu-map
    "C-j" 'corfu-next
    "C-k" 'corfu-previous)
