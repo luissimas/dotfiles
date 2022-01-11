@@ -4,24 +4,24 @@
     - [X] Evil (https://github.com/noctuid/evil-guide)
     - [X] General.el
     - [X] Which-key
-  - [-] Completion
+  - [X] Completion
     - [X] Completion styles
     - [X] Orderless
     - [X] Consult
     - [X] Vertico
     - [X] Marginalia
-    - [ ] Completion at point
-      - [ ] Company vs corfu
-      - [ ] Corfu
-        - [ ] Kind-icon
-        - [ ] Corfu-doc
-  - [ ] Modeline
-  - [ ] Window system
-  - [ ] MPD client
+    - [X] Completion at point
+      - [X] Company vs corfu
+      - [X] Corfu
+        - [X] Kind-icon
+        - [X] Corfu-doc
+  - [X] Modeline
   - [ ] LSP and programming modes
     - [ ] Flymake/Flycheck
     - [ ] Eldoc
     - [ ] Indentation setup
+  - [ ] Window system
+  - [ ] MPD client
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
   - [ ] Terminal modes
   - [ ] Dired
@@ -35,6 +35,7 @@
     - [ ] Packages
     - [ ] Org-roam
     - [ ] Move obsidian vault to org-roam
+  - [ ] Snippets
   - [ ] Spellchecking
   - [ ] Embark
   - [ ] Startup buffer

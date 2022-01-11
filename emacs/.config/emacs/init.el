@@ -477,13 +477,18 @@
   (corfu-auto nil)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
-  (corfu-preview-current t)
+  (corfu-preview-current nil)
+  (corfu-preselect-first t)
+  (corfu-bar-width 0)
+  (corfu-max-width 80)
+  (corfu-left-margin-width 0)
+  (corfu-right-margin-width 0)
   :config
   ;; Unbinding default insert mappings
   (general-define-key
    :states 'insert
    "C-j" nil
-   "C-k")
+   "C-k" nil)
   (general-define-key
    :states 'insert
    :keymaps 'prog-mode-map
@@ -491,17 +496,23 @@
   (general-define-key
    :keymaps 'corfu-map
    "C-j" 'corfu-next
-   "C-k" 'corfu-previous)
-  :hook (prog-mode . corfu-mode))
+   "C-k" 'corfu-previous
+   "C-h" 'corfu-show-documentation)
+  :init
+  (corfu-global-mode))
 
-;; (use-package corfu-doc
-;;   :straight '(:host github :repo "galeo/corfu-doc"))
+(use-package cape
+  :init
+  ;; TODO: Add relevant backends for text modes (spelling, dictionary etc)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-tex))
 
 ;; (use-package kind-icon
-;;   :requires svg-lib
 ;;   :after corfu
 ;;   :custom
-;;   (kind-icon-deafult-face 'corfu-default)
+;;   (kind-icon-default-face 'corfu-default)
+;;   (kind-icon-use-icons t)
+;;   (kind-icon-blend-background nil)
 ;;   :config
 ;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
@@ -667,7 +678,7 @@ Note: This function is meant to be adviced around `find-file'."
   :custom
   (minions-mode-line-lighter "")
   (minions-mode-line-delimiters '("" . ""))
-  (minions-prominent-modes '(defining-kbd-macro flymake-mode))
+  (minions-prominent-modes '(defining-kbd-macro flymake-mode flycheck-mode))
   :init
   (minions-mode))
 
