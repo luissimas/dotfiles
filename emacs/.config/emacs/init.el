@@ -2,9 +2,6 @@
 ;; Setting garbage colector threshold
 (setq gc-cons-threshold (* 100 1024 1024))
 
-(add-hook 'emacs-startup-hook
-          (lambda () (setq gc-cons-threshold (* 8 1024 1024))))
-
 (defun pada/display-startup-time ()
   "Display the startup time for the current section."
   (message "Emacs loaded in %s with %d garbage collections."
@@ -42,7 +39,7 @@
 
 ;; Prompts and confirmation
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq confirm-kill-emacs 'y-or-n-p)
+;; (setq confirm-kill-emacs 'y-or-n-p)
 
 ;; Disable suggestion for keybindings in minibuffer
 (setq suggest-key-bindings nil)
@@ -196,6 +193,11 @@
 
 (setq straight-use-package-by-default t)
 
+;; Setting up emacs path
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
 ;; Keybindings
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -261,6 +263,13 @@
    "M-l" 'enlarge-window-horizontally))
 
 ;; Evil-mode
+(defun pada/evil-lookup-func ()
+  "Function used by `evil-lookup' for looking up documentation of symbols taking context into consideration."
+  (cond
+   ((and (boundp 'lsp-mode) lsp-mode) (lsp-describe-thing-at-point))
+   ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
+   (t man)))
+
 (use-package evil
   :init
   (setq evil-want-integration t
@@ -275,6 +284,7 @@
   (org-mode . (lambda () (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)))
   :custom
   (evil-echo-state . nil)
+  (evil-lookup-func 'pada/evil-lookup-func)
   :config
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
@@ -740,27 +750,35 @@ Note: This function is meant to be adviced around `find-file'."
   :config
   (setq vterm-shell "/bin/bash"))
 
-;; Lsp client
-(use-package eglot
+;; LSP
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  (js-mode . lsp-deferred)
+  (tuareg-mode . lsp-deferred)
+  (c-mode . lsp-deferred)
+  (lsp-mode . lsp-enable-which-key-integration)
   :custom
-  (eglot-autoshutdown t)
-  (eglot-extend-to-xref t)
-  (eglot-sync-connect nil)
-  :hook
-  (js-mode . eglot-ensure)
-  (c-mode . eglot-ensure)
+  (read-process-output-max (* 1024 1024))
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-modeline-code-actions-segments	'(count icon name))
+  (lsp-signature-doc-lines 1)
   :config
-  (pada/leader-key
-    :keymaps 'eglot-mode-map
-    "c" '(:ignore t :which-key "Code")
-    "cr" '(eglot-rename :which-key "Rename")))
+  (general-define-key
+   :states 'normal
+   :keymaps 'lsp-mode-map
+   "gd" 'lsp-find-definition
+   "gr" '(lambda () (interactive) (lsp-find-references t)))
+  :commands (lsp lsp-deferred))
 
-(use-package flymake-eslint
-  :hook
-  (js-mode 'flymake-eslint-enable))
+(use-package flycheck)
 
+;; Documentation in echo area
 (use-package eldoc
   :custom
   (eldoc-echo-area-use-multiline-p nil)
   (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-current-idle-delay 0.2))
+
+(use-package tuareg)

@@ -177,7 +177,7 @@
    (list
     (intern (completing-read "Load custom theme: "
                              (mapcar #'symbol-name
-				     (custom-available-themes))))))
+				                             (custom-available-themes))))))
   (load-theme theme t)
   (dolist (theme (cdr custom-enabled-themes))
     (disable-theme theme)))
@@ -252,20 +252,20 @@ Note: This function is meant to be adviced around `find-file'."
     :keymaps 'normal
     :prefix "SPC")
   (pada/nmap
-    "x" '(execute-extended-command :which-key "M-x")
-    "h" (general-simulate-key "C-h" :which-key "Help")
-    ;; "w" (general-simulate-key "C-w" :which-key "Window")
-    "f" '(:ignore t :which-key "Find")
-    "ff" '(pada/find-file :which-key "Find file")
-    "fF" '(find-file :which-key "Find file in CWD")
-    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
-    "fs" '(save-buffer :which-key "Save file")
-    "w" '(save-buffer :which-key "Save file")
-    "b" '(:ignore t :which-key "Buffer")
-    "bb" '(consult-buffer :which-key "Switch buffer")
-    "bk" '(pada/kill-buffer :which-key "Kill current buffer")
-    "bK" '(kill-buffer :which-key "Kill buffer")
-    "bi" '(ibuffer :which-key "Ibuffer")))
+   "x" '(execute-extended-command :which-key "M-x")
+   "h" (general-simulate-key "C-h" :which-key "Help")
+   ;; "w" (general-simulate-key "C-w" :which-key "Window")
+   "f" '(:ignore t :which-key "Find")
+   "ff" '(pada/find-file :which-key "Find file")
+   "fF" '(find-file :which-key "Find file in CWD")
+   "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+   "fs" '(save-buffer :which-key "Save file")
+   "w" '(save-buffer :which-key "Save file")
+   "b" '(:ignore t :which-key "Buffer")
+   "bb" '(consult-buffer :which-key "Switch buffer")
+   "bk" '(pada/kill-buffer :which-key "Kill current buffer")
+   "bK" '(kill-buffer :which-key "Kill buffer")
+   "bi" '(ibuffer :which-key "Ibuffer")))
 
 ;; Evil-mode
 (use-package evil
@@ -416,23 +416,23 @@ Note: This function is meant to be adviced around `find-file'."
           (project-dired "Dired")
           (project-eshell "Eshell")))
   (pada/nmap
-    "p" '(:ignore t :which-key "Project")
-    "p!" 'project-shell-command
-    "pa" 'project-async-shell-command
-    "pf" 'project-find-file
-    "pF" 'project-or-external-find-file
-    "pb" 'project-switch-to-buffer
-    "ps" 'project-shell
-    "pd" 'project-dired
-    "pv" 'project-vc-dir
-    "pc" 'project-compile
-    "pe" 'project-eshell
-    "pk" 'project-kill-buffers
-    "pp" 'project-switch-project
-    "pg" 'project-find-regexp
-    "pG" 'project-or-external-find-regexp
-    "pr" 'project-query-replace-regexp
-    "px" 'project-execute-extended-command))
+   "p" '(:ignore t :which-key "Project")
+   "p!" 'project-shell-command
+   "pa" 'project-async-shell-command
+   "pf" 'project-find-file
+   "pF" 'project-or-external-find-file
+   "pb" 'project-switch-to-buffer
+   "ps" 'project-shell
+   "pd" 'project-dired
+   "pv" 'project-vc-dir
+   "pc" 'project-compile
+   "pe" 'project-eshell
+   "pk" 'project-kill-buffers
+   "pp" 'project-switch-project
+   "pg" 'project-find-regexp
+   "pG" 'project-or-external-find-regexp
+   "pr" 'project-query-replace-regexp
+   "px" 'project-execute-extended-command))
 
 ;; Magit
 (use-package magit
@@ -441,8 +441,8 @@ Note: This function is meant to be adviced around `find-file'."
   :config
   (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
   (pada/nmap
-    "g" '(:ignore t :which-key "Git")
-    "gs" 'magit-status))
+   "g" '(:ignore t :which-key "Git")
+   "gs" 'magit-status))
 
 ;; Icons
 (use-package all-the-icons)

@@ -19,9 +19,12 @@
   - [-] LSP and programming modes
     - [X] Eglot
     - [X] xref
+    - [X] Lsp-mode
     - [ ] Eldoc
-    - [ ] Flymake
-    - [ ] Indentation setup
+    - [ ] Lsp help buffers
+    - [ ] Keybindings
+    - [ ] Flycheck
+  - [ ] Indentation setup
   - [ ] Window system
   - [ ] MPD client
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
