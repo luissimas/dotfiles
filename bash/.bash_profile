@@ -19,3 +19,6 @@ export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40%" # --preview 'bat {} --color=always -p'"
 
 [[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- vt1
+
+# opam configuration
+test -r /home/padawan/.opam/opam-init/init.sh && . /home/padawan/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true

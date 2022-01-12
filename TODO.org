@@ -16,9 +16,11 @@
         - [X] Kind-icon
         - [X] Corfu-doc
   - [X] Modeline
-  - [ ] LSP and programming modes
-    - [ ] Flymake/Flycheck
+  - [-] LSP and programming modes
+    - [X] Eglot
+    - [X] xref
     - [ ] Eldoc
+    - [ ] Flymake
     - [ ] Indentation setup
   - [ ] Window system
   - [ ] MPD client

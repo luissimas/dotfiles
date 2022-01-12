@@ -175,6 +175,9 @@
             (pada/load-theme emacs-theme)
             (setq associations nil)))))))
 
+;; Load system theme on startup
+(add-hook 'emacs-startup-hook 'pada/load-system-theme)
+
 ;; Straight setup
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -245,7 +248,7 @@
 
     "t" '(:ignote t :which-key "Toggle")
     "tt" '(pada/load-theme :which-key "Theme")
-    "tf" '(flycheck-mode :which-key "Flycheck")
+    "tf" '(flymake-mode :which-key "Flymake")
     "tg" '(git-gutter-mode :which-key "Git gutter")
     "tm" '(minions-mode :which-key "Minions"))
 
@@ -278,12 +281,6 @@
   ;; (define-key evil-insert-state-map (kbd "<tab>") 'tab-to-tab-stop)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (setq evil-lookup-func (lambda ()
-                           (cond
-                            ((and (boundp 'lsp-ui-doc-frame-mode) lsp-ui-doc-frame-mode) (lsp-ui-doc-focus-frame))
-                            ((and (boundp 'lsp-mode) lsp-mode) (lsp-ui-doc-glance))
-                            ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
-                            (t woman))))
   (evil-mode 1))
 
 (use-package evil-surround
@@ -425,8 +422,10 @@
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line))
   :config
-  (setq consult-narrow-key (kbd "C-."))
-  (setq consult-project-root-function
+  (setq consult-narrow-key (kbd "C-.")
+        xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref
+        consult-project-root-function
         (lambda ()
           (when-let (project (project-current))
             (car (project-roots project))))))
@@ -480,9 +479,10 @@
   (corfu-preview-current nil)
   (corfu-preselect-first t)
   (corfu-bar-width 0)
+  (corfu-min-width 40)
   (corfu-max-width 80)
-  (corfu-left-margin-width 0)
-  (corfu-right-margin-width 0)
+  (corfu-left-margin-width 0.1)
+  (corfu-right-margin-width 0.1)
   :config
   ;; Unbinding default insert mappings
   (general-define-key
@@ -688,7 +688,7 @@ Note: This function is meant to be adviced around `find-file'."
 
 ;; Org mode
 (use-package org
-  :hook (org-mode . pada/org-mode-setup)
+  ;; :hook (org-mode . pada/org-mode-setup)
   :custom
   (org-hide-emphasis-markers t)
   (org-return-follows-links t)
@@ -704,50 +704,6 @@ Note: This function is meant to be adviced around `find-file'."
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-;; LSP-mode
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c c")
-  :hook
-  (js-mode . lsp)
-  (c-mode . lsp)
-  :commands lsp
-  :custom
-  (lsp-lens-place-position 'above-line)
-  (lsp-elixir-dialyzer-enabled nil)
-  :config
-  (setq read-process-output-max (* 1024 1024)
-        lsp-headerline-breadcrumb-segments '(symbols)
-        lsp-headerline-breadcrumb-enable nil
-        lsp-lens-enable t
-        lsp-enable-symbol-highlighting t
-        lsp-modeline-code-actions-enable nil
-        lsp-modeline-diagnostics-enable nil
-        lsp-modeline-workspace-status-enable nil
-        lsp-eldoc-render-all nil)
-  (set-face-attribute 'lsp-details-face nil :height 0.9)
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-doc-position 'at-point
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-show-with-mouse nil
-        lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-doc-use-childframe t
-        lsp-ui-doc-max-width 400
-        lsp-ui-doc-max-height 30
-        lsp-signature-render-documentation nil)
-  (define-key evil-normal-state-map (kbd "C-k") 'lsp-ui-doc-focus-frame)
-  (evil-define-key 'normal 'lsp-ui-doc-frame-mode
-    [?q] #'lsp-ui-doc-unfocus-frame))
-
-;; Flycheck for syntax checking
-(use-package flycheck
-  :hook (js-mode . flycheck-mode))
 
 ;; Code formatter
 (use-package format-all
@@ -784,5 +740,27 @@ Note: This function is meant to be adviced around `find-file'."
   :config
   (setq vterm-shell "/bin/bash"))
 
-;; Load system theme on startup
-(pada/load-system-theme)
+;; Lsp client
+(use-package eglot
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-extend-to-xref t)
+  (eglot-sync-connect nil)
+  :hook
+  (js-mode . eglot-ensure)
+  (c-mode . eglot-ensure)
+  :config
+  (pada/leader-key
+    :keymaps 'eglot-mode-map
+    "c" '(:ignore t :which-key "Code")
+    "cr" '(eglot-rename :which-key "Rename")))
+
+(use-package flymake-eslint
+  :hook
+  (js-mode 'flymake-eslint-enable))
+
+(use-package eldoc
+  :custom
+  (eldoc-echo-area-use-multiline-p nil)
+  (eldoc-echo-area-prefer-doc-buffer nil)
+  (eldoc-current-idle-delay 0.2))

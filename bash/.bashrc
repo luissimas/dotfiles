@@ -58,6 +58,3 @@ alias cat='bat -P'
 alias mux='tmuxp'
 alias ta='tmux attach'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
-
-# Opam configuration
-test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh >/dev/null 2>/dev/null || true
