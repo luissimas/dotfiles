@@ -64,7 +64,7 @@
 (setq idle-update-delay 1.0)
 
 ;; Fringes
-(set-fringe-mode '(5 . 5))
+(set-fringe-mode '(5 . 0))
 
 ;; Cursor offset
 (setq scroll-margin 8
@@ -250,7 +250,7 @@
 
     "t" '(:ignote t :which-key "Toggle")
     "tt" '(pada/load-theme :which-key "Theme")
-    "tf" '(flymake-mode :which-key "Flymake")
+    "tf" '(flycheck-mode :which-key "Flycheck")
     "tg" '(git-gutter-mode :which-key "Git gutter")
     "tm" '(minions-mode :which-key "Minions"))
 
@@ -483,7 +483,9 @@
 (use-package corfu
   :custom
   (corfu-cycle t)
-  (corfu-auto nil)
+  (corfu-auto t)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 1)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
   (corfu-preview-current nil)
@@ -542,7 +544,7 @@
 (setq frame-resize-pixelwise t)
 
 (defun pada/set-frame-parameters ()
-  "Set parameters defined in `pada/frame-parameters' for the current frame."
+  "Set the parameters defined in `pada/frame-parameters' for the current frame."
   (interactive)
   (dolist (parameter pada/frame-parameters)
     (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
@@ -688,7 +690,7 @@ Note: This function is meant to be adviced around `find-file'."
   :custom
   (minions-mode-line-lighter "")
   (minions-mode-line-delimiters '("" . ""))
-  (minions-prominent-modes '(defining-kbd-macro flymake-mode flycheck-mode))
+  (minions-prominent-modes '(defining-kbd-macro))
   :init
   (minions-mode))
 
@@ -764,6 +766,7 @@ Note: This function is meant to be adviced around `find-file'."
   (lsp-headerline-breadcrumb-enable nil)
   (lsp-modeline-code-actions-segments	'(count icon name))
   (lsp-signature-doc-lines 1)
+  (lsp-restart 'auto-restart)
   :config
   (general-define-key
    :states 'normal
@@ -772,7 +775,12 @@ Note: This function is meant to be adviced around `find-file'."
    "gr" '(lambda () (interactive) (lsp-find-references t)))
   :commands (lsp lsp-deferred))
 
-(use-package flycheck)
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay 0.01)
+  (flycheck-idle-change-delay 0.01)
+  (flycheck-check-syntax-automatically '(save idle-buffer-switch  idle-change mode-enabled)))
 
 ;; Documentation in echo area
 (use-package eldoc

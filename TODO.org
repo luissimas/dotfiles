@@ -20,10 +20,10 @@
     - [X] Eglot
     - [X] xref
     - [X] Lsp-mode
+    - [ ] Flycheck
     - [ ] Eldoc
     - [ ] Lsp help buffers
     - [ ] Keybindings
-    - [ ] Flycheck
   - [ ] Indentation setup
   - [ ] Window system
   - [ ] MPD client

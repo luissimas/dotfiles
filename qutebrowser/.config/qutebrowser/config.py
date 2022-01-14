@@ -2372,7 +2372,7 @@ config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
 # config.bind('y', 'prompt-accept yes', mode='yesno')
 
 ## Custom bindings
-config.bind('M', 'hint links spawn streamlink --player mpv {hint-url} best')
+config.bind('M', 'hint links spawn mpv {hint-url}')
 config.bind('R', 'config-source')
 config.bind('zb', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 config.bind('zr', 'config-source')
