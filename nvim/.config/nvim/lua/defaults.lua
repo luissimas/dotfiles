@@ -55,7 +55,8 @@ vim.opt.shortmess = vim.opt.shortmess + "c" -- disable completion item messages
 vim.o.spelllang = "pt,en,la" -- spellcheck languages
 
 -- Save and quit
-vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>w", ":w<Enter>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fs", ":w<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<Enter>", { noremap = true, silent = true })
 
 -- Kill buffers without messing up the split

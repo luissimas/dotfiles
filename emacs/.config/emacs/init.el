@@ -694,6 +694,20 @@ Note: This function is meant to be adviced around `find-file'."
   :init
   (minions-mode))
 
+
+;; Mode line (the easy route)
+(use-package doom-modeline
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 4)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  :init
+  (doom-modeline-mode))
+
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
 (setq display-time-default-load-average nil)
@@ -762,7 +776,7 @@ Note: This function is meant to be adviced around `find-file'."
   :custom
   (read-process-output-max (* 1024 1024))
   (lsp-headerline-breadcrumb-enable nil)
-  (lsp-modeline-code-actions-segments	'(count icon name))
+  (lsp-modeline-code-actions-enable nil)
   (lsp-signature-doc-lines 1)
   (lsp-restart 'auto-restart)
   :config

@@ -16,6 +16,7 @@ settings:
     https://frameboxxindore.com: false
     https://meet.google.com: false
     https://web.whatsapp.com: false
+    https://www.reddit.com: false
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false
     https://mail.google.com?extsrc=mailto&url=%25s: false

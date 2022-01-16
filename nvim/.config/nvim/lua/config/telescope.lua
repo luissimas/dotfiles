@@ -98,7 +98,7 @@ vim.api.nvim_set_keymap("n", "<leader>fm", builtin "man_pages", { noremap = true
 vim.api.nvim_set_keymap("n", "<leader>bb", builtin "buffers", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gb", builtin "git_branches", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fp", ":Telescope projects<Enter>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fs", ":lua require('telescope').extensions.nodescripts.run({})<Enter>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fs", ":lua require('telescope').extensions.nodescripts.run({})<Enter>", {noremap = true, silent = true})
 
 -- Custom pickers
 local M = {}

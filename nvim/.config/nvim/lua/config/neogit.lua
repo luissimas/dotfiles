@@ -8,9 +8,8 @@ neogit.setup {
     item = { "○", "●" },
     hunk = { "", "" },
   },
+  use_magit_keybindings = true,
 }
-
-neogit.config.use_magit_keybindings()
 
 vim.api.nvim_set_keymap("n", "<leader>gs", ":Neogit <Enter>", { noremap = true, silent = true })
 
