@@ -182,7 +182,6 @@ v4l2loopback-dkms
 via-bin
 vim
 vlc
-vscodium-bin
 wget
 which
 wireless_tools

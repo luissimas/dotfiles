@@ -61,3 +61,8 @@ alias recompile='sudo ~/scripts/recompile-suckless.sh'
 
 # opam configuration
 test -r /home/padawan/.opam/opam-init/init.sh && . /home/padawan/.opam/opam-init/init.sh >/dev/null 2>/dev/null || true
+
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION
