@@ -58,6 +58,7 @@ kitty
 latex-mk
 latin-words
 lib32-glibc
+lib32-opencl-nvidia
 libgccjit
 libtool
 libvirt
@@ -141,6 +142,7 @@ sed
 sfml
 shellcheck
 spaceship-prompt-git
+steam
 stow
 strace
 streamlink

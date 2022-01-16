@@ -21,7 +21,10 @@
     - [X] xref
     - [X] Lsp-mode
     - [ ] Flycheck
+      - [ ] Make flycheck errors have priority over eldoc (probably advising =lsp-hover=)
+      - [ ] Replace icons
     - [ ] Eldoc
+      - [ ] Limit doc size
     - [ ] Lsp help buffers
     - [ ] Keybindings
   - [ ] Indentation setup

@@ -116,10 +116,10 @@
   (file-exists-p "/sys/class/power_supply/BAT1"))
 
 ;; Font configuration
-(defvar pada/default-font-size (if (pada/is-laptop) 100 120))
+(defvar pada/default-font-size (if (pada/is-laptop) 100 100))
 (defvar pada/default-font-family "Iosevka Padawan")
 
-(defvar pada/variable-font-size (if (pada/is-laptop) 100 120))
+(defvar pada/variable-font-size (if (pada/is-laptop) 100 100))
 (defvar pada/variable-font-family "Iosevka Padawan")
 
 ;; Custom function to kill current buffer
