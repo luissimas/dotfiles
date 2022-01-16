@@ -748,9 +748,7 @@ Note: This function is meant to be adviced around `find-file'."
           ("NOTE"       success bold))))
 
 ;; Better terminal emulator
-(use-package vterm
-  :config
-  (setq vterm-shell "/bin/bash"))
+(use-package vterm)
 
 ;; LSP
 (use-package lsp-mode
