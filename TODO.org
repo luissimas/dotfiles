@@ -36,7 +36,7 @@
   - [ ] Dired
   - [ ] Magit
   - [ ] Database interaction
-  - [ ] Org-mode
+  - [-] Org-mode
     - [X] Basic setup
     - [ ] Faces
     - [ ] https://codeberg.org/joostkremers/visual-fill-column

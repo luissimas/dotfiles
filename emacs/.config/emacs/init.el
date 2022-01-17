@@ -829,7 +829,20 @@ Note: This function is meant to be adviced around `find-file'."
 
 (use-package tuareg)
 
-(use-package mpdel)
+(use-package mpdel
+  :config
+  (defun pada/mpdel-toggle-shuffle ()
+    "Toggle mpd shuffle mode."
+    (interactive)
+    (if libmpdel--random
+        (libmpdel-playback-unset-random)
+      (libmpdel-playback-set-random)))
+
+  (pada/leader-key
+    "m" '(:ignore t :which-key "Mpdel")
+    "mp" '(libmpdel-playback-play-pause :which-key "Toggle play")
+    "ms" '(pada/mpdel-toggle-shuffle :which-key "Toggle shuffle")
+    "mb" '(mpdel-browser-open :which-key "Browse")))
 
 ;; Spellcheck setup
 (with-eval-after-load "ispell"
