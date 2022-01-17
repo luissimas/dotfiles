@@ -28,7 +28,7 @@
     - [ ] Lsp help buffers
     - [ ] Keybindings
   - [ ] Indentation setup
-  - [ ] Make ANSI colors work
+  - [ ] ANSI colors
   - [ ] MPD client
   - [ ] Window system
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
@@ -37,10 +37,12 @@
   - [ ] Magit
   - [ ] Database interaction
   - [ ] Org-mode
-    - [ ] Basic setup
+    - [X] Basic setup
     - [ ] Faces
     - [ ] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] Keymaps
+    - [ ] Hide emphasis markers
+    - [ ] Latex previews
     - [ ] Packages
     - [ ] Org-roam
     - [ ] Move obsidian vault to org-roam

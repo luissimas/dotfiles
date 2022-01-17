@@ -73,6 +73,9 @@
 ;; Remember cursor position
 (save-place-mode 1)
 
+;; One space is enough to end a sentence
+(setq sentence-end-double-space nil)
+
 ;; Spaces over tabs
 (setq standard-indent 2)
 (setq backward-delete-char-untabify-method 'hungry)
@@ -99,16 +102,13 @@
 ;; Enable line numbers and truncate lines only on programming modes
 (add-hook 'prog-mode-hook (lambda ()
                             (setq display-line-numbers 'relative)
-                            (toggle-truncate-lines)))
+                            (toggle-truncate-lines 1)))
 
 ;; Autopairs
 (add-hook 'prog-mode-hook 'electric-pair-local-mode)
 
 ;; (setq show-paren-delay 0)
 ;; (add-hook 'prog-mode-hook 'show-paren-mode)
-
-;; Enable soft wrap for text modes
-(add-hook 'text-mode-hook 'visual-line-mode)
 
 ;; Desktop/Laptop distinction
 (defun pada/is-laptop ()
@@ -706,8 +706,15 @@ Note: This function is meant to be adviced around `find-file'."
 (setq display-time-default-load-average nil)
 
 ;; Org mode
+(defun pada/org-mode-setup ()
+  "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
+  (org-indent-mode)
+  (visual-line-mode)
+  (flyspell-mode))
+
 (use-package org
-  ;; :hook (org-mode . pada/org-mode-setup)
+  :hook
+  (org-mode . pada/org-mode-setup)
   :custom
   (org-hide-emphasis-markers t)
   (org-return-follows-links t)
@@ -716,13 +723,39 @@ Note: This function is meant to be adviced around `find-file'."
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 ()
-                                  (compose-region (match-beginning 1) (match-end 1) "•")))))))
+                                  (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  ;; Font scaling for different header levels
+  (dolist (face '((org-level-1 . 1.3)
+                  (org-level-2 . 1.2)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.05)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    (set-face-attribute (car face) nil :height (cdr face))))
+
+;; Toggle emphasis markers on cursor
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :custom
+  (org-appear-autolinks t)
+  (org-appear-autosubmarkers t))
+
+;; Toggle latex preview on cursor
+(use-package org-fragtog
+  :hook (org-mode . org-fragtog-mode))
 
 (use-package org-bullets
-  :after org
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(use-package visual-fill-column
+  :hook (org-mode . visual-fill-column-mode)
+  :custom
+  (visual-fill-column-width 100)
+  (visual-fill-column-center-text t))
 
 ;; Code formatter
 (use-package format-all
@@ -797,3 +830,12 @@ Note: This function is meant to be adviced around `find-file'."
 (use-package tuareg)
 
 (use-package mpdel)
+
+;; Spellcheck setup
+(with-eval-after-load "ispell"
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pt_BR,en_US")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
