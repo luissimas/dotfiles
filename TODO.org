@@ -28,8 +28,9 @@
     - [ ] Lsp help buffers
     - [ ] Keybindings
   - [ ] Indentation setup
-  - [ ] Window system
+  - [ ] Make ANSI colors work
   - [ ] MPD client
+  - [ ] Window system
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
   - [ ] Terminal modes
   - [ ] Dired

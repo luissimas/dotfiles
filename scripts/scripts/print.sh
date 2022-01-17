@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
 obsidianPath="/home/padawan/dox/vault/Attachments/"
 
@@ -12,18 +12,18 @@ killall unclutter
 
 # Launch scrot
 if [[ "$selected" == "Obsidian" ]]; then
-  filePath=$obsidianPath
-  echo $filePath
-  fileName=$(dmenu -p "File name" -l 0)
+	filePath=$obsidianPath
+	echo $filePath
+	fileName=$(dmenu -p "File name" -l 0)
 elif [[ "$selected" == "Screenshot" ]]; then
-  filePath=$screenshotPath
-  fileName=$(dmenu -p "File name" -l 0)
+	filePath=$screenshotPath
+	fileName=$(dmenu -p "File name" -l 0)
 fi
 
 maim -su $filePath$fileName.png
 
 # Relaunch unclutter
-unclutter&
+unclutter &
 
 # Relaunch picom
 # picom&

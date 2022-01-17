@@ -294,9 +294,9 @@
   (evil-mode 1))
 
 (use-package evil-surround
-  :requires evil
-  :hook
-  (evil-mode . evil-surround-mode))
+  :after evil
+  :config
+  (evil-surround-mode))
 
 (use-package evil-nerd-commenter
   :config
@@ -464,7 +464,9 @@
   (doom-gruvbox-dark-variant "hard"))
 
 ;; Icons
-(use-package all-the-icons)
+(use-package all-the-icons
+  :custom
+  (all-the-icons-scale-factor 1))
 
 (use-package all-the-icons-dired
   :requires all-the-icons
@@ -518,15 +520,6 @@
   ;; TODO: Add relevant backends for text modes (spelling, dictionary etc)
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-tex))
-
-;; (use-package kind-icon
-;;   :after corfu
-;;   :custom
-;;   (kind-icon-default-face 'corfu-default)
-;;   (kind-icon-use-icons t)
-;;   (kind-icon-blend-background nil)
-;;   :config
-;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 ;; Setting font faces
 (defun pada/set-fonts ()
@@ -769,16 +762,16 @@ Note: This function is meant to be adviced around `find-file'."
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
-  (js-mode . lsp-deferred)
-  (tuareg-mode . lsp-deferred)
-  (c-mode . lsp-deferred)
+  (js-mode . lsp)
+  (tuareg-mode . lsp)
+  (c-mode . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :custom
   (read-process-output-max (* 1024 1024))
   (lsp-headerline-breadcrumb-enable nil)
   (lsp-modeline-code-actions-enable nil)
   (lsp-signature-doc-lines 1)
-  (lsp-restart 'auto-restart)
+  (lsp-restart 'iteractive)
   :config
   (general-define-key
    :states 'normal
@@ -802,3 +795,5 @@ Note: This function is meant to be adviced around `find-file'."
   (eldoc-current-idle-delay 0.2))
 
 (use-package tuareg)
+
+(use-package mpdel)
