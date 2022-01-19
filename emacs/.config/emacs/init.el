@@ -277,8 +277,6 @@
         evil-want-Y-yank-to-eol t
         evil-shift-width tab-width)
   (unbind-key "C-k" evil-insert-state-map)
-  :hook
-  (org-mode . (lambda () (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)))
   :custom
   (evil-echo-state . nil)
   (evil-lookup-func 'pada/evil-lookup-func)
@@ -293,12 +291,13 @@
 (use-package evil-surround
   :after evil
   :config
-  (evil-surround-mode))
+  (global-evil-surround-mode))
 
 (use-package evil-nerd-commenter
+  :after evil
   :config
-  (define-key evil-normal-state-map (kbd "gcc") 'evilnc-comment-or-uncomment-lines)
-  (define-key evil-visual-state-map (kbd "gc") 'evilnc-comment-or-uncomment-lines))
+  (general-define-key :states 'normal "gcc" 'evilnc-comment-or-uncomment-lines)
+  (general-define-key :states 'visual "gc" 'evilnc-comment-or-uncomment-lines))
 
 (use-package evil-org
   :after org
@@ -308,6 +307,7 @@
   (evil-org-agenda-set-keys))
 
 (use-package evil-goggles
+  :after evil
   :config
   (setq evil-goggles-duration 0.05)
   (evil-goggles-mode))
@@ -709,6 +709,7 @@ Note: This function is meant to be adviced around `find-file'."
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
+  (general-define-key :states 'normal :keymaps 'org-mode-map "<tab>" 'evil-toggle-fold)
   (setq-local electric-pair-inhibit-predicate
               (lambda (c)
                 (if (char-equal c ?<) t (electric-pair-default-inhibit c)))))

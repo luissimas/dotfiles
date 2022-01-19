@@ -1,6 +1,6 @@
 #!/bin/sh
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
-obsidianPath="/home/padawan/dox/vault/Attachments/"
+obsidianPath="/home/padawan/vault/Attachments/"
 
 selected=$(echo -e 'Obsidian\nScreenshot' | dmenu -p "Type")
 
