@@ -249,7 +249,8 @@
     "tt" '(pada/load-theme :which-key "Theme")
     "tf" '(flycheck-mode :which-key "Flycheck")
     "tg" '(git-gutter-mode :which-key "Git gutter")
-    "tm" '(minions-mode :which-key "Minions"))
+    "tm" '(doom-modeline-mode :which-key "Doom modeline")
+    "tr" '(rainbow-mode :which-key "Rainbow"))
 
   ;; Window resizing
   ;; TODO: Replace it with a hydra
@@ -371,9 +372,9 @@
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; Show colors
-(use-package rainbow-mode
-  :hook (prog-mode . rainbow-mode))
+(use-package rainbow-mode)
 
 ;; Vertico as the completion UI
 (use-package vertico
@@ -720,23 +721,30 @@ Note: This function is meant to be adviced around `find-file'."
   :custom
   (org-hide-emphasis-markers t)
   (org-return-follows-links t)
+  (org-startup-with-inline-images t)
+  (org-cycle-level-faces nil)
+  (org-n-level-faces 4)
+  (org-hidden-keywords '(title))
+  (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   :config
   (add-to-list 'org-modules 'org-tempo)
-  ;; Replace list hyphen with dot
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 ()
-                                  (compose-region (match-beginning 1) (match-end 1) "•"))))))
   ;; Font scaling for different header levels
-  (dolist (face '((org-level-1 . 1.3)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :height (cdr face))))
+  ;; set basic title font
+  (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
+  ;; Low levels are unimportant => no scaling
+  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+  ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
+  ;; Document Title, (\huge)
+  (set-face-attribute 'org-document-title nil
+                      :height 2.074
+                      :foreground 'unspecified
+                      :inherit 'org-level-8))
 
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
@@ -749,10 +757,16 @@ Note: This function is meant to be adviced around `find-file'."
 (use-package org-fragtog
   :hook (org-mode . org-fragtog-mode))
 
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (org-superstar-remove-leading-stars t)
+  (org-superstar-cycle-headline-bullets nil)
+  (org-superstar-headline-bullets-list '("◉" ("🞛" ?◈) "○" "▷"))
+  :config
+  (set-face-attribute 'org-superstar-item nil :height 1.2)
+  (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)
+  (set-face-attribute 'org-superstar-leading nil :height 1.3))
 
 (use-package visual-fill-column
   :hook (org-mode . visual-fill-column-mode)
