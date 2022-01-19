@@ -105,10 +105,7 @@
                             (toggle-truncate-lines 1)))
 
 ;; Autopairs
-(add-hook 'prog-mode-hook 'electric-pair-local-mode)
-
-;; (setq show-paren-delay 0)
-;; (add-hook 'prog-mode-hook 'show-paren-mode)
+(electric-pair-mode)
 
 ;; Desktop/Laptop distinction
 (defun pada/is-laptop ()
@@ -710,7 +707,11 @@ Note: This function is meant to be adviced around `find-file'."
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (org-indent-mode)
   (visual-line-mode)
-  (flyspell-mode))
+  (setq line-spacing 1)
+  (flyspell-mode)
+  (setq-local electric-pair-inhibit-predicate
+              (lambda (c)
+                (if (char-equal c ?<) t (electric-pair-default-inhibit c)))))
 
 (use-package org
   :hook
@@ -719,6 +720,7 @@ Note: This function is meant to be adviced around `find-file'."
   (org-hide-emphasis-markers t)
   (org-return-follows-links t)
   :config
+  (add-to-list 'org-modules 'org-tempo)
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -852,3 +854,23 @@ Note: This function is meant to be adviced around `find-file'."
   ;; before ispell-hunspell-add-multi-dic will work
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
+
+;; Markdown setup
+(use-package markdown-mode
+  :hook
+  (markdown-mode . flyspell-mode)
+  :init
+  (setq-default markdown-hide-markup t
+                markdown-enable-wiki-links t
+                markdown-enable-math t
+                markdown-wiki-link-alias-first nil
+                markdown-wiki-link-search-subdirectories t
+                markdown-wiki-link-search-parent-directories t
+                markdown-link-space-sub-char " "))
+
+;; Display inline latex formulas and images
+(use-package texfrag
+  :hook
+  (texfrag-mode . texfrag-document)
+  (markdown-mode . texfrag-mode)
+  (latex-mode . texfrag-mode))

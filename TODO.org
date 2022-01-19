@@ -38,6 +38,7 @@
   - [ ] Database interaction
   - [-] Org-mode
     - [X] Basic setup
+    - [X] Org-tempo
     - [ ] Faces
     - [ ] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] Keymaps
