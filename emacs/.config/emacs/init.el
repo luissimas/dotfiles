@@ -720,10 +720,13 @@ Note: This function is meant to be adviced around `find-file'."
   (org-mode . pada/org-mode-setup)
   :custom
   (org-hide-emphasis-markers t)
+  (org-pretty-entities t)
   (org-return-follows-links t)
   (org-startup-with-inline-images t)
+  (org-startup-with-latex-preview t)
   (org-cycle-level-faces nil)
   (org-n-level-faces 4)
+  (org-image-actual-width nil)
   (org-hidden-keywords '(title))
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   :config
@@ -751,6 +754,8 @@ Note: This function is meant to be adviced around `find-file'."
   :hook (org-mode . org-appear-mode)
   :custom
   (org-appear-autolinks t)
+  (org-appear-autokeywords t)
+  (org-appear-autoemphasis t)
   (org-appear-autosubmarkers t))
 
 ;; Toggle latex preview on cursor
@@ -763,6 +768,10 @@ Note: This function is meant to be adviced around `find-file'."
   (org-superstar-remove-leading-stars t)
   (org-superstar-cycle-headline-bullets nil)
   (org-superstar-headline-bullets-list '("◉" ("🞛" ?◈) "○" "▷"))
+  (org-superstar-item-bullet-alist
+   '((?* . ?•)
+     (?+ . ?➤)
+     (?- . ?•)))
   :config
   (set-face-attribute 'org-superstar-item nil :height 1.2)
   (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)

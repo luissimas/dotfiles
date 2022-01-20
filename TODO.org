@@ -1,4 +1,5 @@
-* Dotfiles
+#+title: Dotfiles
+
   - [X] Integrate system-wide themes
   - [X] Keymap setup
     - [X] Evil (https://github.com/noctuid/evil-guide)
@@ -40,13 +41,14 @@
     - [X] Basic setup
     - [X] Org-tempo
     - [ ] Faces
-    - [ ] https://codeberg.org/joostkremers/visual-fill-column
-    - [ ] Keymaps
     - [ ] Hide emphasis markers
     - [ ] Latex previews
-    - [ ] Packages
+    - [ ] https://codeberg.org/joostkremers/visual-fill-column
+    - [ ] https://github.com/abo-abo/org-download
+    - [ ] Keymaps
     - [ ] Org-roam
-    - [ ] Move obsidian vault to org-roam
+    - [ ] Move obsidian vault to org-roam (https://github.com/tecosaur/org-pandoc-import)
+    - [ ] Make some presentation mode (https://github.com/takaxp/org-tree-slide)
   - [ ] Snippets
   - [ ] Spellchecking
   - [ ] Embark
