@@ -728,6 +728,7 @@ Note: This function is meant to be adviced around `find-file'."
   (org-n-level-faces 4)
   (org-image-actual-width nil)
   (org-hidden-keywords '(title))
+  (org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   :config
   (add-to-list 'org-modules 'org-tempo)

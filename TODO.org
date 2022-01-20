@@ -43,6 +43,7 @@
     - [ ] Faces
     - [ ] Hide emphasis markers
     - [ ] Latex previews
+      - [ ] Centralize latex blocks
     - [ ] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] https://github.com/abo-abo/org-download
     - [ ] Keymaps
