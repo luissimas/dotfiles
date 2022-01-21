@@ -645,18 +645,8 @@ Note: This function is meant to be adviced around `find-file'."
 (setq mode-line-defining-kbd-macro
       (propertize " Recording macro..." 'face 'mode-line-emphasis))
 
-
-(defvar pada/mode-line-vc
-  '(:eval (when vc-mode
-            (string-match ".*Git[:-]\\(.*\\)" vc-mode)
-            (concat
-             (propertize (all-the-icons-octicon "git-branch")
-                         'display '(raise 0))
-             " " (propertize (match-string 1 vc-mode)
-                             'face 'vc-base-state)))))
-
 (defvar pada/mode-line-buffer-name
-  '(:eval (propertize "%12b" 'face 'mode-line-buffer-id 'help-echo (buffer-file-name))))
+  '(:eval (propertize "%20b" 'face 'mode-line-buffer-id 'help-echo (buffer-file-name))))
 
 (setq-default mode-line-format
               `("%e"
@@ -670,7 +660,7 @@ Note: This function is meant to be adviced around `find-file'."
                 " "
                 mode-line-percent-position
                 "    "
-                ,pada/mode-line-vc
+                (vc-mode vc-mode)
                 "    "
                 mode-line-modes
                 " "
@@ -710,6 +700,8 @@ Note: This function is meant to be adviced around `find-file'."
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
+  (org-latex-preview '(16))
   (general-define-key :states 'normal :keymaps 'org-mode-map "<tab>" 'evil-toggle-fold)
   (setq-local electric-pair-inhibit-predicate
               (lambda (c)
@@ -723,12 +715,12 @@ Note: This function is meant to be adviced around `find-file'."
   (org-pretty-entities t)
   (org-return-follows-links t)
   (org-startup-with-inline-images t)
-  (org-startup-with-latex-preview t)
+  ;; We set the preview in `pada/org-mode-setup', since we can't set the font scale before org starts
+  (org-startup-with-latex-preview nil)
   (org-cycle-level-faces nil)
   (org-n-level-faces 4)
   (org-image-actual-width nil)
   (org-hidden-keywords '(title))
-  (org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   :config
   (add-to-list 'org-modules 'org-tempo)
@@ -748,7 +740,11 @@ Note: This function is meant to be adviced around `find-file'."
   (set-face-attribute 'org-document-title nil
                       :height 2.074
                       :foreground 'unspecified
-                      :inherit 'org-level-8))
+                      :inherit 'org-level-8)
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   "M-<tab>" 'org-shifttab))
 
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
@@ -757,6 +753,7 @@ Note: This function is meant to be adviced around `find-file'."
   (org-appear-autolinks t)
   (org-appear-autokeywords t)
   (org-appear-autoemphasis t)
+  (org-appear-autoentities t)
   (org-appear-autosubmarkers t))
 
 ;; Toggle latex preview on cursor
@@ -777,6 +774,36 @@ Note: This function is meant to be adviced around `find-file'."
   (set-face-attribute 'org-superstar-item nil :height 1.2)
   (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)
   (set-face-attribute 'org-superstar-leading nil :height 1.3))
+
+;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
+(defun org-inline-image--get-current-image ()
+  "Return the overlay associated with the image under point."
+  (car (--select (eq (overlay-get it 'org-image-overlay) t) (overlays-at (point)))))
+
+(defun org-inline-image--get (prop)
+  "Return the value of property PROP for image under point."
+  (let ((image (org-inline-image--get-current-image)))
+    (when image
+      (overlay-get image prop))))
+
+(defun org-inline-image-animate ()
+  "Animate the image if it's possible."
+  (interactive)
+  (let ((image-props (org-inline-image--get 'display)))
+    (when (image-multi-frame-p image-props)
+      (image-animate image-props nil t))))
+
+(defun org-inline-image-animate-auto ()
+  (interactive)
+  (when (eq 'org-mode major-mode)
+    (while-no-input
+      (run-with-idle-timer 0.3 nil 'org-inline-image-animate))))
+
+(setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
+(setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
+(add-hook 'post-command-hook 'org-inline-image-animate-auto)
+
+(setq image-animate-loop t)
 
 (use-package visual-fill-column
   :hook (org-mode . visual-fill-column-mode)

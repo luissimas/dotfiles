@@ -11,7 +11,7 @@ super + shift + q
   $HOME/scripts/power-prompt.sh
 
 # lock screen
-super + alt + l
+super + alt + q
   betterlockscreen -l dim
 
 # make sxhkd reload its configuration files:
