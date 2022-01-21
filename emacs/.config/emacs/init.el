@@ -116,8 +116,8 @@
 (defvar pada/default-font-size (if (pada/is-laptop) 100 100))
 (defvar pada/default-font-family "Iosevka Padawan")
 
-(defvar pada/variable-font-size (if (pada/is-laptop) 100 100))
-(defvar pada/variable-font-family "Iosevka Padawan")
+(defvar pada/variable-font-size (if (pada/is-laptop) 1.2 1.2))
+(defvar pada/variable-font-family "FiraGO")
 
 ;; Custom function to kill current buffer
 (defun pada/kill-current-buffer ()
@@ -524,7 +524,7 @@
   "Set the main font faces."
   (interactive)
   (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
-  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
+  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :weight 'normal)
   (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
 
 ;; Frame parameters
@@ -697,6 +697,7 @@ Note: This function is meant to be adviced around `find-file'."
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (org-indent-mode)
+  (variable-pitch-mode)
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
@@ -724,23 +725,31 @@ Note: This function is meant to be adviced around `find-file'."
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   :config
   (add-to-list 'org-modules 'org-tempo)
+
   ;; Font scaling for different header levels
-  ;; set basic title font
-  (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
-  ;; Low levels are unimportant => no scaling
+  (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
   (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
-  ;; Top ones get scaled the same as in LaTeX (\large, \Large, \LARGE)
-  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2) ;\large
-  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44) ;\Large
-  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728) ;\LARGE
-  ;; Document Title, (\huge)
-  (set-face-attribute 'org-document-title nil
-                      :height 2.074
-                      :foreground 'unspecified
-                      :inherit 'org-level-8)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.2)
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.44)
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.728)
+  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.074)
+
+  ;; Fonts that should always be in fixed-pitch
+  (dolist (face '(org-block
+                  org-block-begin-line
+                  org-code
+                  org-document-info-keyword
+                  org-meta-line
+                  org-table
+                  org-verbatim
+                  org-checkbox))
+    (set-face-attribute `,face nil :inherit 'fixed-pitch))
+
+  (set-face-attribute 'org-block-end-line nil :inherit 'org-block-begin-line)
+
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
@@ -771,9 +780,8 @@ Note: This function is meant to be adviced around `find-file'."
      (?+ . ?➤)
      (?- . ?•)))
   :config
-  (set-face-attribute 'org-superstar-item nil :height 1.2)
-  (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)
-  (set-face-attribute 'org-superstar-leading nil :height 1.3))
+  (set-face-attribute 'org-superstar-item nil :font pada/default-font-family :height 1.2)
+  (set-face-attribute 'org-superstar-header-bullet nil :font pada/default-font-family :height 1.2))
 
 ;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
 (defun org-inline-image--get-current-image ()
