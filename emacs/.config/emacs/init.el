@@ -799,7 +799,7 @@ Note: This function is meant to be adviced around `find-file'."
   (interactive)
   (let ((image-props (org-inline-image--get 'display)))
     (when (image-multi-frame-p image-props)
-      (image-animate image-props nil t))))
+      (image-animate image-props))))
 
 (defun org-inline-image-animate-auto ()
   (interactive)
@@ -810,8 +810,6 @@ Note: This function is meant to be adviced around `find-file'."
 (setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
 (setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
 (add-hook 'post-command-hook 'org-inline-image-animate-auto)
-
-(setq image-animate-loop t)
 
 (use-package visual-fill-column
   :hook (org-mode . visual-fill-column-mode)
