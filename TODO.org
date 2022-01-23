@@ -42,7 +42,7 @@
     - [X] Org-tempo
     - [X] Faces
     - [X] Hide emphasis markers
-    - [X] Latex previews
+    - [ ] Latex previews
       - [ ] Centralize latex blocks
     - [ ] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] https://github.com/abo-abo/org-download

@@ -104,7 +104,7 @@ case $option in "Pywal")
 		emacsclient -e "(pada/load-system-theme)"
 
 		# Recompiling dmenu
-		sudo recompile_dmenu
+		doas recompile_dmenu
 
 		# Update qutebrowser colors
 		pgrep qutebrowser >/dev/null && qutebrowser :config-source

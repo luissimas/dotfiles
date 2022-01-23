@@ -239,6 +239,7 @@
     "gc" '(magit-clone :which-key "Magit clone")
     "gl" '(magit-log-buffer-file :which-key "Magit buffer log")
     "gi" '(magit-init :which-key "Magit init")
+    "gb" '(magit-blame :which-key "Magit blame")
 
     "p" '(:keymap project-prefix-map :which-key "Project")
     ;; "p!" 'project-shell-command
@@ -262,7 +263,8 @@
 
 ;; Evil-mode
 (defun pada/evil-lookup-func ()
-  "Function used by `evil-lookup' for looking up documentation of symbols taking context into consideration."
+  "Lookup contex-aware documentation for symbols.
+This function is meant to be used by `evil-lookup'."
   (cond
    ((and (boundp 'lsp-mode) lsp-mode) (lsp-describe-thing-at-point))
    ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
@@ -503,7 +505,6 @@
    "C-k" nil)
   (general-define-key
    :states 'insert
-   :keymaps 'prog-mode-map
    "C-SPC" 'completion-at-point)
   (general-define-key
    :keymaps 'corfu-map
@@ -515,9 +516,9 @@
 
 (use-package cape
   :init
-  ;; TODO: Add relevant backends for text modes (spelling, dictionary etc)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-tex))
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-ispell))
 
 ;; Setting font faces
 (defun pada/set-fonts ()
@@ -641,12 +642,16 @@ Note: This function is meant to be adviced around `find-file'."
 
 ;; Mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-(setq mode-line-position-column-line-format '("(%l,%c)"))
 (setq mode-line-defining-kbd-macro
       (propertize " Recording macro..." 'face 'mode-line-emphasis))
 
-(defvar pada/mode-line-buffer-name
-  '(:eval (propertize "%20b" 'face 'mode-line-buffer-id 'help-echo (buffer-file-name))))
+(defun pada/replace-vc-string (vc-string)
+  "Replace VC-STRING with a simpler and more pleasent representation.
+This function is meant to advise `vc-git-mode-line-string', particularly
+as a `:filter-result' advice."
+  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
+
+(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
 
 (setq-default mode-line-format
               `("%e"
@@ -654,16 +659,14 @@ Note: This function is meant to be adviced around `find-file'."
                 mode-line-mule-info
                 mode-line-modified
                 " "
-                ,pada/mode-line-buffer-name
-                " "
-                mode-line-position-column-line-format
-                " "
-                mode-line-percent-position
+                mode-line-buffer-identification
+                "    "
+                mode-line-position
                 "    "
                 (vc-mode vc-mode)
                 "    "
                 mode-line-modes
-                " "
+                "    "
                 mode-line-misc-info
                 mode-line-end-spaces))
 
@@ -677,17 +680,17 @@ Note: This function is meant to be adviced around `find-file'."
 
 
 ;; Mode line (the easy route)
-(use-package doom-modeline
-  :custom
-  (doom-modeline-height 25)
-  (doom-modeline-bar-width 4)
-  (doom-modeline-minor-modes nil)
-  (doom-modeline-indent-info nil)
-  (doom-modeline-buffer-encoding nil)
-  (doom-modeline-enable-word-count t)
-  (doom-modeline-buffer-file-name-style 'relative-to-project)
-  :init
-  (doom-modeline-mode))
+;; (use-package doom-modeline
+;;   :custom
+;;   (doom-modeline-height 25)
+;;   (doom-modeline-bar-width 4)
+;;   (doom-modeline-minor-modes nil)
+;;   (doom-modeline-indent-info nil)
+;;   (doom-modeline-buffer-encoding nil)
+;;   (doom-modeline-enable-word-count t)
+;;   (doom-modeline-buffer-file-name-style 'relative-to-project)
+;;   :init
+;;   (doom-modeline-mode))
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
