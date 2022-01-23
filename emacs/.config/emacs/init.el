@@ -935,3 +935,13 @@ as a `:filter-result' advice."
   (texfrag-mode . texfrag-document)
   (markdown-mode . texfrag-mode)
   (latex-mode . texfrag-mode))
+
+;; Colorizing compilation buffer
+(defun pada/colorize-compilation-buffer ()
+  "Colorize compilation-buffer using `ansi-color'."
+  (when (eq major-mode 'compilation-mode)
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))
+
+(add-hook 'compilation-filter-hook 'pada/colorize-compilation-buffer)
+
+;;; init.el ends here

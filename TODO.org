@@ -29,7 +29,7 @@
     - [ ] Lsp help buffers
     - [ ] Keybindings
   - [ ] Indentation setup
-  - [ ] ANSI colors
+  - [X] ANSI colors on compilation buffer
   - [ ] MPD client
   - [ ] Window system
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
