@@ -493,13 +493,13 @@ c.auto_save.session = True
 ##   - lightness-cielab: Modify colors by converting them to CIELAB color space and inverting the L value. Not available with Qt < 5.14.
 ##   - lightness-hsl: Modify colors by converting them to the HSL color space and inverting the lightness (i.e. the "L" in HSL).
 ##   - brightness-rgb: Modify colors by subtracting each of r, g, and b from their maximum value.
-# c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
 
 ## Contrast for dark mode. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
 ## `brightness-rgb`.
 ## Type: Float
-# c.colors.webpage.darkmode.contrast = 0.8
+c.colors.webpage.darkmode.contrast = 0.8
 
 ## Render all web contents using a dark theme. Example configurations
 ## from Chromium's `chrome://flags`:  - "With simple HSL/CIELAB/RGB-based
@@ -511,7 +511,7 @@ c.auto_save.session = True
 ## `colors.webpage.darkmode.threshold.background` to 205.  - "With
 ## selective inversion of everything": Combines the two variants   above.
 ## Type: Bool
-# c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = True
 
 ## Render all colors as grayscale. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
@@ -523,7 +523,7 @@ c.auto_save.session = True
 ## left as-is. If set to 1, images are completely grayscale. Values
 ## between 0 and 1 desaturate the colors accordingly.
 ## Type: Float
-# c.colors.webpage.darkmode.grayscale.images = 0.0
+c.colors.webpage.darkmode.grayscale.images = 0.0
 
 ## Which images to apply dark mode to. With QtWebEngine 5.15.0, this
 ## setting can cause frequent renderer process crashes due to a
@@ -534,7 +534,7 @@ c.auto_save.session = True
 ##   - always: Apply dark mode filter to all images.
 ##   - never: Never apply dark mode filter to any images.
 ##   - smart: Apply dark mode based on image content. Not available with Qt 5.15.0.
-# c.colors.webpage.darkmode.policy.images = 'never'
+c.colors.webpage.darkmode.policy.images = 'never'
 
 ## Which pages to apply dark mode to. The underlying Chromium setting has
 ## been removed in QtWebEngine 5.15.3, thus this setting is ignored

@@ -210,6 +210,7 @@
   (pada/leader-key
     "h" '(:keymap help-map :which-key "Help")
     "w" '(:keymap evil-window-map :which-key "Window")
+    "wt" '(window-toggle-side-windows :which-key "Toggle side windows")
 
     "x" '(execute-extended-command :which-key "M-x")
     "u" '(universal-argument :which-key "Universal argument")
@@ -239,7 +240,8 @@
     "gc" '(magit-clone :which-key "Magit clone")
     "gl" '(magit-log-buffer-file :which-key "Magit buffer log")
     "gi" '(magit-init :which-key "Magit init")
-    "gb" '(magit-blame :which-key "Magit blame")
+    "gb" '(magit-show-commit :which-key "Magit blame line")
+    "gB" '(magit-blame :which-key "Magit blame")
 
     "p" '(:keymap project-prefix-map :which-key "Project")
     ;; "p!" 'project-shell-command
@@ -268,7 +270,7 @@ This function is meant to be used by `evil-lookup'."
   (cond
    ((and (boundp 'lsp-mode) lsp-mode) (lsp-describe-thing-at-point))
    ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
-   (t man)))
+   (t (dictionary-lookup-definition))))
 
 (use-package evil
   :init
