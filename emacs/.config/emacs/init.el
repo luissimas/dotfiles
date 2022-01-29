@@ -365,6 +365,8 @@ This function is meant to be used by `evil-lookup'."
 
 (use-package git-gutter-fringe
   :after git-gutter
+  :custom
+  (fringes-outside-margins t)
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [240] nil nil '(center t))
   (define-fringe-bitmap 'git-gutter-fr:deleted [240] nil nil '(center t))
@@ -901,11 +903,14 @@ as a `:filter-result' advice."
   :commands (lsp lsp-deferred))
 
 (use-package flycheck
-  :hook (prog-mode . flycheck-mode)
+  :hook
+  (prog-mode . flycheck-mode)
+  (flycheck-mode . flycheck-set-indication-mode)
   :custom
   (flycheck-display-errors-delay 0.6)
   (flycheck-idle-change-delay 0.01)
-  (flycheck-check-syntax-automatically '(save idle-buffer-switch  idle-change mode-enabled)))
+  (flycheck-check-syntax-automatically '(save idle-buffer-switch  idle-change mode-enabled))
+  (flycheck-indication-mode 'left-margin))
 
 ;; Documentation in echo area
 (use-package eldoc

@@ -24,8 +24,8 @@
     - [-] Flycheck
       - [X] Make flycheck errors have priority over eldoc (probably advising =lsp-hover=) Actually I just had to make the delay for displaying flycheck errors greater than the eldoc delay.
       - [ ] Replace icons
-    - [ ] Eldoc
-      - [ ] Limit doc size
+    - [X] Eldoc
+      - [X] Limit doc size
     - [ ] Lsp help buffers
     - [ ] Keybindings
   - [ ] Indentation setup
