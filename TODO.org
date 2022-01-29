@@ -21,8 +21,8 @@
     - [X] Eglot
     - [X] xref
     - [X] Lsp-mode
-    - [ ] Flycheck
-      - [ ] Make flycheck errors have priority over eldoc (probably advising =lsp-hover=)
+    - [-] Flycheck
+      - [X] Make flycheck errors have priority over eldoc (probably advising =lsp-hover=) Actually I just had to make the delay for displaying flycheck errors greater than the eldoc delay.
       - [ ] Replace icons
     - [ ] Eldoc
       - [ ] Limit doc size
@@ -44,8 +44,10 @@
     - [X] Hide emphasis markers
     - [ ] Latex previews
       - [ ] Centralize latex blocks
-    - [ ] https://codeberg.org/joostkremers/visual-fill-column
+    - [X] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] https://github.com/abo-abo/org-download
+    - [ ] Org agenda
+    - [ ] Org capture
     - [ ] Keymaps
     - [ ] Org-roam
     - [ ] Move obsidian vault to org-roam (https://github.com/tecosaur/org-pandoc-import)

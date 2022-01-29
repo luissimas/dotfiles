@@ -4,7 +4,7 @@ selected=$(echo -e "F4Y\nCN\nAlgLin\nEng. Software\nORI" | dmenu -i -p "Meet: ")
 
 case $selected in
 "F4Y")
-	brave https://meet.google.com/zpo-nwqn-vrr?authuser=2
+	brave https://meet.google.com/yjo-xzin-rxn?authuser=2
 	;;
 "CN")
 	brave https://meet.google.com/nxm-htfg-yzn?authuser=1

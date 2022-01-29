@@ -442,6 +442,26 @@ This function is meant to be used by `evil-lookup'."
           (when-let (project (project-current))
             (car (project-roots project))))))
 
+;; Actions on completion candidates
+(use-package embark
+  :bind
+  (("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 ;; Project management
 (use-package project
   :config
@@ -484,21 +504,15 @@ This function is meant to be used by `evil-lookup'."
 (use-package tree-sitter-langs)
 
 ;; At-point completion
-(use-package corfu
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
   :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-auto-delay 0.2)
-  (corfu-auto-prefix 1)
-  (corfu-quit-at-boundary t)
-  (corfu-quit-no-match t)
-  (corfu-preview-current nil)
-  (corfu-preselect-first t)
-  (corfu-bar-width 0)
-  (corfu-min-width 40)
-  (corfu-max-width 80)
-  (corfu-left-margin-width 0.1)
-  (corfu-right-margin-width 0.1)
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
+  (company-tooltip-maximum-width 60)
+  (company-tooltip-minimum-width 60)
+  (company-tooltip-align-annotations t)
   :config
   ;; Unbinding default insert mappings
   (general-define-key
@@ -507,20 +521,20 @@ This function is meant to be used by `evil-lookup'."
    "C-k" nil)
   (general-define-key
    :states 'insert
-   "C-SPC" 'completion-at-point)
+   :keymaps 'company-active-map
+   "C-j"  'company-select-next
+   "C-k"  'company-select-previous)
   (general-define-key
-   :keymaps 'corfu-map
-   "C-j" 'corfu-next
-   "C-k" 'corfu-previous
-   "C-h" 'corfu-show-documentation)
-  :init
-  (corfu-global-mode))
+   :states 'insert
+   :keymaps 'company-mode-map
+   "C-SPC"  'company-complete))
 
-(use-package cape
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-ispell))
+(use-package company-box
+  :custom
+  (company-box-scrollbar nil)
+  (company-box-doc-enable nil)
+  :hook
+  (company-mode . company-box-mode))
 
 ;; Setting font faces
 (defun pada/set-fonts ()
@@ -562,6 +576,10 @@ This function is meant to be used by `evil-lookup'."
          (window-height . 0.3)
          (side . bottom)
          (slot . 0))
+        ("\\*\\(lsp-help\\|lsp-documentation\\)\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.2)
+         (side . bottom))
         ("\\*\\([Hh]elp.*\\|info\\)\\*"
          (display-buffer-in-side-window)
          (window-width . 0.4)
@@ -706,7 +724,7 @@ as a `:filter-result' advice."
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
   (org-latex-preview '(16))
   (general-define-key :states 'normal :keymaps 'org-mode-map "<tab>" 'evil-toggle-fold)
   (setq-local electric-pair-inhibit-predicate
@@ -728,6 +746,8 @@ as a `:filter-result' advice."
   (org-image-actual-width nil)
   (org-hidden-keywords '(title))
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
+  (org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")))
+  (org-agenda-files '("~/org" "~/vault/Notes"))
   :config
   (add-to-list 'org-modules 'org-tempo)
 
@@ -758,7 +778,8 @@ as a `:filter-result' advice."
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
-   "M-<tab>" 'org-shifttab))
+   "M-<tab>" 'org-shifttab
+   "C-SPC" 'org-toggle-checkbox))
 
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
@@ -861,6 +882,7 @@ as a `:filter-result' advice."
   (setq lsp-keymap-prefix "C-c l")
   :hook
   (js-mode . lsp)
+  (typescript-mode . lsp)
   (tuareg-mode . lsp)
   (c-mode . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
@@ -881,7 +903,7 @@ as a `:filter-result' advice."
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
   :custom
-  (flycheck-display-errors-delay 0.01)
+  (flycheck-display-errors-delay 0.6)
   (flycheck-idle-change-delay 0.01)
   (flycheck-check-syntax-automatically '(save idle-buffer-switch  idle-change mode-enabled)))
 
@@ -892,6 +914,13 @@ as a `:filter-result' advice."
   (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-current-idle-delay 0.2))
 
+;; Typescript
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :custom
+  (typescript-indent-level 2))
+
+;; OCaml
 (use-package tuareg)
 
 (use-package mpdel
