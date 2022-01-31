@@ -117,7 +117,7 @@
 (defvar pada/default-font-family "Iosevka Padawan")
 
 (defvar pada/variable-font-size (if (pada/is-laptop) 1.2 1.2))
-(defvar pada/variable-font-family "FiraGO")
+(defvar pada/variable-font-family "Fira Sans")
 
 ;; Custom function to kill current buffer
 (defun pada/kill-current-buffer ()
@@ -268,7 +268,7 @@
   "Lookup contex-aware documentation for symbols.
 This function is meant to be used by `evil-lookup'."
   (cond
-   ((and (boundp 'lsp-mode) lsp-mode) (lsp-describe-thing-at-point))
+   ((and (boundp 'lsp-mode) lsp-mode) (lsp-ui-doc-glance))
    ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
    (t (dictionary-lookup-definition))))
 
@@ -860,7 +860,9 @@ as a `:filter-result' advice."
 
 ;; Making emacs search for binaries in node_modules
 (use-package add-node-modules-path
-  :hook (js-mode . add-node-modules-path))
+  :hook
+  (js-mode . add-node-modules-path)
+  (typescript-mode . add-node-modules-path))
 
 ;; Highlight todo comments
 (use-package hl-todo
@@ -902,6 +904,17 @@ as a `:filter-result' advice."
    "gr" '(lambda () (interactive) (lsp-find-references t)))
   :commands (lsp lsp-deferred))
 
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-peek-enable nil)
+  (lsp-ui-imenu-enable nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-signature-render-documentation t)
+  (lsp-ui-doc-use-webkit t))
+
 (use-package flycheck
   :hook
   (prog-mode . flycheck-mode)
@@ -922,7 +935,10 @@ as a `:filter-result' advice."
 ;; Typescript
 (use-package typescript-mode
   :mode "\\.ts\\'"
+  :hook
+  (before-save . lsp-eslint-apply-all-fixes)
   :custom
+  (js-indent-level 2)
   (typescript-indent-level 2))
 
 ;; OCaml
