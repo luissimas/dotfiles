@@ -21,19 +21,20 @@
     - [X] Eglot
     - [X] xref
     - [X] Lsp-mode
-    - [-] Flycheck
+    - [X] Flycheck
       - [X] Make flycheck errors have priority over eldoc (probably advising =lsp-hover=) Actually I just had to make the delay for displaying flycheck errors greater than the eldoc delay.
-      - [ ] Replace icons
     - [X] Eldoc
       - [X] Limit doc size
-    - [ ] Lsp help buffers
+    - [X] Lsp help buffers
     - [ ] Keybindings
-  - [ ] Indentation setup
+  - [ ] Projectile
+  - [ ] Treemacs
   - [X] ANSI colors on compilation buffer
+  - [ ] SQL Setup (maybe using LSP + a REPL) https://emacs-lsp.github.io/lsp-mode/page/lsp-sqls/
+  - [ ] Terminal modes
+  - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
   - [ ] MPD client
   - [ ] Window system
-  - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
-  - [ ] Terminal modes
   - [ ] Dired
   - [ ] Magit
   - [ ] Database interaction
@@ -47,6 +48,7 @@
     - [X] https://codeberg.org/joostkremers/visual-fill-column
     - [ ] https://github.com/abo-abo/org-download
     - [ ] Org agenda
+      - [ ] Google calendar integration
     - [ ] Org capture
     - [ ] Keymaps
     - [ ] Org-roam

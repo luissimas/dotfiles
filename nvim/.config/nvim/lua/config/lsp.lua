@@ -96,12 +96,12 @@ local on_attach = function(client, bufnr)
   -- Enabling formatting
   map(bufnr, "n", "<C-f>", ":lua vim.lsp.buf.formatting()<Enter>", opts)
 
-  -- vim.cmd [[
-  -- augroup LspFormatting
-  --   autocmd!
-  --   autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
-  -- augroup end
-  -- ]]
+  vim.cmd [[
+  augroup LspFormatting
+    autocmd!
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
+  augroup end
+  ]]
 
   if client.name ~= "clangd" then
     client.resolved_capabilities.document_formatting = false

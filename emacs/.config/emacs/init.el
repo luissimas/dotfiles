@@ -116,7 +116,7 @@
 (defvar pada/default-font-size (if (pada/is-laptop) 100 100))
 (defvar pada/default-font-family "Iosevka Padawan")
 
-(defvar pada/variable-font-size (if (pada/is-laptop) 1.2 1.2))
+(defvar pada/variable-font-size (if (pada/is-laptop) 1.1 1.1))
 (defvar pada/variable-font-family "Fira Sans")
 
 ;; Custom function to kill current buffer
@@ -149,6 +149,7 @@
     ("modus-vivendi" modus-vivendi)
     ("nord" doom-nord)
     ("gruvbox" doom-gruvbox)
+    ("tokyonight" doom-tokyo-night)
     ("palenight" doom-palenight))
   "A alist of association between file patterns and external programs."
   :group 'system-theme
@@ -376,8 +377,8 @@ This function is meant to be used by `evil-lookup'."
   (set-face-attribute 'git-gutter-fr:deleted nil :inherit 'magit-diff-removed-highlight))
 
 ;; Rainbow delimiters
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+;; (use-package rainbow-delimiters
+;;   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Show colors
 (use-package rainbow-mode)
@@ -415,7 +416,7 @@ This function is meant to be used by `evil-lookup'."
         completion-ignore-case t
         read-file-name-completion-ignore-case t
         read-buffer-completion-ignore-case t
-        orderless-matching-styles '(orderless-flex orderless-regexp)
+        orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)
         orderless-style-dispatchers '(pada/orderless-literal-dispatcher)))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
@@ -543,7 +544,7 @@ This function is meant to be used by `evil-lookup'."
   "Set the main font faces."
   (interactive)
   (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
-  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :weight 'normal)
+  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height 1.0 :weight 'normal)
   (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
 
 ;; Frame parameters
@@ -573,7 +574,7 @@ This function is meant to be used by `evil-lookup'."
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
@@ -663,56 +664,56 @@ Note: This function is meant to be adviced around `find-file'."
   (global-ligature-mode))
 
 ;; Mode line
-(setq evil-mode-line-format '(before . mode-line-front-space))
-(setq mode-line-defining-kbd-macro
-      (propertize " Recording macro..." 'face 'mode-line-emphasis))
+;; (setq evil-mode-line-format '(before . mode-line-front-space))
+;; (setq mode-line-defining-kbd-macro
+;;       (propertize " Recording macro..." 'face 'mode-line-emphasis))
 
-(defun pada/replace-vc-string (vc-string)
-  "Replace VC-STRING with a simpler and more pleasent representation.
-This function is meant to advise `vc-git-mode-line-string', particularly
-as a `:filter-result' advice."
-  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
+;; (defun pada/replace-vc-string (vc-string)
+;;   "Replace VC-STRING with a simpler and more pleasent representation.
+;; This function is meant to advise `vc-git-mode-line-string', particularly
+;; as a `:filter-result' advice."
+;;   (replace-regexp-in-string ".*Git[:-]" "" vc-string))
 
-(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
+;; (advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
 
-(setq-default mode-line-format
-              `("%e"
-                mode-line-front-space
-                mode-line-mule-info
-                mode-line-modified
-                " "
-                mode-line-buffer-identification
-                "    "
-                mode-line-position
-                "    "
-                (vc-mode vc-mode)
-                "    "
-                mode-line-modes
-                "    "
-                mode-line-misc-info
-                mode-line-end-spaces))
+;; (setq-default mode-line-format
+;;               `("%e"
+;;                 mode-line-front-space
+;;                 mode-line-mule-info
+;;                 mode-line-modified
+;;                 " "
+;;                 mode-line-buffer-identification
+;;                 "    "
+;;                 mode-line-position
+;;                 "    "
+;;                 (vc-mode vc-mode)
+;;                 "    "
+;;                 mode-line-modes
+;;                 "    "
+;;                 mode-line-misc-info
+;;                 mode-line-end-spaces))
 
-(use-package minions
-  :custom
-  (minions-mode-line-lighter "")
-  (minions-mode-line-delimiters '("" . ""))
-  (minions-prominent-modes '(defining-kbd-macro))
-  :init
-  (minions-mode))
+;; (use-package minions
+;;   :custom
+;;   (minions-mode-line-lighter "")
+;;   (minions-mode-line-delimiters '("" . ""))
+;;   (minions-prominent-modes '(defining-kbd-macro))
+;;   :init
+;;   (minions-mode))
 
 
 ;; Mode line (the easy route)
-;; (use-package doom-modeline
-;;   :custom
-;;   (doom-modeline-height 25)
-;;   (doom-modeline-bar-width 4)
-;;   (doom-modeline-minor-modes nil)
-;;   (doom-modeline-indent-info nil)
-;;   (doom-modeline-buffer-encoding nil)
-;;   (doom-modeline-enable-word-count t)
-;;   (doom-modeline-buffer-file-name-style 'relative-to-project)
-;;   :init
-;;   (doom-modeline-mode))
+(use-package doom-modeline
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 4)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  :init
+  (doom-modeline-mode))
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
@@ -726,7 +727,7 @@ as a `:filter-result' advice."
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
   (org-latex-preview '(16))
   (general-define-key :states 'normal :keymaps 'org-mode-map "<tab>" 'evil-toggle-fold)
   (setq-local electric-pair-inhibit-predicate
@@ -740,6 +741,7 @@ as a `:filter-result' advice."
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
   (org-return-follows-links t)
+  (org-display-remote-inline-images 'download)
   (org-startup-with-inline-images t)
   ;; We set the preview in `pada/org-mode-setup', since we can't set the font scale before org starts
   (org-startup-with-latex-preview nil)
@@ -749,7 +751,7 @@ as a `:filter-result' advice."
   (org-hidden-keywords '(title))
   (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
   (org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")))
-  (org-agenda-files '("~/org" "~/vault/Notes"))
+  (org-agenda-files '("~/org"))
   :config
   (add-to-list 'org-modules 'org-tempo)
 
@@ -811,6 +813,9 @@ as a `:filter-result' advice."
   (set-face-attribute 'org-superstar-item nil :font pada/default-font-family :height 1.2)
   (set-face-attribute 'org-superstar-header-bullet nil :font pada/default-font-family :height 1.2))
 
+;; Presentation
+(use-package org-tree-slide)
+
 ;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
 (defun org-inline-image--get-current-image ()
   "Return the overlay associated with the image under point."
@@ -842,7 +847,7 @@ as a `:filter-result' advice."
 (use-package visual-fill-column
   :hook (org-mode . visual-fill-column-mode)
   :custom
-  (visual-fill-column-width 100)
+  (visual-fill-column-width 60)
   (visual-fill-column-center-text t))
 
 ;; Code formatter
@@ -885,35 +890,41 @@ as a `:filter-result' advice."
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
-  (js-mode . lsp)
-  (typescript-mode . lsp)
-  (tuareg-mode . lsp)
-  (c-mode . lsp)
+  ((js-mode typescript-mode tuareg-mode c-mode python-mode). lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
-  :custom
-  (read-process-output-max (* 1024 1024))
-  (lsp-headerline-breadcrumb-enable nil)
-  (lsp-modeline-code-actions-enable nil)
-  (lsp-signature-doc-lines 1)
-  (lsp-restart 'iteractive)
   :config
+  (setq read-process-output-max (* 1024 1024)
+        lsp-headerline-breadcrumb-enable nil
+        lsp-modeline-code-actions-enable t
+        lsp-modeline-diagnostics-enable t
+        lsp-enable-snippet nil
+        lsp-signature-doc-lines 1
+        lsp-auto-guess-root t
+        lsp-enable-on-type-formatting nil
+        lsp-signature-render-documentation t
+        lsp-log-io nil
+        lsp-restart 'iteractive)
   (general-define-key
    :states 'normal
    :keymaps 'lsp-mode-map
    "gd" 'lsp-find-definition
    "gr" '(lambda () (interactive) (lsp-find-references t)))
-  :commands (lsp lsp-deferred))
+  :commands lsp)
 
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :custom
-  (lsp-ui-doc-enable nil)
-  (lsp-ui-peek-enable nil)
-  (lsp-ui-imenu-enable nil)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-doc-position 'at-point)
-  (lsp-signature-render-documentation t)
-  (lsp-ui-doc-use-webkit t))
+  :config
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-doc-header nil
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-border (face-foreground 'default)
+        lsp-ui-peek-enable nil
+        lsp-ui-imenu-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-doc-position 'at-point))
+
+(use-package lsp-pyright
+  :after lsp-mode)
 
 (use-package flycheck
   :hook
@@ -936,7 +947,7 @@ as a `:filter-result' advice."
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook
-  (before-save . lsp-eslint-apply-all-fixes)
+  (typescript-mode-hook . (lambda () (add-hook 'before-save-hook 'lsp-eslint-apply-all-fixes)))
   :custom
   (js-indent-level 2)
   (typescript-indent-level 2))
@@ -995,5 +1006,24 @@ as a `:filter-result' advice."
     (ansi-color-apply-on-region compilation-filter-start (point-max))))
 
 (add-hook 'compilation-filter-hook 'pada/colorize-compilation-buffer)
+
+(use-package treemacs)
+
+(setq-default text-scale-mode-amount 3)
+
+;; Thanks Zoey :) https://github.com/zoedsoupe
+(defun pada/org-start-presentation ()
+  "Start a Org presentation."
+  (interactive)
+  (org-tree-slide-play-with-timer)
+  (flyspell-mode 0)
+  (text-scale-mode 1))
+
+(defun pada/org-end-presentation ()
+  "End a Org presentation."
+  (interactive)
+  (text-scale-mode 0)
+  (flyspell-mode 1)
+  (org-tree-slide-mode 0))
 
 ;;; init.el ends here
