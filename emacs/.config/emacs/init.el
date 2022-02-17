@@ -358,27 +358,20 @@ This function is meant to be used by `evil-lookup'."
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
   :custom
-  (git-gutter:update-interval 1)
-  (git-gutter:modified-sign "│")
-  (git-gutter:added-sign "│")
-  (git-gutter:deleted-sign "│")
-  (set-face-attribute 'git-gutter:unchanged nil :background nil :inherit 'default))
+  (git-gutter:update-interval 0.02))
 
 (use-package git-gutter-fringe
   :after git-gutter
   :custom
   (fringes-outside-margins t)
   :config
-  (define-fringe-bitmap 'git-gutter-fr:added [240] nil nil '(center t))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [240] nil nil '(center t))
-  (define-fringe-bitmap 'git-gutter-fr:modified [240] nil nil '(center t))
-  (set-face-attribute 'git-gutter-fr:added nil :inherit 'magit-diff-added-highlight)
-  (set-face-attribute 'git-gutter-fr:modified nil :inherit 'magit-diff-base-highlight)
-  (set-face-attribute 'git-gutter-fr:deleted nil :inherit 'magit-diff-removed-highlight))
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 ;; Rainbow delimiters
-;; (use-package rainbow-delimiters
-;;   :hook (prog-mode . rainbow-delimiters-mode))
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Show colors
 (use-package rainbow-mode)

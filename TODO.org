@@ -27,7 +27,7 @@
       - [X] Limit doc size
     - [X] Lsp help buffers
     - [ ] Keybindings
-  - [ ] Projectile
+  - [ ] https://github.com/Qkessler/consult-project
   - [ ] Treemacs
   - [X] ANSI colors on compilation buffer
   - [ ] SQL Setup (maybe using LSP + a REPL) https://emacs-lsp.github.io/lsp-mode/page/lsp-sqls/

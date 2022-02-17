@@ -71,7 +71,7 @@ magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" $cachedir/tmp.html | head 
 
 notify-send "Downloading torrent" -i "NONE"
 
-# webtorrent "$magnet" --mpv
+# peerflix -l -k $magnet
 aria2c "$magnet" -d ~/movies
 
 # Simple notification
