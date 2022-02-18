@@ -876,7 +876,14 @@ Note: This function is meant to be adviced around `find-file'."
           ("NOTE"       success bold))))
 
 ;; Better terminal emulator
-(use-package vterm)
+(use-package vterm
+  :config
+  (general-define-key
+   :states 'insert
+   :keymaps 'vterm-mode-map
+	 "C-c"      #'vterm--self-insert
+	 "C-d"      #'vterm--self-insert
+	 "C-SPC"    #'vterm--self-insert))
 
 ;; LSP
 (use-package lsp-mode
