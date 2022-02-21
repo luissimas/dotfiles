@@ -28,10 +28,11 @@
     - [X] Lsp help buffers
     - [ ] Keybindings
   - [ ] https://github.com/Qkessler/consult-project
-  - [ ] Treemacs
+  - [ ] https://github.com/Artawower/blamer.el
   - [X] ANSI colors on compilation buffer
-  - [ ] SQL Setup (maybe using LSP + a REPL) https://emacs-lsp.github.io/lsp-mode/page/lsp-sqls/
   - [ ] Terminal modes
+  - [ ] Snippets
+  - [ ] SQL Setup (maybe using LSP + a REPL) https://emacs-lsp.github.io/lsp-mode/page/lsp-sqls/
   - [ ] TODO comments [[https://github.com/jsmestad/doom-todo-ivy/blob/master/doom-todo-ivy.el][reference]]
   - [ ] MPD client
   - [ ] Window system
@@ -54,8 +55,7 @@
     - [ ] Org-roam
     - [ ] Move obsidian vault to org-roam (https://github.com/tecosaur/org-pandoc-import)
     - [ ] Make some presentation mode (https://github.com/takaxp/org-tree-slide)
-  - [ ] Snippets
-  - [ ] Spellchecking
+  - [X] Spellchecking
   - [ ] Embark
   - [ ] Startup buffer
   - [ ] Create my own theme

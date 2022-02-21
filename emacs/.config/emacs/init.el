@@ -341,6 +341,8 @@ This function is meant to be used by `evil-lookup'."
 
 ;; Helpful
 (use-package helpful
+  :config
+  (defvar read-symbol-positions-list nil)
   :bind
   ([remap describe-function] . helpful-callable)
   ([remap describe-variable] . helpful-variable)
@@ -778,6 +780,17 @@ Note: This function is meant to be adviced around `find-file'."
    "M-<tab>" 'org-shifttab
    "C-SPC" 'org-toggle-checkbox))
 
+(use-package org-babel
+  :straight nil
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
+
+  (defun org-babel-edit-prep:python (babel-info)
+    (setq-local buffer-file-name (->> babel-info caddr (alist-get :tangle)))
+    (lsp)))
+
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
@@ -879,7 +892,7 @@ Note: This function is meant to be adviced around `find-file'."
 (use-package vterm
   :config
   (general-define-key
-   :states 'insert
+   :states 'emacs
    :keymaps 'vterm-mode-map
 	 "C-c"      #'vterm--self-insert
 	 "C-d"      #'vterm--self-insert
@@ -1007,10 +1020,6 @@ Note: This function is meant to be adviced around `find-file'."
 
 (add-hook 'compilation-filter-hook 'pada/colorize-compilation-buffer)
 
-(use-package treemacs)
-
-(setq-default text-scale-mode-amount 3)
-
 ;; Thanks Zoey :) https://github.com/zoedsoupe
 (defun pada/org-start-presentation ()
   "Start a Org presentation."
@@ -1025,5 +1034,7 @@ Note: This function is meant to be adviced around `find-file'."
   (text-scale-mode 0)
   (flyspell-mode 1)
   (org-tree-slide-mode 0))
+
+(setq-default text-scale-mode-amount 3)
 
 ;;; init.el ends here
