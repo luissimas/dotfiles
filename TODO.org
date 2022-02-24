@@ -1,5 +1,4 @@
 #+title: Dotfiles
-
   - [X] Integrate system-wide themes
   - [X] Keymap setup
     - [X] Evil (https://github.com/noctuid/evil-guide)
@@ -28,8 +27,11 @@
     - [X] Lsp help buffers
     - [ ] Keybindings
   - [ ] https://github.com/Qkessler/consult-project
-  - [ ] https://github.com/Artawower/blamer.el
+  - [ ] Embark
+    - [ ] Wgrep
   - [X] ANSI colors on compilation buffer
+  - [ ] Spellchecking
+    - [ ] https://github.com/d12frosted/flyspell-correct
   - [ ] Terminal modes
   - [ ] Snippets
   - [ ] SQL Setup (maybe using LSP + a REPL) https://emacs-lsp.github.io/lsp-mode/page/lsp-sqls/
@@ -44,6 +46,7 @@
     - [X] Org-tempo
     - [X] Faces
     - [X] Hide emphasis markers
+    - [ ] https://github.com/minad/org-modern
     - [ ] Latex previews
       - [ ] Centralize latex blocks
     - [X] https://codeberg.org/joostkremers/visual-fill-column
@@ -55,7 +58,5 @@
     - [ ] Org-roam
     - [ ] Move obsidian vault to org-roam (https://github.com/tecosaur/org-pandoc-import)
     - [ ] Make some presentation mode (https://github.com/takaxp/org-tree-slide)
-  - [X] Spellchecking
-  - [ ] Embark
   - [ ] Startup buffer
   - [ ] Create my own theme

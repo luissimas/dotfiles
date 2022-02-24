@@ -420,6 +420,9 @@ This function is meant to be used by `evil-lookup'."
   (savehist-mode))
 
 ;; Richer completion annotations
+(use-package all-the-icons-completion
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+
 (use-package marginalia
   :after vertico
   :bind (:map minibuffer-local-map
@@ -699,14 +702,15 @@ Note: This function is meant to be adviced around `find-file'."
 
 ;; Mode line (the easy route)
 (use-package doom-modeline
-  :custom
-  (doom-modeline-height 25)
-  (doom-modeline-bar-width 4)
-  (doom-modeline-minor-modes nil)
-  (doom-modeline-indent-info nil)
-  (doom-modeline-buffer-encoding nil)
-  (doom-modeline-enable-word-count t)
-  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  :config
+  (setq
+   doom-modeline-height 25
+   doom-modeline-bar-width 2
+   doom-modeline-minor-modes nil
+   doom-modeline-indent-info t
+   doom-modeline-buffer-encoding nil
+   doom-modeline-enable-word-count t
+   doom-modeline-buffer-file-name-style 'relative-to-project)
   :init
   (doom-modeline-mode))
 
@@ -992,6 +996,10 @@ Note: This function is meant to be adviced around `find-file'."
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
 
+(use-package flyspell-correct
+  :config
+  (general-define-key :states 'insert :keymaps 'flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
+
 ;; Markdown setup
 (use-package markdown-mode
   :hook
@@ -1036,5 +1044,10 @@ Note: This function is meant to be adviced around `find-file'."
   (org-tree-slide-mode 0))
 
 (setq-default text-scale-mode-amount 3)
+
+;; Enable search and replace in embark buffers
+(use-package wgrep)
+
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 ;;; init.el ends here
