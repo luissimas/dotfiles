@@ -726,7 +726,7 @@ Note: This function is meant to be adviced around `find-file'."
   (visual-line-mode)
   (setq line-spacing 1)
   (flyspell-mode)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.3))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
   (org-latex-preview '(16))
   (general-define-key :states 'normal :keymaps 'org-mode-map "<tab>" 'evil-toggle-fold)
   (setq-local electric-pair-inhibit-predicate

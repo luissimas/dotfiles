@@ -69,10 +69,12 @@ fullURL="${baseurl}${url}/"
 curl -s $fullURL >$cachedir/tmp.html
 magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" $cachedir/tmp.html | head -n 1)
 
-notify-send "Downloading torrent" -i "NONE"
+echo "$magnet" | xclip -selection c
+
+notify-send "Magnet link sent do clipboard!" -i "NONE"
 
 # peerflix -l -k $magnet
-aria2c "$magnet" -d ~/movies
+# aria2c "$magnet" -d ~/movies
 
 # Simple notification
 notify-send "Torrent download finished" -i "NONE"
