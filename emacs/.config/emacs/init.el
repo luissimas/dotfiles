@@ -282,11 +282,11 @@ This function is meant to be used by `evil-lookup'."
         evil-undo-system 'undo-tree
         evil-want-Y-yank-to-eol t
         evil-shift-width tab-width)
-  (unbind-key "C-k" evil-insert-state-map)
   :custom
   (evil-echo-state . nil)
   (evil-lookup-func 'pada/evil-lookup-func)
   :config
+  (unbind-key "C-k" 'evil-insert-state-map)
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
   ;; (define-key evil-insert-state-map (kbd "<tab>") 'tab-to-tab-stop)
@@ -506,8 +506,7 @@ This function is meant to be used by `evil-lookup'."
 
 ;; At-point completion
 (use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
@@ -1049,5 +1048,23 @@ Note: This function is meant to be adviced around `find-file'."
 (use-package wgrep)
 
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+
+;; Accounting tools
+(use-package ledger-mode
+  :mode "\\.journal\\'"
+  :hook (ledger-mode . flycheck-mode)
+  :hook (ledger-mode . company-mode)
+  :hook (ledger-mode . (lambda ()
+                         (add-hook 'before-save-hook 'ledger-mode-clean-buffer nil 'make-it-local)))
+  :config
+  (setq ledger-mode-should-check-version nil
+        ledger-report-links-in-register nil
+        ledger-binary-path "hledger"
+        hledger-jfile (expand-file-name "~/dox/accounting.journal"))
+  (add-to-list 'ledger-reports
+               '("monthly expenses" "%(binary) -f %(ledger-file) balance expenses")))
+
+(use-package flycheck-ledger
+  :after (flycheck ledger-mode))
 
 ;;; init.el ends here

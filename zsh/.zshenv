@@ -6,6 +6,7 @@ export PATH=$HOME/.config/polybar/scripts:$PATH
 export PATH=$HOME/scripts:$PATH
 export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
+export LEDGER_FILE=$HOME/dox/accounting.journal
 
 # Exports
 export BROWSER="qutebrowser"
@@ -16,4 +17,3 @@ export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40%" # --preview 'bat {}
 
 # Skipping compinit
 skip_global_compinit=1
-
