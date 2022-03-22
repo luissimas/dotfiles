@@ -86,7 +86,7 @@ case $option in "Pywal")
 		"Catppuccin")
 			name=catppuccin
 			theme=~/.config/wal/colorschemes/catppuccin.json
-			bg=~/.wal/graymountain.jpeg
+			bg=~/.wal/catppuccin.jpg
 			;;
 		*) printf "No option selected." ;;
 		esac
@@ -104,7 +104,7 @@ case $option in "Pywal")
 		emacsclient -e "(pada/load-system-theme)"
 
 		# Recompiling dmenu
-		doas recompile_dmenu
+		sudo recompile_dmenu
 
 		# Update qutebrowser colors
 		pgrep qutebrowser >/dev/null && qutebrowser :config-source

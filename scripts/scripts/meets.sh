@@ -1,6 +1,6 @@
 #!/bin/sh
 
-selected=$(echo -e "F4Y\nCN\nAlgLin\nEng. Software\nORI\nIA" | dmenu -i -p "Meet: ")
+selected=$(echo -e "F4Y\nBD\nCN\nAlgLin\nEng. Software\nORI\nIA" | dmenu -i -p "Meet: ")
 
 case $selected in
 "F4Y")
@@ -21,4 +21,8 @@ case $selected in
 "IA")
 	brave http://meet.google.com/rfo-ycku-aqo?authuser=1
 	;;
+"BD")
+	brave https://meet.google.com/yaa-nczg-jwg?authuser=1
+	;;
+
 esac

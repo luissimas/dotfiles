@@ -3,6 +3,7 @@
 # Terminate already running bar instances
 killall -q polybar
 
-polybar -rq bar >> /tmp/polybar.log & disown
+polybar bar 2>&1 | tee -a /tmp/polybar.log &
+disown
 
 echo "Polybar launched..."

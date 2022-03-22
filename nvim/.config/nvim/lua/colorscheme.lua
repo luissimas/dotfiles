@@ -13,10 +13,12 @@ vim.g.tokyonight_style = "night"
 vim.g.tokyonight_lualine_bold = true
 
 require("catppuccin").setup {
+  transparent_background = false,
+  term_colors = false,
   styles = {
     comments = "italic",
     functions = "NONE",
-    keywords = "NONE",
+    keywords = "italic",
     strings = "NONE",
     variables = "NONE",
   },
@@ -38,11 +40,39 @@ require("catppuccin").setup {
       },
     },
     lsp_trouble = false,
+    cmp = true,
+    lsp_saga = false,
+    gitgutter = false,
     gitsigns = true,
     telescope = true,
+    nvimtree = {
+      enabled = true,
+      show_root = false,
+      transparent_panel = false,
+    },
+    neotree = {
+      enabled = false,
+      show_root = false,
+      transparent_panel = false,
+    },
+    which_key = false,
+    indent_blankline = {
+      enabled = true,
+      colored_indent_levels = false,
+    },
+    dashboard = false,
     neogit = true,
+    vim_sneak = false,
+    fern = false,
+    barbar = false,
+    bufferline = false,
     markdown = true,
+    lightspeed = false,
     ts_rainbow = true,
+    hop = false,
+    notify = false,
+    telekasten = false,
+    symbols_outline = false,
   },
 }
 

@@ -571,7 +571,7 @@ This function is meant to be used by `evil-lookup'."
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
@@ -589,7 +589,12 @@ This function is meant to be used by `evil-lookup'."
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
-         (slot . -1))))
+         (slot . -1))
+        ("\\*Personal Finance\\*"
+         (display-buffer-in-side-window)
+         (window-width . 0.4)
+         (side . right)
+         (slot . 0))))
 
 (setq frame-auto-hide-function 'delete-frame)
 
@@ -752,6 +757,7 @@ Note: This function is meant to be adviced around `find-file'."
   (org-agenda-files '("~/org"))
   :config
   (add-to-list 'org-modules 'org-tempo)
+  (add-to-list 'org-latex-packages-alist '("" "systeme" t))
 
   ;; Font scaling for different header levels
   (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
@@ -781,11 +787,8 @@ Note: This function is meant to be adviced around `find-file'."
    :states 'normal
    :keymaps 'org-mode-map
    "M-<tab>" 'org-shifttab
-   "C-SPC" 'org-toggle-checkbox))
+   "C-SPC" 'org-toggle-checkbox)
 
-(use-package org-babel
-  :straight nil
-  :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)))
@@ -1059,12 +1062,20 @@ Note: This function is meant to be adviced around `find-file'."
   :config
   (setq ledger-mode-should-check-version nil
         ledger-report-links-in-register nil
-        ledger-binary-path "hledger"
-        hledger-jfile (expand-file-name "~/dox/accounting.journal"))
+        ledger-clear-whole-transactions t
+        ledger-post-amount-alignment-column 60
+        ledger-binary-path "ledger")
   (add-to-list 'ledger-reports
                '("monthly expenses" "%(binary) -f %(ledger-file) balance expenses")))
 
-(use-package flycheck-ledger
+(use-package hledger-mode
+  :custom
+  (hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal")))
+
+(use-package flycheck-hledger
   :after (flycheck ledger-mode))
+
+(use-package treemacs)
+(use-package treemacs-all-the-icons)
 
 ;;; init.el ends here
