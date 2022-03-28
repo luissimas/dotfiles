@@ -150,7 +150,8 @@
     ("nord" doom-nord)
     ("gruvbox" doom-gruvbox)
     ("tokyonight" doom-tokyo-night)
-    ("palenight" doom-palenight))
+    ("palenight" doom-palenight)
+    ("catppuccin" catppuccin))
   "A alist of association between file patterns and external programs."
   :group 'system-theme
   :type "alist")
@@ -485,6 +486,9 @@ This function is meant to be used by `evil-lookup'."
 (use-package doom-themes
   :custom
   (doom-gruvbox-dark-variant "hard"))
+
+(use-package catppuccin
+  :straight '(:host github :repo "pspiagicw/catppuccin-emacs"))
 
 ;; Icons
 (use-package all-the-icons
@@ -1064,15 +1068,13 @@ Note: This function is meant to be adviced around `find-file'."
         ledger-report-links-in-register nil
         ledger-clear-whole-transactions t
         ledger-post-amount-alignment-column 60
-        ledger-binary-path "ledger")
-  (add-to-list 'ledger-reports
-               '("monthly expenses" "%(binary) -f %(ledger-file) balance expenses")))
+        ledger-binary-path "ledger"))
 
 (use-package hledger-mode
   :custom
   (hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal")))
 
-(use-package flycheck-hledger
+(use-package flycheck-ledger
   :after (flycheck ledger-mode))
 
 (use-package treemacs)
