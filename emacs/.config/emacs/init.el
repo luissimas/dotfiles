@@ -671,56 +671,56 @@ Note: This function is meant to be adviced around `find-file'."
 
 ;; Mode line
 ;; (setq evil-mode-line-format '(before . mode-line-front-space))
-;; (setq mode-line-defining-kbd-macro
-;;       (propertize " Recording macro..." 'face 'mode-line-emphasis))
+(setq mode-line-defining-kbd-macro
+      (propertize " Recording macro..." 'face 'mode-line-emphasis))
 
-;; (defun pada/replace-vc-string (vc-string)
-;;   "Replace VC-STRING with a simpler and more pleasent representation.
-;; This function is meant to advise `vc-git-mode-line-string', particularly
-;; as a `:filter-result' advice."
-;;   (replace-regexp-in-string ".*Git[:-]" "" vc-string))
+(defun pada/replace-vc-string (vc-string)
+  "Replace VC-STRING with a simpler and more pleasent representation.
+This function is meant to advise `vc-git-mode-line-string', particularly
+as a `:filter-result' advice."
+  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
 
-;; (advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
+(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
 
-;; (setq-default mode-line-format
-;;               `("%e"
-;;                 mode-line-front-space
-;;                 mode-line-mule-info
-;;                 mode-line-modified
-;;                 " "
-;;                 mode-line-buffer-identification
-;;                 "    "
-;;                 mode-line-position
-;;                 "    "
-;;                 (vc-mode vc-mode)
-;;                 "    "
-;;                 mode-line-modes
-;;                 "    "
-;;                 mode-line-misc-info
-;;                 mode-line-end-spaces))
+(setq-default mode-line-format
+              `("%e"
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-modified
+                " "
+                mode-line-buffer-identification
+                "    "
+                mode-line-position
+                "    "
+                (vc-mode vc-mode)
+                "    "
+                mode-line-modes
+                "    "
+                mode-line-misc-info
+                mode-line-end-spaces))
 
-;; (use-package minions
-;;   :custom
-;;   (minions-mode-line-lighter "")
-;;   (minions-mode-line-delimiters '("" . ""))
-;;   (minions-prominent-modes '(defining-kbd-macro))
-;;   :init
-;;   (minions-mode))
+(use-package minions
+  :custom
+  (minions-mode-line-lighter "")
+  (minions-mode-line-delimiters '("" . ""))
+  (minions-prominent-modes '(defining-kbd-macro))
+  :init
+  (minions-mode))
 
 
 ;; Mode line (the easy route)
-(use-package doom-modeline
-  :config
-  (setq
-   doom-modeline-height 25
-   doom-modeline-bar-width 2
-   doom-modeline-minor-modes nil
-   doom-modeline-indent-info t
-   doom-modeline-buffer-encoding nil
-   doom-modeline-enable-word-count t
-   doom-modeline-buffer-file-name-style 'relative-to-project)
-  :init
-  (doom-modeline-mode))
+;; (use-package doom-modeline
+;;   :config
+;;   (setq
+;;    doom-modeline-height 25
+;;    doom-modeline-bar-width 2
+;;    doom-modeline-minor-modes nil
+;;    doom-modeline-indent-info t
+;;    doom-modeline-buffer-encoding nil
+;;    doom-modeline-enable-word-count t
+;;    doom-modeline-buffer-file-name-style 'relative-to-project)
+;;   :init
+;;   (doom-modeline-mode))
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
@@ -748,6 +748,7 @@ Note: This function is meant to be adviced around `find-file'."
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
   (org-return-follows-links t)
+  (org-link-file-path-type 'relative)
   (org-display-remote-inline-images 'download)
   (org-startup-with-inline-images t)
   ;; We set the preview in `pada/org-mode-setup', since we can't set the font scale before org starts
@@ -1050,6 +1051,16 @@ Note: This function is meant to be adviced around `find-file'."
   (org-tree-slide-mode 0))
 
 (setq-default text-scale-mode-amount 3)
+
+(use-package default-text-scale
+  :config
+  (setq default-text-scale-amount 10)
+  (general-define-key
+   :keymaps 'default-text-scale-mode-map
+   "C-="  'default-text-scale-increase
+   "C--"  'default-text-scale-decrease)
+  :init
+  (default-text-scale-mode))
 
 ;; Enable search and replace in embark buffers
 (use-package wgrep)
