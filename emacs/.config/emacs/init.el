@@ -355,6 +355,7 @@ This function is meant to be used by `evil-lookup'."
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
+  (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show)
   (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle))
 
 ;; Git gutter
@@ -444,6 +445,12 @@ This function is meant to be used by `evil-lookup'."
           (when-let (project (project-current))
             (car (project-roots project))))))
 
+(use-package consult-lsp
+  :after lsp
+  :config
+  (pada/leader-key
+    "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")))
+
 ;; Actions on completion candidates
 (use-package embark
   :bind
@@ -467,12 +474,7 @@ This function is meant to be used by `evil-lookup'."
 ;; Project management
 (use-package project
   :config
-  (setq project-switch-commands
-        '((project-find-file "Find file")
-          (project-find-regexp "Find regexp")
-          (project-switch-to-buffer "Switch to buffer")
-          (project-dired "Dired")
-          (project-eshell "Eshell"))))
+  (setq project-switch-commands 'project-find-file))
 
 ;; Themes
 (use-package modus-themes
@@ -899,6 +901,11 @@ as a `:filter-result' advice."
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold))))
 
+(use-package magit-todos
+  :config
+  (setq magit-todos-branch-list nil)
+  :init (magit-todos-mode))
+
 ;; Better terminal emulator
 (use-package vterm
   :config
@@ -910,12 +917,18 @@ as a `:filter-result' advice."
 	 "C-SPC"    #'vterm--self-insert))
 
 ;; LSP
+(defun pada/lsp-consult-xref-setup ()
+  "Setup xref to use consult functions."
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref))
+
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
   ((js-mode typescript-mode tuareg-mode c-mode python-mode). lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
+  (lsp-mode . pada/lsp-consult-xref-setup)
   :config
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-enable nil
@@ -928,11 +941,14 @@ as a `:filter-result' advice."
         lsp-signature-render-documentation t
         lsp-log-io nil
         lsp-restart 'iteractive)
-  (general-define-key
-   :states 'normal
-   :keymaps 'lsp-mode-map
-   "gd" 'lsp-find-definition
-   "gr" '(lambda () (interactive) (lsp-find-references t)))
+  (general-define-key :states 'normal "gr" 'lsp-find-references)
+  (pada/leader-key
+    "l" '(:ignore t :which-key "LSP")
+    "lf" '(lsp-format-buffer :which-key "Format buffer")
+    "la" '(lsp-execute-code-action :which-key "Code actions")
+    "lh" '(lsp-describe-thing-at-point :which-key "Describe symbol at point")
+    "li" '(lsp-organize-imports :which-key "Organize imports")
+    "lr" '(lsp-rename :which-key "Rename"))
   :commands lsp)
 
 (use-package lsp-ui
@@ -941,11 +957,11 @@ as a `:filter-result' advice."
   (setq lsp-ui-doc-enable nil
         lsp-ui-doc-header nil
         lsp-ui-doc-include-signature t
-        lsp-ui-doc-border (face-foreground 'default)
+        lsp-ui-doc-delay 0
+        lsp-ui-doc-position 'at-point
         lsp-ui-peek-enable nil
         lsp-ui-imenu-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-doc-position 'at-point))
+        lsp-ui-sideline-enable nil))
 
 (use-package lsp-pyright
   :after lsp-mode)
