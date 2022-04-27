@@ -50,7 +50,7 @@ case $option in "Pywal")
 	else
 		case $selected in "Palenight")
 			name=base16-material-palenight
-			theme="base16-material-palenight"
+			theme=~/.config/wal/colorschemes/palenight
 			bg=~/.wal/palenight.jpg
 			;;
 		"Gruvbox")
@@ -81,7 +81,7 @@ case $option in "Pywal")
 		"Nord")
 			name=nord
 			theme=~/.config/wal/colorschemes/nord.json
-			bg=~/.wal/nordkanagawa.png
+			bg=~/.wal/nordmountain.jpeg
 			;;
 		"Catppuccin")
 			name=catppuccin

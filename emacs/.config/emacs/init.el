@@ -575,7 +575,7 @@ This function is meant to be used by `evil-lookup'."
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
@@ -1083,12 +1083,12 @@ as a `:filter-result' advice."
 
 (use-package hledger-mode
   :custom
-  (hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal")))
+  (hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal"))
+  (hledger-reporting-day 1))
 
 (use-package flycheck-ledger
   :after (flycheck ledger-mode))
 
-(use-package treemacs)
-(use-package treemacs-all-the-icons)
+(use-package web-mode)
 
 ;;; init.el ends here

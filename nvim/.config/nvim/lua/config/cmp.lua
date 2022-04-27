@@ -27,8 +27,8 @@ cmp.setup {
     { name = "latex_symbols" },
     { name = "ultisnips" },
   },
-  documentation = {
-    border = "single",
+  window = {
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
     format = require("lspkind").cmp_format {

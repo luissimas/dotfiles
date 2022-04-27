@@ -93,7 +93,6 @@ local M = {}
 
 if file then
   local theme = file:read()
-
   M.lualine_theme = lualine_theme[theme]
 
   vim.cmd("colorscheme " .. theme)
