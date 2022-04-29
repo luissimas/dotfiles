@@ -746,23 +746,27 @@ as a `:filter-result' advice."
 (use-package org
   :hook
   (org-mode . pada/org-mode-setup)
-  :custom
-  (org-hide-emphasis-markers t)
-  (org-pretty-entities t)
-  (org-return-follows-links t)
-  (org-link-file-path-type 'relative)
-  (org-display-remote-inline-images 'download)
-  (org-startup-with-inline-images t)
-  ;; We set the preview in `pada/org-mode-setup', since we can't set the font scale before org starts
-  (org-startup-with-latex-preview nil)
-  (org-cycle-level-faces nil)
-  (org-n-level-faces 4)
-  (org-image-actual-width nil)
-  (org-hidden-keywords '(title))
-  (org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory))
-  (org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")))
-  (org-agenda-files '("~/org"))
   :config
+  (setq org-hide-emphasis-markers t
+        org-pretty-entities t
+        org-return-follows-links t
+        org-link-file-path-type 'relative
+        org-display-remote-inline-images 'download
+        org-startup-with-inline-images t
+        org-startup-with-latex-preview nil ; We set the preview in `pada/org-mode-setup', since we can't set the font scale before org starts
+        org-cycle-level-faces nil
+        org-n-level-faces 4
+        org-image-actual-width nil
+        org-hidden-keywords '(title)
+        org-preview-latex-image-directory (expand-file-name "tmp/ltximg/" user-emacs-directory)
+        org-todo-keywords '((sequence "CURRENT(c)" "TODO(t)" "|" "DONE(d)"))
+        org-use-fast-todo-selection 'expert
+        org-agenda-files '("~/org")
+        org-agenda-start-with-log-mode t
+        org-log-done 'time
+        org-log-into-drawer t
+        org-tag-alist '(("work" . ?w) ("school" . ?s)))
+
   (add-to-list 'org-modules 'org-tempo)
   (add-to-list 'org-latex-packages-alist '("" "systeme" t))
 
@@ -802,7 +806,13 @@ as a `:filter-result' advice."
 
   (defun org-babel-edit-prep:python (babel-info)
     (setq-local buffer-file-name (->> babel-info caddr (alist-get :tangle)))
-    (lsp)))
+    (lsp))
+
+  (pada/leader-key
+    "o" '(:ignore t :which-key "Org")
+    "oa" '(org-agenda :which-key "Agenda")
+    "ot" '(org-todo :which-key "Toggle todo state")
+    "oq" '(org-set-tags-command :which-key "Insert tag")))
 
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
