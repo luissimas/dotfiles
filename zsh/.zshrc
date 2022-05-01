@@ -100,11 +100,14 @@ vterm_printf() {
 	fi
 }
 
-# Syntax highlighting
-source /usr/share/zsh-syntax-highlighting
-
-# Zsh-autosuggestions
-source /usr/share/zsh-autosuggestions
+# Syntax highlighting and autosuggestions
+if [ $(find /sys/class/power_supply -name "*BAT*") ]; then
+	source /usr/share/zsh-syntax-highlighting
+	source /usr/share/zsh-autosuggestions
+else
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # Accept autosuggestion
 bindkey '^ ' autosuggest-accept
