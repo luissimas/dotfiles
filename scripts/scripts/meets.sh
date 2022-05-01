@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 selected=$(echo -e "F4Y\nBD\nCN\nAlgLin\nEng. Software\nORI\nIA" | dmenu -i -p "Meet: ")
 

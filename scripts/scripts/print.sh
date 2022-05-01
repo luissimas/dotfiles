@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
 obsidianPath="/home/padawan/dox/vault/Attachments/"
 

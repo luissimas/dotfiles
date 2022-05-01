@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ -e "/sys/class/power_supply/BAT1" ]; then
+if [ -e "/sys/class/power_supply/BAT0" ]; then
   batteryStatus="$(cat /sys/class/power_supply/BAT*/status)"
   capacity="$(cat /sys/class/power_supply/BAT*/capacity)"
 

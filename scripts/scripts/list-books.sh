@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 booksDirectory=/home/padawan/dox/books
 

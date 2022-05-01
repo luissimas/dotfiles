@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 # Making sure that everything is up to date
 # pacman -Syu
 
-dotfilesdir=/home/padawan/dotfiles
+dotfilesdir=~/dotfiles
 
 cd $dotfilesdir
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Sync mirrors to check for updates
 sudo pacman -Sy > /dev/null 2>&1

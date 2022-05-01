@@ -54,15 +54,6 @@ zle -N zle-line-init
 echo -ne '\e[5 q'                # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 
-# FZF
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
-
-export FZF_COMPLETION_TRIGGER=''
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-bindkey '^F' fzf-file-widget
-
 # Aliases
 alias l='exa -l --no-user --time-style long-iso --icons'
 alias la='exa -la --no-user --time-style long-iso --icons'
@@ -110,16 +101,13 @@ vterm_printf() {
 }
 
 # Syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting
 
 # Zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-autosuggestions
 
 # Accept autosuggestion
 bindkey '^ ' autosuggest-accept
-
-# Tmuxp completion
-eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
 
 # Enable prompt
 autoload -U promptinit
@@ -143,6 +131,7 @@ SPACESHIP_DIR_LOCK_SYMBOL="  "
 SPACESHIP_EXEC_TIME_SHOW=true
 SPACESHIP_EXEC_TIME_ELAPSED=2
 SPACESHIP_VI_MODE_SHOW=false
+SPACESHIP_BATTERY_SHOW=false
 
 # Removing all package manager prompt stuff
 SPACESHIP_PACKAGE_SHOW=false
@@ -180,4 +169,6 @@ prompt spaceship
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh >/dev/null 2>/dev/null || true
 
 # If not in tmux or emacs, attach to session
-if [ -f $TMUX ] && [ -z $INSIDE_EMACS ]; then tmux attach; fi
+if [ -f $TMUX ] && [ -z $INSIDE_EMACS ]; then tmux attach 2>/dev/null; fi
+fpath=($fpath "/home/liven/.zfunctions")
+fpath=($fpath "/home/liven/.zfunctions")

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script was copied from https://github.com/Bugswriter/myyt and was modified for my own needs
 

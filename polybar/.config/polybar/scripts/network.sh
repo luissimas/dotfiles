@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ethStatus="$(cat /sys/class/net/enp*/operstate 2>/dev/null)"
 wifiStatus="$(cat /sys/class/net/w*/operstate 2>/dev/null)"

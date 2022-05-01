@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 option=$(echo -e 'Shutdown\nReboot' | dmenu -i -p "Power prompt")
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Laptop command
 volume="$(amixer get Master | grep 'Mono:' | awk '{print $4}' | tr -d '[%]')"

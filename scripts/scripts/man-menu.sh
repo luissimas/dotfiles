@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 selected=$(man -k . | awk '{print $1}' | dmenu -i -p "Select a man")
 

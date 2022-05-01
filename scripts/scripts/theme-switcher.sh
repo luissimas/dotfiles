@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-wallpaperDirectory=/home/padawan/.wal/
+wallpaperDirectory=~/.wal/
 
 # Prompt if the script should use the wallpaper or the themes
-option=$(echo -e 'Theme\nWallpaper\nPywal' | dmenu -i -p "Source")
+option=$(echo 'Theme\nWallpaper\nPywal' | dmenu -i -p "Source")
 
 case $option in "Pywal")
 	selected=$(ls $wallpaperDirectory | dmenu -i -p "Select a file")

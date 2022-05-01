@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 isLaptop="$(cat /sys/class/power_supply/BAT*/status 2>/dev/null)"
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 selected=$(pamixer --list-sinks | grep alsa | dmenu -i -p "Select output device" | awk '{print $1}')
 
