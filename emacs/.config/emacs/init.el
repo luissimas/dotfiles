@@ -1,6 +1,14 @@
-;; -*- lexical-binding: t; -*-
-;; Setting garbage colector threshold
 (setq gc-cons-threshold (* 100 1024 1024))
+
+(defun pada/display-startup-time ()
+  "Display the startup time for the current section."
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook 'pada/display-startup-time)
 
 (defun pada/display-startup-time ()
   "Display the startup time for the current section."
@@ -19,30 +27,28 @@
 (setq native-comp-async-report-warnings-errors nil
       warning-minimum-level :emergency)
 
-;; Setting custom directory
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p (concat user-emacs-directory "custom.el"))
   (load custom-file))
 
-;; Setting backup and auto-save directories
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups" user-emacs-directory))))
-
 (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
 
 (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves" user-emacs-directory) t)))
-
-(setq create-lockfiles nil)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves" user-emacs-directory) t))
+      backup-directory-alist `(("." . ,(expand-file-name "tmp/backups" user-emacs-directory)))
+      create-lockfiles nil)
 
 ;; Stop asking for following git symlink
 (setq vc-follow-symlinks t)
 
 ;; Prompts and confirmation
 (defalias 'yes-or-no-p 'y-or-n-p)
-;; (setq confirm-kill-emacs 'y-or-n-p)
 
 ;; Disable suggestion for keybindings in minibuffer
 (setq suggest-key-bindings nil)
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Disabling init screen
 (setq inhibit-startup-screen t
@@ -88,12 +94,6 @@
 ;; Delete trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Unique buffer name formats
-(setq uniquify-buffer-name-style 'forward)
-
-;; Column numbers
-(column-number-mode)
-
 ;; Remove truncation and continuation indicators
 (setq-default fringe-indicator-alist
               (assq-delete-all 'continuation
@@ -104,7 +104,9 @@
                             (setq display-line-numbers 'relative)
                             (toggle-truncate-lines 1)))
 
-;; Autopairs
+;; Unique buffer name formats
+(setq uniquify-buffer-name-style 'forward)
+
 (electric-pair-mode)
 
 ;; Desktop/Laptop distinction
@@ -119,27 +121,42 @@
 (defvar pada/variable-font-size (if (pada/is-laptop) 1.1 1.1))
 (defvar pada/variable-font-family "Fira Sans")
 
-;; Custom function to kill current buffer
-(defun pada/kill-current-buffer ()
-  "Kill the current buffer."
-  (interactive) (kill-buffer (current-buffer)))
-
-;; Custom find-file
-(defun pada/find-file ()
-  "Wrapper around `find-file'.  If the current file is in a project, use `project-find-file', otherwise use the built-in `find-file'."
+(defun pada/set-fonts ()
+  "Set the main font faces."
   (interactive)
-  (if (project-current)
-      (project-find-file)
-    (call-interactively 'find-file)))
+  (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
+  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height 1.0 :weight 'normal)
+  (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
 
-;; Theme utils
+(defvar pada/frame-parameters
+  '((no-special-glyphs t)
+    (internal-border-width 0)))
+
+(setq frame-resize-pixelwise t)
+
+(defun pada/set-frame-parameters ()
+  "Set the parameters defined in `pada/frame-parameters' for the current frame."
+  (interactive)
+  (dolist (parameter pada/frame-parameters)
+    (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
+
+;; Setting frame options in both daemon (with hooks) or on
+;; normal emacs startup (directly calling the functions)
+(if (daemonp)
+    (progn
+      (add-hook 'server-after-make-frame-hook 'pada/set-fonts)
+      (add-hook 'server-after-make-frame-hook 'pada/set-frame-parameters))
+  (progn
+    (pada/set-fonts)
+    (pada/set-frame-parameters)))
+
 (defun pada/load-theme (theme)
   "Improvement over the default `load-theme'.  Load THEME and disable all themes that were loaded before."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
                              (mapcar #'symbol-name
-				                             (custom-available-themes))))))
+                                     (custom-available-themes))))))
   (load-theme theme t)
   (dolist (theme (cdr custom-enabled-themes))
     (disable-theme theme)))
@@ -174,7 +191,100 @@
 ;; Load system theme on startup
 (add-hook 'emacs-startup-hook 'pada/load-system-theme)
 
-;; Straight setup
+(defgroup pada/open-external nil
+  "Open files with external commands."
+  :group 'files
+  :group 'processes)
+
+(defcustom pada/open-external-associations
+  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura")
+    ("\\.mkv\\'\\|\\.mp4\\'" "mpv"))
+  "A alist of association between file patterns and external programs."
+  :group 'open-external
+  :type "alist")
+
+(defun pada/run-shell-command (command)
+  "Run COMMAND in the default user shell."
+  (message command)
+  (start-process-shell-command "Open external process" nil (concat "exec nohup " command " >/dev/null")))
+
+(defun pada/open-external-advice (fun &rest args)
+  "Advice FUN with ARGS.
+Try to match filename in ARGS against patterns in `open-external-associations',
+if a pattern matches, then open the file using the specified command.  If no
+pattern matches, simply call FUN with ARGS.
+Note: This function is meant to be adviced around `find-file'."
+  (let ((file-name (car args))
+        (associations pada/open-external-associations)
+        (found nil))
+    (while associations
+      (let* ((current (pop associations))
+             (pattern (car current))
+             (program (car (cdr current))))
+        (when (string-match-p pattern file-name)
+          (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
+          (setq found t)
+          (setq associations nil))))
+    (unless found
+      (apply fun args))))
+
+(advice-add 'find-file :around 'pada/open-external-advice)
+
+;; Custom function to kill current buffer
+(defun pada/kill-current-buffer ()
+  "Kill the current buffer."
+  (interactive) (kill-buffer (current-buffer)))
+
+;; Custom find-file
+(defun pada/find-file ()
+  "Wrapper around `find-file'.  If the current file is in a project, use `project-find-file', otherwise use the built-in `find-file'."
+  (interactive)
+  (if (project-current)
+      (project-find-file)
+    (call-interactively 'find-file)))
+
+;; NOTE: I really need to understand all of this better
+(setq display-buffer-alist
+      '(("\\`\\*Calendar\\*\\'"
+         (display-buffer-below-selected))
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\)\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.3)
+         (side . bottom)
+         (slot . 0))
+        ("\\*\\(lsp-help\\|lsp-documentation\\)\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.2)
+         (side . bottom))
+        ("\\*\\([Hh]elp.*\\|info\\)\\*"
+         (display-buffer-in-side-window)
+         (window-width . 0.4)
+         (side . right)
+         (slot . 0))
+        ("\\*\\(.*e?shell\\|vterm\\)\\*"
+         (display-buffer-in-side-window)
+         (window-height . 0.3)
+         (side . bottom)
+         (slot . -1))
+        ("\\*Personal Finance\\*"
+         (display-buffer-in-side-window)
+         (window-width . 0.4)
+         (side . right)
+         (slot . 0))))
+
+(setq frame-auto-hide-function 'delete-frame)
+
+;; Always kill the buffer when quitting a window
+(global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
+(global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
+
+(defun pada/colorize-compilation-buffer ()
+  "Colorize compilation-buffer using `ansi-color'."
+  (when (eq major-mode 'compilation-mode)
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))
+
+(add-hook 'compilation-filter-hook 'pada/colorize-compilation-buffer)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -192,14 +302,16 @@
 
 (setq straight-use-package-by-default t)
 
-;; Setting up emacs path
+;; System path
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
 
-;; Keybindings
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; Making emacs search for binaries in node_modules
+(use-package add-node-modules-path
+  :hook
+  (js-mode . add-node-modules-path)
+  (typescript-mode . add-node-modules-path))
 
 (use-package general
   :after evil
@@ -265,7 +377,6 @@
    "M-k" 'enlarge-window
    "M-l" 'enlarge-window-horizontally))
 
-;; Evil-mode
 (defun pada/evil-lookup-func ()
   "Lookup contex-aware documentation for symbols.
 This function is meant to be used by `evil-lookup'."
@@ -324,7 +435,6 @@ This function is meant to be used by `evil-lookup'."
   :config
   (evil-collection-init))
 
-;; Undo tree
 (use-package undo-tree
   :ensure t
   :config
@@ -332,7 +442,6 @@ This function is meant to be used by `evil-lookup'."
         undo-tree-history-directory-alist `(("." . ,(expand-file-name "undo" user-emacs-directory))))
   (global-undo-tree-mode))
 
-;; Which key
 (use-package which-key
   :config
   (which-key-setup-minibuffer)
@@ -340,7 +449,6 @@ This function is meant to be used by `evil-lookup'."
   (setq which-key-add-column-padding 5)
   (which-key-mode))
 
-;; Helpful
 (use-package helpful
   :config
   (defvar read-symbol-positions-list nil)
@@ -350,385 +458,6 @@ This function is meant to be used by `evil-lookup'."
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
-;; Magit
-(use-package magit
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  :config
-  (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show)
-  (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle))
-
-;; Git gutter
-(use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
-  :custom
-  (git-gutter:update-interval 0.02))
-
-(use-package git-gutter-fringe
-  :after git-gutter
-  :custom
-  (fringes-outside-margins t)
-  :config
-  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
-
-;; Rainbow delimiters
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-;; Show colors
-(use-package rainbow-mode)
-
-;; Vertico as the completion UI
-(use-package vertico
-  :custom
-  (vertico-cycle t)
-  :config
-  ;; Using vertico-directory extension
-  (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
-  (require 'vertico-directory)
-  (general-define-key
-   :states '(normal insert)
-   :keymaps 'vertico-map
-   "C-j" 'vertico-next
-   "C-k" 'vertico-previous
-   "RET" 'vertico-directory-enter
-   "DEL" 'vertico-directory-delete-char)
-  (general-define-key
-   :states 'normal
-   :keymaps 'vertico-map
-   "<escape>" 'abort-minibuffers)
-  :init
-  (vertico-mode))
-
-;; Completion style
-(defun pada/orderless-literal-dispatcher (pattern _index _total)
-  "Literal style dispatcher for strings using the equal sign (`=') as a suffix."
-  (when (string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1))))
-
-(use-package orderless
-  :config
-  (setq completion-styles '(orderless)
-        completion-ignore-case t
-        read-file-name-completion-ignore-case t
-        read-buffer-completion-ignore-case t
-        orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)
-        orderless-style-dispatchers '(pada/orderless-literal-dispatcher)))
-
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist
-  :init
-  (savehist-mode))
-
-;; Richer completion annotations
-(use-package all-the-icons-completion
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
-
-(use-package marginalia
-  :after vertico
-  :bind (:map minibuffer-local-map
-              ("M-a" . marginalia-cycle))
-  :init
-  (marginalia-mode))
-
-;; Better completion commands
-(use-package consult
-  :bind (("C-x b" . consult-buffer)
-         ("C-s" . consult-line))
-  :config
-  (setq consult-narrow-key (kbd "C-.")
-        xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref
-        consult-project-root-function
-        (lambda ()
-          (when-let (project (project-current))
-            (car (project-roots project))))))
-
-(use-package consult-lsp
-  :after lsp
-  :config
-  (pada/leader-key
-    "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")))
-
-;; Actions on completion candidates
-(use-package embark
-  :bind
-  (("C-." . embark-act)
-   ("C-;" . embark-dwim)
-   ("C-h B" . embark-bindings))
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
-
-(use-package embark-consult
-  :ensure t
-  :after (embark consult)
-  :demand t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-;; Project management
-(use-package project
-  :config
-  (setq project-switch-commands 'project-find-file))
-
-;; Themes
-(use-package modus-themes
-  :straight nil
-  :init
-  (setq modus-themes-subtle-line-numbers t
-        modus-themes-mode-line nil))
-
-(use-package nano-theme)
-
-(use-package doom-themes
-  :custom
-  (doom-gruvbox-dark-variant "hard"))
-
-(use-package catppuccin
-  :straight '(:host github :repo "pspiagicw/catppuccin-emacs"))
-
-;; Icons
-(use-package all-the-icons
-  :custom
-  (all-the-icons-scale-factor 1))
-
-(use-package all-the-icons-dired
-  :requires all-the-icons
-  :ensure t
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-;; Better syntax highlight
-(use-package tree-sitter
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (global-tree-sitter-mode))
-
-(use-package tree-sitter-langs)
-
-;; At-point completion
-(use-package company
-  :hook (prog-mode . company-mode)
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
-  (company-tooltip-maximum-width 60)
-  (company-tooltip-minimum-width 60)
-  (company-tooltip-align-annotations t)
-  :config
-  ;; Unbinding default insert mappings
-  (general-define-key
-   :states 'insert
-   "C-j" nil
-   "C-k" nil)
-  (general-define-key
-   :states 'insert
-   :keymaps 'company-active-map
-   "C-j"  'company-select-next
-   "C-k"  'company-select-previous)
-  (general-define-key
-   :states 'insert
-   :keymaps 'company-mode-map
-   "C-SPC"  'company-complete))
-
-(use-package company-box
-  :custom
-  (company-box-scrollbar nil)
-  (company-box-doc-enable nil)
-  :hook
-  (company-mode . company-box-mode))
-
-;; Setting font faces
-(defun pada/set-fonts ()
-  "Set the main font faces."
-  (interactive)
-  (set-face-attribute 'default nil :font pada/default-font-family :height pada/default-font-size :weight 'normal)
-  (set-face-attribute 'fixed-pitch nil :font pada/default-font-family :height 1.0 :weight 'normal)
-  (set-face-attribute 'variable-pitch nil :font pada/variable-font-family :height pada/variable-font-size :weight 'light))
-
-;; Frame parameters
-(defvar pada/frame-parameters
-  '((no-special-glyphs t)
-    (internal-border-width 0)))
-
-(setq frame-resize-pixelwise t)
-
-(defun pada/set-frame-parameters ()
-  "Set the parameters defined in `pada/frame-parameters' for the current frame."
-  (interactive)
-  (dolist (parameter pada/frame-parameters)
-    (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
-
-;; Setting frame options in both daemon (with hooks) or on
-;; normal emacs startup (directly calling the functions)
-(if (daemonp)
-    (progn
-      (add-hook 'server-after-make-frame-hook 'pada/set-fonts)
-      (add-hook 'server-after-make-frame-hook 'pada/set-frame-parameters))
-  (progn
-    (pada/set-fonts)
-    (pada/set-frame-parameters)))
-
-;; NOTE: I really need to understand all of this better
-(setq display-buffer-alist
-      '(("\\`\\*Calendar\\*\\'"
-         (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\)\\*"
-         (display-buffer-in-side-window)
-         (window-height . 0.3)
-         (side . bottom)
-         (slot . 0))
-        ("\\*\\(lsp-help\\|lsp-documentation\\)\\*"
-         (display-buffer-in-side-window)
-         (window-height . 0.2)
-         (side . bottom))
-        ("\\*\\([Hh]elp.*\\|info\\)\\*"
-         (display-buffer-in-side-window)
-         (window-width . 0.4)
-         (side . right)
-         (slot . 0))
-        ("\\*\\(.*e?shell\\|vterm\\)\\*"
-         (display-buffer-in-side-window)
-         (window-height . 0.3)
-         (side . bottom)
-         (slot . -1))
-        ("\\*Personal Finance\\*"
-         (display-buffer-in-side-window)
-         (window-width . 0.4)
-         (side . right)
-         (slot . 0))))
-
-(setq frame-auto-hide-function 'delete-frame)
-
-;; Always kill the buffer when quitting a window
-(global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
-(global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
-
-;; Kill magit diff buffer after commit
-(defun pada/kill-magit-diff-buffer ()
-  "Kill the magit-diff-buffer for the current repository, This function is meant to be added on `git-commit-setup-hook'."
-  (defun kill-magit-diff-buffer ()
-    (kill-buffer (magit-get-mode-buffer 'magit-diff-mode)))
-  (add-hook 'with-editor-post-finish-hook 'kill-magit-diff-buffer nil t))
-
-(add-hook 'git-commit-setup-hook 'pada/kill-magit-diff-buffer)
-
-;; Opening files in external commands based on the filename
-(defgroup pada/open-external nil
-  "Open files with external commands."
-  :group 'files
-  :group 'processes)
-
-(defcustom pada/open-external-associations
-  '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura")
-    ("\\.mkv\\'\\|\\.mp4\\'" "mpv"))
-  "A alist of association between file patterns and external programs."
-  :group 'open-external
-  :type "alist")
-
-(defun pada/run-shell-command (command)
-  "Run COMMAND in the default user shell."
-  (message command)
-  (start-process-shell-command "Open external process" nil (concat "exec nohup " command " >/dev/null")))
-
-(defun pada/open-external-advice (fun &rest args)
-  "Advice FUN with ARGS.
-Try to match filename in ARGS against patterns in `open-external-associations',
-if a pattern matches, then open the file using the specified command.  If no
-pattern matches, simply call FUN with ARGS.
-Note: This function is meant to be adviced around `find-file'."
-  (let ((file-name (car args))
-        (associations pada/open-external-associations)
-        (found nil))
-    (while associations
-      (let* ((current (pop associations))
-             (pattern (car current))
-             (program (car (cdr current))))
-        (when (string-match-p pattern file-name)
-          (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
-          (setq found t)
-          (setq associations nil))))
-    (unless found
-      (apply fun args))))
-
-(advice-add 'find-file :around 'pada/open-external-advice)
-
-;; Font ligatures
-(use-package ligature
-  :straight '(:host github :repo "mickeynp/ligature.el")
-  :config
-  ;; Iosevka ligatures
-  (ligature-set-ligatures 'prog-mode
-                          '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "-->" "--->" "->-" ">-" ">>-"
-                            "=<<" "=<" "=<=" "<==" "<===" "<<=" "<=" "=>" "==>" "===>" "=>=" ">=" ">>="
-                            "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "<!--" "<!---"
-                            "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "<>" "===" "!=="
-                            ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
-                            "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
-  (global-ligature-mode))
-
-;; Mode line
-;; (setq evil-mode-line-format '(before . mode-line-front-space))
-(setq mode-line-defining-kbd-macro
-      (propertize " Recording macro..." 'face 'mode-line-emphasis))
-
-(defun pada/replace-vc-string (vc-string)
-  "Replace VC-STRING with a simpler and more pleasent representation.
-This function is meant to advise `vc-git-mode-line-string', particularly
-as a `:filter-result' advice."
-  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
-
-(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
-
-(setq-default mode-line-format
-              `("%e"
-                mode-line-front-space
-                mode-line-mule-info
-                mode-line-modified
-                " "
-                mode-line-buffer-identification
-                "    "
-                mode-line-position
-                "    "
-                (vc-mode vc-mode)
-                "    "
-                mode-line-modes
-                "    "
-                mode-line-misc-info
-                mode-line-end-spaces))
-
-(use-package minions
-  :custom
-  (minions-mode-line-lighter "")
-  (minions-mode-line-delimiters '("" . ""))
-  (minions-prominent-modes '(defining-kbd-macro))
-  :init
-  (minions-mode))
-
-
-;; Mode line (the easy route)
-;; (use-package doom-modeline
-;;   :config
-;;   (setq
-;;    doom-modeline-height 25
-;;    doom-modeline-bar-width 2
-;;    doom-modeline-minor-modes nil
-;;    doom-modeline-indent-info t
-;;    doom-modeline-buffer-encoding nil
-;;    doom-modeline-enable-word-count t
-;;    doom-modeline-buffer-file-name-style 'relative-to-project)
-;;   :init
-;;   (doom-modeline-mode))
-
-;; Time display format
-(setq display-time-format "%A %d %b, %H:%M")
-(setq display-time-default-load-average nil)
-
-;; Org mode
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (org-indent-mode)
@@ -765,7 +494,8 @@ as a `:filter-result' advice."
         org-agenda-start-with-log-mode t
         org-log-done 'time
         org-log-into-drawer t
-        org-tag-alist '(("work" . ?w) ("school" . ?s)))
+        org-tag-alist '(("work" . ?w) ("school" . ?s))
+        org-confirm-babel-evaluate nil)
 
   (add-to-list 'org-modules 'org-tempo)
   (add-to-list 'org-latex-packages-alist '("" "systeme" t))
@@ -873,13 +603,76 @@ as a `:filter-result' advice."
 (setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
 (add-hook 'post-command-hook 'org-inline-image-animate-auto)
 
-(use-package visual-fill-column
-  :hook (org-mode . visual-fill-column-mode)
-  :custom
-  (visual-fill-column-width 60)
-  (visual-fill-column-center-text t))
+(defun pada/org-start-presentation ()
+  "Start a Org presentation."
+  (interactive)
+  (org-tree-slide-play-with-timer)
+  (flyspell-mode 0)
+  (text-scale-mode 1))
 
-;; Code formatter
+(defun pada/org-end-presentation ()
+  "End a Org presentation."
+  (interactive)
+  (text-scale-mode 0)
+  (flyspell-mode 1)
+  (org-tree-slide-mode 0))
+
+;; Automatically tangle our Emacs.org config file when we save it
+(defun pada/org-babel-tangle-config ()
+  (when (string-equal (file-name-directory (file-truename (buffer-file-name)))
+                      (expand-file-name (file-truename user-emacs-directory)))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pada/org-babel-tangle-config)))
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  :config
+  (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show)
+  (define-key magit-section-mode-map (kbd "<tab>") 'magit-section-toggle)
+
+  ;; Kill magit diff buffer after commit
+  (defun pada/kill-magit-diff-buffer ()
+    "Kill the magit-diff-buffer for the current repository, This function is meant to be added on `git-commit-setup-hook'."
+    (defun kill-magit-diff-buffer ()
+      (kill-buffer (magit-get-mode-buffer 'magit-diff-mode)))
+    (add-hook 'with-editor-post-finish-hook 'kill-magit-diff-buffer nil t))
+
+  (add-hook 'git-commit-setup-hook 'pada/kill-magit-diff-buffer))
+
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :custom
+  (git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :custom
+  (fringes-outside-margins t)
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package rainbow-mode)
+
+(use-package tree-sitter
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+  :config
+  (global-tree-sitter-mode))
+
+(use-package tree-sitter-langs)
+
+(use-package project
+  :config
+  (setq project-switch-commands 'project-find-file))
+
 (use-package format-all
   :hook
   (prog-mode . format-all-mode)
@@ -887,18 +680,10 @@ as a `:filter-result' advice."
   :config
   (setq format-all-show-errors 'never))
 
-;; Setup tabs and other things for projects
 (use-package editorconfig
   :config
   (editorconfig-mode))
 
-;; Making emacs search for binaries in node_modules
-(use-package add-node-modules-path
-  :hook
-  (js-mode . add-node-modules-path)
-  (typescript-mode . add-node-modules-path))
-
-;; Highlight todo comments
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode)
   :config
@@ -916,17 +701,15 @@ as a `:filter-result' advice."
   (setq magit-todos-branch-list nil)
   :init (magit-todos-mode))
 
-;; Better terminal emulator
 (use-package vterm
   :config
   (general-define-key
    :states 'emacs
    :keymaps 'vterm-mode-map
-	 "C-c"      #'vterm--self-insert
-	 "C-d"      #'vterm--self-insert
-	 "C-SPC"    #'vterm--self-insert))
+   "C-c"      #'vterm--self-insert
+   "C-d"      #'vterm--self-insert
+   "C-SPC"    #'vterm--self-insert))
 
-;; LSP
 (defun pada/lsp-consult-xref-setup ()
   "Setup xref to use consult functions."
   (setq xref-show-xrefs-function #'consult-xref
@@ -986,14 +769,12 @@ as a `:filter-result' advice."
   (flycheck-check-syntax-automatically '(save idle-buffer-switch  idle-change mode-enabled))
   (flycheck-indication-mode 'left-margin))
 
-;; Documentation in echo area
 (use-package eldoc
   :custom
   (eldoc-echo-area-use-multiline-p nil)
   (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-current-idle-delay 0.2))
 
-;; Typescript
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook
@@ -1002,8 +783,253 @@ as a `:filter-result' advice."
   (js-indent-level 2)
   (typescript-indent-level 2))
 
-;; OCaml
 (use-package tuareg)
+
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+
+(use-package web-mode)
+
+(use-package vertico
+  :custom
+  (vertico-cycle t)
+  :config
+  ;; Using vertico-directory extension
+  (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
+  (require 'vertico-directory)
+  (general-define-key
+   :states '(normal insert)
+   :keymaps 'vertico-map
+   "C-j" 'vertico-next
+   "C-k" 'vertico-previous
+   "RET" 'vertico-directory-enter
+   "DEL" 'vertico-directory-delete-char)
+  (general-define-key
+   :states 'normal
+   :keymaps 'vertico-map
+   "<escape>" 'abort-minibuffers)
+  :init
+  (vertico-mode))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(defun pada/orderless-literal-dispatcher (pattern _index _total)
+  "Literal style dispatcher for strings using the equal sign (`=') as a suffix."
+  (when (string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1))))
+
+(use-package orderless
+  :config
+  (setq completion-styles '(orderless)
+        completion-ignore-case t
+        read-file-name-completion-ignore-case t
+        read-buffer-completion-ignore-case t
+        orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)
+        orderless-style-dispatchers '(pada/orderless-literal-dispatcher)))
+
+;; Richer completion annotations
+(use-package all-the-icons-completion
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+
+(use-package marginalia
+  :after vertico
+  :bind (:map minibuffer-local-map
+              ("M-a" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
+(use-package consult
+  :bind (("C-x b" . consult-buffer)
+         ("C-s" . consult-line))
+  :config
+  (setq consult-narrow-key (kbd "C-.")
+        xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref
+        consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project))))))
+
+(use-package consult-lsp
+  :after lsp
+  :config
+  (pada/leader-key
+    "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")))
+
+(use-package embark
+  :bind
+  (("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+;; Enable search and replace in embark buffers
+(use-package wgrep)
+
+(use-package company
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
+  (company-tooltip-maximum-width 60)
+  (company-tooltip-minimum-width 60)
+  (company-tooltip-align-annotations t)
+  :config
+  ;; Unbinding default insert mappings
+  (general-define-key
+   :states 'insert
+   "C-j" nil
+   "C-k" nil)
+  (general-define-key
+   :states 'insert
+   :keymaps 'company-active-map
+   "C-j"  'company-select-next
+   "C-k"  'company-select-previous)
+  (general-define-key
+   :states 'insert
+   :keymaps 'company-mode-map
+   "C-SPC"  'company-complete))
+
+(use-package company-box
+  :custom
+  (company-box-scrollbar nil)
+  (company-box-doc-enable nil)
+  :hook
+  (company-mode . company-box-mode))
+
+(use-package modus-themes
+  :straight nil
+  :init
+  (setq modus-themes-subtle-line-numbers t
+        modus-themes-mode-line nil))
+
+(use-package nano-theme)
+
+(use-package doom-themes
+  :custom
+  (doom-gruvbox-dark-variant "hard"))
+
+(use-package catppuccin
+  :straight '(:host github :repo "pspiagicw/catppuccin-emacs"))
+
+(use-package all-the-icons
+  :custom
+  (all-the-icons-scale-factor 1))
+
+(use-package all-the-icons-dired
+  :requires all-the-icons
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package ligature
+  :straight '(:host github :repo "mickeynp/ligature.el")
+  :config
+  ;; Iosevka ligatures
+  (ligature-set-ligatures 'prog-mode
+                          '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "-->" "--->" "->-" ">-" ">>-"
+                            "=<<" "=<" "=<=" "<==" "<===" "<<=" "<=" "=>" "==>" "===>" "=>=" ">=" ">>="
+                            "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "<!--" "<!---"
+                            "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "<>" "===" "!=="
+                            ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>" "__"
+                            "(* *)" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---" "<***>"))
+  (global-ligature-mode))
+
+;; (setq evil-mode-line-format '(before . mode-line-front-space))
+(setq mode-line-defining-kbd-macro
+      (propertize " Recording macro..." 'face 'mode-line-emphasis))
+
+(defun pada/replace-vc-string (vc-string)
+  "Replace VC-STRING with a simpler and more pleasent representation.
+This function is meant to advise `vc-git-mode-line-string', particularly
+as a `:filter-result' advice."
+  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
+
+(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
+
+(setq-default mode-line-format
+              `("%e"
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-modified
+                " "
+                mode-line-buffer-identification
+                "    "
+                mode-line-position
+                "    "
+                (vc-mode vc-mode)
+                "    "
+                mode-line-modes
+                "    "
+                mode-line-misc-info
+                mode-line-end-spaces))
+
+(use-package minions
+  :custom
+  (minions-mode-line-lighter "")
+  (minions-mode-line-delimiters '("" . ""))
+  (minions-prominent-modes '(defining-kbd-macro))
+  :init
+  (minions-mode))
+
+;; Time display format
+(setq display-time-format "%A %d %b, %H:%M")
+(setq display-time-default-load-average nil)
+
+;; (use-package doom-modeline
+;;   :config
+;;   (setq
+;;    doom-modeline-height 25
+;;    doom-modeline-bar-width 2
+;;    doom-modeline-minor-modes nil
+;;    doom-modeline-indent-info t
+;;    doom-modeline-buffer-encoding nil
+;;    doom-modeline-enable-word-count t
+;;    doom-modeline-buffer-file-name-style 'relative-to-project)
+;;   :init
+;;   (doom-modeline-mode))
+
+(use-package visual-fill-column
+  :hook (org-mode . visual-fill-column-mode)
+  :custom
+  (visual-fill-column-width 60)
+  (visual-fill-column-center-text t))
+
+(setq-default text-scale-mode-amount 3)
+
+(use-package default-text-scale
+  :config
+  (setq default-text-scale-amount 10)
+  (general-define-key
+   :keymaps 'default-text-scale-mode-map
+   "C-="  'default-text-scale-increase
+   "C--"  'default-text-scale-decrease)
+  :init
+  (default-text-scale-mode))
+
+(with-eval-after-load "ispell"
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pt_BR,en_US")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
+
+(use-package flyspell-correct
+  :config
+  (general-define-key :states 'insert :keymaps 'flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
 
 (use-package mpdel
   :config
@@ -1020,20 +1046,6 @@ as a `:filter-result' advice."
     "ms" '(pada/mpdel-toggle-shuffle :which-key "Toggle shuffle")
     "mb" '(mpdel-browser-open :which-key "Browse")))
 
-;; Spellcheck setup
-(with-eval-after-load "ispell"
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pt_BR,en_US")
-  ;; ispell-set-spellchecker-params has to be called
-  ;; before ispell-hunspell-add-multi-dic will work
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
-
-(use-package flyspell-correct
-  :config
-  (general-define-key :states 'insert :keymaps 'flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
-
-;; Markdown setup
 (use-package markdown-mode
   :hook
   (markdown-mode . flyspell-mode)
@@ -1053,47 +1065,6 @@ as a `:filter-result' advice."
   (markdown-mode . texfrag-mode)
   (latex-mode . texfrag-mode))
 
-;; Colorizing compilation buffer
-(defun pada/colorize-compilation-buffer ()
-  "Colorize compilation-buffer using `ansi-color'."
-  (when (eq major-mode 'compilation-mode)
-    (ansi-color-apply-on-region compilation-filter-start (point-max))))
-
-(add-hook 'compilation-filter-hook 'pada/colorize-compilation-buffer)
-
-;; Thanks Zoey :) https://github.com/zoedsoupe
-(defun pada/org-start-presentation ()
-  "Start a Org presentation."
-  (interactive)
-  (org-tree-slide-play-with-timer)
-  (flyspell-mode 0)
-  (text-scale-mode 1))
-
-(defun pada/org-end-presentation ()
-  "End a Org presentation."
-  (interactive)
-  (text-scale-mode 0)
-  (flyspell-mode 1)
-  (org-tree-slide-mode 0))
-
-(setq-default text-scale-mode-amount 3)
-
-(use-package default-text-scale
-  :config
-  (setq default-text-scale-amount 10)
-  (general-define-key
-   :keymaps 'default-text-scale-mode-map
-   "C-="  'default-text-scale-increase
-   "C--"  'default-text-scale-decrease)
-  :init
-  (default-text-scale-mode))
-
-;; Enable search and replace in embark buffers
-(use-package wgrep)
-
-(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
-
-;; Accounting tools
 (use-package ledger-mode
   :mode "\\.journal\\'"
   :hook (ledger-mode . flycheck-mode)
@@ -1114,7 +1085,3 @@ as a `:filter-result' advice."
 
 (use-package flycheck-ledger
   :after (flycheck ledger-mode))
-
-(use-package web-mode)
-
-;;; init.el ends here
