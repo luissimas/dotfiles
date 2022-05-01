@@ -1,8 +1,6 @@
 #!/bin/bash
 
-isLaptop="$(cat /sys/class/power_supply/BAT*/status 2>/dev/null)"
-
-if [ -z "$isLaptop" ]; then
+if [ $(find /sys/class/power_supply -name "*BAT*") ]; then
 	# Desktop
 	temp="$(sensors 2>/dev/null | grep Tctl | awk 'NR==1{printf "%d", $2}')"
 else
