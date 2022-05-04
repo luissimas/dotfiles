@@ -333,7 +333,7 @@ Note: This function is meant to be adviced around `find-file'."
     "ff" '(pada/find-file :which-key "Find file")
     "fg" '(consult-ripgrep :which-key "Grep")
     "fF" '(find-file :which-key "Find file in CWD")
-    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
+    "fc" '((lambda () (interactive) (find-file (expand-file-name "README.org" user-emacs-directory))) :which-key "Find config")
     "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
     "fs" '(save-buffer :which-key "Save file")
     "fS" '(write-file :which-key "Save file as...")
@@ -479,6 +479,7 @@ This function is meant to be used by `evil-lookup'."
   (setq org-hide-emphasis-markers t
         org-pretty-entities t
         org-return-follows-links t
+        org-startup-folded t
         org-link-file-path-type 'relative
         org-display-remote-inline-images 'download
         org-startup-with-inline-images t
@@ -741,6 +742,7 @@ This function is meant to be used by `evil-lookup'."
     "la" '(lsp-execute-code-action :which-key "Code actions")
     "lh" '(lsp-describe-thing-at-point :which-key "Describe symbol at point")
     "li" '(lsp-organize-imports :which-key "Organize imports")
+    "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")
     "lr" '(lsp-rename :which-key "Rename"))
   :commands lsp)
 

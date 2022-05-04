@@ -31,9 +31,9 @@ highlight = ${xrdb:foreground:#222}
 [bar/bar]
 enable-ipc=true
 height = 20
-width = 85%
-offset-x = 7.5%
-offset-y = 5
+width = 100%
+offset-x = 0%
+offset-y = 0
 radius = 0
 line-size = 2
 
