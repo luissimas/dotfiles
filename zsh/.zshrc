@@ -173,5 +173,3 @@ test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-ini
 
 # If not in tmux or emacs, attach to session
 if [ -f $TMUX ] && [ -z $INSIDE_EMACS ]; then tmux attach 2>/dev/null; fi
-fpath=($fpath "/home/liven/.zfunctions")
-fpath=($fpath "/home/liven/.zfunctions")

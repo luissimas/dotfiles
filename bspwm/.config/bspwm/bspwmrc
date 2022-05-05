@@ -8,7 +8,13 @@ pgrep -x sxhkd >/dev/null || sxhkd &
 ~/.config/polybar/launch.sh
 
 # bspc monitor -d Δ Θ Π Ψ Ω
-bspc monitor -d 1 2 3 4 5
+
+if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
+	bspc monitor DVI-D-0 -d 1 2 3 4 5
+	bspc monitor HDMI-0 -d 1 2 3 4 5
+else
+	bspc monitor -d 1 2 3 4 5
+fi
 
 bspc config border_width 0
 bspc config window_gap 0
@@ -27,3 +33,5 @@ bspc rule -a discord desktop=^5 state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a Emacs state=tiled
 bspc rule -a Float state=floating
+bspc rule -a dmenu monitor=^1
+bspc rule -a rofi monitor=^1

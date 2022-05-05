@@ -348,6 +348,7 @@ Note: This function is meant to be adviced around `find-file'."
     "bp" '(previous-buffer :which-key "Previous buffer")
     "bN" '(evil-buffer-new :which-key "New buffer")
     "br" '(revert-buffer :which-key "Revert buffer")
+    "bc" '(clone-indirect-buffer-other-window :which-key "Clone buffer")
 
     "g" '(:ignore t :which-key "Git")
     "gs" '(magit-status :which-key "Magit status")
