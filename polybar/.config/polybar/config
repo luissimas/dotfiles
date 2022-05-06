@@ -136,9 +136,10 @@ label-occupied = 
 ; label-occupied-underline = ${colors.foreground}
 label-occupied-padding = 1
 
-label-urgent = %name%
-label-urgent-background = ${colors.background}
-label-urgent-foreground = ${colors.foreground}
+label-urgent = 
+; label-urgent = %name%
+; label-urgent-background = ${colors.background}
+; label-urgent-foreground = ${colors.foreground}
 label-urgent-underline = ${colors.foreground}
 label-urgent-padding = 1
 
