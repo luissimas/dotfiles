@@ -278,6 +278,10 @@ Note: This function is meant to be adviced around `find-file'."
 (global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
 (global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
 
+;; Default compile command
+(setq compile-command "yarn dev")
+
+;; Colorize compilation buffers
 (defun pada/colorize-compilation-buffer ()
   "Colorize compilation-buffer using `ansi-color'."
   (when (eq major-mode 'compilation-mode)
@@ -325,6 +329,7 @@ Note: This function is meant to be adviced around `find-file'."
     "h" '(:keymap help-map :which-key "Help")
     "w" '(:keymap evil-window-map :which-key "Window")
     "wt" '(window-toggle-side-windows :which-key "Toggle side windows")
+    "wo" '(other-window :which-key "Other window")
 
     "x" '(execute-extended-command :which-key "M-x")
     "u" '(universal-argument :which-key "Universal argument")
@@ -625,6 +630,7 @@ This function is meant to be used by `evil-lookup'."
                       (expand-file-name (file-truename user-emacs-directory)))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
+      (call-interactively 'org-babel-remove-result-one-or-many)
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pada/org-babel-tangle-config)))
@@ -745,6 +751,8 @@ This function is meant to be used by `evil-lookup'."
     "li" '(lsp-organize-imports :which-key "Organize imports")
     "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")
     "lr" '(lsp-rename :which-key "Rename"))
+  ;; Disable creation on ts-server .log files
+  (setq lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr"))
   :commands lsp)
 
 (use-package lsp-ui
@@ -1021,6 +1029,28 @@ as a `:filter-result' advice."
    "C--"  'default-text-scale-decrease)
   :init
   (default-text-scale-mode))
+
+(use-package treemacs
+  :config
+  (setq treemacs-is-never-other-window t)
+  (defvar pada/treemacs-open nil)
+  (defun pada/treemacs ()
+    (interactive)
+    "Custom treemacs toggle function that runs `treemacs-display-current-project-exclusively' instead of simply `treemacs'."
+    (if (equal (treemacs-current-visibility) 'visible)
+        (treemacs)
+      (treemacs-display-current-project-exclusively)))
+
+  (pada/leader-key
+    "pt" '(pada/treemacs :which-key "Project tree")))
+
+(use-package treemacs-evil)
+
+(use-package treemacs-all-the-icons
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
+(use-package lsp-treemacs)
 
 (with-eval-after-load "ispell"
   (setq ispell-program-name "hunspell")
