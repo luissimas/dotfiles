@@ -772,6 +772,14 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 #+end_src
 
+*** Blamer
+#+begin_src emacs-lisp
+  (use-package blamer
+    :config
+    (global-blamer-mode)
+    (set-face-attribute 'blamer-face nil :inherit 'font-lock-comment-face))
+#+end_src
+
 ** Delimiters
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
