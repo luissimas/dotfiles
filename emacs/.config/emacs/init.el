@@ -1032,7 +1032,7 @@ as a `:filter-result' advice."
 
 (use-package treemacs
   :config
-  (setq treemacs-is-never-other-window t)
+  (setq treemacs-is-never-other-window nil)
   (defvar pada/treemacs-open nil)
   (defun pada/treemacs ()
     (interactive)

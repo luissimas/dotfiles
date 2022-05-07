@@ -14,7 +14,6 @@ bison
 bpytop
 brave-bin
 bspwm
-chromium-widevine
 clang
 colorpicker
 dbeaver
@@ -23,8 +22,6 @@ djvu2pdf
 dmenu
 dosfstools
 dunst
-efm-langserver
-elixir
 emacs-native-comp-git-enhanced
 exa
 fakeroot
@@ -47,11 +44,7 @@ inkscape
 inotify-tools
 insomnia-bin
 iw
-java8-openjfx
-jdk8-openjdk
 jq
-jre8-openjdk
-jre8-openjdk-headless
 kitty
 latex-mk
 latin-words
@@ -65,8 +58,6 @@ linux-headers
 logmein-hamachi
 lsof
 lua
-lua-language-server
-luarocks
 lxappearance
 m4
 mailspring
@@ -130,7 +121,6 @@ redis
 redshift
 ripgrep
 rofi
-rstudio-desktop-bin
 scrot
 sfml
 shellcheck
@@ -139,7 +129,6 @@ spaceship-prompt-git
 stow
 strace
 streamlink-git
-stylua-bin
 sudo
 sxhkd
 sxiv
@@ -161,7 +150,6 @@ tk
 tldr
 tllocalmgr-git
 tmux
-tmuxp
 tree
 tree-sitter
 ttc-iosevka
@@ -236,8 +224,6 @@ xorg-xwininfo
 xorg-xwud
 xournalpp
 xsel
-yay-git
-youtube-dl
 zathura
 zathura-djvu
 zathura-pdf-mupdf

@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup {
-  ensure_installed = "maintained",
+  ensure_installed = {"c", "lua", "elixir", "ocaml", "erlang", "haskell", "html", "javascript", "jsdoc", "json", "latex", "ocaml_interface", "org", "python", "regex", "typescript", "vim"},
   highlight = {
     enable = true,
   },

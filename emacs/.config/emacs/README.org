@@ -1225,7 +1225,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+begin_src emacs-lisp
   (use-package treemacs
     :config
-    (setq treemacs-is-never-other-window t)
+    (setq treemacs-is-never-other-window nil)
     (defvar pada/treemacs-open nil)
     (defun pada/treemacs ()
       (interactive)
