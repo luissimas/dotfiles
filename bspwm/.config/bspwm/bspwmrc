@@ -26,12 +26,12 @@ bspc config gapless_monocle false
 bspc config focus_follows_pointer true
 
 # Rules
-bspc rule -a qutebrowser desktop=^6
-bspc rule -a Brave-browser desktop=^7
+bspc rule -a qutebrowser desktop=6
+bspc rule -a Brave-browser desktop=7
 bspc rule -a Steam state=floating
-bspc rule -a discord desktop=^8 state=floating
+bspc rule -a discord desktop=8 state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a Emacs state=tiled
 bspc rule -a Float state=floating
-bspc rule -a dmenu monitor=^1
-bspc rule -a rofi monitor=^1
+bspc rule -a dmenu monitor=1
+bspc rule -a rofi monitor=1
