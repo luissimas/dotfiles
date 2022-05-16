@@ -1,7 +1,6 @@
 {
   // Theme
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "Nord",
   "workbench.iconTheme": "material-icon-theme",
 
   // Font
@@ -30,43 +29,21 @@
   "vim.hlsearch": true,
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
-  "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
-    { "before": ["L"], "after": ["$"] },
-    { "before": ["H"], "after": ["0"] },
     {
-      "before": ["<leader>", "f", "f"],
-      "commands": ["workbench.action.quickOpen"]
+      "before": ["L"],
+      "after": ["$"],
+      "recursive": false
     },
     {
-      "before": ["<leader>", "f", "s"],
-      "commands": ["workbench.action.files.save"]
-    },
-    {
-      "before": ["<leader>", "w", "q"],
-      "commands": ["workbench.action.closeActiveEditor"]
-    },
-    {
-      "before": ["<leader>", "w", "h"],
-      "commands": ["workbench.action.focusLeftGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "l"],
-      "commands": ["workbench.action.focusRightGroup"]
-    },
-    {
-      "before": ["<leader>", "w", "v"],
-      "commands": ["workbench.action.splitEditor"]
-    },
-    {
-      "before": ["<leader>", "x"],
-      "commands": ["workbench.action.showCommands"]
-    },
-    {
-      "before": ["<leader>", "t"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "before": ["H"],
+      "after": ["0"],
+      "recursive": false
     }
   ],
+
+  // Which-key
+  "whichkey.delay": 500,
 
   // Formatting
   "editor.formatOnSave": true,
@@ -75,6 +52,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
 
   // File tree
   "explorer.compactFolders": false,
@@ -104,7 +87,6 @@
 
   // Gitlens
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.currentLine.enabled": false,
   "gitlens.defaultDateFormat": "DD/MM/YYYY, H:mm",
   "gitlens.defaultDateShortFormat": "DD/MM/YYYY",
   "gitlens.defaultTimeFormat": "H:mm",
@@ -113,7 +95,6 @@
   "color-highlight.markRuler": false,
   "color-highlight.enable": false,
   "sync.autoDownload": true,
-  "jsync.autoUpload": true,
   "sync.quietSync": true,
   "material-icon-theme.hidesExplorerArrows": true,
   "files.associations": {
@@ -163,16 +144,29 @@
   },
 
   // Misc
-  "vscode-neovim.useCtrlKeysForNormalMode": true,
-  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
-  "bracket-pair-colorizer-2.showVerticalScopeLine": false,
   "cSpell.language": "en,pt-BR",
-  "bracket-pair-colorizer-2.depreciation-notice": false,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "scm.diffDecorations": "none",
   "scm.diffDecorationsGutterAction": "none",
   "git.autofetch": true,
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "Palenight Theme",
+  "projectManager.git.baseFolders": ["~/liven", "~/cati"],
+  "gitlens.codeLens.enabled": false,
+  "vim.easymotion": true,
+  "editor.renderWhitespace": "none",
+  "customizeUI.stylesheet": {
+    ":root": "--tab-height: 10px; --font-size-tab-title: 13px;",
+    ".editor-actions": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .tab": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .monaco-icon-label": "height: var(--tab-height) !important; line-height: var(--tab-height) !important; font-size: var(--font-size-tab-title); !important",
+    ".tabs-container .monaco-icon-label:before": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .tab-actions": "display: none; !important",
+    ".tabs-container .monaco-icon-description-container": "display: none;"
+  }
 }
