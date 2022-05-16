@@ -29,7 +29,33 @@
   "vim.hlsearch": true,
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [" "],
+      "commands": ["whichkey.show"],
+      "recursive": false
+    },
+    {
+      "before": ["<space>"],
+      "commands": ["vspacecode.space"]
+    },
+    {
+      "before": [","],
+      "commands": [
+        "vspacecode.space",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "m"
+        }
+      ]
+    }
+  ],
   "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [" "],
+      "commands": ["whichkey.show"],
+      "recursive": false
+    },
     {
       "before": ["L"],
       "after": ["$"],
@@ -39,10 +65,82 @@
       "before": ["H"],
       "after": ["0"],
       "recursive": false
+    },
+    {
+      "before": ["\\", "f", "f"],
+      "commands": ["workbench.action.quickOpen"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "f", "s"],
+      "commands": ["workbench.action.files.save"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "w", "q"],
+      "commands": ["workbench.action.closeActiveEditor"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "w", "h"],
+      "commands": ["workbench.action.focusLeftGroup"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "w", "l"],
+      "commands": ["workbench.action.focusRightGroup"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "w", "v"],
+      "commands": ["workbench.action.splitEditor"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "x"],
+      "commands": ["workbench.action.showCommands"],
+      "recursive": false
+    },
+    {
+      "before": ["\\", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"],
+      "recursive": false
+    },
+    {
+      "before": ["y", "s"],
+      "after": ["<plugys>"],
+      "recursive": false
+    },
+    {
+      "before": ["y", "s", "s"],
+      "after": ["<plugys>", "<plugys>"],
+      "recursive": false
+    },
+    {
+      "before": ["c", "s"],
+      "after": ["<plugcs>"],
+      "recursive": false
+    },
+    {
+      "before": ["d", "s"],
+      "after": ["<plugds>"],
+      "recursive": false
+    },
+    {
+      "before": ["<space>"],
+      "commands": ["vspacecode.space"]
+    },
+    {
+      "before": [","],
+      "commands": [
+        "vspacecode.space",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "m"
+        }
+      ]
     }
   ],
-
-  // Which-key
   "whichkey.delay": 500,
 
   // Formatting
@@ -159,14 +257,5 @@
   "projectManager.git.baseFolders": ["~/liven", "~/cati"],
   "gitlens.codeLens.enabled": false,
   "vim.easymotion": true,
-  "editor.renderWhitespace": "none",
-  "customizeUI.stylesheet": {
-    ":root": "--tab-height: 10px; --font-size-tab-title: 13px;",
-    ".editor-actions": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .tab": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .monaco-icon-label": "height: var(--tab-height) !important; line-height: var(--tab-height) !important; font-size: var(--font-size-tab-title); !important",
-    ".tabs-container .monaco-icon-label:before": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .tab-actions": "display: none; !important",
-    ".tabs-container .monaco-icon-description-container": "display: none;"
-  }
+  "editor.renderWhitespace": "none"
 }
