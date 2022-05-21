@@ -29,6 +29,9 @@
     - [X] Keybindings
   - [X] Project.el
     - [X] Basic setup
+  - [X] Perspective.el
+  - [ ] Projectile
+  - [ ] Popper.el
   - [-] TODO Comments
     - [X] Highlight [[https://github.com/tarsius/hl-todo]]
     - [X] Magit buffer [[https://github.com/alphapapa/magit-todos]]

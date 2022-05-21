@@ -274,6 +274,14 @@ Note: This function is meant to be adviced around `find-file'."
 
 (setq frame-auto-hide-function 'delete-frame)
 
+;; Making new buffers use reuse the same window
+(customize-set-variable 'display-buffer-base-action
+                        '((display-buffer-reuse-window display-buffer-same-window)
+                          (reusable-frames . t)))
+
+;; Avoid automatic window resizing
+(customize-set-variable 'even-window-sizes nil)
+
 ;; Always kill the buffer when quitting a window
 (global-set-key [remap quit-window] '(lambda () (interactive) (quit-window t)))
 (global-set-key [remap magit-mode-bury-buffer] '(lambda () (interactive) (magit-mode-bury-buffer t)))
@@ -347,7 +355,7 @@ Note: This function is meant to be adviced around `find-file'."
     "bb" '(consult-buffer :which-key "Switch buffer")
     "bk" '(pada/kill-current-buffer :which-key "Kill current buffer")
     "bK" '(kill-buffer :which-key "Kill buffer")
-    "bi" '(ibuffer :which-key "Ibuffer")
+    "bi" '(persp-ibuffer :which-key "Ibuffer")
     "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
     "bn" '(next-buffer :which-key "Next buffer")
     "bp" '(previous-buffer :which-key "Previous buffer")
@@ -367,6 +375,8 @@ Note: This function is meant to be adviced around `find-file'."
     ;; "p!" 'project-shell-command
     "pa" 'project-async-shell-command
     "p&" nil
+
+    "y" '(:keymap perspective-map :which-key "Perspective")
 
     "t" '(:ignote t :which-key "Toggle")
     "tt" '(pada/load-theme :which-key "Theme")
@@ -463,6 +473,14 @@ This function is meant to be used by `evil-lookup'."
   ([remap describe-variable] . helpful-variable)
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
+
+(use-package perspective
+  :config
+  (consult-customize consult--source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source)
+  (setq persp-sort 'created
+        persp-modestring-short nil)
+  (persp-mode))
 
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
