@@ -401,6 +401,15 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (typescript-mode . add-node-modules-path))
 #+end_src
 
+** Perspective.el
+#+begin_src emacs-lisp
+  (use-package perspective
+    :config
+    (setq persp-sort 'created
+          persp-modestring-short nil)
+    (persp-mode))
+#+end_src
+
 ** Keybindings
 *** General.el
 #+begin_src emacs-lisp
@@ -565,17 +574,6 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     ([remap describe-variable] . helpful-variable)
     ([remap describe-command] . helpful-command)
     ([remap describe-key] . helpful-key))
-#+end_src
-
-** Perspective.el
-#+begin_src emacs-lisp
-  (use-package perspective
-    :config
-    (consult-customize consult--source-buffer :hidden t :default nil)
-    (add-to-list 'consult-buffer-sources persp-consult-source)
-    (setq persp-sort 'created
-          persp-modestring-short nil)
-    (persp-mode))
 #+end_src
 
 * Org-mode

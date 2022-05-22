@@ -325,6 +325,12 @@ Note: This function is meant to be adviced around `find-file'."
   (js-mode . add-node-modules-path)
   (typescript-mode . add-node-modules-path))
 
+(use-package perspective
+  :config
+  (setq persp-sort 'created
+        persp-modestring-short nil)
+  (persp-mode))
+
 (use-package general
   :after evil
   :config
@@ -473,14 +479,6 @@ This function is meant to be used by `evil-lookup'."
   ([remap describe-variable] . helpful-variable)
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
-
-(use-package perspective
-  :config
-  (consult-customize consult--source-buffer :hidden t :default nil)
-  (add-to-list 'consult-buffer-sources persp-consult-source)
-  (setq persp-sort 'created
-        persp-modestring-short nil)
-  (persp-mode))
 
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
