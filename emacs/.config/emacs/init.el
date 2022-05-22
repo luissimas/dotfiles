@@ -881,7 +881,11 @@ This function is meant to be used by `evil-lookup'."
         consult-project-root-function
         (lambda ()
           (when-let (project (project-current))
-            (car (project-roots project))))))
+            (car (project-roots project)))))
+
+  ;; Perspective.el integration
+  (consult-customize consult--source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source))
 
 (use-package consult-lsp
   :after lsp
