@@ -247,7 +247,7 @@ Note: This function is meant to be adviced around `find-file'."
 (setq display-buffer-alist
       '(("\\`\\*Calendar\\*\\'"
          (display-buffer-below-selected))
-        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\)\\*"
+        ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\|exunit-compilation\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
@@ -325,12 +325,6 @@ Note: This function is meant to be adviced around `find-file'."
   (js-mode . add-node-modules-path)
   (typescript-mode . add-node-modules-path))
 
-(use-package perspective
-  :config
-  (setq persp-sort 'created
-        persp-modestring-short nil)
-  (persp-mode))
-
 (use-package general
   :after evil
   :config
@@ -361,7 +355,7 @@ Note: This function is meant to be adviced around `find-file'."
     "bb" '(consult-buffer :which-key "Switch buffer")
     "bk" '(pada/kill-current-buffer :which-key "Kill current buffer")
     "bK" '(kill-buffer :which-key "Kill buffer")
-    "bi" '(persp-ibuffer :which-key "Ibuffer")
+    "bi" '(ibuffer :which-key "Ibuffer")
     "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
     "bn" '(next-buffer :which-key "Next buffer")
     "bp" '(previous-buffer :which-key "Previous buffer")
@@ -382,7 +376,7 @@ Note: This function is meant to be adviced around `find-file'."
     "pa" 'project-async-shell-command
     "p&" nil
 
-    "y" '(:keymap perspective-map :which-key "Perspective")
+    ;; "SPC" '(:keymap perspective-map :which-key "Perspective")
 
     "t" '(:ignote t :which-key "Toggle")
     "tt" '(pada/load-theme :which-key "Theme")
@@ -744,13 +738,18 @@ This function is meant to be used by `evil-lookup'."
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref))
 
+(defun pada/lsp-corfu-setup ()
+  (setq-local completion-styles '(orderless)
+              completion-category-defaults nil))
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-completion-provider :none)
   :hook
-  ((js-mode typescript-mode tuareg-mode c-mode python-mode). lsp-deferred)
+  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode). lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . pada/lsp-consult-xref-setup)
+  (lsp-mode . pada/lsp-corfu-setup)
   :config
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-enable nil
@@ -783,6 +782,7 @@ This function is meant to be used by `evil-lookup'."
         lsp-ui-doc-header nil
         lsp-ui-doc-include-signature t
         lsp-ui-doc-delay 0
+        lsp-ui-doc-max-height 50
         lsp-ui-doc-position 'at-point
         lsp-ui-peek-enable nil
         lsp-ui-imenu-enable nil
@@ -820,6 +820,15 @@ This function is meant to be used by `evil-lookup'."
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 (use-package web-mode)
+
+(use-package elixir-mode)
+
+(use-package exunit
+  :hook (elixir-mode . exunit-mode))
+
+(use-package yasnippet)
+
+(use-package yasnippet-snippets)
 
 (use-package vertico
   :custom
@@ -881,11 +890,7 @@ This function is meant to be used by `evil-lookup'."
         consult-project-root-function
         (lambda ()
           (when-let (project (project-current))
-            (car (project-roots project)))))
-
-  ;; Perspective.el integration
-  (consult-customize consult--source-buffer :hidden t :default nil)
-  (add-to-list 'consult-buffer-sources persp-consult-source))
+            (car (project-roots project))))))
 
 (use-package consult-lsp
   :after lsp
@@ -915,36 +920,42 @@ This function is meant to be used by `evil-lookup'."
 ;; Enable search and replace in embark buffers
 (use-package wgrep)
 
-(use-package company
-  :hook (prog-mode . company-mode)
+(use-package corfu
   :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
-  (company-tooltip-maximum-width 60)
-  (company-tooltip-minimum-width 60)
-  (company-tooltip-align-annotations t)
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 1)
+  (corfu-quit-at-boundary t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current nil)
+  (corfu-preselect-first t)
+  (corfu-bar-width 0)
+  (corfu-min-width 40)
+  (corfu-max-width 80)
+  (corfu-left-margin-width 0.1)
+  (corfu-right-margin-width 0.1)
   :config
   ;; Unbinding default insert mappings
   (general-define-key
-   :states 'insert
    "C-j" nil
    "C-k" nil)
   (general-define-key
    :states 'insert
-   :keymaps 'company-active-map
-   "C-j"  'company-select-next
-   "C-k"  'company-select-previous)
+   "C-SPC" 'completion-at-point)
   (general-define-key
-   :states 'insert
-   :keymaps 'company-mode-map
-   "C-SPC"  'company-complete))
+   :keymaps 'corfu-map
+   "C-j" 'corfu-next
+   "C-k" 'corfu-previous
+   "C-h" 'corfu-show-documentation)
+  :init
+  (global-corfu-mode))
 
-(use-package company-box
-  :custom
-  (company-box-scrollbar nil)
-  (company-box-doc-enable nil)
-  :hook
-  (company-mode . company-box-mode))
+(use-package cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-ispell))
 
 (use-package modus-themes
   :straight nil

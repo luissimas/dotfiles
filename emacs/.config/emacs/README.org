@@ -312,7 +312,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
   (setq display-buffer-alist
         '(("\\`\\*Calendar\\*\\'"
            (display-buffer-below-selected))
-          ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\)\\*"
+          ("\\*\\(Backtrace\\|Warnings\\|Compile-Log\\|compilation\\|Messages\\|Async Shell Command\\|Python\\|prolog\\|SQL:.*\\|exunit-compilation\\)\\*"
            (display-buffer-in-side-window)
            (window-height . 0.3)
            (side . bottom)
@@ -402,7 +402,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+end_src
 
 ** Perspective.el
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package perspective
     :config
     (setq persp-sort 'created
@@ -443,7 +443,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
       "bb" '(consult-buffer :which-key "Switch buffer")
       "bk" '(pada/kill-current-buffer :which-key "Kill current buffer")
       "bK" '(kill-buffer :which-key "Kill buffer")
-      "bi" '(persp-ibuffer :which-key "Ibuffer")
+      "bi" '(ibuffer :which-key "Ibuffer")
       "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
       "bn" '(next-buffer :which-key "Next buffer")
       "bp" '(previous-buffer :which-key "Previous buffer")
@@ -464,7 +464,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
       "pa" 'project-async-shell-command
       "p&" nil
 
-      "y" '(:keymap perspective-map :which-key "Perspective")
+      ;; "SPC" '(:keymap perspective-map :which-key "Perspective")
 
       "t" '(:ignote t :which-key "Toggle")
       "tt" '(pada/load-theme :which-key "Theme")
@@ -874,19 +874,25 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+end_src
 
 ** LSP
+*** lsp-mode
 #+begin_src emacs-lisp
   (defun pada/lsp-consult-xref-setup ()
     "Setup xref to use consult functions."
     (setq xref-show-xrefs-function #'consult-xref
           xref-show-definitions-function #'consult-xref))
 
+  (defun pada/lsp-corfu-setup ()
+    (setq-local completion-styles '(orderless)
+                completion-category-defaults nil))
   (use-package lsp-mode
     :init
     (setq lsp-keymap-prefix "C-c l")
+    (setq lsp-completion-provider :none)
     :hook
-    ((js-mode typescript-mode tuareg-mode c-mode python-mode). lsp-deferred)
+    ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode). lsp-deferred)
     (lsp-mode . lsp-enable-which-key-integration)
     (lsp-mode . pada/lsp-consult-xref-setup)
+    (lsp-mode . pada/lsp-corfu-setup)
     :config
     (setq read-process-output-max (* 1024 1024)
           lsp-headerline-breadcrumb-enable nil
@@ -919,6 +925,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
           lsp-ui-doc-header nil
           lsp-ui-doc-include-signature t
           lsp-ui-doc-delay 0
+          lsp-ui-doc-max-height 50
           lsp-ui-doc-position 'at-point
           lsp-ui-peek-enable nil
           lsp-ui-imenu-enable nil
@@ -926,6 +933,21 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
   (use-package lsp-pyright
     :after lsp-mode)
+#+end_src
+
+*** lsp-bridge
+#+begin_src emacs-lisp :tangle no
+  (add-to-list 'load-path "~/.config/emacs/lsp-bridge")
+
+  (require 'lsp-bridge)
+  (setq lsp-bridge-completion-provider 'corfu)
+  (require 'lsp-bridge-icon)        ;; show icons for completion items, optional
+  (require 'lsp-bridge-orderless)   ;; make lsp-bridge support fuzzy match, optional
+  (global-lsp-bridge-mode)
+
+  ;; For Xref support
+  (add-hook 'lsp-bridge-mode-hook (lambda ()
+                                    (add-hook 'xref-backend-functions #'lsp-bridge-xref-backend nil t)))
 #+end_src
 
 ** Syntax checking
@@ -975,6 +997,21 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 *** HTML + CSS
 #+begin_src emacs-lisp
   (use-package web-mode)
+#+end_src
+
+*** Elixir
+#+begin_src emacs-lisp
+  (use-package elixir-mode)
+
+  (use-package exunit
+    :hook (elixir-mode . exunit-mode))
+#+end_src
+
+** Snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet)
+
+  (use-package yasnippet-snippets)
 #+end_src
 
 * Completion UI
@@ -1049,11 +1086,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
           consult-project-root-function
           (lambda ()
             (when-let (project (project-current))
-              (car (project-roots project)))))
-
-    ;; Perspective.el integration
-    (consult-customize consult--source-buffer :hidden t :default nil)
-    (add-to-list 'consult-buffer-sources persp-consult-source))
+              (car (project-roots project))))))
 
   (use-package consult-lsp
     :after lsp
@@ -1088,7 +1121,8 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+end_src
 
 ** At-point completion
-#+begin_src emacs-lisp
+*** Company
+#+begin_src emacs-lisp :tangle no
   (use-package company
     :hook (prog-mode . company-mode)
     :custom
@@ -1119,6 +1153,46 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (company-box-doc-enable nil)
     :hook
     (company-mode . company-box-mode))
+#+end_src
+
+*** Corfu
+#+begin_src emacs-lisp
+  (use-package corfu
+    :custom
+    (corfu-cycle t)
+    (corfu-auto t)
+    (corfu-auto-delay 0.2)
+    (corfu-auto-prefix 1)
+    (corfu-quit-at-boundary t)
+    (corfu-quit-no-match t)
+    (corfu-preview-current nil)
+    (corfu-preselect-first t)
+    (corfu-bar-width 0)
+    (corfu-min-width 40)
+    (corfu-max-width 80)
+    (corfu-left-margin-width 0.1)
+    (corfu-right-margin-width 0.1)
+    :config
+    ;; Unbinding default insert mappings
+    (general-define-key
+     "C-j" nil
+     "C-k" nil)
+    (general-define-key
+     :states 'insert
+     "C-SPC" 'completion-at-point)
+    (general-define-key
+     :keymaps 'corfu-map
+     "C-j" 'corfu-next
+     "C-k" 'corfu-previous
+     "C-h" 'corfu-show-documentation)
+    :init
+    (global-corfu-mode))
+
+  (use-package cape
+    :init
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-tex)
+    (add-to-list 'completion-at-point-functions #'cape-ispell))
 #+end_src
 
 * UI Enhancements
