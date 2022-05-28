@@ -21,7 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 13 :weight 'semi-light)
+(setq doom-font (font-spec :family "Iosevka Padawan" :size 13 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Padawan" :size 24 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -85,7 +86,11 @@
         :n "L" 'evil-end-of-line))
 
 ;; Fringe width
-(set-fringe-mode '(1 . 0))
+(after! git-gutter-fringe
+  (set-fringe-mode '(1 . 0)))
+
+;; Removing def from prettify-symbols
+(plist-delete! +ligatures-extra-symbols :def)
 
 ;; Scroll offset
 (setq! scroll-margin 8)
@@ -104,6 +109,21 @@
 ;; Projectile
 (setq! projectile-project-search-path '(("~/fun" . 2) "~/liven" "~/cati"))
 
+;; Persp-mode
+(map! :leader :map doom-leader-workspace-map
+      (:prefix-map ("TAB" . "workspace")
+       :desc "Display tab bar"           "TAB" #'+workspace/display
+       :desc "Switch workspace"          "s"   #'+workspace/switch-to
+       :desc "Switch to last workspace"  "l"   #'+workspace/other
+       :desc "New workspace"             "n"   #'+workspace/new-named
+       :desc "New unnamed workspace"     "N"   #'+workspace/new
+       :desc "Load workspace from file"  "L"   #'+workspace/load
+       :desc "Save workspace to file"    "S"   #'+workspace/save
+       :desc "Delete session"            "x"   #'+workspace/kill-session
+       :desc "Delete this workspace"     "k"   #'+workspace/delete
+       :desc "Rename workspace"          "r"   #'+workspace/rename
+       :desc "Restore last session"      "R"   #'+workspace/restore-last-session))
+
 ;; Disabling hl-line-mode
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
@@ -117,7 +137,21 @@
 (after! format-all
   (setq! +format-on-save-enabled-modes '(not tex-mode
                                              latex-mode
-                                             org-msg-edit-mode)))
+                                             org-msg-edit-mode)
+         format-all-show-errors 'never))
+
+;; LSP
+(after! lsp-mode
+  ;; Disable creation on ts-server .log files
+  (setq! lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")
+         lsp-auto-guess-root t
+         lsp-signature-doc-lines 1
+         lsp-ui-sideline-enable nil
+         lsp-lens-enable nil))
+
+;; Flycheck
+(after! flycheck-credo
+  (setq! flycheck-elixir-credo-strict t))
 
 ;; Unique buffer name formats
 (setq! uniquify-buffer-name-style 'forward)
@@ -153,7 +187,8 @@
   :config
   (setq! hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal")
          hledger-reporting-day 1)
-  (map! :leader :map hledger-mode-map
+  (map! :map hledger-mode-map
+        :localleader
         :desc "Hledger report" "mr"  #'hledger-run-command))
 
 ;; Open files in external programs
