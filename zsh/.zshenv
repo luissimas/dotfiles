@@ -5,6 +5,7 @@ export PATH=$HOME/.config/bspwm/scripts:$PATH
 export PATH=$HOME/.config/polybar/scripts:$PATH
 export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/.npm-packages/bin:$PATH
+export PATH=$HOME/repos/doom/bin:$PATH
 export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
 export LEDGER_FILE=$HOME/dox/accounting/accounting.journal
