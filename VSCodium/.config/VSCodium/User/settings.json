@@ -8,9 +8,6 @@
   "editor.fontWeight": 400,
   "editor.fontLigatures": true,
   "editor.fontSize": 13,
-
-  // Editor
-  "workbench.editor.showTabs": false,
   "editor.mouseWheelZoom": true,
   "editor.renderLineHighlight": "none",
   "breadcrumbs.enabled": false,
@@ -18,6 +15,8 @@
   "editor.lineNumbers": "relative",
   "editor.semanticHighlighting.enabled": true,
   "editor.minimap.enabled": false,
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
   "editor.occurrencesHighlight": false,
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
@@ -142,6 +141,75 @@
     }
   ],
   "whichkey.delay": 500,
+  "vspacecode.bindingOverrides": [
+    {
+      "keys": "t",
+      "name": "+Toggles",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "e",
+          "name": "Toggle side bar visibility",
+          "type": "command",
+          "command": "workbench.action.toggleSidebarVisibility"
+        },
+        {
+          "key": "c",
+          "name": "Toggle centered layout",
+          "type": "command",
+          "command": "workbench.action.toggleCenteredLayout"
+        },
+        {
+          "key": "i",
+          "name": "Select icon theme",
+          "type": "command",
+          "command": "workbench.action.selectIconTheme"
+        },
+        {
+          "key": "j",
+          "name": "Toggle panel visibility",
+          "type": "command",
+          "command": "workbench.action.togglePanel"
+        },
+        {
+          "key": "m",
+          "name": "Toggle maximized panel",
+          "type": "command",
+          "command": "workbench.action.toggleMaximizedPanel"
+        },
+        {
+          "key": "s",
+          "name": "Select theme",
+          "type": "command",
+          "command": "workbench.action.selectTheme"
+        },
+        {
+          "key": "t",
+          "name": "Toggle tool/activity bar visibility",
+          "type": "command",
+          "command": "workbench.action.toggleActivityBarVisibility"
+        },
+        {
+          "key": "z",
+          "name": "Toggle zen mode",
+          "type": "command",
+          "command": "workbench.action.toggleZenMode"
+        },
+        {
+          "key": "F",
+          "name": "Toggle full screen",
+          "type": "command",
+          "command": "workbench.action.toggleFullScreen"
+        },
+        {
+          "key": "T",
+          "name": "Toggle tab visibility",
+          "type": "command",
+          "command": "workbench.action.toggleTabsVisibility"
+        }
+      ]
+    }
+  ],
 
   // Formatting
   "editor.formatOnSave": true,
@@ -246,7 +314,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "scm.diffDecorations": "none",
+  "scm.diffDecorations": "gutter",
   "scm.diffDecorationsGutterAction": "none",
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -257,5 +325,6 @@
   "projectManager.git.baseFolders": ["~/liven", "~/cati"],
   "gitlens.codeLens.enabled": false,
   "vim.easymotion": true,
-  "editor.renderWhitespace": "none"
+  "editor.renderWhitespace": "none",
+  "workbench.editor.showTabs": false
 }

@@ -11,6 +11,7 @@ settings:
     https://www.catarinense.com.br: false
     https://www.centauro.com.br: false
     https://www.google.com: false
+    https://www.viacaocometa.com.br: false
     https://www.zapimoveis.com.br: false
   content.media.audio_video_capture:
     https://meet.google.com: false
