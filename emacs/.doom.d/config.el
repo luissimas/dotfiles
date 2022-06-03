@@ -33,7 +33,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+
+;; doom-plain doom-moonlight doom-tomorrow-night
+(setq doom-theme 'doom-tomorrow-night)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -85,12 +87,16 @@
   (map! :n "H" 'evil-beginning-of-line
         :n "L" 'evil-end-of-line))
 
+;; Unique buffer name formats
+(setq! uniquify-buffer-name-style 'forward)
+
 ;; Fringe width
 (after! git-gutter-fringe
   (set-fringe-mode '(1 . 0)))
 
 ;; Removing def from prettify-symbols
 (plist-delete! +ligatures-extra-symbols :def)
+(plist-delete! +ligatures-extra-symbols :not)
 
 ;; Scroll offset
 (setq! scroll-margin 8)
@@ -107,7 +113,10 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Projectile
-(setq! projectile-project-search-path '(("~/fun" . 2) "~/liven" "~/cati"))
+(after! projectile
+  (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2))
+         projectile-enable-caching nil
+         projectile-indexing-method 'hybrid))
 
 ;; Persp-mode
 (map! :leader :map doom-leader-workspace-map
@@ -134,20 +143,23 @@
         :i "C-SPC" #'company-complete))
 
 ;; Formatting
+(setq! +format-on-save-enabled-modes '(not tex-mode
+                                           latex-mode
+                                           org-msg-edit-mode))
 (after! format-all
-  (setq! +format-on-save-enabled-modes '(not tex-mode
-                                             latex-mode
-                                             org-msg-edit-mode)
-         format-all-show-errors 'never))
+  (setq! format-all-show-errors 'never
+         +format-with-lsp nil))
 
 ;; LSP
 (after! lsp-mode
   ;; Disable creation on ts-server .log files
-  (setq! lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")
-         lsp-auto-guess-root t
+  (setq! lsp-auto-guess-root t
          lsp-signature-doc-lines 1
          lsp-ui-sideline-enable nil
-         lsp-lens-enable nil))
+         lsp-lens-enable t
+         lsp-elixir-suggest-specs nil
+         lsp-elixir-dialyzer-enabled nil
+         lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")))
 
 ;; Flycheck
 (after! flycheck-credo
@@ -169,7 +181,9 @@
 
 ;; Consult
 (after! consult
-  (map! :n "C-s" #'consult-line))
+  (map! :n "C-s" #'consult-line)
+  (map! :leader
+        :desc "Grep" "fg" #'consult-ripgrep))
 
 ;; Orderless
 (after! orderless
