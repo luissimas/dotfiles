@@ -138,17 +138,18 @@
 
 ;; Company
 (after! company
-  (setq company-box-scrollbar nil)
+  (setq! company-box-scrollbar nil
+         company-minimum-prefix-length 1
+         copany-idle-delay 0.0)
   (map! :map company-mode-map
         :i "C-SPC" #'company-complete))
 
 ;; Formatting
 (setq! +format-on-save-enabled-modes '(not tex-mode
                                            latex-mode
-                                           org-msg-edit-mode))
-(after! format-all
-  (setq! format-all-show-errors 'never
-         +format-with-lsp nil))
+                                           org-msg-edit-mode)
+       format-all-show-errors 'never
+       +format-with-lsp nil)
 
 ;; LSP
 (after! lsp-mode
@@ -164,9 +165,6 @@
 ;; Flycheck
 (after! flycheck-credo
   (setq! flycheck-elixir-credo-strict t))
-
-;; Unique buffer name formats
-(setq! uniquify-buffer-name-style 'forward)
 
 ;; Magit
 (after! magit
@@ -188,6 +186,11 @@
 ;; Orderless
 (after! orderless
   (setq! orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
+
+;; Themes
+(after! modus-themes
+  (setq! modus-themes-subtle-line-numbers t
+        modus-themes-mode-line nil))
 
 ;; Ledger
 (use-package! ledger-mode
