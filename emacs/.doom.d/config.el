@@ -84,8 +84,8 @@
   (setq +evil-want-o/O-to-continue-comments nil
         evil-want-minibuffer t
         evil-shift-width 2)
-  (map! :n "H" 'evil-beginning-of-line
-        :n "L" 'evil-end-of-line))
+  (map! :nv "H" 'evil-beginning-of-line
+        :nv "L" 'evil-end-of-line))
 
 ;; Unique buffer name formats
 (setq! uniquify-buffer-name-style 'forward)
@@ -190,7 +190,7 @@
 ;; Themes
 (after! modus-themes
   (setq! modus-themes-subtle-line-numbers t
-        modus-themes-mode-line nil))
+         modus-themes-mode-line nil))
 
 ;; Ledger
 (use-package! ledger-mode
