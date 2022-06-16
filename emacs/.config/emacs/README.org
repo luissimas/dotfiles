@@ -807,8 +807,9 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 *** Blamer
 #+begin_src emacs-lisp
   (use-package blamer
+    :hook
+    (prog-mode . blamer-mode)
     :config
-    (global-blamer-mode)
     (set-face-attribute 'blamer-face nil :inherit 'font-lock-comment-face))
 #+end_src
 

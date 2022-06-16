@@ -686,8 +686,9 @@ This function is meant to be used by `evil-lookup'."
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 (use-package blamer
+  :hook
+  (prog-mode . blamer-mode)
   :config
-  (global-blamer-mode)
   (set-face-attribute 'blamer-face nil :inherit 'font-lock-comment-face))
 
 (use-package rainbow-delimiters
