@@ -325,6 +325,12 @@ Note: This function is meant to be adviced around `find-file'."
   (js-mode . add-node-modules-path)
   (typescript-mode . add-node-modules-path))
 
+(use-package persp-mode
+  :config
+  (setq perp-autokill-buffer-on-remove 'kill-weak)
+  :init
+  (persp-mode))
+
 (use-package general
   :after evil
   :config
@@ -350,6 +356,9 @@ Note: This function is meant to be adviced around `find-file'."
     "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
     "fs" '(save-buffer :which-key "Save file")
     "fS" '(write-file :which-key "Save file as...")
+
+    "s" '(:ignote t :which-key "Search")
+    "ss" '(consult-line :which-key "Search line")
 
     "b" '(:ignore t :which-key "Buffer")
     "bb" '(consult-buffer :which-key "Switch buffer")
@@ -383,7 +392,8 @@ Note: This function is meant to be adviced around `find-file'."
     "tf" '(flycheck-mode :which-key "Flycheck")
     "tg" '(git-gutter-mode :which-key "Git gutter")
     "tm" '(doom-modeline-mode :which-key "Doom modeline")
-    "tr" '(rainbow-mode :which-key "Rainbow"))
+    "tr" '(rainbow-mode :which-key "Rainbow")
+    "tb" '(text-scale-mode :which-key "Big font"))
 
   ;; Window resizing
   ;; TODO: Replace it with a hydra
@@ -961,7 +971,8 @@ This function is meant to be used by `evil-lookup'."
   :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
-        modus-themes-mode-line nil))
+        modus-themes-mode-line '(borderless)
+        modus-themes-org-blocks 'gray-background))
 
 (use-package nano-theme)
 

@@ -88,7 +88,13 @@
         :n "L" 'evil-end-of-line))
 
 ;; Unique buffer name formats
-(setq! uniquify-buffer-name-style 'forward)
+;; doom's `persp-mode' activation disables uniquify, b/c it says it breaks it.
+;; It doesn't cause big enough problems for me to worry about it, so we override
+;; the override. `persp-mode' is activated in the `doom-init-ui-hook', so we add
+;; another hook at the end of the list of hooks to set our uniquify values.
+(add-hook! 'doom-init-ui-hook
+           :append ;; ensure it gets added to the end.
+           #'(lambda () (require 'uniquify) (setq uniquify-buffer-name-style 'forward)))
 
 ;; Fringe width
 (after! git-gutter-fringe
@@ -97,6 +103,9 @@
 ;; Removing def from prettify-symbols
 (plist-delete! +ligatures-extra-symbols :def)
 (plist-delete! +ligatures-extra-symbols :not)
+
+;; Treemacs icon theme
+(setq! doom-themes-treemacs-theme "doom-colors")
 
 ;; Scroll offset
 (setq! scroll-margin 8)
@@ -191,6 +200,9 @@
 (after! modus-themes
   (setq! modus-themes-subtle-line-numbers t
         modus-themes-mode-line nil))
+
+(after! ispell
+  (setq! ispell-dictionary  "pt_BR,en_US"))
 
 ;; Ledger
 (use-package! ledger-mode

@@ -410,6 +410,15 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (persp-mode))
 #+end_src
 
+** Persp-mode
+#+begin_src emacs-lisp
+  (use-package persp-mode
+    :config
+    (setq perp-autokill-buffer-on-remove 'kill-weak)
+    :init
+    (persp-mode))
+#+end_src
+
 ** Keybindings
 *** General.el
 #+begin_src emacs-lisp
@@ -438,6 +447,9 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
       "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
       "fs" '(save-buffer :which-key "Save file")
       "fS" '(write-file :which-key "Save file as...")
+
+      "s" '(:ignote t :which-key "Search")
+      "ss" '(consult-line :which-key "Search line")
 
       "b" '(:ignore t :which-key "Buffer")
       "bb" '(consult-buffer :which-key "Switch buffer")
@@ -471,7 +483,8 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
       "tf" '(flycheck-mode :which-key "Flycheck")
       "tg" '(git-gutter-mode :which-key "Git gutter")
       "tm" '(doom-modeline-mode :which-key "Doom modeline")
-      "tr" '(rainbow-mode :which-key "Rainbow"))
+      "tr" '(rainbow-mode :which-key "Rainbow")
+      "tb" '(text-scale-mode :which-key "Big font"))
 
     ;; Window resizing
     ;; TODO: Replace it with a hydra
@@ -749,6 +762,9 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pada/org-babel-tangle-config)))
 #+end_src
+
+#+RESULTS:
+| org-tempo-setup | visual-fill-column-mode | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | (lambda nil (add-hook 'after-save-hook #'pada/org-babel-tangle-config)) | evil-org-mode | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-superstar-mode | org-fragtog-mode | org-appear-mode | pada/org-mode-setup |
 
 * Development
 ** Git
@@ -1202,7 +1218,8 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     :straight nil
     :init
     (setq modus-themes-subtle-line-numbers t
-          modus-themes-mode-line nil))
+          modus-themes-mode-line '(borderless)
+          modus-themes-org-blocks 'gray-background))
 
   (use-package nano-theme)
 
