@@ -439,10 +439,11 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
       "x" '(execute-extended-command :which-key "M-x")
       "u" '(universal-argument :which-key "Universal argument")
 
+      "SPC" '(pada/find-file :which-key "Find file in project")
+
       "f" '(:ignore t :which-key "Find")
-      "ff" '(pada/find-file :which-key "Find file")
+      "ff" '(find-file :which-key "Find file")
       "fg" '(consult-ripgrep :which-key "Grep")
-      "fF" '(find-file :which-key "Find file in CWD")
       "fc" '((lambda () (interactive) (find-file (expand-file-name "README.org" user-emacs-directory))) :which-key "Find config")
       "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
       "fs" '(save-buffer :which-key "Save file")
@@ -706,36 +707,36 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (set-face-attribute 'org-superstar-item nil :font pada/default-font-family :height 1.2)
     (set-face-attribute 'org-superstar-header-bullet nil :font pada/default-font-family :height 1.2))
 
+  ;; ;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
+  ;; (defun org-inline-image--get-current-image ()
+  ;;   "Return the overlay associated with the image under point."
+  ;;   (car (--select (eq (overlay-get it 'org-image-overlay) t) (overlays-at (point)))))
+
+  ;; (defun org-inline-image--get (prop)
+  ;;   "Return the value of property PROP for image under point."
+  ;;   (let ((image (org-inline-image--get-current-image)))
+  ;;     (when image
+  ;;       (overlay-get image prop))))
+
+  ;; (defun org-inline-image-animate ()
+  ;;   "Animate the image if it's possible."
+  ;;   (interactive)
+  ;;   (let ((image-props (org-inline-image--get 'display)))
+  ;;     (when (image-multi-frame-p image-props)
+  ;;       (image-animate image-props))))
+
+  ;; (defun org-inline-image-animate-auto ()
+  ;;   (interactive)
+  ;;   (when (eq 'org-mode major-mode)
+  ;;     (while-no-input
+  ;;       (run-with-idle-timer 0.3 nil 'org-inline-image-animate))))
+
+  ;; (setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
+  ;; (setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
+  ;; (add-hook 'post-command-hook 'org-inline-image-animate-auto)
+
   ;; Presentation
   (use-package org-tree-slide)
-
-  ;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
-  (defun org-inline-image--get-current-image ()
-    "Return the overlay associated with the image under point."
-    (car (--select (eq (overlay-get it 'org-image-overlay) t) (overlays-at (point)))))
-
-  (defun org-inline-image--get (prop)
-    "Return the value of property PROP for image under point."
-    (let ((image (org-inline-image--get-current-image)))
-      (when image
-        (overlay-get image prop))))
-
-  (defun org-inline-image-animate ()
-    "Animate the image if it's possible."
-    (interactive)
-    (let ((image-props (org-inline-image--get 'display)))
-      (when (image-multi-frame-p image-props)
-        (image-animate image-props))))
-
-  (defun org-inline-image-animate-auto ()
-    (interactive)
-    (when (eq 'org-mode major-mode)
-      (while-no-input
-        (run-with-idle-timer 0.3 nil 'org-inline-image-animate))))
-
-  (setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
-  (setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
-  (add-hook 'post-command-hook 'org-inline-image-animate-auto)
 
   (defun pada/org-start-presentation ()
     "Start a Org presentation."
@@ -762,9 +763,6 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pada/org-babel-tangle-config)))
 #+end_src
-
-#+RESULTS:
-| org-tempo-setup | visual-fill-column-mode | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | (lambda nil (add-hook 'after-save-hook #'pada/org-babel-tangle-config)) | evil-org-mode | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-superstar-mode | org-fragtog-mode | org-appear-mode | pada/org-mode-setup |
 
 * Development
 ** Git
@@ -1139,12 +1137,12 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
 ** At-point completion
 *** Company
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (use-package company
     :hook (prog-mode . company-mode)
     :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0)
+    (company-minimum-prefix-length 2)
+    (company-idle-delay 0.1)
     (company-tooltip-maximum-width 60)
     (company-tooltip-minimum-width 60)
     (company-tooltip-align-annotations t)
@@ -1173,13 +1171,13 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+end_src
 
 *** Corfu
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package corfu
     :custom
     (corfu-cycle t)
     (corfu-auto t)
     (corfu-auto-delay 0.2)
-    (corfu-auto-prefix 1)
+    (corfu-auto-prefix 2)
     (corfu-quit-at-boundary t)
     (corfu-quit-no-match t)
     (corfu-preview-current nil)
@@ -1220,7 +1218,8 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     :init
     (setq modus-themes-subtle-line-numbers t
           modus-themes-mode-line '(borderless)
-          modus-themes-org-blocks 'gray-background))
+          modus-themes-org-blocks 'gray-background
+          modus-themes-hl-line '(accented)))
 
   (use-package nano-theme)
 
@@ -1274,6 +1273,9 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
   (advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
 
+  (setq column-number-mode 1
+        line-number-mode 1)
+
   (setq-default mode-line-format
                 `("%e"
                   mode-line-front-space
@@ -1302,19 +1304,21 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
   ;; Time display format
   (setq display-time-format "%A %d %b, %H:%M")
   (setq display-time-default-load-average nil)
+#+end_src
 
-  ;; (use-package doom-modeline
-  ;;   :config
-  ;;   (setq
-  ;;    doom-modeline-height 25
-  ;;    doom-modeline-bar-width 2
-  ;;    doom-modeline-minor-modes nil
-  ;;    doom-modeline-indent-info t
-  ;;    doom-modeline-buffer-encoding nil
-  ;;    doom-modeline-enable-word-count t
-  ;;    doom-modeline-buffer-file-name-style 'relative-to-project)
-  ;;   :init
-  ;;   (doom-modeline-mode))
+#+begin_src emacs-lisp :tangle no
+  (use-package doom-modeline
+    :config
+    (setq
+     doom-modeline-height 25
+     doom-modeline-bar-width 2
+     doom-modeline-minor-modes nil
+     doom-modeline-indent-info t
+     doom-modeline-buffer-encoding nil
+     doom-modeline-enable-word-count t
+     doom-modeline-buffer-file-name-style 'relative-to-project)
+    :init
+    (doom-modeline-mode))
 #+end_src
 
 ** Centralizing buffer contents
@@ -1444,4 +1448,20 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 
   (use-package flycheck-ledger
     :after (flycheck ledger-mode))
+#+end_src
+
+** Todoist
+#+begin_src emacs-lisp
+  (use-package todoist
+    :config
+    (setq todoist-token "34fecf43ddf18e94a13c68821ec5f84bac2e2bbb"))
+#+end_src
+
+** Denote
+#+begin_src emacs-lisp
+  (use-package denote
+    :straight '(:host github :repo "protesilaos/denote")
+    :config
+    (setq denote-directory (expand-file-name "~/dox/notes")
+          denote-known-keywords '("ufscar" "computer science" "language")))
 #+end_src

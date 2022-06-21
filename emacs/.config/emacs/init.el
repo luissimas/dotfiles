@@ -348,10 +348,11 @@ Note: This function is meant to be adviced around `find-file'."
     "x" '(execute-extended-command :which-key "M-x")
     "u" '(universal-argument :which-key "Universal argument")
 
+    "SPC" '(pada/find-file :which-key "Find file in project")
+
     "f" '(:ignore t :which-key "Find")
-    "ff" '(pada/find-file :which-key "Find file")
+    "ff" '(find-file :which-key "Find file")
     "fg" '(consult-ripgrep :which-key "Grep")
-    "fF" '(find-file :which-key "Find file in CWD")
     "fc" '((lambda () (interactive) (find-file (expand-file-name "README.org" user-emacs-directory))) :which-key "Find config")
     "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
     "fs" '(save-buffer :which-key "Save file")
@@ -599,36 +600,36 @@ This function is meant to be used by `evil-lookup'."
   (set-face-attribute 'org-superstar-item nil :font pada/default-font-family :height 1.2)
   (set-face-attribute 'org-superstar-header-bullet nil :font pada/default-font-family :height 1.2))
 
+;; ;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
+;; (defun org-inline-image--get-current-image ()
+;;   "Return the overlay associated with the image under point."
+;;   (car (--select (eq (overlay-get it 'org-image-overlay) t) (overlays-at (point)))))
+
+;; (defun org-inline-image--get (prop)
+;;   "Return the value of property PROP for image under point."
+;;   (let ((image (org-inline-image--get-current-image)))
+;;     (when image
+;;       (overlay-get image prop))))
+
+;; (defun org-inline-image-animate ()
+;;   "Animate the image if it's possible."
+;;   (interactive)
+;;   (let ((image-props (org-inline-image--get 'display)))
+;;     (when (image-multi-frame-p image-props)
+;;       (image-animate image-props))))
+
+;; (defun org-inline-image-animate-auto ()
+;;   (interactive)
+;;   (when (eq 'org-mode major-mode)
+;;     (while-no-input
+;;       (run-with-idle-timer 0.3 nil 'org-inline-image-animate))))
+
+;; (setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
+;; (setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
+;; (add-hook 'post-command-hook 'org-inline-image-animate-auto)
+
 ;; Presentation
 (use-package org-tree-slide)
-
-;; Animate inline gifs source: https://ivanaf.com/animating_gifs_in_orgmode.html
-(defun org-inline-image--get-current-image ()
-  "Return the overlay associated with the image under point."
-  (car (--select (eq (overlay-get it 'org-image-overlay) t) (overlays-at (point)))))
-
-(defun org-inline-image--get (prop)
-  "Return the value of property PROP for image under point."
-  (let ((image (org-inline-image--get-current-image)))
-    (when image
-      (overlay-get image prop))))
-
-(defun org-inline-image-animate ()
-  "Animate the image if it's possible."
-  (interactive)
-  (let ((image-props (org-inline-image--get 'display)))
-    (when (image-multi-frame-p image-props)
-      (image-animate image-props))))
-
-(defun org-inline-image-animate-auto ()
-  (interactive)
-  (when (eq 'org-mode major-mode)
-    (while-no-input
-      (run-with-idle-timer 0.3 nil 'org-inline-image-animate))))
-
-(setq org-inline-image--get-current-image (byte-compile 'org-inline-image--get-current-image))
-(setq org-inline-image-animate  (byte-compile 'org-inline-image-animate ))
-(add-hook 'post-command-hook 'org-inline-image-animate-auto)
 
 (defun pada/org-start-presentation ()
   "Start a Org presentation."
@@ -931,49 +932,44 @@ This function is meant to be used by `evil-lookup'."
 ;; Enable search and replace in embark buffers
 (use-package wgrep)
 
-(use-package corfu
+(use-package company
+  :hook (prog-mode . company-mode)
   :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-auto-delay 0.2)
-  (corfu-auto-prefix 1)
-  (corfu-quit-at-boundary t)
-  (corfu-quit-no-match t)
-  (corfu-preview-current nil)
-  (corfu-preselect-first t)
-  (corfu-bar-width 0)
-  (corfu-min-width 40)
-  (corfu-max-width 80)
-  (corfu-left-margin-width 0.1)
-  (corfu-right-margin-width 0.1)
+  (company-minimum-prefix-length 2)
+  (company-idle-delay 0.1)
+  (company-tooltip-maximum-width 60)
+  (company-tooltip-minimum-width 60)
+  (company-tooltip-align-annotations t)
   :config
   ;; Unbinding default insert mappings
   (general-define-key
+   :states 'insert
    "C-j" nil
    "C-k" nil)
   (general-define-key
    :states 'insert
-   "C-SPC" 'completion-at-point)
+   :keymaps 'company-active-map
+   "C-j"  'company-select-next
+   "C-k"  'company-select-previous)
   (general-define-key
-   :keymaps 'corfu-map
-   "C-j" 'corfu-next
-   "C-k" 'corfu-previous
-   "C-h" 'corfu-show-documentation)
-  :init
-  (global-corfu-mode))
+   :states 'insert
+   :keymaps 'company-mode-map
+   "C-SPC"  'company-complete))
 
-(use-package cape
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-ispell))
+(use-package company-box
+  :custom
+  (company-box-scrollbar nil)
+  (company-box-doc-enable nil)
+  :hook
+  (company-mode . company-box-mode))
 
 (use-package modus-themes
   :straight nil
   :init
   (setq modus-themes-subtle-line-numbers t
         modus-themes-mode-line '(borderless)
-        modus-themes-org-blocks 'gray-background))
+        modus-themes-org-blocks 'gray-background
+        modus-themes-hl-line '(accented)))
 
 (use-package nano-theme)
 
@@ -1018,6 +1014,9 @@ as a `:filter-result' advice."
 
 (advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
 
+(setq column-number-mode 1
+      line-number-mode 1)
+
 (setq-default mode-line-format
               `("%e"
                 mode-line-front-space
@@ -1046,19 +1045,6 @@ as a `:filter-result' advice."
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
 (setq display-time-default-load-average nil)
-
-;; (use-package doom-modeline
-;;   :config
-;;   (setq
-;;    doom-modeline-height 25
-;;    doom-modeline-bar-width 2
-;;    doom-modeline-minor-modes nil
-;;    doom-modeline-indent-info t
-;;    doom-modeline-buffer-encoding nil
-;;    doom-modeline-enable-word-count t
-;;    doom-modeline-buffer-file-name-style 'relative-to-project)
-;;   :init
-;;   (doom-modeline-mode))
 
 (use-package visual-fill-column
   :hook (org-mode . visual-fill-column-mode)
@@ -1166,3 +1152,13 @@ as a `:filter-result' advice."
 
 (use-package flycheck-ledger
   :after (flycheck ledger-mode))
+
+(use-package todoist
+  :config
+  (setq todoist-token "34fecf43ddf18e94a13c68821ec5f84bac2e2bbb"))
+
+(use-package denote
+  :straight '(:host github :repo "protesilaos/denote")
+  :config
+  (setq denote-directory (expand-file-name "~/dox/notes")
+        denote-known-keywords '("ufscar" "computer science" "language")))
