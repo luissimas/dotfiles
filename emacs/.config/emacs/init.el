@@ -230,18 +230,23 @@ Note: This function is meant to be adviced around `find-file'."
 
 (advice-add 'find-file :around 'pada/open-external-advice)
 
-;; Custom function to kill current buffer
 (defun pada/kill-current-buffer ()
   "Kill the current buffer."
   (interactive) (kill-buffer (current-buffer)))
 
-;; Custom find-file
 (defun pada/find-file ()
   "Wrapper around `find-file'.  If the current file is in a project, use `project-find-file', otherwise use the built-in `find-file'."
   (interactive)
   (if (project-current)
       (project-find-file)
     (call-interactively 'find-file)))
+
+(defun pada/switch-buffer ()
+  "Wrapper around `consult-buffer'.  If the current buffer is in a project, use `project-switch-to-buffer', otherwise use `consult-buffer'."
+  (interactive)
+  (if (project-current)
+      (call-interactively 'project-switch-to-buffer)
+    (call-interactively 'consult-buffer)))
 
 ;; NOTE: I really need to understand all of this better
 (setq display-buffer-alist
@@ -327,7 +332,13 @@ Note: This function is meant to be adviced around `find-file'."
 
 (use-package persp-mode
   :config
-  (setq persp-autokill-buffer-on-remove 'kill-weak)
+  (setq persp-autokill-buffer-on-remove 'kill-weak
+        persp-reset-windows-on-nil-window-conf nil
+        persp-nil-hidden t
+        persp-switch-to-added-buffer nil
+        persp-kill-foreign-buffer-behaviour 'kill
+        persp-remove-buffers-from-nil-persp-behaviour nil
+        persp-auto-resume-time -1)
   :init
   (persp-mode))
 
@@ -365,7 +376,8 @@ Note: This function is meant to be adviced around `find-file'."
     "ss" '(consult-line :which-key "Search line")
 
     "b" '(:ignore t :which-key "Buffer")
-    "bb" '(consult-buffer :which-key "Switch buffer")
+    "bb" '(pada/switch-buffer :which-key "Switch to buffer in project")
+    "bB" '(consult-buffer :which-key "Switch to buffer")
     "bk" '(pada/kill-current-buffer :which-key "Kill current buffer")
     "bK" '(kill-buffer :which-key "Kill buffer")
     "bi" '(ibuffer :which-key "Ibuffer")
@@ -395,7 +407,7 @@ Note: This function is meant to be adviced around `find-file'."
     "tt" '(pada/load-theme :which-key "Theme")
     "tf" '(flycheck-mode :which-key "Flycheck")
     "tg" '(git-gutter-mode :which-key "Git gutter")
-    "tm" '(doom-modeline-mode :which-key "Doom modeline")
+    "tm" '(hide-mode-line-mode :which-key "Modeline")
     "tr" '(rainbow-mode :which-key "Rainbow")
     "tb" '(text-scale-mode :which-key "Big font"))
 
@@ -1161,4 +1173,4 @@ as a `:filter-result' advice."
         denote-known-keywords '("ufscar" "computer science" "language")))
 
 (use-package hide-mode-line
-  :hook (vterm-mode . hide-mode-line-mode))
+  :hook ((vterm-mode compilation-mode treemacs-mode) . hide-mode-line-mode))
