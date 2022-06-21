@@ -327,9 +327,12 @@ Note: This function is meant to be adviced around `find-file'."
 
 (use-package persp-mode
   :config
-  (setq perp-autokill-buffer-on-remove 'kill-weak)
+  (setq persp-autokill-buffer-on-remove 'kill-weak)
   :init
   (persp-mode))
+
+;; TODO: Integrate persp-mode
+;; (with-persp-buffer-list () (consult-buffer))
 
 (use-package general
   :after evil
@@ -685,12 +688,6 @@ This function is meant to be used by `evil-lookup'."
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
-
-(use-package blamer
-  :hook
-  (prog-mode . blamer-mode)
-  :config
-  (set-face-attribute 'blamer-face nil :inherit 'font-lock-comment-face))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -1162,3 +1159,6 @@ as a `:filter-result' advice."
   :config
   (setq denote-directory (expand-file-name "~/dox/notes")
         denote-known-keywords '("ufscar" "computer science" "language")))
+
+(use-package hide-mode-line
+  :hook (vterm-mode . hide-mode-line-mode))

@@ -414,9 +414,12 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+begin_src emacs-lisp
   (use-package persp-mode
     :config
-    (setq perp-autokill-buffer-on-remove 'kill-weak)
+    (setq persp-autokill-buffer-on-remove 'kill-weak)
     :init
     (persp-mode))
+
+  ;; TODO: Integrate persp-mode
+  ;; (with-persp-buffer-list () (consult-buffer))
 #+end_src
 
 ** Keybindings
@@ -803,7 +806,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
 #+end_src
 
 *** Blamer
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package blamer
     :hook
     (prog-mode . blamer-mode)
@@ -1464,4 +1467,10 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     :config
     (setq denote-directory (expand-file-name "~/dox/notes")
           denote-known-keywords '("ufscar" "computer science" "language")))
+#+end_src
+
+** Hide mode line
+#+begin_src emacs-lisp
+  (use-package hide-mode-line
+    :hook (vterm-mode . hide-mode-line-mode))
 #+end_src

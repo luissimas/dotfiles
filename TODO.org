@@ -30,7 +30,7 @@
   - [X] Project.el
     - [X] Basic setup
   - [X] Perspective.el
-  - [ ] Smartparens
+  - [ ] Persp-mode
   - [ ] Projectile
   - [ ] Popper.el
   - [-] TODO Comments
