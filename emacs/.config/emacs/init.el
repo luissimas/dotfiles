@@ -266,7 +266,7 @@ Note: This function is meant to be adviced around `find-file'."
          (window-width . 0.4)
          (side . right)
          (slot . 0))
-        ("\\*\\(.*e?shell\\|vterm\\)\\*"
+        ("\\*\\(.*e?shell\\|.*vterm\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom)
@@ -399,6 +399,7 @@ Note: This function is meant to be adviced around `find-file'."
     "p" '(:keymap project-prefix-map :which-key "Project")
     ;; "p!" 'project-shell-command
     "pa" 'project-async-shell-command
+    "pv" 'pada/project-vterm
     "p&" nil
 
     ;; "SPC" '(:keymap perspective-map :which-key "Perspective")
@@ -585,7 +586,14 @@ This function is meant to be used by `evil-lookup'."
     "o" '(:ignore t :which-key "Org")
     "oa" '(org-agenda :which-key "Agenda")
     "ot" '(org-todo :which-key "Toggle todo state")
-    "oq" '(org-set-tags-command :which-key "Insert tag")))
+    "oq" '(org-set-tags-command :which-key "Insert tag"))
+
+  (add-to-list 'org-latex-classes '("abntex2" "\\documentclass{abntex2}"
+                                    ("\\section{%s}" . "\\section*{%s}")
+                                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
+(use-package org-ref)
 
 ;; Toggle emphasis markers on cursor
 (use-package org-appear
@@ -715,14 +723,20 @@ This function is meant to be used by `evil-lookup'."
 
 (use-package project
   :config
-  (setq project-switch-commands 'project-find-file))
-
-(use-package format-all
-  :hook
-  (prog-mode . format-all-mode)
-  (format-all-mode . format-all-ensure-formatter)
-  :config
-  (setq format-all-show-errors 'never))
+  (setq project-switch-commands 'project-find-file)
+  (defun pada/project-vterm ()
+    "Create a vterm buffer in the current project's root directory.
+  If a vterm buffer already exists for the current project,
+  switch to it. Otherwise, create a new vterm buffer.
+  With \\[universal-argument] prefix arg, create a new vterm buffer even if one
+  already exists"
+    (interactive)
+    (let* ((default-directory (project-root (project-current t)))
+           (project-vterm-name (project-prefixed-buffer-name "vterm"))
+           (vterm-buffer (get-buffer project-vterm-name)))
+      (if (and vterm-buffer (not current-prefix-arg))
+          (pop-to-buffer vterm-buffer)
+        (vterm (generate-new-buffer-name project-vterm-name))))))
 
 (use-package editorconfig
   :config
@@ -1173,4 +1187,4 @@ as a `:filter-result' advice."
         denote-known-keywords '("ufscar" "computer science" "language")))
 
 (use-package hide-mode-line
-  :hook ((vterm-mode compilation-mode treemacs-mode) . hide-mode-line-mode))
+  :hook ((vterm-mode compilation-mode treemacs-mode shell-mode) . hide-mode-line-mode))
