@@ -738,6 +738,13 @@ This function is meant to be used by `evil-lookup'."
           (pop-to-buffer vterm-buffer)
         (vterm (generate-new-buffer-name project-vterm-name))))))
 
+(use-package format-all
+  :hook
+  (prog-mode . format-all-mode)
+  (format-all-mode . format-all-ensure-formatter)
+  :config
+  (setq format-all-show-errors 'never))
+
 (use-package editorconfig
   :config
   (editorconfig-mode))
@@ -790,7 +797,7 @@ This function is meant to be used by `evil-lookup'."
         lsp-headerline-breadcrumb-enable nil
         lsp-modeline-code-actions-enable t
         lsp-modeline-diagnostics-enable t
-        lsp-enable-snippet nil
+        lsp-enable-snippet t
         lsp-signature-doc-lines 1
         lsp-auto-guess-root t
         lsp-enable-on-type-formatting nil
@@ -861,7 +868,18 @@ This function is meant to be used by `evil-lookup'."
 (use-package exunit
   :hook (elixir-mode . exunit-mode))
 
-(use-package yasnippet)
+(use-package flycheck-credo
+  :after elixir-mode
+  :config
+  (setq flycheck-elixir-credo-strict t)
+  (flycheck-credo-setup))
+
+(use-package alchemist
+  :hook (elixir-move . alchemist-mode))
+
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
 
 (use-package yasnippet-snippets)
 
@@ -958,9 +976,9 @@ This function is meant to be used by `evil-lookup'."
 (use-package company
   :hook (prog-mode . company-mode)
   :custom
-  (company-minimum-prefix-length 2)
+  (company-minimum-prefix-length 1)
   (company-idle-delay 0.1)
-  (company-tooltip-maximum-width 60)
+  (company-tooltip-maximum-width 120)
   (company-tooltip-minimum-width 60)
   (company-tooltip-align-annotations t)
   :config
