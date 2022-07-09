@@ -875,7 +875,7 @@ This function is meant to be used by `evil-lookup'."
   (flycheck-credo-setup))
 
 (use-package alchemist
-  :hook (elixir-move . alchemist-mode))
+  :hook (elixir-mode . alchemist-mode))
 
 (use-package yasnippet
   :config

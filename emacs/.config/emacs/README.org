@@ -1064,7 +1064,7 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     (flycheck-credo-setup))
 
   (use-package alchemist
-    :hook (elixir-move . alchemist-mode))
+    :hook (elixir-mode . alchemist-mode))
 #+end_src
 
 ** Snippets
