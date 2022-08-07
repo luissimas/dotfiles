@@ -18,13 +18,16 @@ settings:
   content.notifications.enabled:
     https://frameboxxindore.com: false
     https://meet.google.com: false
+    https://squadafum.com.br: false
     https://web.whatsapp.com: false
+    https://www.drogariasaopaulo.com.br: false
     https://www.netflix.com: false
     https://www.netshoes.com.br: false
     https://www.reddit.com: false
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: false
     https://mail.google.com?extsrc=mailto&url=%25s: false
+    https://mail.proton.me#mailto=%25s: true
     https://mail.protonmail.com?to=%25s: false
   statusbar.show:
     global: always

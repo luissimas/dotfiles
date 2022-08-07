@@ -588,10 +588,11 @@ This function is meant to be used by `evil-lookup'."
     "ot" '(org-todo :which-key "Toggle todo state")
     "oq" '(org-set-tags-command :which-key "Insert tag"))
 
-  (add-to-list 'org-latex-classes '("abntex2" "\\documentclass{abntex2}"
-                                    ("\\section{%s}" . "\\section*{%s}")
-                                    ("\\subsection{%s}" . "\\subsection*{%s}")
-                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes '("abntex2" "\\documentclass{abntex2}"
+                                      ("\\section{%s}" . "\\section*{%s}")
+                                      ("\\subsection{%s}" . "\\subsection*{%s}")
+                                      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
 
 (use-package org-ref)
 
@@ -659,6 +660,7 @@ This function is meant to be used by `evil-lookup'."
   (interactive)
   (org-tree-slide-play-with-timer)
   (flyspell-mode 0)
+  (hide-mode-line-mode)
   (text-scale-mode 1))
 
 (defun pada/org-end-presentation ()
@@ -666,6 +668,7 @@ This function is meant to be used by `evil-lookup'."
   (interactive)
   (text-scale-mode 0)
   (flyspell-mode 1)
+  (hide-mode-line-mode 0)
   (org-tree-slide-mode 0))
 
 ;; Automatically tangle our Emacs.org config file when we save it
@@ -786,7 +789,7 @@ This function is meant to be used by `evil-lookup'."
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-completion-provider :none)
+  ;; (setq lsp-completion-provider :none)
   :hook
   ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode). lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
@@ -802,6 +805,7 @@ This function is meant to be used by `evil-lookup'."
         lsp-auto-guess-root t
         lsp-enable-on-type-formatting nil
         lsp-signature-render-documentation t
+        lsp-elixir-suggest-specs nil
         lsp-log-io nil
         lsp-restart 'iteractive)
   (general-define-key :states 'normal "gr" 'lsp-find-references)
@@ -1020,6 +1024,12 @@ This function is meant to be used by `evil-lookup'."
 
 (use-package catppuccin
   :straight '(:host github :repo "pspiagicw/catppuccin-emacs"))
+
+(use-package mindre-theme
+  :straight '(:host github :repo "erikbackman/mindre-theme")
+  :config
+  (setq mindre-use-more-bold nil
+        mindre-use-faded-lisp-parens nil))
 
 (use-package all-the-icons
   :custom

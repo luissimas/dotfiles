@@ -26,4 +26,4 @@ emacs --daemon --no-x-resources &
 # Starting polkit agent
 polkit-dumb-agent &
 
-exec bspwm
+exec dwm
