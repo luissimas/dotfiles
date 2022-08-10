@@ -1,14 +1,19 @@
 #!/bin/bash
 
 # Laptop command
-volume="$(amixer get Master | grep 'Mono:' | awk '{print $4}' | tr -d '[%]')"
+status="$(amixer get Master | grep 'Front Left:' | awk '{print $6}' | tr -d '[%]')"
+volume="$(amixer get Master | grep 'Front Left:' | awk '{print $5}' | tr -d '[%]')"
 
-if [ $volume -gt 70 ] || [ $volume -eq 70 ]; then
-	icon=""
-elif [ $volume -lt 70 ] && [ $volume -gt 0 ]; then
-	icon="墳"
+if [[ $status = "off" ]]; then
+	printf "ﱝ mute"
 else
-	icon=""
-fi
+	if [[ $volume -gt 70 ]] || [[ $volume -eq 70 ]]; then
+		icon=" "
+	elif [[ $volume -lt 70 ]] && [[ $volume -gt 0 ]]; then
+		icon="墳 "
+	else
+		icon=" "
+	fi
 
-printf "$icon $volume%%"
+	printf "$icon $volume%%"
+fi

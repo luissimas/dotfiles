@@ -1,4 +1,5 @@
 #!/bin/bash
 
-clockString="$(date "+%H:%M")"
-printf " $clockString "
+time="$(date "+%H:%M")"
+date="$(date "+%A, %b %d")"
+printf "  $date $time"
