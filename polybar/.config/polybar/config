@@ -29,7 +29,7 @@ highlight = ${xrdb:foreground:#222}
 ; |_.__/ \__,_|_|  |___/
 
 [bar/main]
-monitor=DVI-D-0
+; monitor=DVI-D-0
 
 enable-ipc=true
 height = 20
@@ -55,7 +55,7 @@ module-margin = 1
 
 modules-left = bspwm
 modules-center = time
-modules-right = packages network pulseaudio battery temperature cpu memory
+modules-right = network pulseaudio battery temperature cpu
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -123,33 +123,33 @@ label-maxlen = 50
 type = internal/bspwm
 enable-scroll = false
 
-label-focused = 
-; label-focused = %name%
-; label-focused-foreground = ${colors.background}
-; label-focused-background = ${colors.foreground}
+; label-focused = 
+label-focused = %name%
+label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.foreground}
 label-focused-padding = 1
 
-label-occupied = 
-; label-occupied = %name%
-; label-occupied-background = ${colors.background}
-; label-occupied-foreground = ${colors.foreground}
-; label-occupied-underline = ${colors.foreground}
+; label-occupied = 
+label-occupied = %name%
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.foreground}
+label-occupied-underline = ${colors.foreground}
 label-occupied-padding = 1
 
-label-urgent = 
-; label-urgent = %name%
-; label-urgent-background = ${colors.background}
-; label-urgent-foreground = ${colors.foreground}
+; label-urgent = 
+label-urgent = %name%
+label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.foreground}
 label-urgent-underline = ${colors.foreground}
 label-urgent-padding = 1
 
-label-empty = 
-; label-empty = %name%
+; label-empty = 
+label-empty = %name%
 label-empty-padding = 1
 
 format = <label-state> <label-mode>
 
-label-monocle = "类 "
+; label-monocle = "类 "
 
 [module/time]
 type = internal/date
