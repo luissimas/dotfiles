@@ -843,6 +843,12 @@ This is my Emacs configuration. I'm currently in the process of migrating all th
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
+** Folding
+#+begin_src emacs-lisp
+  (use-package origami
+    :config (global-origami-mode))
+#+end_src
+
 ** Colors
 #+begin_src emacs-lisp
   (use-package rainbow-mode)

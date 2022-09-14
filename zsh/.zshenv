@@ -11,7 +11,7 @@ export QUTEWAL_DYNAMIC_LOADING=True
 export LEDGER_FILE=$HOME/dox/accounting/accounting.journal
 
 # Exports
-export BROWSER="qutebrowser"
+export BROWSER="brave"
 export READER="zathura"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"

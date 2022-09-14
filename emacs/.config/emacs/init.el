@@ -715,6 +715,9 @@ This function is meant to be used by `evil-lookup'."
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package origami
+  :config (global-origami-mode))
+
 (use-package rainbow-mode)
 
 (use-package tree-sitter
