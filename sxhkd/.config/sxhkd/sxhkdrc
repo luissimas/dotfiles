@@ -11,7 +11,7 @@ super + shift + q
   $HOME/scripts/power-prompt.sh
 
 # lock screen
-super + shift + l
+super + alt + l
   i3lock -B 10 -k
 
 # make sxhkd reload its configuration files:
