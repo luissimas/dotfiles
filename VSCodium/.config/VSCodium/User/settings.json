@@ -321,7 +321,7 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.colorTheme": "Palenight Theme",
+  "workbench.colorTheme": "poimandres",
   "projectManager.git.baseFolders": ["~/liven", "~/cati"],
   "gitlens.codeLens.enabled": false,
   "vim.easymotion": true,

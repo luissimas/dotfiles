@@ -1,14 +1,8 @@
+;;; init.el --- My emacs configuration
+;;; Commentary:
+;;; Code:
+
 (setq gc-cons-threshold (* 100 1024 1024))
-
-(defun pada/display-startup-time ()
-  "Display the startup time for the current section."
-  (message "Emacs loaded in %s with %d garbage collections."
-           (format "%.2f seconds"
-                   (float-time
-                    (time-subtract after-init-time before-init-time)))
-           gcs-done))
-
-(add-hook 'emacs-startup-hook 'pada/display-startup-time)
 
 (defun pada/display-startup-time ()
   "Display the startup time for the current section."
@@ -367,7 +361,7 @@ Note: This function is meant to be adviced around `find-file'."
     "f" '(:ignore t :which-key "Find")
     "ff" '(find-file :which-key "Find file")
     "fg" '(consult-ripgrep :which-key "Grep")
-    "fc" '((lambda () (interactive) (find-file (expand-file-name "README.org" user-emacs-directory))) :which-key "Find config")
+    "fc" '((lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))) :which-key "Find config")
     "fC" '(editorconfig-find-current-editorconfig :which-key "Find project editorconfig")
     "fs" '(save-buffer :which-key "Save file")
     "fS" '(write-file :which-key "Save file as...")
@@ -670,17 +664,6 @@ This function is meant to be used by `evil-lookup'."
   (flyspell-mode 1)
   (hide-mode-line-mode 0)
   (org-tree-slide-mode 0))
-
-;; Automatically tangle our Emacs.org config file when we save it
-(defun pada/org-babel-tangle-config ()
-  (when (string-equal (file-name-directory (file-truename (buffer-file-name)))
-                      (expand-file-name (file-truename user-emacs-directory)))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (call-interactively 'org-babel-remove-result-one-or-many)
-      (org-babel-tangle))))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pada/org-babel-tangle-config)))
 
 (use-package magit
   :custom
@@ -1219,3 +1202,4 @@ as a `:filter-result' advice."
 
 (use-package hide-mode-line
   :hook ((vterm-mode compilation-mode treemacs-mode shell-mode) . hide-mode-line-mode))
+;;; init.el ends here
