@@ -50,12 +50,14 @@ bluetooth_toggle() {
 	fi
 }
 
-case "$1" in
---toggle)
-	bluetooth_toggle
-	;;
-*)
-	bluetooth_print
-	;;
-esac
-Footer
+if [ -e "/sys/class/power_supply/BAT0" ]; then
+	case "$1" in
+	--toggle)
+		bluetooth_toggle
+		;;
+	*)
+		bluetooth_print
+		;;
+	esac
+	Footer
+fi
