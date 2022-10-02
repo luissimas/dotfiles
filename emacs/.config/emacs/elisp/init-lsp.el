@@ -20,7 +20,7 @@
   (setq lsp-keymap-prefix "C-c l")
   ;; (setq lsp-completion-provider :none)
   :hook
-  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode). lsp-deferred)
+  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode web-mode). lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . pada/lsp-consult-xref-setup)
   (lsp-mode . pada/lsp-corfu-setup)
