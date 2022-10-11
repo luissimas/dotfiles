@@ -11,6 +11,8 @@
 
 (use-package yasnippet-snippets)
 
+(use-package consult-yasnippet)
+
 (provide 'init-yas)
 ;;; Code:
 ;;; init-yas.el ends here

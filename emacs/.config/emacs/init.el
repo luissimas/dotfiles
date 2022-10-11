@@ -98,6 +98,7 @@
 (require 'init-spell)
 (require 'init-ledger)
 (require 'init-mpdel)
+(require 'init-screenshot)
 ;;-------------------------------------------------------------------------------
 
 

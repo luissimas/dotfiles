@@ -21,5 +21,4 @@
     "mb" '(mpdel-browser-open :which-key "Browse")))
 
 (provide 'init-mpdel)
-;;; Code:
 ;;; init-mpdel.el ends here

@@ -99,7 +99,7 @@
   :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.1)
+  (company-idle-delay 0.0)
   (company-tooltip-maximum-width 120)
   (company-tooltip-minimum-width 60)
   (company-tooltip-align-annotations t)

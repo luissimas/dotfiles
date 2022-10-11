@@ -47,7 +47,7 @@
     "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")
     "lr" '(lsp-rename :which-key "Rename"))
   ;; Disable creation on ts-server .log files
-  (setq lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr"))
+  (setq lsp-clients-typescript-server-args '("--stdio"))
   :commands lsp)
 
 (use-package lsp-ui
