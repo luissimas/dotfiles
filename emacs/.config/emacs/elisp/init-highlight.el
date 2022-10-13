@@ -8,7 +8,8 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :hook (css-mode web-mode))
 
 (use-package tree-sitter
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)

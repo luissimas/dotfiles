@@ -5,10 +5,16 @@
 
 ;;; Code:
 
-(use-package elixir-mode)
+(use-package elixir-mode
+  :init
+  (add-hook 'elixir-mode-hook
+            (lambda ()
+              (push '("|>" . ?\u25B7) prettify-symbols-alist))))
 
 (use-package exunit
-  :hook (elixir-mode . exunit-mode))
+  :hook elixir-mode)
+
+(use-package inf-elixir)
 
 (use-package flycheck-credo
   :after elixir-mode
