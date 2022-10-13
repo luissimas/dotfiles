@@ -86,6 +86,9 @@
 ;; Autopairs
 (electric-pair-mode)
 
+;; Pretty symbols
+(global-prettify-symbols-mode)
+
 ;; Font configuration
 (defvar pada/default-font-size (if (pada/is-laptop) 100 100))
 (defvar pada/default-font-family "Iosevka Padawan")
@@ -147,7 +150,7 @@
          (slot . 0))
         ("\\*\\(lsp-help\\|lsp-documentation\\)\\*"
          (display-buffer-in-side-window)
-         (window-height . 0.2)
+         (window-height . 0.3)
          (side . bottom))
         ("\\*\\([Hh]elp.*\\|info\\)\\*"
          (display-buffer-in-side-window)

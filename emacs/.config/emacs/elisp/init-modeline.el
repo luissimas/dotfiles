@@ -54,7 +54,7 @@ as a `:filter-result' advice."
 
 ;; Hide modeline
 (use-package hide-mode-line
-  :hook ((vterm-mode compilation-mode treemacs-mode shell-mode) . hide-mode-line-mode))
+  :hook ((vterm-mode compilation-mode treemacs-mode shell-mode help-mode) . hide-mode-line-mode))
 
 (provide 'init-modeline)
 ;;; Code:
