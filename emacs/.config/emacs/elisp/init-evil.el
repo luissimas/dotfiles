@@ -10,8 +10,7 @@
 This function is meant to be used by `evil-lookup'."
   (cond
    ((and (boundp 'lsp-mode) lsp-mode) (lsp-ui-doc-glance))
-   ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))
-   (t (dictionary-lookup-definition))))
+   ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))))
 
 (use-package evil
   :init

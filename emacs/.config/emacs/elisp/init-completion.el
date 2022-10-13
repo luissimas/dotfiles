@@ -6,30 +6,44 @@
 ;;; Code:
 
 (use-package vertico
+  :straight (:files (:defaults "extensions/*"))
   :custom
   (vertico-cycle t)
   :config
-  ;; Using vertico-directory extension
-  (add-to-list 'load-path (expand-file-name "straight/build/vertico/extensions" user-emacs-directory))
-  (require 'vertico-directory)
   (general-define-key
    :states '(normal insert)
    :keymaps 'vertico-map
    "C-j" 'vertico-next
    "C-k" 'vertico-previous
-   "RET" 'vertico-directory-enter
-   "DEL" 'vertico-directory-delete-char)
-  (general-define-key
-   :states 'normal
-   :keymaps 'vertico-map
-   "<escape>" 'abort-minibuffers)
-  :init
-  (vertico-mode))
+   (general-define-key
+    :states 'normal
+    :keymaps 'vertico-map
+    "<escape>" 'abort-minibuffers)
+   :init
+   (vertico-mode)))
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
+;; Persist history over Emacs restarts. Vertico and corfu sort by history position.
 (use-package savehist
   :init
   (savehist-mode))
+
+(use-package vetico-repeat
+  :after vertico
+  :straight nil
+  :config
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+  (add-to-list 'savehist-additional-variables 'vertico-repeat-history))
+
+(use-package vertico-directory
+  :after vertico
+  :straight nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 (defun pada/orderless-literal-dispatcher (pattern _index _total)
   "Literal style dispatcher for strings using the equal sign (`=') as a suffix."
@@ -37,8 +51,10 @@
 
 (use-package orderless
   :config
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless basic)
         completion-ignore-case t
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))
         read-file-name-completion-ignore-case t
         read-buffer-completion-ignore-case t
         orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)
@@ -95,36 +111,77 @@
 ;; Enable search and replace in embark buffers
 (use-package wgrep)
 
-(use-package company
-  :hook (prog-mode . company-mode)
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
-  (company-tooltip-maximum-width 120)
-  (company-tooltip-minimum-width 60)
-  (company-tooltip-align-annotations t)
-  :config
-  ;; Unbinding default insert mappings
-  (general-define-key
-   :states 'insert
-   "C-j" nil
-   "C-k" nil)
-  (general-define-key
-   :states 'insert
-   :keymaps 'company-active-map
-   "C-j"  'company-select-next
-   "C-k"  'company-select-previous)
-  (general-define-key
-   :states 'insert
-   :keymaps 'company-mode-map
-   "C-SPC"  'company-complete))
+(defun pada/corfu-quit ()
+  "Quits corfu completion and enter evil normal mode."
+  (interactive)
+  (corfu-quit)
+  (evil-normal-state))
 
-(use-package company-box
+(use-package corfu
+  :straight (:files (:defaults "extensions/*"))
+  ;; Optional customizations
   :custom
-  (company-box-scrollbar nil)
-  (company-box-doc-enable nil)
-  :hook
-  (company-mode . company-box-mode))
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-delay 0.1)
+  (corfu-auto-prefix 1)
+  (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  (corfu-preview-current nil)    ;; Disable current candidate preview
+  (corfu-preselect-first t)
+  (corfu-bar-width 0)
+  (corfu-min-width 20)
+  (corfu-max-width 100)
+  (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  (corfu-scroll-margin 5)        ;; Use scroll margin
+  :config
+  (general-define-key
+   :states 'insert
+   "C-SPC" #'completion-at-point)
+  (general-define-key
+   :states 'insert
+   :keymaps 'corfu-map
+   [escape] #'pada/corfu-quit
+   "ESC" #'pada/corfu-quit
+   "C-SPC" #'corfu-quit)
+  :init
+  (global-corfu-mode))
+
+(use-package corfu-history
+  :after corfu
+  :straight nil
+  :config
+  (add-to-list 'savehist-additional-variables 'corfu-history)
+  :init
+  (corfu-history-mode))
+
+(use-package corfu-info
+  :after corfu
+  :straight nil)
+
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  (kind-icon-blend-background nil)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-ispell))
+
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  ;; Other useful Dabbrev configurations.
+  :custom
+  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (provide 'init-completion)
 ;;; Code:

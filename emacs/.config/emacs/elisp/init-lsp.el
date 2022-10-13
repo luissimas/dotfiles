@@ -12,15 +12,15 @@
 
 (defun pada/lsp-corfu-setup ()
   "Setup corfu completion style for lsp."
-  (setq-local completion-styles '(orderless)
+  (setq-local completion-styles '(orderless basic)
               completion-category-defaults nil))
 
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  ;; (setq lsp-completion-provider :none)
+  (setq lsp-completion-provider :none)
   :hook
-  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode web-mode). lsp-deferred)
+  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode web-mode css-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . pada/lsp-consult-xref-setup)
   (lsp-mode . pada/lsp-corfu-setup)
