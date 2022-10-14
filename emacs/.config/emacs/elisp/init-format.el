@@ -5,12 +5,9 @@
 
 ;;; Code:
 
-(use-package format-all
-  :hook
-  (prog-mode . format-all-mode)
-  (format-all-mode . format-all-ensure-formatter)
-  :config
-  (setq format-all-show-errors 'never))
+(use-package apheleia
+  :init
+  (apheleia-global-mode))
 
 (use-package editorconfig
   :config
