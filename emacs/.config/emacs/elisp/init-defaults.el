@@ -148,7 +148,7 @@
          (window-height . 0.3)
          (side . bottom)
          (slot . 0))
-        ("\\*\\(lsp-help\\|lsp-documentation\\)\\*"
+        ("\\*\\(lsp-help\\|lsp-documentation\\|eldoc\\)\\*"
          (display-buffer-in-side-window)
          (window-height . 0.3)
          (side . bottom))

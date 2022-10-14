@@ -83,12 +83,6 @@
           (when-let (project (project-current))
             (car (project-roots project))))))
 
-(use-package consult-lsp
-  :after lsp
-  :config
-  (pada/leader-key
-    "ld" '(consult-lsp-diagnostics :which-key "Diagnostics")))
-
 (use-package embark
   :bind
   (("C-." . embark-act)
@@ -123,8 +117,8 @@
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-delay 0.1)
-  (corfu-auto-prefix 1)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 2)
   (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
