@@ -83,16 +83,26 @@
 ;;   (flycheck-indication-mode 'left-margin))
 
 (use-package eglot
+  :hook
+  ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode web-mode css-mode) . eglot-ensure)
   :config
   (defun pada/setup-eglot-eldoc ()
     (push 'flymake-eldoc-function eldoc-documentation-functions))
   (add-hook 'eglot-managed-mode-hook #'pada/setup-eglot-eldoc)
+
+  (defun pada/consult-flymake-project ()
+    (interactive)
+    (consult-flymake t))
+
+  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
 
   (pada/leader-key
     :keymaps 'eglot-mode-map
     "l" '(:ignore t :which-key "LSP")
     "lf" '(eglot-format :which-key "Format buffer")
     "la" '(eglot-code-actions :which-key "Code actions")
+    "ld" '(pada/consult-flymake-project :which-key "Diagnostics")
     "ls" '(consult-eglot-symbols :which-key "Find symbol")
     "lh" '(eldoc :which-key "Describe symbol at point")
     "li" '(eglot-code-action-organize-imports :which-key "Organize imports")

@@ -6,17 +6,22 @@
 ;;; Code:
 
 (use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook
-  (typescript-mode-hook . (lambda () (add-hook 'before-save-hook 'lsp-eslint-apply-all-fixes)))
+  ;; :hook
+  ;; (typescript-mode-hook . (lambda () (add-hook 'before-save-hook 'lsp-eslint-apply-all-fixes)))
   :custom
   (js-indent-level 2)
-  (typescript-indent-level 2))
+  (typescript-indent-level 2)
+  :config
+  ;; Deriving typescript-mode to work with tsx files
+  ;; see: https://vxlabs.com/2022/06/12/typescript-development-with-emacs-tree-sitter-and-lsp-in-2022/
+  (define-derived-mode typescriptreact-mode typescript-mode "TypeScript TSX")
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescriptreact-mode))
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
 
 ;; Web-mode for all the HTML/CSS/JSX/TSX stuff
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode)
+         ;; ("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2
@@ -26,8 +31,7 @@
         web-mode-comment-style 2
         web-mode-enable-css-colorization t
         web-mode-enable-auto-quoting nil
-        web-mode-enable-comment-keywords t)
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
+        web-mode-enable-comment-keywords t))
 
 ;; Tailwindcss
 (use-package lsp-tailwindcss
