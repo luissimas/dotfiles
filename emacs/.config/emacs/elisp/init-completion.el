@@ -138,7 +138,8 @@
    :keymaps 'corfu-map
    [escape] #'pada/corfu-quit
    "ESC" #'pada/corfu-quit
-   "C-SPC" #'corfu-quit)
+   "C-SPC" #'corfu-quit
+   "C-h" #'corfu-info-documentation)
   :init
   (global-corfu-mode))
 
