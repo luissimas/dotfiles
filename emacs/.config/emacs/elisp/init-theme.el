@@ -57,5 +57,12 @@
   (setq mindre-use-more-bold nil
         mindre-use-faded-lisp-parens nil))
 
+;; Pywal
+(use-package ewal)
+
+(use-package ewal-spacemacs-themes
+  :config
+  (setq spacemacs-theme-underline-parens nil))
+
 (provide 'init-theme)
 ;;; init-theme.el ends here
