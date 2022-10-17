@@ -117,8 +117,8 @@
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-delay 0.2)
-  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-auto-prefix 1)
   (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -127,7 +127,7 @@
   (corfu-bar-width 0)
   (corfu-min-width 20)
   (corfu-max-width 100)
-  (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  (corfu-echo-documentation 0.2) ;; Disable documentation in the echo area
   (corfu-scroll-margin 5)        ;; Use scroll margin
   :config
   (general-define-key
