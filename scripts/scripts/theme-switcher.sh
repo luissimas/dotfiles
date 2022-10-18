@@ -33,10 +33,13 @@ case $option in "Pywal")
             # Update qutebrowser colors
             pgrep qutebrowser >/dev/null && qutebrowser :config-source
 
-            echo "wally" >~/.colorscheme
+            echo "pywal" >~/.colorscheme
 
             # Update emacs colors
-            emacsclient -e "(pada/load-theme 'ewal-spacemacs-modern)"
+            emacsclient -e "(pada/load-theme 'ewal-doom-one)"
+
+            # Recompiling dmenu
+            sudo recompile_dmenu
 
             # Update betterlockscreen (takes a while)
             printf "Setting lock screen...\n"

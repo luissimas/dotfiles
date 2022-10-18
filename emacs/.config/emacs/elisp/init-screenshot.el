@@ -9,4 +9,5 @@
   :straight
   (:host github :repo "tecosaur/screenshot" :branch "master" :build (:not compile)))
 
+(provide 'init-screenshot)
 ;;; init-screenshot.el ends here

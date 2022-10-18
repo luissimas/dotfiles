@@ -13,6 +13,7 @@
     ("gruvbox" doom-gruvbox)
     ("tokyonight" doom-tokyo-night)
     ("palenight" doom-palenight)
+    ("pywal" ewal-doom-one)
     ("catppuccin" catppuccin))
   "A alist of association between file patterns and external programs."
   :group 'system-theme
@@ -63,6 +64,8 @@
 (use-package ewal-spacemacs-themes
   :config
   (setq spacemacs-theme-underline-parens nil))
+
+(use-package ewal-doom-themes)
 
 (provide 'init-theme)
 ;;; init-theme.el ends here
