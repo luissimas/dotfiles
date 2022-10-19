@@ -27,8 +27,8 @@
 
 (use-package project
   :config
-  (setq project-switch-commands 'project-find-file)
-  (add-to-list 'project-find-functions #'pada/project-find-root))
+  ;; (add-to-list 'project-find-functions #'pada/project-find-root)
+  (setq project-switch-commands 'project-find-file))
 
 (provide 'init-project)
 ;;; Code:

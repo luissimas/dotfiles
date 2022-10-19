@@ -101,7 +101,6 @@
     (interactive)
     (consult-flymake t))
 
-  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
 
   (pada/leader-key

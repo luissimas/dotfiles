@@ -22,7 +22,8 @@
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)
          ;; ("\\.tsx\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode))
+         ("\\.jsx\\'" . web-mode)
+         ("\\.[hl]?eex\\'" . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
