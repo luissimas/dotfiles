@@ -10,7 +10,7 @@
 This function is meant to be used by `evil-lookup'."
   (cond
    ((and (boundp 'lsp-mode) lsp-mode) (lsp-ui-doc-glance))
-   ((and (boundp 'eglot-mode) eglot-mode) (eldoc))
+   ((and (boundp 'eglot--managed-mode) eglot--managed-mode) (eldoc-box-eglot-help-at-point))
    ((equal major-mode #'emacs-lisp-mode) (helpful-at-point))))
 
 (use-package evil

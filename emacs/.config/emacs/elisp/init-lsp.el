@@ -86,9 +86,16 @@
   :hook
   ((js-mode typescript-mode tuareg-mode c-mode python-mode elixir-mode web-mode css-mode) . eglot-ensure)
   :config
-  (defun pada/setup-eglot-eldoc ()
+  (setq eglot-events-buffer-size 0
+        eglot-confirm-server-initiated-edits nil)
+
+  (defun pada/eglot-setup()
+    (general-define-key
+     :keymaps 'eglot-mode-map
+     :states 'normal
+     "K" #'eldoc-box-eglot-help-at-point)
     (push 'flymake-eldoc-function eldoc-documentation-functions))
-  (add-hook 'eglot-managed-mode-hook #'pada/setup-eglot-eldoc)
+  (add-hook 'eglot-managed-mode-hook #'pada/eglot-setup)
 
   (defun pada/consult-flymake-project ()
     (interactive)
@@ -116,6 +123,19 @@
   (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-current-idle-delay 0.2)
   (eldoc-documentation-strategy 'eldoc-documentation-compose))
+
+(use-package eldoc-box
+  :custom
+  (eldoc-box-max-pixel-width 400)
+  (eldoc-box-max-pixel-height 300)
+  (eldoc-box-position-function #'eldoc-box--default-at-point-position-function))
+
+(use-package flymake
+  :config
+  (general-define-key
+   :keymaps 'flymake-mode-map
+   "M-n" #'flymake-goto-next-error
+   "M-p" #'flymake-goto-prev-error))
 
 (provide 'init-lsp)
 ;;; Code:

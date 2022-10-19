@@ -8,7 +8,7 @@
 ;;; Code:
 
 (defcustom pada/project-root-markers
-  '(".git" "package.json" "mix.exs")
+  '("mix.exs")
   "Files or directories that indicate the root of a project."
   :group 'project
   :type '(repeat string))

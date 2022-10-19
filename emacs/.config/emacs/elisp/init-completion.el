@@ -32,7 +32,9 @@
   :straight nil
   :config
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
-  (add-to-list 'savehist-additional-variables 'vertico-repeat-history))
+  (add-to-list 'savehist-additional-variables 'vertico-repeat-history)
+  (pada/leader-key
+    "." '(vertico-repeat :which-key "Repeat")))
 
 (use-package vertico-directory
   :after vertico
@@ -117,8 +119,8 @@
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-delay 0.0)
-  (corfu-auto-prefix 1)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 2)
   (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
