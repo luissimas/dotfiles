@@ -115,6 +115,7 @@
 
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
+  :hook (prog-mode . corfu-mode)
   ;; Optional customizations
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
@@ -134,6 +135,7 @@
   :config
   (general-define-key
    :states 'insert
+   :keymaps 'corfu-map
    "C-SPC" #'completion-at-point)
   (general-define-key
    :states 'insert
@@ -141,9 +143,7 @@
    [escape] #'pada/corfu-quit
    "ESC" #'pada/corfu-quit
    "C-SPC" #'corfu-quit
-   "C-h" #'corfu-info-documentation)
-  :init
-  (global-corfu-mode))
+   "C-h" #'corfu-info-documentation))
 
 (use-package corfu-history
   :after corfu
