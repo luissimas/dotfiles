@@ -55,3 +55,10 @@
 
 ;; Hledger
 (package! hledger-mode)
+
+;; Themes
+(package! nano-theme)
+(package! mindre-theme :recipe (:repo "erikbackman/mindre-theme"))
+(package! ewal)
+(package! ewal-doom-themes)
+(package! apheleia)

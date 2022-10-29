@@ -34,8 +34,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 
-;; doom-plain doom-moonlight doom-tomorrow-night
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -80,6 +79,8 @@
 (map! :leader
       :desc "M-x" "x" #'execute-extended-command)
 
+(map! :nv "gr" #'+lookup/references)
+
 (after! evil
   (setq +evil-want-o/O-to-continue-comments nil
         evil-want-minibuffer t
@@ -99,10 +100,6 @@
 ;; Fringe width
 (after! git-gutter-fringe
   (set-fringe-mode '(1 . 0)))
-
-;; Removing def from prettify-symbols
-(plist-delete! +ligatures-extra-symbols :def)
-(plist-delete! +ligatures-extra-symbols :not)
 
 ;; Treemacs icon theme
 (setq! doom-themes-treemacs-theme "doom-colors")
@@ -154,11 +151,7 @@
         :i "C-SPC" #'company-complete))
 
 ;; Formatting
-(setq! +format-on-save-enabled-modes '(not tex-mode
-                                           latex-mode
-                                           org-msg-edit-mode)
-       format-all-show-errors 'never
-       +format-with-lsp nil)
+(apheleia-global-mode)
 
 ;; LSP
 (after! lsp-mode
@@ -168,8 +161,8 @@
          lsp-ui-sideline-enable nil
          lsp-lens-enable t
          lsp-elixir-suggest-specs nil
-         lsp-elixir-dialyzer-enabled nil
-         lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")))
+         lsp-elixir-dialyzer-enabled nil))
+         
 
 ;; Flycheck
 (after! flycheck-credo
@@ -202,7 +195,9 @@
          modus-themes-mode-line nil))
 
 (after! ispell
-  (setq! ispell-dictionary  "pt_BR,en_US"))
+  (setq! ispell-dictionary  "pt_BR,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
 
 ;; Ledger
 (use-package! ledger-mode
@@ -221,7 +216,6 @@
         :desc "Hledger report" "mr"  #'hledger-run-command))
 
 ;; Open files in external programs
-;; TODO: Correctly port this to doom
 (defgroup pada/open-external nil
   "Open files with external commands."
   :group 'files
@@ -260,3 +254,47 @@
       (apply fun args))))
 
 (advice-add 'find-file :around 'pada/open-external-advice)
+
+(defun pada/load-theme (theme)
+  "Improvement over the default `load-theme'.
+Load THEME and disable all themes that were loaded before."
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar #'symbol-name
+                                     (custom-available-themes))))))
+  (load-theme theme t)
+  (dolist (theme (cdr custom-enabled-themes))
+    (disable-theme theme)))
+
+;; Sync system theme with emacs theme
+(defcustom pada/system-theme-associations
+  '(("modus-operandi" modus-operandi)
+    ("modus-vivendi" modus-vivendi)
+    ("nord" doom-nord)
+    ("gruvbox" doom-gruvbox)
+    ("tokyonight" doom-tokyo-night)
+    ("palenight" doom-palenight)
+    ("pywal" ewal-doom-one)
+    ("catppuccin" catppuccin))
+  "A alist of association between file patterns and external programs."
+  :group 'system-theme
+  :type "alist")
+
+(defun pada/load-system-theme ()
+  "Read file ~/.colorscheme and load its theme."
+  (interactive)
+  (with-temp-buffer
+    (insert-file-contents "~/.colorscheme")
+    (let ((theme (string-trim (buffer-string)))
+          (associations pada/system-theme-associations))
+      (while associations
+        (let* ((current (pop associations))
+               (system-theme (car current))
+               (emacs-theme (car (cdr current))))
+          (when (string-match-p system-theme theme)
+            (pada/load-theme emacs-theme)
+            (setq associations nil)))))))
+
+;; Load system theme on startup
+(add-hook 'emacs-startup-hook 'pada/load-system-theme)
