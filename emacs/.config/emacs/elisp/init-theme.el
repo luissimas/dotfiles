@@ -9,7 +9,7 @@
 (defcustom pada/system-theme-associations
   '(("modus-operandi" modus-operandi)
     ("modus-vivendi" modus-vivendi)
-    ("nord" doom-nord)
+    ("nord" doom-nord-aurora)
     ("gruvbox" doom-gruvbox)
     ("tokyonight" doom-tokyo-night)
     ("palenight" doom-palenight)

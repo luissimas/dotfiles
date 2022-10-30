@@ -12,7 +12,7 @@
 
 (defun pada/lsp-corfu-setup ()
   "Setup corfu completion style for lsp."
-  (setq-local completion-styles '(orderless basic)
+  (setq-local completion-styles '(orderless)
               completion-category-defaults nil))
 
 (use-package lsp-mode

@@ -40,5 +40,8 @@
   (setq magit-todos-branch-list nil)
   :init (magit-todos-mode))
 
+(use-package forge
+  :after magit)
+
 (provide 'init-git)
 ;;; init-git.el ends here

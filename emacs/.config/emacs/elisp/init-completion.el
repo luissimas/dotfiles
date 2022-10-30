@@ -121,7 +121,7 @@
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-delay 0.2)
-  (corfu-auto-prefix 2)
+  (corfu-auto-prefix 1)
   (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -135,7 +135,6 @@
   :config
   (general-define-key
    :states 'insert
-   :keymaps 'corfu-map
    "C-SPC" #'completion-at-point)
   (general-define-key
    :states 'insert
@@ -143,6 +142,8 @@
    [escape] #'pada/corfu-quit
    "ESC" #'pada/corfu-quit
    "C-SPC" #'corfu-quit
+   "C-j" #'corfu-next
+   "C-k" #'corfu-previous
    "C-h" #'corfu-info-documentation))
 
 (use-package corfu-history
