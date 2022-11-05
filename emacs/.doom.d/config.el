@@ -349,3 +349,23 @@ as a `:filter-result' advice."
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
 (setq display-time-default-load-average nil)
+
+;; Remove truncation and continuation indicators
+(setq-default fringe-indicator-alist
+              (assq-delete-all 'continuation
+                               (assq-delete-all 'truncation fringe-indicator-alist)))
+
+(defun pada/set-frame-parameters ()
+  "Set custom parameters for the current frame."
+  (interactive)
+  (dolist (parameter '((no-special-glyphs t)
+                       (internal-border-width 0)))
+    (set-frame-parameter (selected-frame) (car parameter) (car (cdr parameter)))))
+
+;; Setting frame options in both daemon (with hooks) or on
+;; normal emacs startup (directly calling the functions)
+(if (daemonp)
+    (progn
+      (add-hook 'server-after-make-frame-hook 'pada/set-frame-parameters))
+  (progn
+    (pada/set-frame-parameters)))
