@@ -61,4 +61,8 @@
 (package! mindre-theme :recipe (:repo "erikbackman/mindre-theme"))
 (package! ewal)
 (package! ewal-doom-themes)
+
+;; Async formatting
 (package! apheleia)
+
+(package! minions)
