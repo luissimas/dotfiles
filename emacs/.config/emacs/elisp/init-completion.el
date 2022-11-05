@@ -134,7 +134,9 @@
   (corfu-scroll-margin 5)        ;; Use scroll margin
   :config
   (general-define-key
+   :definer 'minor-mode
    :states 'insert
+   :keymaps 'corfu-mode
    "C-SPC" #'completion-at-point)
   (general-define-key
    :states 'insert

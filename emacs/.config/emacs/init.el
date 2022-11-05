@@ -99,6 +99,7 @@
 (require 'init-ledger)
 (require 'init-mpdel)
 (require 'init-screenshot)
+(require 'init-docker)
 ;;-------------------------------------------------------------------------------
 
 

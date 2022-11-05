@@ -23,5 +23,4 @@
   (flycheck-credo-setup))
 
 (provide 'init-elixir)
-;;; Code:
 ;;; init-elixir.el ends here
