@@ -87,6 +87,9 @@
 ;; Disabling hl-line-mode
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
+;; Disabling mode-line on dashboard
+(add-hook! +doom-dashboard-mode #'hide-mode-line-mode)
+
 (after! evil
   (setq +evil-want-o/O-to-continue-comments nil
         evil-want-minibuffer t
@@ -121,9 +124,9 @@
 
 ;; Treesitter
 (use-package! tree-sitter
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (global-tree-sitter-mode))
 
 ;; Projectile
 (after! projectile
