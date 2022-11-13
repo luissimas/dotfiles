@@ -36,7 +36,7 @@ case $option in "Pywal")
             echo "pywal" >~/.colorscheme
 
             # Update emacs colors
-            emacsclient -e "(pada/load-theme 'ewal-doom-one)"
+            emacsclient -e "(consult-theme 'ewal-doom-one)"
 
             # Recompiling dmenu
             sudo recompile_dmenu

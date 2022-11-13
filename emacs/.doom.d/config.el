@@ -109,7 +109,7 @@
 
 ;; Fringe width
 (after! git-gutter-fringe
-  (set-fringe-mode '(8 . 0)))
+  (set-fringe-mode '(2 . 0)))
 
 ;; Treemacs icon theme
 (setq! doom-themes-treemacs-theme "doom-colors")
@@ -265,18 +265,6 @@
 
 (advice-add 'find-file :around 'pada/open-external-advice)
 
-(defun pada/load-theme (theme)
-  "Improvement over the default `load-theme'.
-Load THEME and disable all themes that were loaded before."
-  (interactive
-   (list
-    (intern (completing-read "Load custom theme: "
-                             (mapcar #'symbol-name
-                                     (custom-available-themes))))))
-  (load-theme theme t)
-  (dolist (theme (cdr custom-enabled-themes))
-    (disable-theme theme)))
-
 ;; Sync system theme with emacs theme
 (defcustom pada/system-theme-associations
   '(("modus-operandi" modus-operandi)
@@ -303,7 +291,7 @@ Load THEME and disable all themes that were loaded before."
                (system-theme (car current))
                (emacs-theme (car (cdr current))))
           (when (string-match-p system-theme theme)
-            (pada/load-theme emacs-theme)
+            (consult-theme emacs-theme)
             (setq associations nil)))))))
 
 ;; Load system theme on startup
