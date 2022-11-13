@@ -369,7 +369,6 @@ as a `:filter-result' advice."
         :i "C-SPC" #'vterm--self-insert))
 
 
-
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (mixed-pitch-mode)
@@ -377,6 +376,19 @@ as a `:filter-result' advice."
   (git-gutter-mode -1)
   (setq-local line-spacing 1
               display-line-numbers nil))
+
+(defun pada/set-org-faces ()
+  "Customize faces for `org-mode' headings.
+This function is meant to be added to `doom-load-theme-hook' and to advice after `consult-theme'."
+  (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
+  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.2)
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.3)
+  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0))
 
 (use-package! org
   :config
@@ -388,25 +400,17 @@ as a `:filter-result' advice."
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("liven") ("personal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.1)
+        org-hidden-keywords '(title)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
         org-agenda-tags-column 10
         org-log-done 'timer
         org-log-into-drawer t)
 
-  ;; Font scaling for different header levels
-  (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
-  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
-  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.2)
-  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.3)
-  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0)
-
   (add-to-list 'org-agenda-files "~/dox/vault/Notes")
-  (add-hook 'org-mode-hook #'pada/org-mode-setup))
+  (add-hook 'org-mode-hook #'pada/org-mode-setup)
+  (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
+  (advice-add #'consult-theme :after (lambda (&rest args) (pada/set-org-faces))))
 
 (use-package! org-habit
   :after org)
