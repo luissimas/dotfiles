@@ -55,7 +55,7 @@ module-margin = 1
 
 modules-left = bspwm
 modules-center = time
-modules-right = bluetooth network pulseaudio battery temperature cpu
+modules-right = packages bluetooth network pulseaudio battery temperature cpu
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev

@@ -25,7 +25,7 @@
   :config
   (setq org-hide-emphasis-markers t
         org-pretty-entities t
-        org-return-follows-links t
+        org-return-follows-link t
         org-startup-folded t
         org-link-file-path-type 'relative
         org-display-remote-inline-images 'download
