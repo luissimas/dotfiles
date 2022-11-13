@@ -367,3 +367,70 @@ as a `:filter-result' advice."
         :i "C-c"   #'vterm--self-insert
         :i "C-d"   #'vterm--self-insert
         :i "C-SPC" #'vterm--self-insert))
+
+
+
+(defun pada/org-mode-setup ()
+  "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
+  (mixed-pitch-mode)
+  (visual-line-mode)
+  (setq-local line-spacing 1
+              display-line-numbers nil))
+
+(use-package! org
+  :config
+  (setq org-hide-emphasis-markers t
+        org-pretty-entities t
+        org-ellipsis "…"
+        org-startup-with-inline-images t
+        org-startup-with-latex-preview t
+        org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w@/!)" "|" "DONE(d)" "CANCELLED(c)"))
+        org-format-latex-options (plist-put org-format-latex-options :scale 1.1))
+
+  ;; Font scaling for different header levels
+  (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
+  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.2)
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.3)
+  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0)
+
+  (add-to-list 'org-agenda-files "~/dox/vault/Notes")
+  (add-hook 'org-mode-hook #'pada/org-mode-setup))
+
+(use-package! org-modern
+  :config
+  (setq org-modern-list '((?* . "•")
+                          (?+ . "◦")
+                          (?- . "•"))
+        org-modern-star '("◉" "🞛" "○" "◇"))
+  (set-face-attribute 'org-modern-symbol nil :font doom-font :height 1.2)
+  (set-face-attribute 'org-modern-label nil :height 1.0))
+
+;; Toggle emphasis markers on cursor
+(use-package! org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoentities t
+       org-appear-autokeywords t
+       org-appear-autolinks t
+       org-appear-autosubmarkers t))
+
+;; Toggle latex preview on cursor
+(use-package! org-fragtog
+  :hook (org-mode . org-fragtog-mode))
+
+;; (use-package! visual-fill-column
+;;   :hook (org-mode . visual-fill-column-mode)
+;;   :config
+;;   (setq visual-fill-column-width 60
+;;         visual-fill-column-center-text t))
+
+(after! evil-org
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+
+(use-package! org-modern
+  :init (global-org-modern-mode))
