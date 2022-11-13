@@ -374,6 +374,7 @@ as a `:filter-result' advice."
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (mixed-pitch-mode)
   (visual-line-mode)
+  (git-gutter-mode -1)
   (setq-local line-spacing 1
               display-line-numbers nil))
 
@@ -384,8 +385,14 @@ as a `:filter-result' advice."
         org-ellipsis "…"
         org-startup-with-inline-images t
         org-startup-with-latex-preview t
-        org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w@/!)" "|" "DONE(d)" "CANCELLED(c)"))
-        org-format-latex-options (plist-put org-format-latex-options :scale 1.1))
+        org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
+        org-tag-alist '(("ufscar") ("liven") ("personal"))
+        org-format-latex-options (plist-put org-format-latex-options :scale 1.1)
+        org-deadline-warning-days 5
+        org-agenda-start-with-log-mode t
+        org-agenda-tags-column 10
+        org-log-done 'timer
+        org-log-into-drawer t)
 
   ;; Font scaling for different header levels
   (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
@@ -401,17 +408,23 @@ as a `:filter-result' advice."
   (add-to-list 'org-agenda-files "~/dox/vault/Notes")
   (add-hook 'org-mode-hook #'pada/org-mode-setup))
 
+(use-package! org-habit
+  :after org)
+
 (use-package! org-modern
+  :after org
   :config
   (setq org-modern-list '((?* . "•")
                           (?+ . "◦")
                           (?- . "•"))
-        org-modern-star '("◉" "🞛" "○" "◇"))
-  (set-face-attribute 'org-modern-symbol nil :font doom-font :height 1.2)
-  (set-face-attribute 'org-modern-label nil :height 1.0))
+        org-modern-star '("◉ " "🞛 " "○ " "◇ "))
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
+  (set-face-attribute 'org-modern-label nil :height 1.0)
+  :init (global-org-modern-mode))
 
 ;; Toggle emphasis markers on cursor
 (use-package! org-appear
+  :after org
   :hook (org-mode . org-appear-mode)
   :config
   (setq org-appear-autoentities t
@@ -421,16 +434,15 @@ as a `:filter-result' advice."
 
 ;; Toggle latex preview on cursor
 (use-package! org-fragtog
+  :after org
   :hook (org-mode . org-fragtog-mode))
 
-;; (use-package! visual-fill-column
-;;   :hook (org-mode . visual-fill-column-mode)
-;;   :config
-;;   (setq visual-fill-column-width 60
-;;         visual-fill-column-center-text t))
+(use-package! org-journal
+  :config
+  (setq org-journal-date-prefix "#+title: "
+        org-journal-time-prefix "* "
+        org-journal-date-format "%a, %d-%m-%Y"
+        org-journal-file-format "%Y-%m-%d.org"))
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
-(use-package! org-modern
-  :init (global-org-modern-mode))
