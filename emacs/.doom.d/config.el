@@ -133,6 +133,7 @@
   (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2))
          projectile-enable-caching nil
          projectile-switch-project-action #'projectile-dired
+         projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid))
 
 ;; Persp-mode
@@ -452,3 +453,10 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+
+(use-package! org-pomodoro
+  :config
+  (setq org-pomodoro-length 50
+        org-pomodoro-short-break-length 10
+        org-pomodoro-long-break-frequency 100
+        org-pomodoro-play-sounds nil))

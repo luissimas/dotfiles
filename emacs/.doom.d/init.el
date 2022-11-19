@@ -81,7 +81,7 @@
 
        :checkers
        (syntax +childframe)            ; tasing you for every semicolon you forget
-       (spell +flyspell +everywhere +hunspell) ; tasing you for misspelling mispelling
+       (spell +flyspell +hunspell) ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -91,10 +91,10 @@
        ;;direnv
        (docker +lsp)
        editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        eval                ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
-       (lookup +dictionary); navigate your code and its documentation
+       (lookup +dictionary +offline); navigate your code and its documentation
        lsp               ; M-x vscode
        (magit +forge)             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
