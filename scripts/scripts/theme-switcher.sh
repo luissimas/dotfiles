@@ -49,7 +49,7 @@ case $option in "Pywal")
     fi
     ;;
 "Theme")
-    selected=$(echo -e 'Nord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | dmenu -i -p "Theme")
+    selected=$(echo -e 'OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | dmenu -i -p "Theme")
 
     if [[ -z $selected ]]; then
         printf "No selection"
@@ -88,6 +88,11 @@ case $option in "Pywal")
             name=nord
             theme=~/.config/wal/colorschemes/nord.json
             bg=~/.wal/nordmountain.jpeg
+            ;;
+        "OneDark")
+            name=onedark
+            theme=base16-onedark
+            bg=~/.wal/onedark.png
             ;;
         "Catppuccin")
             name=catppuccin

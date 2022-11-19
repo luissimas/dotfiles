@@ -274,6 +274,7 @@
     ("tokyonight" doom-tokyo-night)
     ("palenight" doom-palenight)
     ("pywal" ewal-doom-one)
+    ("onedark" doom-one)
     ("catppuccin" catppuccin))
   "A alist of association between file patterns and external programs."
   :group 'system-theme
@@ -291,6 +292,7 @@
                (system-theme (car current))
                (emacs-theme (car (cdr current))))
           (when (string-match-p system-theme theme)
+            (setq doom-theme emacs-theme)
             (consult-theme emacs-theme)
             (setq associations nil)))))))
 
