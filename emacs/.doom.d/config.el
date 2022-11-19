@@ -460,3 +460,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-pomodoro-short-break-length 10
         org-pomodoro-long-break-frequency 100
         org-pomodoro-play-sounds nil))
+
+;; Popup rules
+(set-popup-rules!
+ '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current)))
