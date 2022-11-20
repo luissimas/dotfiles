@@ -33,7 +33,6 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-
 (setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -391,7 +390,8 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
   (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.2)
   (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.3)
-  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0))
+  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0)
+  (set-face-attribute 'org-agenda-structure nil :weight 'semi-bold :height 1.4 :inherit 'default))
 
 (use-package! org
   :config
@@ -406,17 +406,67 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-hidden-keywords '(title)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
+        org-tags-column 0
+        org-agenda-span 'week
+        org-agenda-start-day "-0d"
+        org-agenda-start-on-weekday 0
+        org-scheduled-past-days 0
+        org-agenda-block-separator ?—
+        org-agenda-time-leading-zero t
+        org-agenda-current-time-string (concat "Now " (make-string 70 ?-))
         org-agenda-tags-column 10
         org-log-done 'timer
         org-log-into-drawer t)
 
+  (setq org-agenda-custom-commands
+        '(("P" "Padawan's custom agenda"
+           ((todo "WAIT"
+                  ((org-agenda-overriding-header "Tasks on hold\n")))
+            (agenda ""
+                    ((org-agenda-span 3)
+                     (org-deadline-warning-days 0)
+                     (org-agenda-format-date "%A, %d %B %Y")
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-overriding-header "\nDaily agenda\n")))
+            (agenda ""
+                    ((org-agenda-span 3)
+                     (org-agenda-start-on-weekday nil)
+                     (org-agenda-start-day "+1d")
+                     (org-deadline-warning-days 0)
+                     ;; (org-agenda-show-all-dates nil)
+                     (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                     (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                     (org-agenda-overriding-header "\nNext three days\n")))
+            (agenda "" ((org-agenda-time-grid nil)
+                        (org-agenda-start-on-weekday nil)
+                        (org-agenda-start-day "+4d")
+                        (org-agenda-span 14)
+                        (org-agenda-show-all-dates nil)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-entry-types '(:deadline))
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))))
+
+  (defun pada/custom-agenda (&optional arg)
+    (interactive "P")
+    (org-agenda arg "P"))
+
+  (map! :leader
+        :desc "Agenda"            "oaa" #'pada/custom-agenda
+        :desc "Agenda dispatcher" "oaA"   #'org-agenda)
+
   (add-to-list 'org-agenda-files "~/dox/vault/Notes")
   (add-hook 'org-mode-hook #'pada/org-mode-setup)
+  (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
   (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
   (advice-add #'consult-theme :after (lambda (&rest args) (pada/set-org-faces))))
 
 (use-package! org-habit
-  :after org)
+  :after org
+  :config
+  (setq org-habit-graph-column 50
+        org-habit-preceding-days 7
+        org-habit-show-all-today t))
 
 (use-package! org-modern
   :after org
