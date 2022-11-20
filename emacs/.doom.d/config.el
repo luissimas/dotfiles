@@ -423,7 +423,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
            ((todo "WAIT"
                   ((org-agenda-overriding-header "Tasks on hold\n")))
             (agenda ""
-                    ((org-agenda-span 3)
+                    ((org-agenda-span 1)
                      (org-deadline-warning-days 0)
                      (org-agenda-format-date "%A, %d %B %Y")
                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
