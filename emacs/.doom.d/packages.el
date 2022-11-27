@@ -61,6 +61,7 @@
 (package! mindre-theme :recipe (:repo "erikbackman/mindre-theme"))
 (package! ewal)
 (package! ewal-doom-themes)
+(package! ef-themes)
 
 ;; Async formatting
 (package! apheleia)
@@ -71,3 +72,6 @@
 (package! org-modern)
 (package! org-appear)
 (package! org-fragtog)
+
+;; Screenshot
+(package! screenshot :recipe (:repo "tecosaur/screenshot"))

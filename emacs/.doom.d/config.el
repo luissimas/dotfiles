@@ -131,11 +131,17 @@
 (after! projectile
   (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2))
          projectile-enable-caching nil
-         projectile-switch-project-action #'projectile-dired
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid))
 
 ;; Persp-mode
+(after! persp-mode
+  (setq +workspaces-on-switch-project-behavior t
+        persp-auto-resume-time 0
+        persp-init-frame-behaviour t
+        persp-interactive-init-frame-behaviour-override -1
+        persp-emacsclient-init-frame-behaviour-override -1))
+
 (map! :leader :map doom-leader-workspace-map
       (:prefix-map ("TAB" . "workspace")
        :desc "Display tab bar"           "TAB" #'+workspace/display
@@ -203,6 +209,8 @@
          modus-themes-mode-line '(borderless)
          modus-themes-org-blocks 'gray-background
          modus-themes-hl-line '(accented)))
+
+(use-package nano-theme)
 
 (after! ispell
   (setq! ispell-dictionary  "pt_BR,en_US")
@@ -466,7 +474,12 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   :config
   (setq org-habit-graph-column 50
         org-habit-preceding-days 7
-        org-habit-show-all-today t))
+        org-habit-show-all-today t
+        org-habit-show-done-always-green t))
+
+(use-package! org-download
+  :config
+  (setq org-download-method 'directory))
 
 (use-package! org-modern
   :after org
@@ -503,13 +516,6 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
-(use-package! org-pomodoro
-  :config
-  (setq org-pomodoro-length 50
-        org-pomodoro-short-break-length 10
-        org-pomodoro-long-break-frequency 100
-        org-pomodoro-play-sounds nil))
 
 ;; Popup rules
 (set-popup-rules!
