@@ -140,21 +140,22 @@
         persp-auto-resume-time 0
         persp-init-frame-behaviour t
         persp-interactive-init-frame-behaviour-override -1
-        persp-emacsclient-init-frame-behaviour-override -1))
-
-(map! :leader :map doom-leader-workspace-map
-      (:prefix-map ("TAB" . "workspace")
-       :desc "Display tab bar"           "TAB" #'+workspace/display
-       :desc "Switch workspace"          "s"   #'+workspace/switch-to
-       :desc "Switch to last workspace"  "l"   #'+workspace/other
-       :desc "New workspace"             "n"   #'+workspace/new-named
-       :desc "New unnamed workspace"     "N"   #'+workspace/new
-       :desc "Load workspace from file"  "L"   #'+workspace/load
-       :desc "Save workspace to file"    "S"   #'+workspace/save
-       :desc "Delete session"            "x"   #'+workspace/kill-session
-       :desc "Delete this workspace"     "k"   #'+workspace/delete
-       :desc "Rename workspace"          "r"   #'+workspace/rename
-       :desc "Restore last session"      "R"   #'+workspace/restore-last-session))
+        persp-emacsclient-init-frame-behaviour-override -1)
+  (map! :leader :map doom-leader-workspace-map
+        (:prefix-map ("TAB" . "workspace")
+         :desc "Display tab bar"           "TAB" #'+workspace/display
+         :desc "Switch workspace"          "s"   #'+workspace/switch-to
+         :desc "Switch to last workspace"  "l"   #'+workspace/other
+         :desc "New workspace"             "n"   #'+workspace/new-named
+         :desc "New unnamed workspace"     "N"   #'+workspace/new
+         :desc "Load workspace from file"  "L"   #'+workspace/load
+         :desc "Save workspace to file"    "S"   #'+workspace/save
+         :desc "Delete session"            "x"   #'+workspace/kill-session
+         :desc "Delete this workspace"     "k"   #'+workspace/delete
+         :desc "Previous workspace"        "i"   #'+workspace/switch-left
+         :desc "Next workspace"            "o"   #'+workspace/switch-right
+         :desc "Rename workspace"          "r"   #'+workspace/rename
+         :desc "Restore last session"      "R"   #'+workspace/restore-last-session)))
 
 ;; Company
 (after! company
