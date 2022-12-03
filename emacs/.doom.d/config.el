@@ -478,10 +478,6 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-habit-show-all-today t
         org-habit-show-done-always-green t))
 
-(use-package! org-download
-  :config
-  (setq org-download-method 'directory))
-
 (use-package! org-modern
   :after org
   :config
@@ -520,4 +516,5 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
 ;; Popup rules
 (set-popup-rules!
- '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current)))
+  '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
+  '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3)))
