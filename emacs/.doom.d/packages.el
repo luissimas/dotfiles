@@ -75,3 +75,7 @@
 
 ;; Screenshot
 (package! screenshot :recipe (:repo "tecosaur/screenshot"))
+
+;; Disabling flycheck popup
+(package! flycheck-popup-tip :disable t)
+(package! flycheck-posframe :disable t)

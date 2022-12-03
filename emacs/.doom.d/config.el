@@ -169,19 +169,30 @@
 (apheleia-global-mode)
 
 ;; LSP
-(after! lsp-mode
-  ;; Disable creation on ts-server .log files
+(use-package! lsp-mode
+  :config
   (setq! lsp-auto-guess-root t
          lsp-signature-doc-lines 1
-         lsp-ui-sideline-enable nil
          lsp-lens-enable t
          lsp-elixir-suggest-specs nil
-         lsp-elixir-dialyzer-enabled nil))
-         
+         lsp-elixir-dialyzer-enabled nil
+         lsp-file-watch-threshold 5000))
 
 ;; Flycheck
-(after! flycheck-credo
+(use-package! flycheck
+  :hook
+  (flycheck-mode . (lambda () (flycheck-set-indication-mode 'left-margin)))
+  :config
+  (setq! flycheck-display-errors-delay 0.2))
+
+(use-package! flycheck-credo
+  :config
   (setq! flycheck-elixir-credo-strict t))
+
+;; Eldoc
+(use-package! eldoc
+  :config
+  (setq! eldoc-idle-delay 0.1))
 
 ;; Magit
 (after! magit
@@ -199,6 +210,12 @@
   (map! :n "C-s" #'consult-line)
   (map! :leader
         :desc "Grep" "fg" #'consult-ripgrep))
+
+(use-package! consult-lsp
+  :config
+  (map! :map lsp-mode-map
+        :leader
+        :desc "Lsp diagnostics" "cld" #'consult-lsp-diagnostics))
 
 ;; Orderless
 (after! orderless
