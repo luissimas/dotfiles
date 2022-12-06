@@ -178,6 +178,18 @@
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000))
 
+(use-package! lsp-ui
+  :config
+  (setq! lsp-ui-doc-enable nil
+         lsp-ui-doc-header nil
+         lsp-ui-doc-include-signature t
+         lsp-ui-doc-delay 0
+         lsp-ui-doc-max-height 50
+         lsp-ui-doc-position 'at-point
+         lsp-ui-peek-enable nil
+         lsp-ui-imenu-enable nil
+         lsp-ui-sideline-enable nil))
+
 ;; Flycheck
 (use-package! flycheck
   :hook
@@ -213,9 +225,9 @@
 
 (use-package! consult-lsp
   :config
-  (map! :map lsp-mode-map
-        :leader
-        :desc "Lsp diagnostics" "cld" #'consult-lsp-diagnostics))
+  (map! :leader
+        :map lsp-mode-map
+        :desc "Diagnostics" "cd" #'consult-lsp-diagnostics))
 
 ;; Orderless
 (after! orderless
