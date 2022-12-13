@@ -86,9 +86,6 @@
 ;; Disabling hl-line-mode
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
-;; Disabling mode-line on dashboard
-(add-hook! +doom-dashboard-mode #'hide-mode-line-mode)
-
 (after! evil
   (setq +evil-want-o/O-to-continue-comments nil
         evil-want-minibuffer t
@@ -278,7 +275,6 @@
 
 (defun pada/run-shell-command (command)
   "Run COMMAND in the default user shell."
-  (message command)
   (start-process-shell-command "Open external process" nil (concat "exec nohup " command " >/dev/null")))
 
 (defun pada/open-external-advice (fun &rest args)
@@ -547,3 +543,43 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 (set-popup-rules!
   '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3)))
+
+;; Disabling mode-line on dashboard
+(add-hook! +doom-dashboard-mode #'hide-mode-line-mode)
+
+;; Hiding cursor on dashboard
+(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+
+;; Random quote on dashboard
+(defun pada/doom-dashboard-quote ()
+  "Get a random quote and format it to display on Doom's dashboard."
+  (mapconcat
+   (lambda (line)
+     (+doom-dashboard--center
+      +doom-dashboard--width
+      (with-temp-buffer
+        (insert-text-button
+         line
+         'action
+         (lambda (_) (+doom-dashboard-reload t))
+         'face 'doom-dashboard-menu-desc
+         'help-echo "Random phrase"
+         'follow-link t)
+        (buffer-string))))
+   (split-string
+    (with-temp-buffer
+      (insert (s-trim (shell-command-to-string "quote.sh")))
+      (setq fill-column (min 70 (/ (* 2 (window-width)) 3)))
+      (fill-region (point-min) (point-max))
+      (buffer-string))
+    "\n")
+   "\n"))
+
+(defun pada/doom-dashboard-quote-widget ()
+  (setq line-spacing 0.2)
+  (insert "\n\n" (pada/doom-dashboard-quote) "\n"))
+
+(setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
+                                   pada/doom-dashboard-quote-widget
+                                   doom-dashboard-widget-loaded
+                                   doom-dashboard-widget-footer))
