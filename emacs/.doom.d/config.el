@@ -41,7 +41,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org/"
+      org-roam-directory "~/repos/notes")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -583,3 +584,26 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
                                    pada/doom-dashboard-quote-widget
                                    doom-dashboard-widget-loaded
                                    doom-dashboard-widget-footer))
+
+;; Org-roam
+(use-package! websocket
+    :after org-roam)
+
+(defun browse-url-surf (url &optional _new-window)
+  "Ask the surf WWW browser to load URL.
+Default to the URL around or before point."
+  (interactive (browse-url-interactive-arg "URL: "))
+  (setq url (browse-url-encode-url url))
+  (message url)
+  (start-process (concat "surf " url) nil "surf" url))
+
+(use-package! org-roam-ui
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t
+          org-roam-ui-browser-function #'browse-url-surf)
+    (map! :leader
+          :desc "Open graph" "nrg" #'org-roam-ui-open))

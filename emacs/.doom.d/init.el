@@ -81,7 +81,7 @@
 
        :checkers
        (syntax)            ; tasing you for every semicolon you forget
-       (spell +flyspell +hunspell) ; tasing you for misspelling mispelling
+       (spell +flyspell +hunspell +everywhere) ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -152,7 +152,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ocaml             ; an objective camel
-       (org +pandoc +present +journal)               ; organize your plain life in plain text
+       (org +pandoc +present +journal +roam2 +jupyter)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional

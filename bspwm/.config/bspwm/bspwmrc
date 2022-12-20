@@ -10,10 +10,10 @@ pgrep -x sxhkd >/dev/null || sxhkd &
 # bspc monitor -d Δ Θ Π Ψ Ω
 
 if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
-	bspc monitor DVI-D-0 -d 1 2 3 4 5
-	bspc monitor HDMI-0 -d 6 7 8
+    bspc monitor DVI-D-0 -d 1 2 3 4 5
+    bspc monitor HDMI-0 -d 6 7 8
 else
-	bspc monitor -d 1 2 3 4 5
+    bspc monitor -d 1 2 3 4 5
 fi
 
 bspc config border_width 1
@@ -32,6 +32,7 @@ bspc rule -a Steam state=floating
 bspc rule -a discord desktop=8 state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a Emacs state=tiled
+bspc rule -a Surf state=tiled
 bspc rule -a Float state=floating
 bspc rule -a dmenu monitor=1
 bspc rule -a rofi monitor=1

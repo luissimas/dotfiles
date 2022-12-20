@@ -79,3 +79,7 @@
 ;; Disabling flycheck popup
 (package! flycheck-popup-tip :disable t)
 (package! flycheck-posframe :disable t)
+
+;; Org-roam
+(unpin! org-roam)
+(package! org-roam-ui)
