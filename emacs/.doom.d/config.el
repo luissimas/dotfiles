@@ -164,7 +164,10 @@
         :i "C-SPC" #'company-complete))
 
 ;; Formatting
-(apheleia-global-mode)
+(use-package! apheleia
+  :config
+  (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
+  :init (apheleia-global-mode))
 
 ;; LSP
 (use-package! lsp-mode
@@ -174,7 +177,8 @@
          lsp-lens-enable t
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
-         lsp-file-watch-threshold 5000))
+         lsp-file-watch-threshold 5000)
+  (add-hook! 'prisma-mode-hook #'lsp))
 
 (use-package! lsp-ui
   :config
