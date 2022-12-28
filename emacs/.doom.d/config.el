@@ -42,7 +42,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/"
-      org-roam-directory "~/repos/notes")
+      org-roam-directory "~/repos/zettelkasten")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -338,46 +338,6 @@
 ;; Load system theme on startup
 (add-hook 'emacs-startup-hook 'pada/load-system-theme)
 
-;; Macro recording display format
-(setq mode-line-defining-kbd-macro
-      (propertize " Recording macro..." 'face 'mode-line-emphasis))
-
-(defun pada/replace-vc-string (vc-string)
-  "Replace VC-STRING with a simpler and more pleasent representation.
-This function is meant to advise `vc-git-mode-line-string', particularly
-as a `:filter-result' advice."
-  (replace-regexp-in-string ".*Git[:-]" "" vc-string))
-
-(advice-add 'vc-git-mode-line-string :filter-return 'pada/replace-vc-string)
-
-(setq column-number-mode 1
-      line-number-mode 1)
-
-(setq-default mode-line-format
-              `("%e"
-                mode-line-front-space
-                mode-line-mule-info
-                mode-line-modified
-                " "
-                mode-line-buffer-identification
-                "    "
-                mode-line-position
-                "    "
-                (vc-mode vc-mode)
-                "    "
-                mode-line-modes
-                "    "
-                mode-line-misc-info
-                mode-line-end-spaces))
-
-(use-package! minions
-  :custom
-  (minions-mode-line-lighter "")
-  (minions-mode-line-delimiters '("" . ""))
-  (minions-prominent-modes '(defining-kbd-macro))
-  :init
-  (minions-mode))
-
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
 (setq display-time-default-load-average nil)
@@ -526,7 +486,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   :config
   (setq org-appear-autoentities t
        org-appear-autokeywords t
-       org-appear-autolinks t
+       org-appear-autolinks nil
        org-appear-autosubmarkers t))
 
 ;; Toggle latex preview on cursor
