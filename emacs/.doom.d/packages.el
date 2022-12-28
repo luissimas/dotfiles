@@ -86,3 +86,11 @@
 
 ;; Prisma
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+
+;; Elfeed-tube
+(package! elfeed-tube)
+(package! elfeed-tube-mpv)
+(package! mpv)
+
+;; sxhkdrc
+(package! sxhkdrc-mode)

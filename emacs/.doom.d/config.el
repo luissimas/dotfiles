@@ -571,3 +571,24 @@ Default to the URL around or before point."
           org-roam-ui-browser-function #'browse-url-surf)
     (map! :leader
           :desc "Open graph" "nrg" #'org-roam-ui-open))
+
+(use-package! elfeed
+  :config
+  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+  (setq! elfeed-goodies/entry-pane-size 0.5
+         elfeed-search-filter "@6-months-ago")
+  (setq elfeed-feeds
+        '(("https://www.youtube.com/feeds/videos.xml?channel_id=UCYCO3Kifwg56zhus3XXiAVg" youtube productivity)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" youtube programming)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCOJNw9aHGRkYuIOqwU7yK-Q" youtube travel)
+          ("https://protesilaos.com/codelog.xml" programming)
+          ("https://protesilaos.com/commentary.xml" misc)
+          ("https://protesilaos.com/news.xml" misc))))
+
+(use-package! elfeed-tube
+  :after elfeed
+  :config
+  (elfeed-tube-setup))
+
+(use-package! elfeed-tube-mpv
+  :after elfeed-tube)
