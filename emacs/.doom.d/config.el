@@ -576,6 +576,8 @@ Default to the URL around or before point."
   :config
   (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
   (setq! elfeed-goodies/entry-pane-size 0.5
+         elfeed-goodies/feed-source-column-width 20
+         elfeed-goodies/tag-column-width 30
          elfeed-search-filter "@6-months-ago")
   (setq elfeed-feeds
         '(("https://www.youtube.com/feeds/videos.xml?channel_id=UCYCO3Kifwg56zhus3XXiAVg" youtube productivity)
@@ -583,7 +585,11 @@ Default to the URL around or before point."
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCOJNw9aHGRkYuIOqwU7yK-Q" youtube travel)
           ("https://protesilaos.com/codelog.xml" programming)
           ("https://protesilaos.com/commentary.xml" misc)
-          ("https://protesilaos.com/news.xml" misc))))
+          ("https://protesilaos.com/news.xml" misc)
+          ("https://lukesmith.xyz/index.xml" misc)
+          ("https://curiosum.dev/blog/rss.xml" programming))))
+
+
 
 (use-package! elfeed-tube
   :after elfeed
