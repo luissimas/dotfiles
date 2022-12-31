@@ -1,15 +1,15 @@
 #!/bin/bash
 
-booksDirectory=/home/padawan/dox/books
+booksDirectory=/home/padawan/repos/books
 
 function get_books() {
-	ls $wallpaperDirectory
+    ls $wallpaperDirectory
 }
 
-selected=$(ls $booksDirectory/**/* | grep '.pdf\|.epub\|.djvu' | sed 's/\/home\/padawan\/dox\/books\///' | dmenu -i -p "Select a file")
+selected=$(ls -R $booksDirectory | grep '.pdf\|.epub\|.djvu' | sed 's/\/home\/padawan\/repos\/books\///' | dmenu -i -p "Select a file")
 
 if [ -z "$selected" ]; then
-	echo "No book selected"
+    echo "No book selected"
 else
-	zathura $booksDirectory/$selected
+    zathura $booksDirectory/$selected
 fi
