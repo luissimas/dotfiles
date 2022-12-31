@@ -167,6 +167,19 @@
 (use-package! apheleia
   :config
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
+
+  ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
+  ;; run the commands in the current project root. This is important to make mix
+  ;; formatter respect the project configuration in .formatter.exs.
+  ;; source: https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
+  (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
+    (let ((project (project-current)))
+      (if (not (null project))
+          (let ((default-directory (project-root project))) (apply orig-fn args))
+        (apply orig-fn args))))
+
+  (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
+
   :init (apheleia-global-mode))
 
 ;; LSP
@@ -588,8 +601,6 @@ Default to the URL around or before point."
           ("https://protesilaos.com/news.xml" misc)
           ("https://lukesmith.xyz/index.xml" misc)
           ("https://curiosum.dev/blog/rss.xml" programming))))
-
-
 
 (use-package! elfeed-tube
   :after elfeed
