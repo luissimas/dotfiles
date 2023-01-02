@@ -66,8 +66,6 @@
 ;; Async formatting
 (package! apheleia)
 
-(package! minions)
-
 ;; Org-mode enhancements
 (package! org-modern)
 (package! org-appear)

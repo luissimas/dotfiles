@@ -1,5 +1,6 @@
 ;==========================================================
 ;
+
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
 ;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
@@ -18,7 +19,7 @@
 
 [colors]
 background = ${xrdb:background:#000}
-; background = #00
+background-dim = ${xrdb:color8:#000}
 foreground = ${xrdb:foreground:#111}
 highlight = ${xrdb:foreground:#222}
 
@@ -53,9 +54,9 @@ font-1=Iosevka Nerd Font:style=Regular:pixelsize=10:antialias=true;2
 
 module-margin = 1
 
-modules-left = bspwm
+modules-left = bspwm xwindow
 modules-center = time
-modules-right = packages bluetooth network pulseaudio battery temperature cpu
+modules-right = bluetooth network memory temperature pulseaudio backlight battery
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -115,36 +116,34 @@ scroll-down = bspc desktop -f prev
 [module/xwindow]
 type = internal/xwindow
 label = %title%
-
-label-margin = 2
 label-maxlen = 50
 
 [module/bspwm]
 type = internal/bspwm
 enable-scroll = false
 
-label-focused = 
-; label-focused = %name%
-; label-focused-foreground = ${colors.background}
-; label-focused-background = ${colors.foreground}
+; label-focused = 
+label-focused = %name%
+label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.foreground}
 label-focused-padding = 1
 
-label-occupied = 
-; label-occupied = %name%
-; label-occupied-background = ${colors.background}
-; label-occupied-foreground = ${colors.foreground}
-; label-occupied-underline = ${colors.foreground}
+; label-occupied = 
+label-occupied = %name%
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.foreground}
+label-occupied-underline = ${colors.foreground}
 label-occupied-padding = 1
 
-label-urgent = 
-; label-urgent = %name%
-; label-urgent-background = ${colors.background}
-; label-urgent-foreground = ${colors.foreground}
-; label-urgent-underline = ${colors.foreground}
+; label-urgent = 
+label-urgent = %name%
+label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-underline = ${colors.foreground}
 label-urgent-padding = 1
 
-label-empty = 
-; label-empty = %name%
+; label-empty = 
+label-empty = %name%
 label-empty-padding = 1
 
 format = <label-state> <label-mode>
@@ -155,7 +154,7 @@ format = <label-state> <label-mode>
 type = internal/date
 interval = 10
 
-time = "%H:%M "
+time = "%H:%M"
 date = "%A, %b %d"
 
 label = %date% %time%
@@ -191,8 +190,8 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 
-label-discharging = %percentage%%
-format-discharging = <ramp-capacity>  <label-discharging>
+label-discharging = %percentage:3%%
+format-discharging = <ramp-capacity> <label-discharging>
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -202,11 +201,11 @@ animation-charging-4 = 
 
 animation-charging-framerate = 750
 
-label-charging = %percentage%%
-format-charging = <animation-charging>  <label-charging>
+label-charging = %percentage:3%%
+format-charging = <animation-charging> <label-charging>
 
-label-full = %percentage%%
-format-full = <ramp-capacity>  <label-full>
+label-full = %percentage:3%%
+format-full = <ramp-capacity> <label-full>
 
 [module/temperature]
 type = custom/script
@@ -214,7 +213,6 @@ type = custom/script
 exec = temp.sh
 
 interval = 5
-
 
 [module/cpu]
 type = internal/cpu
@@ -231,13 +229,13 @@ ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
 
-label = ﬙ %percentage:02:3%%
+label = %percentage:02:3%%
 
-format = <label>
+format = ﬙ <label>
 
 [module/memory]
 type = internal/memory
-label =  %gb_used%/%gb_total%
+label =  %used%
 
 [module/packages]
 type = custom/script
@@ -249,13 +247,6 @@ exec-if = sudo pacman -Sy
 interval = 3600
 
 click-left = packages.sh
-
-[module/network]
-type = custom/script
-
-exec = network.sh
-
-interval = 3
 
 [module/spotify]
 type = custom/script
@@ -274,3 +265,32 @@ click-left = bluetooth.sh --toggle &
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
+[module/backlight]
+type = internal/backlight
+
+card = intel_backlight
+use-actual-brightness = true
+
+label = %percentage:3%%
+format =  <label>
+
+[module/network]
+type = internal/network
+interface-type = wireless
+interval = 1
+
+format-connected =   <label-connected>
+format-disconnected =   <label-disconnected>
+label-connected = %essid%
+label-disconnected = Disconnected
+
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+fixed-values = true
+interval = 10
+
+label-mounted = %used%
+format-mounted =  <label-mounted>
