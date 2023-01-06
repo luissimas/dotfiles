@@ -46,10 +46,10 @@ XF86AudioMute
 
 # screen brightness
 XF86MonBrightnessUp
-  light -A 10
+  light -A 5
 
 XF86MonBrightnessDown
-  light -U 10
+  light -U 5
 
 ###############
 #bspwm hotkeys#

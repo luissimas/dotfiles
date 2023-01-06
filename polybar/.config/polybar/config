@@ -205,7 +205,7 @@ label-charging = %percentage:3%%
 format-charging = <animation-charging> <label-charging>
 
 label-full = %percentage:3%%
-format-full = <ramp-capacity> <label-full>
+format-full = <ramp-capacity>  <label-full>
 
 [module/temperature]
 type = custom/script
