@@ -95,7 +95,6 @@ m4
 maim
 make
 man-pages
-manga-cli-git
 mariadb
 mongodb-bin
 mongodb-compass
