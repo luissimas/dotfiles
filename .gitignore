@@ -1,15 +1,3 @@
-nvim/.config/nvim/autoload
-nvim/.config/nvim/.netrwhist
-nvim/.config/nvim/plugin/packer_compiled.lua
-nvim/.config/nvim/plugin/packer_compiled.vim
-emacs/.config/emacs/eln-cache/
-emacs/.config/emacs/history
-emacs/.config/emacs/places
-emacs/.config/emacs/projects
-emacs/.config/emacs/straight/
-emacs/.config/emacs/tmp/
-emacs/.config/emacs/transient/
-emacs/.config/emacs/undo/
 qutebrowser/.config/qutebrowser/qsettings/QtProject.conf
 *.log
 secret.json
