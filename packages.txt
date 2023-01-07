@@ -157,7 +157,6 @@ sed
 sfml
 shellcheck
 shfmt
-spaceship-prompt
 stow
 strace
 streamlink-git
