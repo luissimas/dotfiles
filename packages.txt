@@ -284,3 +284,5 @@ zscroll-git
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
+
+a
