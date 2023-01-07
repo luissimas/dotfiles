@@ -1,6 +1,5 @@
 ;==========================================================
 ;
-
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
 ;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
@@ -56,7 +55,7 @@ module-margin = 1
 
 modules-left = bspwm xwindow
 modules-center = time
-modules-right = bluetooth network memory temperature pulseaudio backlight battery
+modules-right = bluetooth network memory temperature pulseaudio backlight battery-internal battery-slice
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -175,13 +174,10 @@ ramp-volume-2 = ""
 
 label-muted = "ﱝ mute"
 
-[module/battery]
+[module/battery-base]
 type = internal/battery
 
 full-at = 99
-
-battery = BAT0
-adapter = ADP1
 
 poll-interval = 5
 
@@ -190,7 +186,9 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 
-label-discharging = %percentage:3%%
+time-format = %H:%M
+
+label-discharging = %percentage:3%% %time%
 format-discharging = <ramp-capacity> <label-discharging>
 
 animation-charging-0 = 
@@ -207,12 +205,28 @@ format-charging = <animation-charging> <label-charging>
 label-full = %percentage:3%%
 format-full = <ramp-capacity>  <label-full>
 
+[module/battery-internal]
+inherit = module/battery-base
+
+battery = BAT0
+adapter = ADP1
+
+[module/battery-slice]
+inherit = module/battery-base
+
+battery = BAT1
+adapter = ADP1
+
 [module/temperature]
-type = custom/script
+type = internal/temperature
 
-exec = temp.sh
+thermal-zone = 3
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon9/temp1_input
 
-interval = 5
+base-temperature = 0
+warn-temperature = 80
+
+format =   <label>
 
 [module/cpu]
 type = internal/cpu
