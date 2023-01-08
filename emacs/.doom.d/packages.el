@@ -62,6 +62,7 @@
 (package! ewal)
 (package! ewal-doom-themes)
 (package! ef-themes)
+(package! modus-themes)
 
 ;; Async formatting
 (package! apheleia)

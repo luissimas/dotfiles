@@ -72,6 +72,7 @@ hunspell-pt-br
 inetutils
 inkscape
 inotify-tools
+insomnia-bin
 iw
 iwd
 jdk8-openjdk
@@ -130,6 +131,7 @@ pcmanfm
 pdfjs
 pkgconf
 playerctl
+polkit-dumb-agent-git
 polybar
 postgresql
 psutils
@@ -142,6 +144,7 @@ python-pip
 python-prctl
 python-pynvim
 python-pywal
+python-validity
 python2
 qmk
 qutebrowser

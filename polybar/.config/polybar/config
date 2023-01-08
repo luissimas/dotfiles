@@ -53,9 +53,9 @@ font-1=Iosevka Nerd Font:style=Regular:pixelsize=10:antialias=true;2
 
 module-margin = 1
 
-modules-left = bspwm xwindow
+modules-left = bspwm
 modules-center = time
-modules-right = bluetooth network memory temperature pulseaudio backlight battery-internal battery-slice
+modules-right = bluetooth network filesystem memory temperature pulseaudio backlight battery-internal battery-slice
 
 scroll-up = bspwn-wsnext
 scroll-down = bspwn-wsprev
@@ -221,7 +221,7 @@ adapter = ADP1
 type = internal/temperature
 
 thermal-zone = 3
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon9/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon10/temp1_input
 
 base-temperature = 0
 warn-temperature = 80

@@ -41,7 +41,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/"
+(setq org-directory "~/docs/org/"
       org-roam-directory "~/repos/zettelkasten")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -103,10 +103,6 @@
 (add-hook! 'doom-init-ui-hook
            :append ;; ensure it gets added to the end.
            #'(lambda () (require 'uniquify) (setq uniquify-buffer-name-style 'forward)))
-
-;; Fringe width
-(after! git-gutter-fringe
-  (set-fringe-mode '(2 . 0)))
 
 ;; Treemacs icon theme
 (setq! doom-themes-treemacs-theme "doom-colors")
@@ -349,7 +345,7 @@
             (setq associations nil)))))))
 
 ;; Load system theme on startup
-(add-hook 'emacs-startup-hook 'pada/load-system-theme)
+(add-hook 'doom-after-init-hook #'pada/load-system-theme)
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
@@ -371,7 +367,7 @@
 ;; normal emacs startup (directly calling the functions)
 (if (daemonp)
     (progn
-      (add-hook 'server-after-make-frame-hook 'pada/set-frame-parameters))
+      (add-hook! 'server-after-make-frame-hook #'pada/set-frame-parameters (enable-theme doom-theme)))
   (progn
     (pada/set-frame-parameters)))
 
@@ -467,7 +463,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         :desc "Agenda"            "oaa" #'pada/custom-agenda
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
 
-  (add-to-list 'org-agenda-files "~/dox/vault/Notes")
+  (add-to-list 'org-agenda-files "~/repos/zettelkasten")
   (add-hook 'org-mode-hook #'pada/org-mode-setup)
   (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
   (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
@@ -523,7 +519,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3)))
 
 ;; Disabling mode-line on dashboard
-(add-hook! +doom-dashboard-mode #'hide-mode-line-mode)
+(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1))
 
 ;; Hiding cursor on dashboard
 (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
@@ -559,8 +555,9 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
                                    pada/doom-dashboard-quote-widget
-                                   doom-dashboard-widget-loaded
-                                   doom-dashboard-widget-footer))
+                                   doom-dashboard-widget-loaded))
+
+(setq fancy-splash-image (concat doom-user-dir "icon.png"))
 
 ;; Org-roam
 (use-package! websocket
@@ -611,3 +608,27 @@ Default to the URL around or before point."
 
 (use-package! elfeed-tube-mpv
   :after elfeed-tube)
+
+(use-package! doom-modeline
+  :config
+  (setq! doom-modeline-buffer-file-name-style 'buffer-name
+         doom-modeline-major-mode-icon nil
+         doom-modeline-major-mode-color-icon t
+         doom-modeline-enable-word-count t
+         doom-modeline-checker-simple-format t
+         doom-modeline-vcs-max-length 20
+         doom-modeline-lsp nil)
+  (setq! lsp-modeline-diagnostics-enable nil)
+  (setq all-the-icons-scale-factor 1.0))
+
+(use-package! modus-themes
+  :init
+  (setq! modus-themes-org-blocks 'gray-background
+         modus-themes-common-palette-overrides
+         '((fg-line-number-inactive "gray50")
+           (fg-line-number-active fg-main)
+           (bg-line-number-inactive unspecified)
+           (bg-line-number-active unspecified)
+           (border-mode-line-active unspecified)
+           (border-mode-line-inactive unspecified)
+           (fringe unspecified))))

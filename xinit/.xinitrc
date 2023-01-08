@@ -19,6 +19,6 @@ emacs --daemon --with-profile doom &
 # redshift -b 1:0.5 -l -27.59667:-48.54917 &
 
 # Starting polkit agent
-# polkit-dumb-agent &
+polkit-dumb-agent &
 
 exec bspwm
