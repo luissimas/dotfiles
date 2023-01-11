@@ -8,14 +8,7 @@ killall -q polybar
 
 # Launch main bar
 echo "---" | tee -a /tmp/polybar.log
-polybar main 2>&1 | tee -a /tmp/polybar_main.log &
+polybar main 2>&1 | tee -a /tmp/polybar.log &
 disown
-
-# Launch second monitor bar (if available)
-if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
-	echo "---" | tee -a /tmp/polybar.log
-	polybar secondary 2>&1 | tee -a /tmp/polybar_seconday.log &
-	disown
-fi
 
 echo "Bars launched..."

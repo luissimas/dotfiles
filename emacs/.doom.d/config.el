@@ -383,7 +383,7 @@
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (mixed-pitch-mode)
   (visual-line-mode)
-  (git-gutter-mode -1)
+  (diff-hl-mode -1)
   (setq-local line-spacing 1
               display-line-numbers nil))
 
@@ -463,7 +463,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         :desc "Agenda"            "oaa" #'pada/custom-agenda
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
 
-  (add-to-list 'org-agenda-files "~/repos/zettelkasten")
+  ;; (add-to-list 'org-agenda-files "~/repos/zettelkasten")
   (add-hook 'org-mode-hook #'pada/org-mode-setup)
   (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
   (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
@@ -557,7 +557,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
                                    pada/doom-dashboard-quote-widget
                                    doom-dashboard-widget-loaded))
 
-(setq fancy-splash-image (concat doom-user-dir "icon.png"))
+(setq fancy-splash-image (expand-file-name "icon.png" doom-user-dir))
 
 ;; Org-roam
 (use-package! websocket

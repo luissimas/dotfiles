@@ -5,6 +5,11 @@ xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd >/dev/null || sxhkd &
 
 ~/.config/bspwm/scripts/bspwmcolors
+
+# For some reason we have to wait a bit before starting polybar, otherwise
+# it doesn't show properly (although it starts just fine).
+sleep 1
+
 ~/.config/polybar/launch.sh
 
 # bspc monitor -d Δ Θ Π Ψ Ω
