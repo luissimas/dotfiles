@@ -3,15 +3,15 @@
 wallpaperDirectory=~/.wal/
 
 # Prompt if the script should use the wallpaper or the themes
-option=$(echo -e 'Theme\nWallpaper\nPywal' | dmenu -i -p "Source")
+option=$(echo -e 'Theme\nWallpaper\nPywal' | rofi -dmenu -i -p "Source")
 
 case $option in "Pywal")
-    selected=$(ls $wallpaperDirectory | dmenu -i -p "Select a file")
+    selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "Select a file")
 
     if [[ -z "$selected" ]]; then
         printf "No image selected\n"
     else
-        themelight=$(echo -e 'Dark\nLight' | dmenu -i -p "Select")
+        themelight=$(echo -e 'Dark\nLight' | rofi -dmenu -i -p "Select")
 
         if [[ -z "$themelight" ]]; then
             printf "No selection\n"
@@ -38,9 +38,6 @@ case $option in "Pywal")
             # Update emacs colors
             emacsclient -e "(consult-theme 'ewal-doom-one)"
 
-            # Recompiling dmenu
-            sudo recompile_dmenu
-
             # Update betterlockscreen (takes a while)
             printf "Setting lock screen...\n"
             betterlockscreen -u "$wallpaperDirectory$selected" >/dev/null 2>&1
@@ -49,7 +46,7 @@ case $option in "Pywal")
     fi
     ;;
 "Theme")
-    selected=$(echo -e 'OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | dmenu -i -p "Theme")
+    selected=$(echo -e 'OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi' | rofi -dmenu -i -p "Theme")
 
     if [[ -z $selected ]]; then
         printf "No selection"
@@ -114,15 +111,12 @@ case $option in "Pywal")
         # Update emacs colors
         emacsclient -e "(pada/load-system-theme)"
 
-        # Recompiling dmenu
-        sudo recompile_dmenu
-
         # Update qutebrowser colors
         pgrep qutebrowser >/dev/null && qutebrowser :config-source
     fi
     ;;
 "Wallpaper")
-    selected=$(ls $wallpaperDirectory | dmenu -i -p "File")
+    selected=$(ls $wallpaperDirectory | roif -dmenu -i -p "File")
 
     if [[ -z "$selected" ]]; then
         printf "No image selected\n"

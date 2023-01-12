@@ -1,14 +1,14 @@
 #!/bin/bash
 
-option=$(echo -e 'Shutdown\nReboot\nLogout' | dmenu -i -p "Power prompt")
+option=$(echo -e 'Shutdown\nReboot\nLogout' | rofi -dmenu -i -p "Power prompt")
 
 case $option in "Shutdown")
-	exec shutdown now
-	;;
+    exec shutdown now
+    ;;
 "Reboot")
-	exec reboot
-	;;
+    exec reboot
+    ;;
 "Logout")
-	exec bspc quit
-	;;
+    exec bspc quit
+    ;;
 esac

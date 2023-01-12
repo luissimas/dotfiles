@@ -1,9 +1,9 @@
 #!/bin/bash
 
-selected=$(pamixer --list-sinks | grep alsa | dmenu -i -p "Select output device" | awk '{print $1}')
+selected=$(pamixer --list-sinks | grep alsa | rofi -dmenu -i -p "Select output device" | awk '{print $1}')
 
 if [ -z "$selected" ]; then
-	echo "No device selected"
+    echo "No device selected"
 else
-	pacmd set-default-sink $selected
+    pacmd set-default-sink $selected
 fi
