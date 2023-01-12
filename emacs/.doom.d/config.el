@@ -424,7 +424,9 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-agenda-current-time-string (concat "Now " (make-string 70 ?-))
         org-agenda-tags-column 10
         org-log-done 'timer
-        org-log-into-drawer t)
+        org-log-into-drawer t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t)
 
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
@@ -580,7 +582,10 @@ Default to the URL around or before point."
           org-roam-ui-open-on-start t
           org-roam-ui-browser-function #'browse-url-surf)
     (map! :leader
-          :desc "Open graph" "nrg" #'org-roam-ui-open))
+          :desc "Open graph" "nrg" #'org-roam-ui-open)
+    (map! :leader
+          :map org-mode-map
+          :desc "Open graph" "mmg" #'org-roam-ui-open))
 
 (use-package! elfeed
   :config
@@ -632,3 +637,7 @@ Default to the URL around or before point."
            (border-mode-line-active unspecified)
            (border-mode-line-inactive unspecified)
            (fringe unspecified))))
+
+(use-package! diff-hl
+  :config
+  (setq diff-hl-draw-borders nil))
