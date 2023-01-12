@@ -12,7 +12,6 @@ unclutter --timeout 1 &
 wal -R &
 # picom &
 mopidy &
-# emacs --daemon --no-x-resources &
 emacs --daemon --with-profile doom &
 
 # Redshift controlling backlight temperature and color

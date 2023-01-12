@@ -12,14 +12,7 @@ sleep 1
 
 ~/.config/polybar/launch.sh
 
-# bspc monitor -d Δ Θ Π Ψ Ω
-
-if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
-    bspc monitor DVI-D-0 -d 1 2 3 4 5
-    bspc monitor HDMI-0 -d 6 7 8
-else
-    bspc monitor -d 1 2 3 4 5
-fi
+bspc monitor -d 1 2 3 4 5
 
 bspc config border_width 1
 bspc config window_gap 0
