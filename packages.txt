@@ -153,6 +153,7 @@ redis
 redshift
 ripgrep
 rofi
+rofi-bluetooth-git
 screen
 screenkey
 scrot
