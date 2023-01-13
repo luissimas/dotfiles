@@ -11,6 +11,7 @@ automake
 base
 bash-language-server
 bat
+batsignal
 betterlockscreen
 binutils
 bison
@@ -18,6 +19,7 @@ bluez
 bluez-alsa-git
 bluez-utils
 brave-bin
+brillo
 bspwm
 btop
 chromium-widevine
@@ -85,7 +87,6 @@ libgccjit
 libreoffice-fresh
 libtool
 libvirt
-light
 linux
 linux-firmware
 linux-headers
