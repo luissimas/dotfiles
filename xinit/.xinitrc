@@ -11,7 +11,9 @@ unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
 # picom &
-mopidy &
+# mopidy &
+dunst &
+batsignal -c 10 -w 30 -f 99
 emacs --daemon --with-profile doom &
 
 # Redshift controlling backlight temperature and color
