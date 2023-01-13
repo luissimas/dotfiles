@@ -21,9 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 16 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 24 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16))
+(setq doom-font (font-spec :family "Iosevka Padawan" :size 14 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Padawan" :size 20 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -385,7 +385,8 @@
   (visual-line-mode)
   (diff-hl-mode -1)
   (setq-local line-spacing 1
-              display-line-numbers nil))
+              display-line-numbers nil)
+  (+zen/toggle))
 
 (defun pada/set-org-faces ()
   "Customize faces for `org-mode' headings.
@@ -466,7 +467,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
 
   ;; (add-to-list 'org-agenda-files "~/repos/zettelkasten")
-  (add-hook 'org-mode-hook #'pada/org-mode-setup)
+  (add-hook! 'org-mode-hook :append #'pada/org-mode-setup)
   (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
   (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
   (advice-add #'consult-theme :after (lambda (&rest args) (pada/set-org-faces))))
@@ -599,6 +600,7 @@ Default to the URL around or before point."
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCcaTUtGzOiS4cqrgtcsHYWg" youtube productivity)
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" youtube programming)
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCOJNw9aHGRkYuIOqwU7yK-Q" youtube travel)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube programming)
           ("https://protesilaos.com/codelog.xml" programming)
           ("https://phaazon.net/blog/feed" programming)
           ("https://protesilaos.com/commentary.xml" misc)
