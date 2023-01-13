@@ -42,7 +42,7 @@ super + shift + m
 	pamixer -t
 
 XF86AudioMute
-	pamixer -t
+  pamixer -t
 
 # screen brightness
 XF86MonBrightnessUp
