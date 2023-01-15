@@ -4,7 +4,7 @@
 
 # program launcher
 super + p
-  rofi -show combi -modes combi -combi-modes "window,drun,run"
+  rofi -show run
 
 # power prompt
 super + shift + q

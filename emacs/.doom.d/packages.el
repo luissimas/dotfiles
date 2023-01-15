@@ -93,3 +93,6 @@
 
 ;; sxhkdrc
 (package! sxhkdrc-mode)
+
+;; Support for engrave org-mode code block exports
+(package! engrave-faces)

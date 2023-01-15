@@ -93,7 +93,9 @@
         evil-move-cursor-back nil
         evil-shift-width 2)
   (map! :nv "H" 'evil-beginning-of-line
-        :nv "L" 'evil-end-of-line))
+        :nv "L" 'evil-end-of-line
+        :nv "j" 'evil-next-visual-line
+        :nv "k" 'evil-previous-visual-line))
 
 ;; Unique buffer name formats
 ;; doom's `persp-mode' activation disables uniquify, b/c it says it breaks it.
@@ -429,6 +431,9 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-agenda-skip-deadline-if-done t
         org-agenda-skip-scheduled-if-done t)
 
+  ;; Highlight code blocks on latex export
+  (setq org-latex-listings 'engraved)
+
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
            ((todo "WAIT"
@@ -603,6 +608,7 @@ Default to the URL around or before point."
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube programming)
           ("https://protesilaos.com/codelog.xml" programming)
           ("https://phaazon.net/blog/feed" programming)
+          ("https://project-mage.org/rss.xml" programming)
           ("https://protesilaos.com/commentary.xml" misc)
           ("https://protesilaos.com/news.xml" misc)
           ("https://lukesmith.xyz/index.xml" misc)
