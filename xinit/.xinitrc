@@ -17,7 +17,7 @@ batsignal -c 10 -w 30 -f 99 &
 emacs --daemon --with-profile doom &
 
 # Redshift controlling backlight temperature and color
-# redshift -b 1:0.5 -l -27.59667:-48.54917 &
+redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | awk 'OFS=":" {print $3,$5}' | tr -d ',}') &
 
 # Starting polkit agent
 polkit-dumb-agent &
