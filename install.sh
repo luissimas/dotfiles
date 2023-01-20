@@ -12,7 +12,6 @@ cd $dotfilesdir
 
 # Use GNU Stow to symlink config files
 
-for folder in $(ls -d */)
-do
-  stow $folder
+for folder in $(ls -d */); do
+    stow $folder
 done

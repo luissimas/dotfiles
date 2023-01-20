@@ -132,3 +132,7 @@ case $option in "Pywal")
     printf "No option selected\n"
     ;;
 esac
+
+[[ ! -L ~/.config/dunst/dunstrc ]] && ln -s ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
+
+killall dunst && dunst &
