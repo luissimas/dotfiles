@@ -116,7 +116,7 @@ case $option in "Pywal")
     fi
     ;;
 "Wallpaper")
-    selected=$(ls $wallpaperDirectory | roif -dmenu -i -p "File")
+    selected=$(ls $wallpaperDirectory | rofi -dmenu -i -p "File")
 
     if [[ -z "$selected" ]]; then
         printf "No image selected\n"

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-cd ~/repos/zettelkasten
-git-sync
-
-emacsclient -e '(org-roam-db-sync)'

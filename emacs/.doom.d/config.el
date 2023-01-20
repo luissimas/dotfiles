@@ -413,7 +413,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-startup-with-latex-preview t
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("liven") ("personal"))
-        org-format-latex-options (plist-put org-format-latex-options :scale 1.1)
+        org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
         org-hidden-keywords '(title)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
