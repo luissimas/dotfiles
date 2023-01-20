@@ -10,7 +10,7 @@ setxkbmap -model abnt2 -layout br -variant thinkpad -option "caps:swapescape" &
 unclutter --timeout 1 &
 ~/.fehbg &
 wal -R &
-# picom &
+picom &
 # mopidy &
 dunst &
 batsignal -c 10 -w 30 -f 99 &
