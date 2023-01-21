@@ -129,6 +129,7 @@ patch
 pavucontrol
 pcmanfm
 pdfjs
+picom
 pkgconf
 playerctl
 polkit-dumb-agent-git
@@ -153,7 +154,6 @@ redis
 redshift
 ripgrep
 rofi
-rofi-bluetooth-git
 screen
 screenkey
 scrot
@@ -206,6 +206,7 @@ ttf-iosevka-term-ss04
 ttf-jetbrains-mono
 ttf-liberation
 ttf-roboto-mono
+ttf-weather-icons
 ttfautohint
 typescript-language-server
 unclutter
