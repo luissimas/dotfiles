@@ -57,7 +57,7 @@ battery_print() {
 }
 
 battery_notify() {
-    dunstify -t 0 "$(acpi)"
+    notify-send -t 10000 "$(acpi)"
 }
 
 path_pid="/tmp/polybar-battery-combined-udev.pid"
