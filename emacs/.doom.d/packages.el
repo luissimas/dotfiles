@@ -63,6 +63,7 @@
 (package! ewal-doom-themes)
 (package! ef-themes)
 (package! modus-themes)
+(package! catppuccin :recipe (:host github :repo "catppuccin/emacs"))
 
 ;; Async formatting
 (package! apheleia)
