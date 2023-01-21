@@ -56,6 +56,10 @@ battery_print() {
     echo "$icon $battery_percent%"
 }
 
+battery_notify() {
+    dunstify -t 0 "$(acpi)"
+}
+
 path_pid="/tmp/polybar-battery-combined-udev.pid"
 
 case "$1" in
@@ -65,6 +69,9 @@ case "$1" in
     if [ "$pid" != "" ]; then
         kill -10 "$pid"
     fi
+    ;;
+--notify)
+    battery_notify
     ;;
 *)
     echo $$ >$path_pid
