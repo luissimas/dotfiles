@@ -13,7 +13,7 @@ wal -R &
 picom &
 # mopidy &
 dunst &
-batsignal -c 10 -w 30 -f 99 &
+batsignal -c 10 -w 15 -f 99 -e &
 emacs --daemon --with-profile doom &
 
 # Redshift controlling backlight temperature and color
