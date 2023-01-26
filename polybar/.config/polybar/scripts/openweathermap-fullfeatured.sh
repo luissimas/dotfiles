@@ -54,5 +54,5 @@ if [ -n "$current" ]; then
     current_temp=$(echo "$current" | jq ".main.temp" | cut -d "." -f 1)
     current_icon=$(echo "$current" | jq -r ".weather[0].icon")
 
-    echo "$(get_icon "$current_icon") $current_temp$SYMBOL"
+    echo "$(get_icon "$current_icon")  $current_temp$SYMBOL"
 fi
