@@ -49,10 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; Treesitter for better syntax highlight
-(package! tree-sitter)
-(package! tree-sitter-langs)
-
 ;; Hledger
 (package! hledger-mode)
 
@@ -97,3 +93,6 @@
 
 ;; Support for engrave org-mode code block exports
 (package! engrave-faces)
+
+;; Cuda
+(package! cuda-mode)

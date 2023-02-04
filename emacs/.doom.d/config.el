@@ -117,15 +117,9 @@
        standard-indent 2
        backward-delete-char-untabify-method 'hungry)
 
-;; Treesitter
-(use-package! tree-sitter
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (global-tree-sitter-mode))
-
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2))
+  (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2) ("~/docs" . 2))
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid))
@@ -270,7 +264,7 @@
 
 (use-package! hledger-mode
   :config
-  (setq! hledger-jfile (expand-file-name "~/dox/accounting/accounting.journal")
+  (setq! hledger-jfile (expand-file-name "~/docs/Accounting/accounting.journal")
          hledger-reporting-day 1)
   (map! :map hledger-mode-map
         :localleader
@@ -608,7 +602,6 @@ Default to the URL around or before point."
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube programming)
           ("https://protesilaos.com/codelog.xml" programming)
           ("https://phaazon.net/blog/feed" programming)
-          ("https://project-mage.org/rss.xml" programming)
           ("https://protesilaos.com/commentary.xml" misc)
           ("https://protesilaos.com/news.xml" misc)
           ("https://lukesmith.xyz/index.xml" misc)

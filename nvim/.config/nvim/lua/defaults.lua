@@ -105,15 +105,15 @@ vim.cmd [[
 -- vim.o.statusline = " %f %m %r %= %y %p%% "
 
 -- Quickfixlist
-vim.cmd [[
-  augroup QuickFixSettings
-    autocmd!
-    autocmd BufWrite,BufEnter,InsertLeave * lua vim.diagnostic.setloclist({ open = false })
-    autocmd FileType qf set nonumber
-    autocmd FileType qf set norelativenumber
-    autocmd FileType qf set signcolumn="no"
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup QuickFixSettings
+--     autocmd!
+--     autocmd BufWrite,BufEnter,InsertLeave * lua vim.diagnostic.setloclist({ open = false })
+--     autocmd FileType qf set nonumber
+--     autocmd FileType qf set norelativenumber
+--     autocmd FileType qf set signcolumn="no"
+--   augroup end
+-- ]]
 
 vim.api.nvim_set_keymap("n", "<C-q>", ":copen<Enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-n>", ":cnext<Enter>zz", { noremap = true, silent = true })

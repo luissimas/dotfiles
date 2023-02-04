@@ -8,7 +8,7 @@ export PATH=$HOME/.npm-packages/bin:$PATH
 export PATH=$HOME/repos/doom/bin:$PATH
 export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
-export LEDGER_FILE=$HOME/dox/accounting/accounting.journal
+export LEDGER_FILE=$HOME/docs/Accounting/accounting.journal
 
 # Exports
 export BROWSER="brave"
