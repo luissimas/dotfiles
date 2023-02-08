@@ -30,6 +30,6 @@ settings:
     https://mail.proton.me#mailto=%25s: true
     https://mail.protonmail.com?to=%25s: false
   statusbar.show:
-    global: always
+    global: never
   tabs.show:
-    global: always
+    global: never

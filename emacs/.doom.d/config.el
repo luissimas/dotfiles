@@ -81,6 +81,8 @@
 
 (map! :nv "gr" #'+lookup/references)
 
+(setq delete-by-moving-to-trash t)
+
 ;; Disabling window-divider-mode
 (remove-hook 'doom-init-ui-hook #'window-divider-mode)
 
@@ -119,7 +121,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '(("~/fun" . 3) "~/liven" ("~/cati" . 2) ("~/docs" . 2))
+  (setq! projectile-project-search-path '(("~/fun" . 4) "~/liven" ("~/cati" . 2) ("~/docs" . 2))
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid))
@@ -130,7 +132,7 @@
         persp-auto-resume-time 0
         persp-init-frame-behaviour t
         persp-interactive-init-frame-behaviour-override -1
-        persp-emacsclient-init-frame-behaviour-override -1)
+        persp-emacsclient-init-frame-behaviour-override "main")
   (map! :leader :map doom-leader-workspace-map
         (:prefix-map ("TAB" . "workspace")
          :desc "Display tab bar"           "TAB" #'+workspace/display
@@ -237,8 +239,14 @@
         :desc "Diagnostics" "cd" #'consult-lsp-diagnostics))
 
 ;; Orderless
-(after! orderless
-  (setq! orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
+(use-package! orderless
+  :config
+  (setq! completion-styles '(orderless basic)
+         completion-ignore-case t
+         completion-category-defaults nil
+         read-file-name-completion-ignore-case t
+         read-buffer-completion-ignore-case t
+         orderless-matching-styles '(orderless-literal orderless-flex orderless-regexp)))
 
 ;; Themes
 (after! modus-themes

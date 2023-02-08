@@ -93,6 +93,3 @@
 
 ;; Support for engrave org-mode code block exports
 (package! engrave-faces)
-
-;; Cuda
-(package! cuda-mode)
