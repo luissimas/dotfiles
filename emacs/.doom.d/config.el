@@ -76,11 +76,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(map! :leader
-      :desc "M-x" "x" #'execute-extended-command)
-
-(map! :nv "gr" #'+lookup/references)
-
+;; Use trash
 (setq delete-by-moving-to-trash t)
 
 ;; Disabling window-divider-mode
@@ -89,11 +85,17 @@
 ;; Disabling hl-line-mode
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
-(after! evil
+(use-package! evil
+  :config
   (setq +evil-want-o/O-to-continue-comments nil
         evil-want-minibuffer t
         evil-move-cursor-back nil
         evil-shift-width 2)
+  (map! :leader
+        :desc "M-x" "x" #'execute-extended-command)
+
+  (map! :nv "j" #'+lookup/references)
+
   (map! :nv "H" 'evil-beginning-of-line
         :nv "L" 'evil-end-of-line
         :nv "j" 'evil-next-visual-line
@@ -413,6 +415,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-ellipsis "…"
         org-startup-with-inline-images t
         org-startup-with-latex-preview t
+        org-preview-latex-default-process 'imagemagick
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("liven") ("personal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
@@ -433,8 +436,11 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         org-agenda-skip-deadline-if-done t
         org-agenda-skip-scheduled-if-done t)
 
-  ;; Highlight code blocks on latex export
+  ;; Better code blocks highlighting on latex export
   (setq org-latex-listings 'engraved)
+
+  ;; Tikz to draw graphics
+  (setq org-latex-packages-alist (append org-latex-packages-alist '(("" "tikz" t) "\\usetikzlibrary{arrows,automata,positioning}")))
 
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
@@ -650,3 +656,8 @@ Default to the URL around or before point."
 (use-package! diff-hl
   :config
   (setq diff-hl-draw-borders nil))
+
+(use-package! typescript-mode
+  :config
+  (setq! js-indent-level 2
+         typescript-indent-level 2))
