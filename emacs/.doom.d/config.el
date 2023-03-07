@@ -270,6 +270,9 @@
   :hook
   (ledger-mode . (lambda () (add-hook 'before-save-hook 'ledger-mode-clean-buffer nil 'make-it-local)))
   :config
+  (map! :leader
+        :desc "Ledger report" "ol" #'ledger-report)
+
   (setq! ledger-post-amount-alignment-column 60
          ledger-mode-should-check-version nil
          ledger-binary-path "hledger")
@@ -278,7 +281,7 @@
 
   (setq ledger-reports
         '(("Balance sheet" "hledger balancesheet --drop=1")
-          ("Income statement current moth" "hledger is -p thismonth -S --drop=1")
+          ("Income statement current month" "hledger is -p thismonth -S --drop=1")
           ("Income statement past 6 months" "hledger is -M -b '6 months ago' -SA --drop=1")
           ("Expenses report" "hledger bal expenses -M -b '6 months ago' -SA --depth=2 --drop=1")
           ("Investments report" "hledger bal assets:investments --no-total --drop=2"))))
