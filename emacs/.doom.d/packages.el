@@ -49,9 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; Hledger
-(package! hledger-mode)
-
 ;; Themes
 (package! nano-theme)
 (package! mindre-theme :recipe (:repo "erikbackman/mindre-theme"))
@@ -93,3 +90,6 @@
 
 ;; Support for engrave org-mode code block exports
 (package! engrave-faces)
+
+;; Disable jk escape
+(package! evil-escape :disable t)

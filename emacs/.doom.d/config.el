@@ -94,7 +94,7 @@
   (map! :leader
         :desc "M-x" "x" #'execute-extended-command)
 
-  (map! :nv "j" #'+lookup/references)
+  (map! :nv "gr" #'+lookup/references)
 
   (map! :nv "H" 'evil-beginning-of-line
         :nv "L" 'evil-end-of-line
@@ -123,7 +123,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '(("~/fun" . 4) "~/liven" ("~/cati" . 2) ("~/docs" . 2))
+  (setq! projectile-project-search-path '(("~/fun" . 4) "~/liven" ("~/cati" . 2) ("~/docs" . 2) ("~/freela". 3))
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid))
@@ -134,7 +134,7 @@
         persp-auto-resume-time 0
         persp-init-frame-behaviour t
         persp-interactive-init-frame-behaviour-override -1
-        persp-emacsclient-init-frame-behaviour-override "main")
+        persp-emacsclient-init-frame-behaviour-override -1)
   (map! :leader :map doom-leader-workspace-map
         (:prefix-map ("TAB" . "workspace")
          :desc "Display tab bar"           "TAB" #'+workspace/display
@@ -267,18 +267,21 @@
 ;; Ledger
 (use-package! ledger-mode
   :mode "\\.journal\\'"
-  :hook (ledger-mode . (lambda ()
-                         (add-hook 'before-save-hook 'ledger-mode-clean-buffer nil 'make-it-local)))
+  :hook
+  (ledger-mode . (lambda () (add-hook 'before-save-hook 'ledger-mode-clean-buffer nil 'make-it-local)))
   :config
-  (setq! ledger-post-amount-alignment-column 60))
+  (setq! ledger-post-amount-alignment-column 60
+         ledger-mode-should-check-version nil
+         ledger-binary-path "hledger")
 
-(use-package! hledger-mode
-  :config
-  (setq! hledger-jfile (expand-file-name "~/docs/Accounting/accounting.journal")
-         hledger-reporting-day 1)
-  (map! :map hledger-mode-map
-        :localleader
-        :desc "Hledger report" "mr"  #'hledger-run-command))
+  (add-hook! ledger-report-mode #'hl-line-mode)
+
+  (setq ledger-reports
+        '(("Balance sheet" "hledger balancesheet --drop=1")
+          ("Income statement current moth" "hledger is -p thismonth -S --drop=1")
+          ("Income statement past 6 months" "hledger is -M -b '6 months ago' -SA --drop=1")
+          ("Expenses report" "hledger bal expenses -M -b '6 months ago' -SA --depth=2 --drop=1")
+          ("Investments report" "hledger bal assets:investments --no-total --drop=2"))))
 
 ;; Open files in external programs
 (defgroup pada/open-external nil
@@ -440,7 +443,10 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   (setq org-latex-listings 'engraved)
 
   ;; Tikz to draw graphics
-  (setq org-latex-packages-alist (append org-latex-packages-alist '(("" "tikz" t) "\\usetikzlibrary{arrows,automata,positioning}")))
+  (setq org-latex-packages-alist (append org-latex-packages-alist '(("" "tikz" t)
+                                                                    ("" "qtree" t)
+                                                                    ("" "forest" t)
+                                                                    "\\usetikzlibrary{arrows,automata,positioning}")))
 
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
