@@ -5,6 +5,7 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+xrdb -merge ~/.Xresources &
 setxkbmap -model abnt2 -layout br -variant thinkpad -option "caps:swapescape" &
 
 unclutter --timeout 1 &

@@ -113,6 +113,8 @@
 ;; Treemacs icon theme
 (setq! doom-themes-treemacs-theme "doom-colors")
 
+(setq! doom-gruvbox-dark-variant "hard")
+
 ;; Scroll offset
 (setq! scroll-margin 8)
 

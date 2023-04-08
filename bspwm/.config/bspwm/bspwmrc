@@ -3,6 +3,7 @@
 # Startup
 xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd >/dev/null || sxhkd &
+~/.fehbg &
 
 ~/.config/bspwm/scripts/bspwmcolors
 
@@ -12,7 +13,12 @@ sleep 1
 
 ~/.config/polybar/launch.sh
 
-bspc monitor -d 1 2 3 4 5
+if [[ $(xrandr -q | grep 'HDMI2 connected') ]]; then
+  bspc monitor eDP1 -d 1 2 3 4 5
+  bspc monitor HDMI2 -d 1 2 3 4 5
+else
+  bspc monitor -d 1 2 3 4 5
+fi
 
 bspc config border_width 1
 bspc config window_gap 0
