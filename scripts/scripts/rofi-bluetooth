@@ -185,7 +185,7 @@ print_status() {
     if power_on; then
         printf ''
 
-        paired_devices_cmd="devices Paired"
+        paired_devices_cmd="devices"
         # Check if an outdated version of bluetoothctl is used to preserve backwards compatibility
         if (($(echo "$(bluetoothctl version | cut -d ' ' -f 2) < 5.65" | bc -l))); then
             paired_devices_cmd="paired-devices"
