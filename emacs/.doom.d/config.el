@@ -85,6 +85,12 @@
 ;; Disabling hl-line-mode
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
+;; Keybinding to toggle modeline
+(map! :leader
+        :desc "Modeline" "tm" #'hide-mode-line-mode)
+
+(add-hook! 'compilation-mode-hook #'hide-mode-line-mode)
+
 (use-package! evil
   :config
   (setq +evil-want-o/O-to-continue-comments nil
@@ -221,7 +227,8 @@
 
 ;; Magit
 (after! magit
-  (setq! magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (setq! magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
+         magit-save-repository-buffers 'dontask)
   (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show))
 
 ;; Vertico
