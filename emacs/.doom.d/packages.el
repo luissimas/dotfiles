@@ -99,3 +99,7 @@
 
 ;; Focus current paragraph
 (package! focus)
+
+;; Iex interaction
+(package! inf-elixir)
+

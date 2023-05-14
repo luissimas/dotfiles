@@ -701,3 +701,21 @@ Default to the URL around or before point."
   :config
   (setq! js-indent-level 2
          typescript-indent-level 2))
+
+(use-package! inf-elixir
+  :demand t
+  :config
+  (defun pada/elixir-project-p ()
+    "Check if the current projectile project is and Elixir project."
+    (interactive)
+    (and (projectile-project-p) (file-exists-p (concat (projectile-project-root) "mix.exs"))))
+
+  (defun +elixir/open-repl ()
+    "Open Elixir REPL."
+    (interactive)
+    (pop-to-buffer
+     (if (pada/elixir-project-p)
+         (inf-elixir-project)
+       (inf-elixir))))
+
+  (set-repl-handler! 'elixir-mode #'+elixir/open-repl))
