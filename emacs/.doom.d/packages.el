@@ -93,3 +93,9 @@
 
 ;; Disable jk escape
 (package! evil-escape :disable t)
+
+;; Center cursor on screen
+(package! centered-cursor-mode)
+
+;; Focus current paragraph
+(package! focus)

@@ -399,7 +399,6 @@
         :i "C-d"   #'vterm--self-insert
         :i "C-SPC" #'vterm--self-insert))
 
-
 (defun pada/org-mode-setup ()
   "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
   (mixed-pitch-mode)
@@ -619,9 +618,35 @@ Default to the URL around or before point."
           :map org-mode-map
           :desc "Open graph" "mmg" #'org-roam-ui-open))
 
+(defun pada/elfeed-show-mode-setup ()
+  "Set options for `elfeed-show-mode'. This function is meant to be added to `elfeed-show-mode-hook'."
+  (mixed-pitch-mode)
+  (setq-local line-spacing 1
+              display-line-numbers nil
+              scroll-margin 0)
+  (setq-local evil-normal-state-cursor nil
+              evil-visual-state-cursor nil
+              cursor-type nil)
+  (centered-cursor-mode)
+  (focus-mode)
+  (+zen/toggle))
+
+(use-package! centered-cursor-mode
+  :after elfeed)
+
+(use-package! focus
+  :after elfeed
+  :config
+  (add-to-list 'focus-mode-to-thing '(elfeed-show-mode . paragraph)))
+
 (use-package! elfeed
   :config
-  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+  (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
+  (add-hook! 'elfeed-search-mode-hook #'centered-cursor-mode)
+  (add-hook! 'elfeed-show-mode-hook #'pada/elfeed-show-mode-setup)
+  (map! :map 'elfeed-show-mode-map
+        :n "j" #'evil-forward-paragraph
+        :n "k" #'evil-backward-paragraph)
   (setq! elfeed-goodies/entry-pane-size 0.5
          elfeed-goodies/feed-source-column-width 20
          elfeed-goodies/tag-column-width 30
@@ -630,14 +655,11 @@ Default to the URL around or before point."
         '(("https://www.youtube.com/feeds/videos.xml?channel_id=UCYCO3Kifwg56zhus3XXiAVg" youtube productivity)
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCcaTUtGzOiS4cqrgtcsHYWg" youtube productivity)
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" youtube programming)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCOJNw9aHGRkYuIOqwU7yK-Q" youtube travel)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube programming)
           ("https://protesilaos.com/codelog.xml" programming)
-          ("https://phaazon.net/blog/feed" programming)
           ("https://protesilaos.com/commentary.xml" misc)
           ("https://protesilaos.com/news.xml" misc)
-          ("https://lukesmith.xyz/index.xml" misc)
-          ("https://curiosum.dev/blog/rss.xml" programming))))
+          ("https://phaazon.net/blog/feed" programming)
+          ("https://lukesmith.xyz/index.xml" misc))))
 
 (use-package! elfeed-tube
   :after elfeed
