@@ -102,8 +102,8 @@
 
   (map! :nv "gr" #'+lookup/references)
 
-  (map! :nv "H" 'evil-beginning-of-line
-        :nv "L" 'evil-end-of-line
+  (map! :nv "H" 'evil-beginning-of-visual-line
+        :nv "L" 'evil-end-of-visual-line
         :nv "j" 'evil-next-visual-line
         :nv "k" 'evil-previous-visual-line))
 
@@ -228,7 +228,8 @@
 ;; Magit
 (after! magit
   (setq! magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
-         magit-save-repository-buffers 'dontask)
+         magit-save-repository-buffers 'dontask
+         magit-list-refs-sortby "-creatordate")
   (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show))
 
 ;; Vertico
@@ -276,6 +277,7 @@
 ;; Ledger
 (use-package! ledger-mode
   :mode "\\.journal\\'"
+  :demand t
   :hook
   (ledger-mode . (lambda () (add-hook 'before-save-hook 'ledger-mode-clean-buffer nil 'make-it-local)))
   :config

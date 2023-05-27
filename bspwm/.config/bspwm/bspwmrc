@@ -40,3 +40,4 @@ bspc rule -a Surf state=tiled
 bspc rule -a Float state=floating
 bspc rule -a dmenu monitor=1
 bspc rule -a rofi monitor=1
+bspc rule -a gnome-calculator state=floating
