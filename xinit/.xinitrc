@@ -6,7 +6,8 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 xrdb -merge ~/.Xresources &
-setxkbmap -layout "br,us" -variant "thinkpad,intl" -model "abnt2," -option "br:swapcaps" &
+setxkbmap -layout "br,us" -variant "thinkpad,intl" -model "abnt2," -option "caps:swapescape" &
+
 
 unclutter --timeout 1 &
 ~/.fehbg &

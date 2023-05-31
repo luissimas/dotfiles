@@ -139,6 +139,7 @@
 ;; Persp-mode
 (after! persp-mode
   (setq +workspaces-on-switch-project-behavior t
+        +workspaces-switch-project-function #'magit-status
         persp-auto-resume-time 0
         persp-init-frame-behaviour t
         persp-interactive-init-frame-behaviour-override -1
@@ -195,6 +196,11 @@
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000)
+  ;; (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
+  ;; (lsp-register-client
+  ;;  (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/rel/lexical/start_lexical.sh")
+  ;;                   :activation-fn (lsp-activate-on "elixir-lexical")
+  ;;                   :server-id 'elixir-lexical))
   (add-hook! 'prisma-mode-hook #'lsp))
 
 (use-package! lsp-ui
