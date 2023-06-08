@@ -476,7 +476,8 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
                      (org-deadline-warning-days 0)
                      (org-agenda-format-date "%A, %d %B %Y")
                      (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
-                     (org-agenda-overriding-header "\nDaily agenda\n")))
+                     (org-agenda-overriding-header "\nDaily agenda\n")
+                     (org-agenda-skip-function #'pada/org-agenda-skip-habits)))
             (agenda ""
                     ((org-agenda-span 3)
                      (org-agenda-start-on-weekday nil)
@@ -494,7 +495,31 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
                         (org-deadline-warning-days 0)
                         (org-agenda-entry-types '(:deadline))
                         (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))))))
+                        (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n")))
+            (agenda "" ((org-agenda-span 1)
+                        (org-agenda-time-grid nil)
+                        (org-agenda-prefix-format "")
+                        (org-agenda-format-date "")
+                        (org-agenda-skip-function #'pada/org-agenda-skip-non-habits)
+                        (org-agenda-overriding-header "\nHabits")))))))
+
+  (defun pada/org-agenda-skip-habits ()
+    "Skip entries with STYLE property set to 'habit'."
+    (org-back-to-heading t)
+    (let ((style (org-entry-get (point) "STYLE")))
+      (if (string-equal style "habit")
+          (progn
+            (org-next-visible-heading 1)
+            (point)))))
+
+  (defun pada/org-agenda-skip-non-habits ()
+    "Skip entries where the STYLE property is no set to 'habit'."
+    (org-back-to-heading t)
+    (let ((style (org-entry-get (point) "STYLE")))
+      (unless (string-equal style "habit")
+          (progn
+            (org-next-visible-heading 1)
+            (point)))))
 
   (defun pada/custom-agenda (&optional arg)
     (interactive "P")
@@ -513,7 +538,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 (use-package! org-habit
   :after org
   :config
-  (setq org-habit-graph-column 50
+  (setq org-habit-graph-column 10
         org-habit-preceding-days 7
         org-habit-show-all-today t
         org-habit-show-done-always-green t))
