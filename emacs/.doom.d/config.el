@@ -752,3 +752,10 @@ Default to the URL around or before point."
        (inf-elixir))))
 
   (set-repl-handler! 'elixir-mode #'+elixir/open-repl))
+
+(defun pada/capitalize-first-char (&optional string)
+  "Capitalize the first character of STRING."
+  (when (and string (> (length string) 0))
+    (let ((first-char (substring string nil 1))
+          (rest-str   (substring string 1)))
+      (concat (capitalize first-char) rest-str))))

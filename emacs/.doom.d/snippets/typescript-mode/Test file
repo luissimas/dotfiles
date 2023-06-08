@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Test file
+# key: t
+# --
+
+const makeTestData = () => {
+  const $2 = new $3
+  const $1 = new ${1:$(pada/capitalize-first-char yas-text)}Implementation($2)
+
+  const $2Spy = jest.spyOn($2, '$4')
+
+  return {
+    $1,
+    $2Spy
+  }
+}
+
+describe('${1:$(pada/capitalize-first-char yas-text)}', () => {
+  $0
+})
