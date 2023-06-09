@@ -538,8 +538,10 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 (use-package! org-habit
   :after org
   :config
-  (setq org-habit-graph-column 10
-        org-habit-preceding-days 7
+  (remove-hook 'org-agenda-mode-hook #'+org-habit-resize-graph-h)
+  (setq org-habit-following-days 4
+        org-habit-preceding-days 20
+        org-habit-graph-column 20
         org-habit-show-all-today t
         org-habit-show-done-always-green t))
 
