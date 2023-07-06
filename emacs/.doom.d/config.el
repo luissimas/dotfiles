@@ -161,12 +161,12 @@
          :desc "Restore last session"      "R"   #'+workspace/restore-last-session)))
 
 ;; Company
-(after! company
-  (setq! company-box-scrollbar nil
-         company-minimum-prefix-length 1
-         copany-idle-delay 0.0)
-  (map! :map company-mode-map
-        :i "C-SPC" #'company-complete))
+;; (after! company
+;;   (setq! company-box-scrollbar nil
+;;          company-minimum-prefix-length 1
+;;          copany-idle-delay 0.0)
+;;   (map! :map company-mode-map
+;;         :i "C-SPC" #'company-complete))
 
 ;; Formatting
 (use-package! apheleia
@@ -193,6 +193,7 @@
   (setq! lsp-auto-guess-root t
          lsp-signature-doc-lines 1
          lsp-lens-enable t
+         lsp-completion-provider :none
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000)
@@ -242,7 +243,10 @@
 (after! vertico
   (setq! vertico-count 10)
   (map! :map vertico-map
-        :n "<escape>" #'abort-minibuffers))
+        :n "<escape>" #'abort-minibuffers)
+  (map! :leader
+        "'" nil ;; Removing the default mapping
+        :desc "Vertico repeat" "." #'vertico-repeat))
 
 ;; Consult
 (after! consult
@@ -469,8 +473,9 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
-           ((todo "WAIT"
-                  ((org-agenda-overriding-header "Tasks on hold\n")))
+           ((todo ""
+                  ((org-agenda-overriding-header "Unscheduled tasks\n")
+                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))))
             (agenda ""
                     ((org-agenda-span 1)
                      (org-deadline-warning-days 0)
@@ -531,8 +536,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 
   ;; (add-to-list 'org-agenda-files "~/repos/zettelkasten")
   (add-hook! 'org-mode-hook :append #'pada/org-mode-setup)
-  (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
-  (add-hook 'doom-load-theme-hook #'pada/set-org-faces)
+  ;; (add-hook! 'doom-load-theme-hook :append #'pada/set-org-faces)
   (advice-add #'consult-theme :after (lambda (&rest args) (pada/set-org-faces))))
 
 (use-package! org-habit
@@ -541,7 +545,7 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
   (remove-hook 'org-agenda-mode-hook #'+org-habit-resize-graph-h)
   (setq org-habit-following-days 4
         org-habit-preceding-days 20
-        org-habit-graph-column 20
+        org-habit-graph-column 25
         org-habit-show-all-today t
         org-habit-show-done-always-green t))
 
@@ -584,10 +588,13 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
 ;; Popup rules
 (set-popup-rules!
   '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
-  '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3)))
+  '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
+  '(("^+new-snippet+" :quit nil :size 0.3))
+  '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t)))
 
 ;; Disabling mode-line on dashboard
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1))
+
 
 ;; Hiding cursor on dashboard
 (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
@@ -761,3 +768,99 @@ Default to the URL around or before point."
     (let ((first-char (substring string nil 1))
           (rest-str   (substring string 1)))
       (concat (capitalize first-char) rest-str))))
+
+(defun yas-new-snippet (&optional no-template)
+  "Pops a new buffer for writing a snippet.
+
+Expands a snippet-writing snippet, unless the optional prefix arg
+NO-TEMPLATE is non-nil."
+  (interactive "P")
+  (let ((guessed-directories (yas--guess-snippet-directories))
+        (yas-selected-text (or yas-selected-text
+                               (and (region-active-p)
+                                    (buffer-substring-no-properties
+                                     (region-beginning) (region-end))))))
+
+    (pop-to-buffer yas-new-snippet-buffer-name)
+    (erase-buffer)
+    (kill-all-local-variables)
+    (snippet-mode)
+    (yas-minor-mode 1)
+    (set (make-local-variable 'yas--guessed-modes)
+         (mapcar (lambda (d) (yas--table-mode (car d)))
+                 guessed-directories))
+    (set (make-local-variable 'default-directory)
+         (car (cdr (car guessed-directories))))
+    (if (and (not no-template) yas-new-snippet-default)
+        (yas-expand-snippet yas-new-snippet-default))))
+
+;; Corfu
+(use-package! corfu
+  :init (global-corfu-mode)
+  :config
+  (setq corfu-cycle t
+        corfu-auto t
+        corfu-auto-delay 0.2
+        corfu-auto-prefix 1
+        corfu-separator ?\s
+        corfu-preview-current nil
+        corfu-quit-no-match t
+        corfu-bar-width 0
+        corfu-min-width 80
+        corfu-max-width 100
+        corfu-scroll-margin 5
+        corfu-echo-delay 0.2
+        corfu-popupinfo-delay (cons nil 0.2)
+        corfu-popupinfo-hide nil)
+
+  (add-hook! 'global-corfu-mode-hook
+             #'corfu-history-mode
+             #'corfu-echo-mode)
+
+  (defun pada/corfu-quit ()
+    "Quits corfu completion and enter evil normal mode."
+    (interactive)
+    (corfu-quit)
+    (evil-normal-state))
+
+  (map! :mode global-corfu-mode :i "C-SPC" #'completion-at-point)
+  (map! :mode global-corfu-mode :map corfu-map
+        :i
+        [escape] #'pada/corfu-quit
+        "ESC" #'pada/corfu-quit
+        "C-SPC" #'corfu-quit
+        "C-j" #'corfu-next
+        "C-k" #'corfu-previous
+        "C-h" #'corfu-info-documentation
+        "C-l" #'corfu-info-location)
+
+
+  (defun pada/lsp-corfu-setup ()
+    "Setup corfu completion style for lsp."
+    (setq-local completion-styles '(orderless)
+                completion-category-defaults nil
+                completion-at-point-functions '(cape-super-capf
+                                                lsp-completion-at-point
+                                                (cape-company-to-capf #'company-yasnippet))))
+
+  (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup))
+
+(use-package! kind-icon
+  :after corfu
+  :config
+  (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
+        kind-icon-blend-background nil)
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package! cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-ispell))
+
+;; Marginalia
+(use-package! marginalia
+  :config
+  (map! :map minibuffer-local-map
+        "M-a" #'marginalia-cycle))

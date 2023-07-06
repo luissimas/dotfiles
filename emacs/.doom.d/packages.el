@@ -77,7 +77,7 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 
-;; Prisma
+;; Prisma mode
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 ;; Elfeed-tube
@@ -94,11 +94,14 @@
 ;; Disable jk escape
 (package! evil-escape :disable t)
 
-;; Center cursor on screen
+;; Reading enhancements
 (package! centered-cursor-mode)
-
-;; Focus current paragraph
 (package! focus)
 
 ;; Iex interaction
 (package! inf-elixir)
+
+;; Better completion at point
+(package! corfu :recipe (:files (:defaults "extensions/*.el")))
+(package! kind-icon)
+(package! cape)
