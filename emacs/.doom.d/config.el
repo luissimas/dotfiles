@@ -374,7 +374,7 @@
                (emacs-theme (car (cdr current))))
           (when (string-match-p system-theme theme)
             (setq doom-theme emacs-theme)
-            (consult-theme emacs-theme)
+            (load-theme emacs-theme t)
             (setq associations nil)))))))
 
 ;; Load system theme on startup
@@ -410,29 +410,6 @@
         :i "C-c"   #'vterm--self-insert
         :i "C-d"   #'vterm--self-insert
         :i "C-SPC" #'vterm--self-insert))
-
-(defun pada/org-mode-setup ()
-  "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
-  (mixed-pitch-mode)
-  (visual-line-mode)
-  (diff-hl-mode -1)
-  (setq-local line-spacing 1
-              display-line-numbers nil)
-  (+zen/toggle))
-
-(defun pada/set-org-faces ()
-  "Customize faces for `org-mode' headings.
-This function is meant to be added to `doom-load-theme-hook' and to advice after `consult-theme'."
-  (set-face-attribute 'org-level-8 nil :weight 'semi-bold :inherit 'default)
-  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
-  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.2)
-  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.3)
-  (set-face-attribute 'org-document-title nil :inherit 'org-level-8 :height 2.0)
-  (set-face-attribute 'org-agenda-structure nil :weight 'semi-bold :height 1.4 :inherit 'default))
 
 (use-package! org
   :config
@@ -534,10 +511,17 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
         :desc "Agenda"            "oaa" #'pada/custom-agenda
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
 
+  (defun pada/org-mode-setup ()
+    "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
+    (mixed-pitch-mode)
+    (visual-line-mode)
+    (diff-hl-mode -1)
+    (setq-local line-spacing 1
+                display-line-numbers nil)
+    (+zen/toggle))
+
   ;; (add-to-list 'org-agenda-files "~/repos/zettelkasten")
-  (add-hook! 'org-mode-hook :append #'pada/org-mode-setup)
-  ;; (add-hook! 'doom-load-theme-hook :append #'pada/set-org-faces)
-  (advice-add #'consult-theme :after (lambda (&rest args) (pada/set-org-faces))))
+  (add-hook! 'org-mode-hook :append #'pada/org-mode-setup))
 
 (use-package! org-habit
   :after org
@@ -609,8 +593,8 @@ This function is meant to be added to `doom-load-theme-hook' and to advice after
       (with-temp-buffer
         (insert-text-button
          line
-         'action
-         (lambda (_) (+doom-dashboard-reload t))
+         ;; 'action
+         ;; (lambda (_) (+doom-dashboard-reload t))
          'face 'doom-dashboard-menu-desc
          'help-echo "Random phrase"
          'follow-link t)
@@ -850,7 +834,8 @@ NO-TEMPLATE is non-nil."
   :config
   (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
         kind-icon-blend-background nil)
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+  (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache))
 
 (use-package! cape
   :init
