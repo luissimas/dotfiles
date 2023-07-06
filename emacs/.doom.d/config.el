@@ -839,6 +839,9 @@ NO-TEMPLATE is non-nil."
   (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
   (add-hook 'eshell-mode-hook #'corfu-mode))
 
+(use-package! company
+  :after corfu)
+
 (use-package! kind-icon
   :after corfu
   :config

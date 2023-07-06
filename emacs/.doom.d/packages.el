@@ -105,3 +105,6 @@
 (package! corfu :recipe (:files (:defaults "extensions/*.el")))
 (package! kind-icon)
 (package! cape)
+
+;; Needed to use company-yasnippet
+(package! company)
