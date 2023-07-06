@@ -1,0 +1,22 @@
+# key: usecase
+# name: Usecase
+# --
+export interface $1UsecaseParams {
+  $2
+}
+
+export interface $1Usecase {
+  execute: (params: $1UsecaseParams) => Promise<${3:void}>
+}
+
+@injectable()
+export class $1UsecaseImplementation implements $1Usecase
+{
+  constructor(
+  $4
+  ) {}
+
+  execute = async (params: $1UsecaseParams) => {
+    $0
+  }
+}
