@@ -785,14 +785,14 @@ NO-TEMPLATE is non-nil."
   (setq corfu-cycle t
         corfu-auto t
         corfu-auto-delay 0.2
-        corfu-auto-prefix 1
+        corfu-auto-prefix 2
         corfu-separator ?\s
         corfu-preview-current nil
-        corfu-quit-no-match t
+        corfu-quit-no-match 'separator
         corfu-bar-width 0
         corfu-min-width 80
         corfu-max-width 100
-        corfu-scroll-margin 5
+        corfu-scroll-margin 4
         corfu-echo-delay 0.2
         corfu-popupinfo-delay (cons nil 0.2)
         corfu-popupinfo-hide nil)
@@ -818,16 +818,26 @@ NO-TEMPLATE is non-nil."
         "C-h" #'corfu-info-documentation
         "C-l" #'corfu-info-location)
 
-
   (defun pada/lsp-corfu-setup ()
     "Setup corfu completion style for lsp."
     (setq-local completion-styles '(orderless)
                 completion-category-defaults nil
-                completion-at-point-functions '(cape-super-capf
-                                                lsp-completion-at-point
-                                                (cape-company-to-capf #'company-yasnippet))))
+                completion-at-point-functions (list (cape-super-capf
+                                                     #'lsp-completion-at-point
+                                                     (cape-company-to-capf #'company-yasnippet)))))
 
-  (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup))
+  (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup)
+
+  (defun pada/corfu-enable-in-minibuffer ()
+    "Enable Corfu in the minibuffer if `completion-at-point' is bound."
+    (when (where-is-internal #'completion-at-point (list (current-local-map)))
+      ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+                  corfu-popupinfo-delay nil)
+      (corfu-mode 1)))
+
+  (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
+  (add-hook 'eshell-mode-hook #'corfu-mode))
 
 (use-package! kind-icon
   :after corfu
