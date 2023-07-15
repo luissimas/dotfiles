@@ -189,6 +189,8 @@
 
 ;; LSP
 (use-package! lsp-mode
+  :init
+  (setq! lsp-pyright-multi-root nil)
   :config
   (setq! lsp-auto-guess-root t
          lsp-signature-doc-lines 1
@@ -351,7 +353,7 @@
 (defcustom pada/system-theme-associations
   '(("modus-operandi" modus-operandi)
     ("modus-vivendi" modus-vivendi)
-    ("nord" doom-nord)
+    ("nord" doom-nord-aurora)
     ("gruvbox" doom-gruvbox)
     ("tokyonight" doom-tokyo-night)
     ("palenight" doom-palenight)
@@ -642,7 +644,7 @@ Default to the URL around or before point."
     (map! :leader
           :desc "Open graph" "nrg" #'org-roam-ui-open)
     (map! :leader
-          :map org-mode-map
+          :map org-roam-mode-map
           :desc "Open graph" "mmg" #'org-roam-ui-open))
 
 (defun pada/elfeed-show-mode-setup ()
@@ -802,7 +804,7 @@ NO-TEMPLATE is non-nil."
 
   (defun pada/+org-return-advice (fun &rest args)
     "Advice for `+org/return' that inserts the selected completion candidate if it exists."
-    (if (and (boundp corfu-mode) (>= corfu--index 0))
+    (if (and (boundp 'corfu-mode) (>= corfu--index 0))
         (corfu-insert)
       (apply fun args)))
 
@@ -889,4 +891,25 @@ NO-TEMPLATE is non-nil."
 
 (use-package! poetry
   :config
-  (setq poetry-tracking-strategy 'switch-buffer))
+
+  (defvar pada/poetry--last-project-venv nil
+    "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
+
+  (defun pada/set-pyright-venv ()
+    "Set `lsp-pyright-venv-path' the same as `poetry-project-venv'.
+Also restarts the LSP workspace via `lsp-workspace-restart' so the
+venv change affects pyright."
+
+    (if (and (boundp 'lsp-pyright-venv-path)
+             (boundp 'poetry-project-venv)
+             poetry-project-venv
+             (not (string-equal pada/poetry--last-project-venv poetry-project-venv)))
+        (progn
+          (message "Setting lsp-pyright-venv-path")
+          (setq pada/poetry--last-project-venv poetry-project-venv)
+          (setq-local lsp-pyright-venv-path poetry-project-venv)
+          (if lsp-mode
+              (progn
+                (lsp-workspace-restart (car (lsp-workspaces))))))))
+
+  (add-hook 'lsp-mode-hook #'pada/set-pyright-venv))

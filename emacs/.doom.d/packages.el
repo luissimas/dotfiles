@@ -110,4 +110,5 @@
 ;; Needed to use company-yasnippet
 (package! company)
 
-(package! poetry)
+;; Disable nose tests
+(package! nose :disable t)
