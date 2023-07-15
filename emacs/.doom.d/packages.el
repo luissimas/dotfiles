@@ -102,9 +102,12 @@
 (package! inf-elixir)
 
 ;; Better completion at point
-(package! corfu :recipe (:files (:defaults "extensions/*.el")))
+(package! corfu :recipe (:files (:defaults "extensions/*.el") :host github :repo "minad/corfu"))
+
 (package! kind-icon)
 (package! cape)
 
 ;; Needed to use company-yasnippet
 (package! company)
+
+(package! poetry)

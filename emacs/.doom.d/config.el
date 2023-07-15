@@ -280,7 +280,8 @@
 (use-package nano-theme)
 
 (after! ispell
-  (setq! ispell-dictionary  "pt_BR,en_US")
+  (setq! ispell-dictionary  "pt_BR,en_US"
+         ispell-silently-savep t)
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "pt_BR,en_US"))
 
@@ -789,13 +790,23 @@ NO-TEMPLATE is non-nil."
         corfu-separator ?\s
         corfu-preview-current nil
         corfu-quit-no-match 'separator
+        corfu-on-exact-match nil
         corfu-bar-width 0
         corfu-min-width 80
         corfu-max-width 100
         corfu-scroll-margin 4
         corfu-echo-delay 0.2
         corfu-popupinfo-delay (cons nil 0.2)
-        corfu-popupinfo-hide nil)
+        corfu-popupinfo-hide nil
+        tab-always-indent 'complete)
+
+  (defun pada/+org-return-advice (fun &rest args)
+    "Advice for `+org/return' that inserts the selected completion candidate if it exists."
+    (if (and (boundp corfu-mode) (>= corfu--index 0))
+        (corfu-insert)
+      (apply fun args)))
+
+  (advice-add #'+org/return :around #'pada/+org-return-advice)
 
   (add-hook! 'global-corfu-mode-hook
              #'corfu-history-mode
@@ -807,7 +818,7 @@ NO-TEMPLATE is non-nil."
     (corfu-quit)
     (evil-normal-state))
 
-  (map! :mode global-corfu-mode :i "C-SPC" #'completion-at-point)
+  (map! :mode global-corfu-mode :map corfu-mode-map :i "C-SPC" #'completion-at-point)
   (map! :mode global-corfu-mode :map corfu-map
         :i
         [escape] #'pada/corfu-quit
@@ -821,10 +832,7 @@ NO-TEMPLATE is non-nil."
   (defun pada/lsp-corfu-setup ()
     "Setup corfu completion style for lsp."
     (setq-local completion-styles '(orderless)
-                completion-category-defaults nil
-                completion-at-point-functions (list (cape-super-capf
-                                                     #'lsp-completion-at-point
-                                                     (cape-company-to-capf #'company-yasnippet)))))
+                completion-category-defaults nil))
 
   (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup)
 
@@ -852,13 +860,33 @@ NO-TEMPLATE is non-nil."
 
 (use-package! cape
   :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-ispell))
+  (defun pada/cape-capf-setup-git-commit ()
+    (add-to-list 'completion-at-point-functions
+                 (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
+
+  (defun pada/cape-capf-setup-org ()
+    (require 'org-roam)
+        (add-to-list 'completion-at-point-functions
+                     (apply #'cape-super-capf
+                            (append
+                             (if (org-roam-file-p) org-roam-completion-functions ())
+                             (list #'cape-ispell #'cape-dabbrev (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-tex)))))
+
+  (defun pada/cape-capf-setup-lsp ()
+    (add-to-list 'completion-at-point-functions
+                 (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-ispell #'cape-dabbrev)))
+
+
+  (add-hook! 'lsp-completion-mode-hook #'pada/cape-capf-setup-lsp)
+  (add-hook! 'git-commit-mode-hook #'pada/cape-capf-setup-git-commit)
+  (add-hook! 'org-mode-hook #'pada/cape-capf-setup-org))
 
 ;; Marginalia
 (use-package! marginalia
   :config
   (map! :map minibuffer-local-map
         "M-a" #'marginalia-cycle))
+
+(use-package! poetry
+  :config
+  (setq poetry-tracking-strategy 'switch-buffer))
