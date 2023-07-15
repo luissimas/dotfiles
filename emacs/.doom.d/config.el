@@ -173,6 +173,11 @@
   :config
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
 
+  (setf (alist-get 'isort apheleia-formatters)
+        '("isort" "--stdout" "-"))
+  (setf (alist-get 'python-mode apheleia-mode-alist)
+        '(isort black))
+
   ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
   ;; run the commands in the current project root. This is important to make mix
   ;; formatter respect the project configuration in .formatter.exs.
