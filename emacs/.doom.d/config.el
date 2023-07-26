@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 14 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 20 :weight 'regular)
+(setq doom-font (font-spec :family "Iosevka Padawan" :size 18 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Padawan" :size 25 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -102,8 +102,8 @@
 
   (map! :nv "gr" #'+lookup/references)
 
-  (map! :nv "H" 'evil-beginning-of-visual-line
-        :nv "L" 'evil-end-of-visual-line
+  (map! :nv "H" 'evil-beginning-of-line
+        :nv "L" 'evil-end-of-line
         :nv "j" 'evil-next-visual-line
         :nv "k" 'evil-previous-visual-line))
 
@@ -168,6 +168,11 @@
 ;;   (map! :map company-mode-map
 ;;         :i "C-SPC" #'company-complete))
 
+;; Treemacs
+(use-package! treemacs
+  :config
+  (treemacs-follow-mode))
+
 ;; Formatting
 (use-package! apheleia
   :config
@@ -204,6 +209,7 @@
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
   ;; (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
   ;; (lsp-register-client
   ;;  (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/rel/lexical/start_lexical.sh")
@@ -582,11 +588,12 @@
   '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
   '(("^+new-snippet+" :quit nil :size 0.3))
-  '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t)))
+  '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))
+  '(("^\\*doom:\\(?:v?term\\|e?shell\\)-popup"
+     :vslot -5 :size 0.3 :select t :modeline nil :quit nil :ttl nil)))
 
 ;; Disabling mode-line on dashboard
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1))
-
 
 ;; Hiding cursor on dashboard
 (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
