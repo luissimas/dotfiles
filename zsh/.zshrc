@@ -117,7 +117,7 @@ PROMPT='%B%~%F{yellow}${vcs_info_msg_0_}%f%b λ '
 test -r /home/padawan/.opam/opam-init/init.zsh && . /home/padawan/.opam/opam-init/init.zsh >/dev/null 2>/dev/null || true
 
 # If not in tmux or emacs, attach to session
-if [ -f $TMUX ] && [ -z $INSIDE_EMACS ]; then tmux attach 2>/dev/null; fi
+# if [ -f $TMUX ] && [ -z $INSIDE_EMACS ]; then tmux attach 2>/dev/null; fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 

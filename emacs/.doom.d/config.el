@@ -97,8 +97,13 @@
         evil-want-minibuffer t
         evil-move-cursor-back nil
         evil-shift-width 2)
+  (global-subword-mode)
+
   (map! :leader
-        :desc "M-x" "x" #'execute-extended-command)
+        :desc "Ledger report" "ol" #'ledger-report)
+  (map! :leader
+        :desc "M-x" "x" #'execute-extended-command
+        :desc "Glasses" "tg" #'glasses-mode)
 
   (map! :nv "gr" #'+lookup/references)
 
@@ -697,6 +702,7 @@ Default to the URL around or before point."
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UCcaTUtGzOiS4cqrgtcsHYWg" youtube productivity)
           ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" youtube programming)
           ("https://protesilaos.com/codelog.xml" programming)
+          ("https://karthinks.com/index.xml" programming)
           ("https://protesilaos.com/commentary.xml" misc)
           ("https://protesilaos.com/news.xml" misc)
           ("https://phaazon.net/blog/feed" programming)
