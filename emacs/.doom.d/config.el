@@ -100,7 +100,8 @@
   (global-subword-mode)
 
   (map! :leader
-        :desc "Ledger report" "ol" #'ledger-report)
+        :desc "Ledger report" "ol" #'ledger-report
+        :desc "Man page" "om" #'manual-entry)
   (map! :leader
         :desc "M-x" "x" #'execute-extended-command
         :desc "Glasses" "tg" #'glasses-mode)
@@ -590,7 +591,7 @@
 
 ;; Popup rules
 (set-popup-rules!
-  '(("\\*\\([Hh]elp.*\\|info\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
+  '(("\\*\\([Hh]elp.*\\|info\\|\\(?:Wo\\)Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
   '(("^+new-snippet+" :quit nil :size 0.3))
   '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))

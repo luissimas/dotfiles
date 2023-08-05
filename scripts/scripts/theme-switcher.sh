@@ -94,7 +94,7 @@ case $option in "Pywal")
         "Catppuccin")
             name=catppuccin
             theme=~/.config/wal/colorschemes/catppuccin.json
-            bg=~/.wal/catppuccin.jpg
+            bg=~/.wal/catpuccin_leaves.png
             ;;
         *) printf "No option selected." ;;
         esac

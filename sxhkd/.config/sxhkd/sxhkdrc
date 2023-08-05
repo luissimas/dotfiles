@@ -103,9 +103,9 @@ super + {_,shift + }c
 super + {i,o}
 	bspc desktop -f {prev,next}.local
 
-# swap monitor focus/node
-super + {_,shift} + space
-	bspc {monitor -f,node -m} next
+# set sticky window
+super +  space
+	bspc node -g sticky
 
 # focus the last node/desktop
 super + {grave,Tab}

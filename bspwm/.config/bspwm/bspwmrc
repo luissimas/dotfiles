@@ -30,6 +30,10 @@ bspc config borderless_monocle true
 bspc config single_monocle true
 bspc config gapless_monocle false
 bspc config focus_follows_pointer true
+bspc config merge_overlapping_monitors true
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+bspc config pointer_follows_focus true
 
 # Rules
 bspc rule -a qutebrowser desktop=1
