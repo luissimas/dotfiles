@@ -10,6 +10,8 @@ export PATH=$HOME/repos/lexical/_build/dev/rel/lexical:$PATH
 export GOPATH=$HOME/.local/go
 export QUTEWAL_DYNAMIC_LOADING=True
 export LEDGER_FILE=$HOME/docs/Accounting/accounting.journal
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+export KERL_CONFIGURE_OPTIONS="--without-wx --without-javac"
 
 # Exports
 export BROWSER="brave"

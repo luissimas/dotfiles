@@ -97,7 +97,6 @@
         evil-want-minibuffer t
         evil-move-cursor-back nil
         evil-shift-width 2)
-  (global-subword-mode)
 
   (map! :leader
         :desc "Ledger report" "ol" #'ledger-report
