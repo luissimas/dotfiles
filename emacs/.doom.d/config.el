@@ -922,6 +922,8 @@ NO-TEMPLATE is non-nil."
 (use-package! poetry
   :config
 
+  (setq! poetry-tracking-strategy 'switch-buffer)
+
   (defvar pada/poetry--last-project-venv nil
     "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
 
@@ -942,5 +944,7 @@ venv change affects pyright."
               (progn
                 (lsp-workspace-restart (car (lsp-workspaces))))))))
 
-  ;(add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
-  )
+  (add-hook 'lsp-mode-hook #'pada/set-pyright-venv))
+
+;; Prevent python template (shebang) if file is in a project
+(set-file-template! "\\.py$" :project t)
