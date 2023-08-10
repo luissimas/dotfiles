@@ -539,7 +539,6 @@
                 display-line-numbers nil)
     (+zen/toggle))
 
-  ;; (add-to-list 'org-agenda-files "~/repos/zettelkasten")
   (add-hook! 'org-mode-hook :append #'pada/org-mode-setup))
 
 (use-package! org-habit
@@ -578,13 +577,6 @@
   :after org
   :hook (org-mode . org-fragtog-mode))
 
-(use-package! org-journal
-  :config
-  (setq org-journal-date-prefix "#+title: "
-        org-journal-time-prefix "* "
-        org-journal-date-format "%a, %d-%m-%Y"
-        org-journal-file-format "%Y-%m-%d.org"))
-
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
@@ -593,6 +585,7 @@
   '(("\\*\\([Hh]elp.*\\|info\\|\\(?:Wo\\)Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
   '(("^+new-snippet+" :quit nil :size 0.3))
+  '(("^\\*Embark" :quit nil :size 0.3))
   '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))
   '(("^\\*doom:\\(?:v?term\\|e?shell\\)-popup"
      :vslot -5 :size 0.3 :select t :modeline nil :quit nil :ttl nil)))
@@ -601,39 +594,46 @@
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1))
 
 ;; Hiding cursor on dashboard
-(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+;; (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
 
-;; Random quote on dashboard
-(defun pada/doom-dashboard-quote ()
-  "Get a random quote and format it to display on Doom's dashboard."
-  (mapconcat
-   (lambda (line)
-     (+doom-dashboard--center
-      +doom-dashboard--width
-      (with-temp-buffer
-        (insert-text-button
-         line
-         ;; 'action
-         ;; (lambda (_) (+doom-dashboard-reload t))
-         'face 'doom-dashboard-menu-desc
-         'help-echo "Random phrase"
-         'follow-link t)
-        (buffer-string))))
-   (split-string
-    (with-temp-buffer
-      (insert (s-trim (shell-command-to-string "quote.sh")))
-      (setq fill-column (min 70 (/ (* 2 (window-width)) 3)))
-      (fill-region (point-min) (point-max))
-      (buffer-string))
-    "\n")
-   "\n"))
+;; Setting the menu items
+(setq! +doom-dashboard-menu-sections
+  '(("Reload last session"
+     :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+     :when (cond ((modulep! :ui workspaces)
+                  (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                 ((require 'desktop nil t)
+                  (file-exists-p (desktop-full-file-name))))
+     :face (:inherit (doom-dashboard-menu-title bold))
+     :action doom/quickload-session)
+    ("Open org-agenda"
+     :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+     :when (fboundp 'org-agenda)
+     :action pada/custom-agenda)
+    ("Recently opened files"
+     :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+     :action recentf-open-files)
+    ("Open project"
+     :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+     :action projectile-switch-project)
+    ("Jump to bookmark"
+     :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+     :action bookmark-jump)
+    ("Open today's journal" :icon
+     (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+     :action org-roam-dailies-goto-today)))
 
-(defun pada/doom-dashboard-quote-widget ()
-  (setq line-spacing 0.2)
-  (insert "\n\n" (pada/doom-dashboard-quote) "\n"))
+(map! :map +doom-dashboard-mode-map
+      :desc "Reload last session"   :n "R" #'doom/quickload-session
+      :desc "Open org-agenda"       :n "a" #'pada/custom-agenda
+      :desc "Recently opened files" :n "r" #'consult-recent-file
+      :desc "Open project"          :n "p" #'projectile-switch-project
+      :desc "Jump to bookmark"      :n "b" #'bookmark-jump
+      :desc "Open today's journal"  :n "j" #'org-roam-dailies-goto-today)
 
+;; Setting dashboard functions
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
-                                   pada/doom-dashboard-quote-widget
+                                   doom-dashboard-widget-shortmenu
                                    doom-dashboard-widget-loaded))
 
 (setq fancy-splash-image (expand-file-name "icon.png" doom-user-dir))
@@ -649,6 +649,18 @@ Default to the URL around or before point."
   (setq url (browse-url-encode-url url))
   (message url)
   (start-process (concat "surf " url) nil "surf" url))
+
+(use-package org-roam
+  :config
+  (setq org-roam-dailies-directory "journal")
+  (map! :leader "nrd" nil)
+  (map! :leader :map doom-leader-workspace-map
+        (:prefix-map ("nj" . "Journal")
+         :desc "Create entry for today"    "j"   #'org-roam-dailies-capture-today
+         :desc "Go to today's entry"       "t"   #'org-roam-dailies-goto-today
+         :desc "Create entry for tomorrow" "T"   #'org-roam-dailies-capture-tomorrow
+         :desc "Go to entry by date"       "d"   #'org-roam-dailies-goto-date
+         :desc "Create entry for date"     "D"   #'org-roam-dailies-capture-date)))
 
 (use-package! org-roam-ui
     :after org-roam
@@ -930,4 +942,5 @@ venv change affects pyright."
               (progn
                 (lsp-workspace-restart (car (lsp-workspaces))))))))
 
-  (add-hook 'lsp-mode-hook #'pada/set-pyright-venv))
+  ;(add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
+  )

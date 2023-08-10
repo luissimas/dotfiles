@@ -1,6 +1,6 @@
 #!/bin/bash
 
-option=$(echo -e 'Shutdown\nReboot\nLogout' | rofi -dmenu -i -p "Power prompt")
+option=$(echo -e 'Lock\nShutdown\nReboot\nLogout' | rofi -dmenu -i -p "Power prompt")
 
 case $option in "Shutdown")
     exec shutdown now
@@ -10,5 +10,8 @@ case $option in "Shutdown")
     ;;
 "Logout")
     exec bspc quit
+    ;;
+"Lock")
+    exec i3lock -B 10 -k
     ;;
 esac

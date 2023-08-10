@@ -12,19 +12,19 @@ super + shift + q
 
 # lock screen
 super + alt + shift + l
-  i3lock -B 10 -k
+
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
 # applications
-super + shift + {w,o,d,z,k}
-	{$BROWSER,obsidian,discord,zathura,kitty}
+super + shift + {w,d,z,k}
+	{$BROWSER,discord,zathura,kitty}
 
 # scripts
-super + shift + {t,b,p,y,s,a,c,e}
-	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,ytb.sh,spotify.sh,audiosink.sh,meets.sh,emacs.sh}
+super + shift + {t,p,e}
+	~/scripts/{theme-switcher.sh,print.sh,emacs.sh}
 
 # quick screenshot to clipboard
 super + a
