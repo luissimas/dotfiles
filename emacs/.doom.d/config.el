@@ -530,6 +530,8 @@
         :desc "Agenda"            "oaa" #'pada/custom-agenda
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
 
+  (add-to-list 'org-agenda-files "~/repos/zettelkasten/journal")
+
   (defun pada/org-mode-setup ()
     "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
     (mixed-pitch-mode)
@@ -948,3 +950,10 @@ venv change affects pyright."
 
 ;; Prevent python template (shebang) if file is in a project
 (set-file-template! "\\.py$" :project t)
+
+(use-package! docker
+  :config
+  (add-hook! '(docker-container-mode-hook
+               docker-image-mode-hook
+               docker-volume-mode-hook
+               docker-network-mode-hook) #'hl-line-mode))
