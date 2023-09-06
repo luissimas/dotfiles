@@ -1,0 +1,19 @@
+# key: openapi
+# name: FastAPI custom OpenAPI
+# --
+def custom_openapi():
+    """Generates custom OpenAPI metadata."""
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    openapi_schema = get_openapi(
+        title="${1:Title}",
+        version="0.1.0",
+        summary="${2:Summary}",
+        routes=app.routes,
+    )
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+$0
+app.openapi = custom_openapi

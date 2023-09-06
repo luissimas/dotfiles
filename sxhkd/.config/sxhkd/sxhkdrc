@@ -23,8 +23,8 @@ super + shift + {w,d,z,k}
 	{$BROWSER,discord,zathura,kitty}
 
 # scripts
-super + shift + {t,p,e}
-	~/scripts/{theme-switcher.sh,print.sh,emacs.sh}
+super + shift + {t,b,p,e}
+	~/scripts/{theme-switcher.sh,list-books.sh,print.sh,emacs.sh}
 
 # quick screenshot to clipboard
 super + a
@@ -103,9 +103,13 @@ super + {_,shift + }c
 super + {i,o}
 	bspc desktop -f {prev,next}.local
 
-# set sticky window
-super +  space
-	bspc node -g sticky
+# # set sticky window
+# super +  space
+# 	bspc node -g sticky
+
+# swap monitor focus/node
+super + {_,shift} + space
+	bspc {monitor -f,node -m} next
 
 # focus the last node/desktop
 super + {grave,Tab}

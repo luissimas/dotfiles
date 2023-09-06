@@ -21,9 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 18 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 25 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
+(setq doom-font (font-spec :family "Iosevka Padawan" :size 18.0 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Padawan" :size 24.0 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -98,6 +98,13 @@
         evil-move-cursor-back nil
         evil-shift-width 2)
 
+  (defun evil-paste-after-from-0 ()
+    (interactive)
+    (let ((evil-this-register ?0))
+      (call-interactively 'evil-paste-after)))
+
+  (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+
   (map! :leader
         :desc "Ledger report" "ol" #'ledger-report
         :desc "Man page" "om" #'manual-entry)
@@ -130,8 +137,7 @@
 (setq! scroll-margin 8)
 
 ;; Tab width
-(setq! tab-width 2
-       standard-indent 2
+(setq! tab-width 4
        backward-delete-char-untabify-method 'hungry)
 
 ;; Projectile
@@ -139,7 +145,8 @@
   (setq! projectile-project-search-path '(("~/fun" . 4) "~/liven" ("~/cati" . 2) ("~/docs" . 2) ("~/freela". 3))
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
-         projectile-indexing-method 'hybrid))
+         projectile-indexing-method 'hybrid)
+  (add-to-list 'projectile-project-root-files "go.mod"))
 
 ;; Persp-mode
 (after! persp-mode
@@ -214,13 +221,15 @@
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000)
+  (add-to-list 'exec-path "~/repos/elixir-ls")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
   ;; (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
   ;; (lsp-register-client
   ;;  (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/rel/lexical/start_lexical.sh")
   ;;                   :activation-fn (lsp-activate-on "elixir-lexical")
   ;;                   :server-id 'elixir-lexical))
-  (add-hook! 'prisma-mode-hook #'lsp))
+  (add-hook! 'prisma-mode-hook #'lsp)
+  (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
 
 (use-package! lsp-ui
   :config
@@ -584,8 +593,10 @@
 
 ;; Popup rules
 (set-popup-rules!
-  '(("\\*\\([Hh]elp.*\\|info\\|\\(?:Wo\\)Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
+  '(("\\*\\([Hh]elp.*\\|info\\|godoc.*\\|\\(?:Wo\\)Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
+  '(("^\\*compilation\\*.*" :quit t :ttl nil :size 0.3))
+  '(("^\\*pytest\\*.*" :quit nil :ttl nil :size 0.3))
   '(("^+new-snippet+" :quit nil :size 0.3))
   '(("^\\*Embark" :quit nil :size 0.3))
   '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))
@@ -658,8 +669,8 @@ Default to the URL around or before point."
   (map! :leader "nrd" nil)
   (map! :leader :map doom-leader-workspace-map
         (:prefix-map ("nj" . "Journal")
-         :desc "Create entry for today"    "j"   #'org-roam-dailies-capture-today
-         :desc "Go to today's entry"       "t"   #'org-roam-dailies-goto-today
+         :desc "Create entry for today"    "c"   #'org-roam-dailies-capture-today
+         :desc "Go to today's entry"       "j"   #'org-roam-dailies-goto-today
          :desc "Create entry for tomorrow" "T"   #'org-roam-dailies-capture-tomorrow
          :desc "Go to entry by date"       "d"   #'org-roam-dailies-goto-date
          :desc "Create entry for date"     "D"   #'org-roam-dailies-capture-date)))
@@ -733,7 +744,7 @@ Default to the URL around or before point."
 (use-package! doom-modeline
   :config
   (setq! doom-modeline-buffer-file-name-style 'buffer-name
-         doom-modeline-major-mode-icon nil
+         doom-modeline-major-mode-icon t
          doom-modeline-major-mode-color-icon t
          doom-modeline-enable-word-count t
          doom-modeline-checker-simple-format t
@@ -842,10 +853,6 @@ NO-TEMPLATE is non-nil."
 
   (advice-add #'+org/return :around #'pada/+org-return-advice)
 
-  (add-hook! 'global-corfu-mode-hook
-             #'corfu-history-mode
-             #'corfu-echo-mode)
-
   (defun pada/corfu-quit ()
     "Quits corfu completion and enter evil normal mode."
     (interactive)
@@ -879,7 +886,11 @@ NO-TEMPLATE is non-nil."
       (corfu-mode 1)))
 
   (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
-  (add-hook 'eshell-mode-hook #'corfu-mode))
+  (add-hook 'eshell-mode-hook #'corfu-mode)
+
+  (corfu-history-mode)
+  (corfu-echo-mode)
+  (corfu-popupinfo-mode))
 
 (use-package! company
   :after corfu)
@@ -890,7 +901,8 @@ NO-TEMPLATE is non-nil."
   (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
         kind-icon-blend-background nil)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache))
+  (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache)
+  (add-hook 'doom-big-font-mode-hook #'kind-icon-reset-cache))
 
 (use-package! cape
   :init
@@ -948,8 +960,8 @@ venv change affects pyright."
 
   (add-hook 'lsp-mode-hook #'pada/set-pyright-venv))
 
-;; Prevent python template (shebang) if file is in a project
-(set-file-template! "\\.py$" :project t)
+;; Prevent python template (shebang)
+(set-file-template! "\\.py$" :ignore t)
 
 (use-package! docker
   :config
