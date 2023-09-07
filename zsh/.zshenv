@@ -19,6 +19,7 @@ export READER="zathura"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40%" # --preview 'bat {} --color=always -p'"
+export OPENWEATHER_KEY="3b6c414b301c5501f7cfe3b433d89d7f"
 
 # Skipping compinit
 skip_global_compinit=1

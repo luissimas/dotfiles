@@ -1,0 +1,14 @@
+session_name: tropico-hss
+start_directory: ~/liven/tropico-hss
+
+windows:
+  - window_name: infra
+    panes:
+      - cd scripts && docker compose up rabbitmq postgres
+  - window_name: database
+    panes:
+      - cd packages/database
+  - window_name: services
+    focus: true
+    panes:
+      - cd scripts && sleep 3 && docker compose up api app
