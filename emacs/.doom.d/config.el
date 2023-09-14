@@ -228,7 +228,7 @@
   ;;  (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/rel/lexical/start_lexical.sh")
   ;;                   :activation-fn (lsp-activate-on "elixir-lexical")
   ;;                   :server-id 'elixir-lexical))
-  (add-hook! 'prisma-mode-hook #'lsp)
+  (add-hook! '(prisma-mode-hook terraform-mode-hook) #'lsp)
   (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
 
 (use-package! lsp-ui
@@ -958,7 +958,8 @@ venv change affects pyright."
               (progn
                 (lsp-workspace-restart (car (lsp-workspaces))))))))
 
-  (add-hook 'lsp-mode-hook #'pada/set-pyright-venv))
+  ;; (add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
+  )
 
 ;; Prevent python template (shebang)
 (set-file-template! "\\.py$" :ignore t)

@@ -129,3 +129,6 @@ if [ -f '/home/padawan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/padawan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/padawan/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
