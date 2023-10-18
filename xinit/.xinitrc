@@ -9,7 +9,7 @@ xrdb -merge ~/.Xresources &
 setxkbmap -layout "br,us" -variant "thinkpad,intl" -model "abnt2," -option "caps:swapescape" &
 
 # Setting mouse sensitivity
-xinput --set-prop 10 'libinput Accel Speed' 0.75
+xinput --set-prop 10 'libinput Accel Speed' 1
 
 if [ $(xrandr -q | grep 'HDMI2 connected') ]; then autorandr desk; fi
 

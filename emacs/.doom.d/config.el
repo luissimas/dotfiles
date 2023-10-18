@@ -439,6 +439,12 @@
         :i "C-d"   #'vterm--self-insert
         :i "C-SPC" #'vterm--self-insert))
 
+
+(use-package! eat
+  :config
+  (setq eshell-visual-commands nil)
+  (eat-eshell-mode))
+
 (use-package! org
   :config
   (setq org-hide-emphasis-markers t
@@ -600,7 +606,7 @@
   '(("^+new-snippet+" :quit nil :size 0.3))
   '(("^\\*Embark" :quit nil :size 0.3))
   '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))
-  '(("^\\*doom:\\(?:v?term\\|e?shell\\)-popup"
+  '(("^\\*doom:\\(?:v?term\\|e?shell\\)-popup\\|\\**-?eat\\*"
      :vslot -5 :size 0.3 :select t :modeline nil :quit nil :ttl nil)))
 
 ;; Disabling mode-line on dashboard
@@ -830,8 +836,8 @@ NO-TEMPLATE is non-nil."
   :config
   (setq corfu-cycle t
         corfu-auto t
-        corfu-auto-delay 0.2
-        corfu-auto-prefix 2
+        corfu-auto-delay 0.1
+        corfu-auto-prefix 1
         corfu-separator ?\s
         corfu-preview-current nil
         corfu-quit-no-match 'separator
@@ -840,7 +846,7 @@ NO-TEMPLATE is non-nil."
         corfu-min-width 80
         corfu-max-width 100
         corfu-scroll-margin 4
-        corfu-echo-delay 0.2
+        corfu-echo-delay 0.1
         corfu-popupinfo-delay (cons nil 0.2)
         corfu-popupinfo-hide nil
         tab-always-indent 'complete)

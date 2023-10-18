@@ -99,6 +99,9 @@ vterm_printf() {
     fi
 }
 
+# Eat
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/zsh"
+
 # Syntax highlighting and autosuggestions
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -132,3 +135,6 @@ if [ -f '/home/padawan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . 
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+# Zoxide setup
+eval "$(zoxide init zsh)"
