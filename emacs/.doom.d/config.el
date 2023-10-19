@@ -976,3 +976,7 @@ venv change affects pyright."
                docker-image-mode-hook
                docker-volume-mode-hook
                docker-network-mode-hook) #'hl-line-mode))
+
+(use-package! magit-todos
+  :config
+  (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:"))
