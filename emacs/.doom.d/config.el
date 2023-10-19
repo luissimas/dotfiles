@@ -439,11 +439,25 @@
         :i "C-d"   #'vterm--self-insert
         :i "C-SPC" #'vterm--self-insert))
 
-
 (use-package! eat
   :config
   (setq eshell-visual-commands nil)
-  (eat-eshell-mode))
+  (eat-eshell-mode)
+  (defun pada/popup-eat (&optional arg)
+    "Pop up an eat terminal buffer and add it to the current perspective."
+    (interactive "P")
+    (let* ((default-directory (project-root (project-current t)))
+           (eat-buffer-name (project-prefixed-buffer-name "eat"))
+           (window (get-buffer-window eat-buffer-name)))
+      (if (window-live-p window)
+          (delete-window window)
+        (let ((buffer (eat-project arg)))
+          (unless (persp-contain-buffer-p buffer)
+            (persp-add-buffer buffer))))))
+
+  (map! :leader
+        :desc "Toggle eat popup" "ot" #'pada/popup-eat))
+
 
 (use-package! org
   :config
