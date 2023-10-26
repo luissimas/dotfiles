@@ -223,11 +223,11 @@
          lsp-file-watch-threshold 5000)
   (add-to-list 'exec-path "~/repos/elixir-ls")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
-  ;; (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
-  ;; (lsp-register-client
-  ;;  (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/rel/lexical/start_lexical.sh")
-  ;;                   :activation-fn (lsp-activate-on "elixir-lexical")
-  ;;                   :server-id 'elixir-lexical))
+  (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
+                    :activation-fn (lsp-activate-on "elixir-lexical")
+                    :server-id 'elixir-lexical))
   (add-hook! '(prisma-mode-hook terraform-mode-hook) #'lsp)
   (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
 
@@ -617,6 +617,8 @@
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
   '(("^\\*compilation\\*.*" :quit t :ttl nil :size 0.3))
   '(("^\\*pytest\\*.*" :quit nil :ttl nil :size 0.3))
+  '(("^\\*exunit.*\\*" :quit nil :ttl nil :size 0.3))
+  '(("^\\*rfc.*\\*" :quit nil :ttl nil :side right :width 0.35 :slot 1))
   '(("^+new-snippet+" :quit nil :size 0.3))
   '(("^\\*Embark" :quit nil :size 0.3))
   '(("^\\*eww\\*" :side right :size 0.5 :quit nil :select t))
@@ -851,19 +853,20 @@ NO-TEMPLATE is non-nil."
   (setq corfu-cycle t
         corfu-auto t
         corfu-auto-delay 0.1
-        corfu-auto-prefix 1
+        corfu-auto-prefix 2
         corfu-separator ?\s
         corfu-preview-current nil
-        corfu-quit-no-match 'separator
+        corfu-quit-no-match nil
+        corfu-quit-at-boundary nil
         corfu-on-exact-match nil
         corfu-bar-width 0
         corfu-min-width 80
         corfu-max-width 100
         corfu-scroll-margin 4
         corfu-echo-delay 0.1
-        corfu-popupinfo-delay (cons nil 0.2)
+        corfu-popupinfo-delay '(nil 0.2)
         corfu-popupinfo-hide nil
-        tab-always-indent 'complete)
+        tab-always-indent t)
 
   (defun pada/+org-return-advice (fun &rest args)
     "Advice for `+org/return' that inserts the selected completion candidate if it exists."
@@ -919,6 +922,7 @@ NO-TEMPLATE is non-nil."
   :after corfu
   :config
   (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
+        kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 1.0 :scale 0.9)
         kind-icon-blend-background nil)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
   (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache)
@@ -940,7 +944,7 @@ NO-TEMPLATE is non-nil."
 
   (defun pada/cape-capf-setup-lsp ()
     (add-to-list 'completion-at-point-functions
-                 (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-ispell #'cape-dabbrev)))
+                 (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
 
 
   (add-hook! 'lsp-completion-mode-hook #'pada/cape-capf-setup-lsp)
