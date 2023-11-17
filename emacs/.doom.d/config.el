@@ -343,6 +343,7 @@
 
 (defcustom pada/open-external-associations
   '(("\\.pdf\\'\\|\\.epub\\'\\|\\.djvu\\'" "zathura")
+    ("\\.pcap\\'\\|\\.cap\\'" "wireshark")
     ("\\.mkv\\'\\|\\.mp4\\'" "mpv"))
   "A alist of association between file patterns and external programs."
   :group 'open-external
@@ -572,6 +573,18 @@
 
   (add-hook! 'org-mode-hook :append #'pada/org-mode-setup))
 
+(use-package! writeroom-mode
+  :config
+  (setq writeroom-mode-line t))
+
+;; Update Org files with last modified date when #+lastmod: is available
+(setq time-stamp-active t
+      time-stamp-start "#\\+lastmod:[ \t]*"
+      time-stamp-end "$"
+      time-stamp-format "[%04Y-%02m-%02d %a]")
+
+(add-hook 'before-save-hook 'time-stamp nil)
+
 (use-package! org-habit
   :after org
   :config
@@ -753,7 +766,8 @@ Default to the URL around or before point."
           ("https://protesilaos.com/commentary.xml" misc)
           ("https://protesilaos.com/news.xml" misc)
           ("https://phaazon.net/blog/feed" programming)
-          ("https://lukesmith.xyz/index.xml" misc))))
+          ("https://lukesmith.xyz/index.xml" misc)
+          ("https://luissimas.github.io/posts/index.xml" mine))))
 
 (use-package! elfeed-tube
   :after elfeed
@@ -856,7 +870,7 @@ NO-TEMPLATE is non-nil."
         corfu-auto-prefix 2
         corfu-separator ?\s
         corfu-preview-current nil
-        corfu-quit-no-match nil
+        corfu-quit-no-match t
         corfu-quit-at-boundary nil
         corfu-on-exact-match nil
         corfu-bar-width 0
