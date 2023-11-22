@@ -192,8 +192,8 @@
 
   (setf (alist-get 'isort apheleia-formatters)
         '("isort" "--stdout" "-"))
-  (setf (alist-get 'python-mode apheleia-mode-alist)
-        '(isort black))
+  (setf (alist-get 'python-mode apheleia-mode-alist) '(isort black)
+        (alist-get 'go-mode apheleia-mode-alist) 'goimports)
 
   ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
   ;; run the commands in the current project root. This is important to make mix
