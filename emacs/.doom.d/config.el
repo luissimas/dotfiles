@@ -359,19 +359,21 @@
   if a pattern matches, then open the file using the specified command.  If no
   pattern matches, simply call FUN with ARGS.
   Note: This function is meant to be adviced around `find-file'."
-  (let ((file-name (car args))
-        (associations pada/open-external-associations)
-        (found nil))
-    (while associations
-      (let* ((current (pop associations))
-             (pattern (car current))
-             (program (car (cdr current))))
-        (when (string-match-p pattern file-name)
-          (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
-          (setq found t)
-          (setq associations nil))))
-    (unless found
-      (apply fun args))))
+  (if (equal current-prefix-arg '(4))
+      (apply fun args)
+    (let ((file-name (car args))
+          (associations pada/open-external-associations)
+          (found nil))
+      (while associations
+        (let* ((current (pop associations))
+               (pattern (car current))
+               (program (car (cdr current))))
+          (when (string-match-p pattern file-name)
+            (pada/run-shell-command (concat program " " (shell-quote-argument file-name)))
+            (setq found t)
+            (setq associations nil))))
+      (unless found
+        (apply fun args)))))
 
 (advice-add 'find-file :around 'pada/open-external-advice)
 
