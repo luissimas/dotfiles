@@ -73,7 +73,6 @@ alias pacman='sudo pacman'
 alias v='vim'
 alias code='codium'
 alias icat='kitty +kitten icat'
-alias cat='bat -P'
 alias mux='tmuxp'
 alias ta='tmux attach'
 alias recompile='sudo ~/scripts/recompile-suckless.sh'
@@ -138,3 +137,6 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 # Zoxide setup
 eval "$(zoxide init zsh)"
+
+# IEX shell history
+export ERL_AFLAGS="-kernel shell_history enabled"

@@ -1,8 +1,8 @@
 #!/bin/bash
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
-obsidianPath="/home/padawan/dox/vault/Attachments/"
+notesPath="/home/padawan/repos/zettelkasten/attachments/"
 
-selected=$(echo -e 'Obsidian\nScreenshot' | rofi -dmenu -p "Type")
+selected=$(echo -e 'Notes\nScreenshot' | rofi -dmenu -p "Type")
 
 # Kill unclutter to allow mouse selection
 killall unclutter
@@ -11,8 +11,8 @@ killall unclutter
 # killall picom
 
 # Launch scrot
-if [[ "$selected" == "Obsidian" ]]; then
-    filePath=$obsidianPath
+if [[ "$selected" == "Notes" ]]; then
+    filePath=$notesPath
     echo $filePath
     fileName=$(rofi -dmenu -p "File name" -l 0)
 elif [[ "$selected" == "Screenshot" ]]; then

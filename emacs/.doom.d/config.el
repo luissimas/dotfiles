@@ -22,7 +22,7 @@
 ;; accept. For example:
 ;;
 (setq doom-font (font-spec :family "Iosevka Padawan" :size 18.0 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 24.0 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Padawan" :size 26.0 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -142,7 +142,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '(("~/fun" . 4) "~/liven" ("~/cati" . 2) ("~/docs" . 2) ("~/freela". 3))
+  (setq! projectile-project-search-path '("~/liven"  ("~/docs" . 2) "~/projects")
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid)
@@ -173,12 +173,12 @@
          :desc "Restore last session"      "R"   #'+workspace/restore-last-session)))
 
 ;; Company
-;; (after! company
-;;   (setq! company-box-scrollbar nil
-;;          company-minimum-prefix-length 1
-;;          copany-idle-delay 0.0)
-;;   (map! :map company-mode-map
-;;         :i "C-SPC" #'company-complete))
+(after! company
+  (setq! company-box-scrollbar nil
+         company-minimum-prefix-length 1
+         copany-idle-delay 0.0)
+  (map! :map company-mode-map
+        :i "C-SPC" #'company-complete))
 
 ;; Treemacs
 (use-package! treemacs
@@ -626,9 +626,19 @@
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
+
+(use-package ob-prolog
+  :ensure t
+  :config
+  (setq org-babel-prolog-command "swipl")
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((prolog . t))))
+
 ;; Popup rules
 (set-popup-rules!
-  '(("\\*\\([Hh]elp.*\\|info\\|godoc.*\\|\\(?:Wo\\)Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
+  '(("\\*\\([Hh]elp.*\\|info\\|godoc.*\\|Man.*\\)\\*" :side right :width 0.4 :slot 0 :ttl 0 :quit current))
   '(("^\\*Alchemist-IEx\\*" :quit nil :size 0.3))
   '(("^\\*compilation\\*.*" :quit t :ttl nil :size 0.3))
   '(("^\\*pytest\\*.*" :quit nil :ttl nil :size 0.3))
@@ -679,7 +689,7 @@
       :desc "Recently opened files" :n "r" #'consult-recent-file
       :desc "Open project"          :n "p" #'projectile-switch-project
       :desc "Jump to bookmark"      :n "b" #'bookmark-jump
-      :desc "Open today's journal"  :n "j" #'org-roam-dailies-goto-today)
+      :desc "Open today's journal"  :n "J" #'org-roam-dailies-goto-today)
 
 ;; Setting dashboard functions
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
@@ -863,109 +873,106 @@ NO-TEMPLATE is non-nil."
         (yas-expand-snippet yas-new-snippet-default))))
 
 ;; Corfu
-(use-package! corfu
-  :init (global-corfu-mode)
-  :config
-  (setq corfu-cycle t
-        corfu-auto t
-        corfu-auto-delay 0.1
-        corfu-auto-prefix 2
-        corfu-separator ?\s
-        corfu-preview-current nil
-        corfu-quit-no-match t
-        corfu-quit-at-boundary nil
-        corfu-on-exact-match nil
-        corfu-bar-width 0
-        corfu-min-width 80
-        corfu-max-width 100
-        corfu-scroll-margin 4
-        corfu-echo-delay 0.1
-        corfu-popupinfo-delay '(nil 0.2)
-        corfu-popupinfo-hide nil
-        tab-always-indent t)
+;; (use-package! corfu
+;;   :init (global-corfu-mode)
+;;   :config
+;;   (setq corfu-cycle t
+;;         corfu-auto t
+;;         corfu-auto-delay 0.1
+;;         corfu-auto-prefix 2
+;;         corfu-separator ?\s
+;;         corfu-preview-current nil
+;;         corfu-quit-no-match t
+;;         corfu-quit-at-boundary nil
+;;         corfu-on-exact-match nil
+;;         corfu-bar-width 0
+;;         corfu-min-width 80
+;;         corfu-max-width 100
+;;         corfu-scroll-margin 4
+;;         corfu-echo-delay 0.1
+;;         corfu-popupinfo-delay '(nil 0.2)
+;;         corfu-popupinfo-hide nil
+;;         tab-always-indent t)
 
-  (defun pada/+org-return-advice (fun &rest args)
-    "Advice for `+org/return' that inserts the selected completion candidate if it exists."
-    (if (and (boundp 'corfu-mode) (>= corfu--index 0))
-        (corfu-insert)
-      (apply fun args)))
+;;   (defun pada/+org-return-advice (fun &rest args)
+;;     "Advice for `+org/return' that inserts the selected completion candidate if it exists."
+;;     (if (and (boundp 'corfu-mode) (>= corfu--index 0))
+;;         (corfu-insert)
+;;       (apply fun args)))
 
-  (advice-add #'+org/return :around #'pada/+org-return-advice)
+;;   (advice-add #'+org/return :around #'pada/+org-return-advice)
 
-  (defun pada/corfu-quit ()
-    "Quits corfu completion and enter evil normal mode."
-    (interactive)
-    (corfu-quit)
-    (evil-normal-state))
+;;   (defun pada/corfu-quit ()
+;;     "Quits corfu completion and enter evil normal mode."
+;;     (interactive)
+;;     (corfu-quit)
+;;     (evil-normal-state))
 
-  (map! :mode global-corfu-mode :map corfu-mode-map :i "C-SPC" #'completion-at-point)
-  (map! :mode global-corfu-mode :map corfu-map
-        :i
-        [escape] #'pada/corfu-quit
-        "ESC" #'pada/corfu-quit
-        "C-SPC" #'corfu-quit
-        "C-j" #'corfu-next
-        "C-k" #'corfu-previous
-        "C-h" #'corfu-info-documentation
-        "C-l" #'corfu-info-location)
+;;   (map! :mode global-corfu-mode :map corfu-mode-map :i "C-SPC" #'completion-at-point)
+;;   (map! :mode global-corfu-mode :map corfu-map
+;;         :i
+;;         [escape] #'pada/corfu-quit
+;;         "ESC" #'pada/corfu-quit
+;;         "C-SPC" #'corfu-quit
+;;         "C-j" #'corfu-next
+;;         "C-k" #'corfu-previous
+;;         "C-h" #'corfu-info-documentation
+;;         "C-l" #'corfu-info-location)
 
-  (defun pada/lsp-corfu-setup ()
-    "Setup corfu completion style for lsp."
-    (setq-local completion-styles '(orderless)
-                completion-category-defaults nil))
+;;   (defun pada/lsp-corfu-setup ()
+;;     "Setup corfu completion style for lsp."
+;;     (setq-local completion-styles '(orderless)
+;;                 completion-category-defaults nil))
 
-  (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup)
+;;   (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup)
 
-  (defun pada/corfu-enable-in-minibuffer ()
-    "Enable Corfu in the minibuffer if `completion-at-point' is bound."
-    (when (where-is-internal #'completion-at-point (list (current-local-map)))
-      ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
-      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
-                  corfu-popupinfo-delay nil)
-      (corfu-mode 1)))
+;;   (defun pada/corfu-enable-in-minibuffer ()
+;;     "Enable Corfu in the minibuffer if `completion-at-point' is bound."
+;;     (when (where-is-internal #'completion-at-point (list (current-local-map)))
+;;       ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+;;       (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+;;                   corfu-popupinfo-delay nil)
+;;       (corfu-mode 1)))
 
-  (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
-  (add-hook 'eshell-mode-hook #'corfu-mode)
+;;   (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
+;;   (add-hook 'eshell-mode-hook #'corfu-mode)
 
-  (corfu-history-mode)
-  (corfu-echo-mode)
-  (corfu-popupinfo-mode))
+;;   (corfu-history-mode)
+;;   (corfu-echo-mode)
+;;   (corfu-popupinfo-mode))
 
-(use-package! company
-  :after corfu)
+;; (use-package! kind-icon
+;;   :after corfu
+;;   :config
+;;   (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
+;;         kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 1.0 :scale 0.9)
+;;         kind-icon-blend-background nil)
+;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+;;   (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache)
+;;   (add-hook 'doom-big-font-mode-hook #'kind-icon-reset-cache))
 
-(use-package! kind-icon
-  :after corfu
-  :config
-  (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
-        kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 1.0 :scale 0.9)
-        kind-icon-blend-background nil)
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache)
-  (add-hook 'doom-big-font-mode-hook #'kind-icon-reset-cache))
+;; (use-package! cape
+;;   :init
+;;   (defun pada/cape-capf-setup-git-commit ()
+;;     (add-to-list 'completion-at-point-functions
+;;                  (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
 
-(use-package! cape
-  :init
-  (defun pada/cape-capf-setup-git-commit ()
-    (add-to-list 'completion-at-point-functions
-                 (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
+;;   (defun pada/cape-capf-setup-org ()
+;;     (require 'org-roam)
+;;         (add-to-list 'completion-at-point-functions
+;;                      (apply #'cape-super-capf
+;;                             (append
+;;                              (if (org-roam-file-p) org-roam-completion-functions ())
+;;                              (list #'cape-ispell #'cape-dabbrev (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-tex)))))
 
-  (defun pada/cape-capf-setup-org ()
-    (require 'org-roam)
-        (add-to-list 'completion-at-point-functions
-                     (apply #'cape-super-capf
-                            (append
-                             (if (org-roam-file-p) org-roam-completion-functions ())
-                             (list #'cape-ispell #'cape-dabbrev (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-tex)))))
-
-  (defun pada/cape-capf-setup-lsp ()
-    (add-to-list 'completion-at-point-functions
-                 (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
+;;   (defun pada/cape-capf-setup-lsp ()
+;;     (add-to-list 'completion-at-point-functions
+;;                  (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
 
 
-  (add-hook! 'lsp-completion-mode-hook #'pada/cape-capf-setup-lsp)
-  (add-hook! 'git-commit-mode-hook #'pada/cape-capf-setup-git-commit)
-  (add-hook! 'org-mode-hook #'pada/cape-capf-setup-org))
+;;   (add-hook! 'lsp-completion-mode-hook #'pada/cape-capf-setup-lsp)
+;;   (add-hook! 'git-commit-mode-hook #'pada/cape-capf-setup-git-commit)
+;;   (add-hook! 'org-mode-hook #'pada/cape-capf-setup-org))
 
 ;; Marginalia
 (use-package! marginalia
@@ -973,33 +980,33 @@ NO-TEMPLATE is non-nil."
   (map! :map minibuffer-local-map
         "M-a" #'marginalia-cycle))
 
-(use-package! poetry
-  :config
+;; (use-package! poetry
+;;   :config
 
-  (setq! poetry-tracking-strategy 'switch-buffer)
+;;   (setq! poetry-tracking-strategy 'switch-buffer)
 
-  (defvar pada/poetry--last-project-venv nil
-    "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
+;;   (defvar pada/poetry--last-project-venv nil
+;;     "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
 
-  (defun pada/set-pyright-venv ()
-    "Set `lsp-pyright-venv-path' the same as `poetry-project-venv'.
-Also restarts the LSP workspace via `lsp-workspace-restart' so the
-venv change affects pyright."
+;;   (defun pada/set-pyright-venv ()
+;;     "Set `lsp-pyright-venv-path' the same as `poetry-project-venv'.
+;; Also restarts the LSP workspace via `lsp-workspace-restart' so the
+;; venv change affects pyright."
 
-    (if (and (boundp 'lsp-pyright-venv-path)
-             (boundp 'poetry-project-venv)
-             poetry-project-venv
-             (not (string-equal pada/poetry--last-project-venv poetry-project-venv)))
-        (progn
-          (message "Setting lsp-pyright-venv-path")
-          (setq pada/poetry--last-project-venv poetry-project-venv)
-          (setq-local lsp-pyright-venv-path poetry-project-venv)
-          (if lsp-mode
-              (progn
-                (lsp-workspace-restart (car (lsp-workspaces))))))))
+;;     (if (and (boundp 'lsp-pyright-venv-path)
+;;              (boundp 'poetry-project-venv)
+;;              poetry-project-venv
+;;              (not (string-equal pada/poetry--last-project-venv poetry-project-venv)))
+;;         (progn
+;;           (message "Setting lsp-pyright-venv-path")
+;;           (setq pada/poetry--last-project-venv poetry-project-venv)
+;;           (setq-local lsp-pyright-venv-path poetry-project-venv)
+;;           (if lsp-mode
+;;               (progn
+;;                 (lsp-workspace-restart (car (lsp-workspaces))))))))
 
-  ;; (add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
-  )
+;;   ;; (add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
+;;   )
 
 ;; Prevent python template (shebang)
 (set-file-template! "\\.py$" :ignore t)
