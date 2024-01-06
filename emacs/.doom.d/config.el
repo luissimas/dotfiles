@@ -87,7 +87,7 @@
 
 ;; Keybinding to toggle modeline
 (map! :leader
-        :desc "Modeline" "tm" #'hide-mode-line-mode)
+      :desc "Modeline" "tm" #'hide-mode-line-mode)
 
 (add-hook! 'compilation-mode-hook #'hide-mode-line-mode)
 
@@ -550,9 +550,9 @@
     (org-back-to-heading t)
     (let ((style (org-entry-get (point) "STYLE")))
       (unless (string-equal style "habit")
-          (progn
-            (org-next-visible-heading 1)
-            (point)))))
+        (progn
+          (org-next-visible-heading 1)
+          (point)))))
 
   (defun pada/custom-agenda (&optional arg)
     (interactive "P")
@@ -614,9 +614,9 @@
   :hook (org-mode . org-appear-mode)
   :config
   (setq org-appear-autoentities t
-       org-appear-autokeywords t
-       org-appear-autolinks nil
-       org-appear-autosubmarkers t))
+        org-appear-autokeywords t
+        org-appear-autolinks nil
+        org-appear-autosubmarkers t))
 
 ;; Toggle latex preview on cursor
 (use-package! org-fragtog
@@ -658,30 +658,30 @@
 
 ;; Setting the menu items
 (setq! +doom-dashboard-menu-sections
-  '(("Reload last session"
-     :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
-     :when (cond ((modulep! :ui workspaces)
-                  (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
-                 ((require 'desktop nil t)
-                  (file-exists-p (desktop-full-file-name))))
-     :face (:inherit (doom-dashboard-menu-title bold))
-     :action doom/quickload-session)
-    ("Open org-agenda"
-     :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
-     :when (fboundp 'org-agenda)
-     :action pada/custom-agenda)
-    ("Recently opened files"
-     :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
-     :action recentf-open-files)
-    ("Open project"
-     :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
-     :action projectile-switch-project)
-    ("Jump to bookmark"
-     :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
-     :action bookmark-jump)
-    ("Open today's journal" :icon
-     (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
-     :action org-roam-dailies-goto-today)))
+       '(("Reload last session"
+          :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+          :when (cond ((modulep! :ui workspaces)
+                       (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                      ((require 'desktop nil t)
+                       (file-exists-p (desktop-full-file-name))))
+          :face (:inherit (doom-dashboard-menu-title bold))
+          :action doom/quickload-session)
+         ("Open org-agenda"
+          :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          :when (fboundp 'org-agenda)
+          :action pada/custom-agenda)
+         ("Recently opened files"
+          :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+          :action recentf-open-files)
+         ("Open project"
+          :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+          :action projectile-switch-project)
+         ("Jump to bookmark"
+          :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+          :action bookmark-jump)
+         ("Open today's journal" :icon
+          (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+          :action org-roam-dailies-goto-today)))
 
 (map! :map +doom-dashboard-mode-map
       :desc "Reload last session"   :n "R" #'doom/quickload-session
@@ -700,7 +700,7 @@
 
 ;; Org-roam
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (defun browse-url-surf (url &optional _new-window)
   "Ask the surf WWW browser to load URL.
@@ -723,18 +723,18 @@ Default to the URL around or before point."
          :desc "Create entry for date"     "D"   #'org-roam-dailies-capture-date)))
 
 (use-package! org-roam-ui
-    :after org-roam
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t
-          org-roam-ui-browser-function #'browse-url-surf)
-    (map! :leader
-          :desc "Open graph" "nrg" #'org-roam-ui-open)
-    (map! :leader
-          :map org-roam-mode-map
-          :desc "Open graph" "mmg" #'org-roam-ui-open))
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t
+        org-roam-ui-browser-function #'browse-url-surf)
+  (map! :leader
+        :desc "Open graph" "nrg" #'org-roam-ui-open)
+  (map! :leader
+        :map org-roam-mode-map
+        :desc "Open graph" "mmg" #'org-roam-ui-open))
 
 (defun pada/elfeed-show-mode-setup ()
   "Set options for `elfeed-show-mode'. This function is meant to be added to `elfeed-show-mode-hook'."

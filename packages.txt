@@ -246,7 +246,6 @@ ttf-roboto-mono
 ttf-weather-icons
 ttfautohint
 typescript-language-server
-unclutter
 unixodbc
 unrar
 unzip
