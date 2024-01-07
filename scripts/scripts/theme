@@ -1,0 +1,65 @@
+#!/bin/bash
+
+wall_dir=~/.wal/
+theme_dir=~/.config/wal/colorschemes/
+themes="OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi"
+selected=$(echo -e "$themes" | rofi -dmenu -i -p "Theme")
+
+case $selected in "Palenight")
+    name=base16-material-palenight
+    theme=$theme_dir/palenight
+    bg=$wall_dir/palenight.jpg
+    ;;
+"Gruvbox")
+    name=base16-gruvbox-dark-hard
+    theme="base16-gruvbox-hard"
+    bg=$wall_dir/forestfog.jpg
+    ;;
+"Rosé Pine")
+    name=rose-pine
+    theme=$theme_dir/rosepine.json
+    bg=$wall_dir/rosessky.jpg
+    ;;
+"Tokyonight")
+    name=tokyonight
+    theme=$theme_dir/tokyonight.json
+    bg=$wall_dir/traintunnel.jpg
+    ;;
+"Modus Vivendi")
+    name=modus-vivendi
+    theme=$theme_dir/modus-vivendi.json
+    bg=$wall_dir/whitemountain.jpg
+    ;;
+"Modus Operandi")
+    name=modus-operandi
+    theme=$theme_dir/modus-operandi.json
+    bg=$wall_dir/whitemountain.jpg
+    ;;
+"Nord")
+    name=nord
+    theme=$theme_dir/nord.json
+    bg=$wall_dir/nordmountain.jpeg
+    ;;
+"OneDark")
+    name=onedark
+    theme=base16-onedark
+    bg=$wall_dir/onedark.png
+    ;;
+"Catppuccin")
+    name=catppuccin
+    theme=$theme_dir/catppuccin.json
+    bg=$wall_dir/catpuccin_leaves.png
+    ;;
+*) printf "No option selected." ;;
+esac
+
+
+wal --theme $theme
+swww img $bg -t none
+echo $name >~/.colorscheme
+
+# Update emacs colors
+emacsclient -e "(pada/load-system-theme)"
+
+# Update qutebrowser colors
+pgrep qutebrowser >/dev/null && qutebrowser :config-source
