@@ -63,3 +63,6 @@ emacsclient -e "(pada/load-system-theme)"
 
 # Update qutebrowser colors
 pgrep qutebrowser >/dev/null && qutebrowser :config-source
+
+# Restart waybar
+killall launch-waybar && launch-waybar
