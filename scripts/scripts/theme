@@ -1,7 +1,7 @@
 #!/bin/bash
 
-wall_dir=~/.wal/
-theme_dir=~/.config/wal/colorschemes/
+wall_dir=~/.wal
+theme_dir=~/.config/wal/colorschemes
 themes="OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi"
 selected=$(echo -e "$themes" | rofi -dmenu -i -p "Theme")
 
@@ -53,10 +53,10 @@ case $selected in "Palenight")
 *) printf "No option selected." ;;
 esac
 
-
 wal --theme $theme
 swww img $bg -t none
 echo $name >~/.colorscheme
+echo $bg >~/.bg
 
 # Update emacs colors
 emacsclient -e "(pada/load-system-theme)"

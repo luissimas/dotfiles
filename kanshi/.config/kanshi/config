@@ -1,0 +1,10 @@
+profile {
+    output HDMI-A-2 enable position 0,0
+    output eDP-1 disable
+    exec swww img $(cat ~/.bg) -t none
+}
+
+profile {
+    output eDP-1 enable position 0,0
+    exec swww img $(cat ~/.bg) -t none
+}
