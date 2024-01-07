@@ -1,2 +1,16 @@
 #!/bin/bash
-grim -g "$(slurp -w 0)" - | wl-copy
+
+while getopts 's' option; do
+    case $option in
+        s)
+            save=1
+            ;;
+    esac
+done
+
+if [ $save ]; then
+    grim -g "$(slurp -w 0)"
+else
+    grim -g "$(slurp -w 0)" - | wl-copy
+fi
+
