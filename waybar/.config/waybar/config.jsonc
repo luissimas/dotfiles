@@ -1,0 +1,91 @@
+{
+  "height": 20,
+  "spacing": 0,
+  "layer": "top",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": [],
+  "modules-right": [
+    "weather",
+    "bluetooth",
+    "network",
+    "docker",
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock"
+  ],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "format": "{name}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟  muted",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "",
+    "format-disabled": "",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+  },
+  "clock": {
+    "format": "  {:%a, %d %b   %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "cpu": {
+    "format": "  {usage}%"
+  },
+  "memory": {
+    "format": "  {percentage}%"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C"
+  },
+  "backlight": {
+    "format": "󰃟 {percent}%"
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰚥 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "{ipaddr}/{cidr} 󰈁",
+    "format-ethernet": "{ipaddr}/{cidr} 󰈁",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "  {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "󰈁 {ifname}",
+    "tooltip-format-disconnected": "Disconnected"
+  }
+}
