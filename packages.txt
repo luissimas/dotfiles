@@ -70,6 +70,7 @@ gnome-multi-writer
 gnu-netcat
 gparted
 grep
+grim
 groff
 grub
 gzip
@@ -79,6 +80,8 @@ htop
 hugo
 hunspell-en_us
 hunspell-pt-br
+hyprland
+hyprpicker-git
 inetutils
 inkscape
 inotify-tools
@@ -140,6 +143,7 @@ ntp
 nvtop
 obs-studio
 onboard
+onefetch
 opam
 openmp
 openvpn
@@ -157,6 +161,7 @@ peek
 picom
 pkgconf
 playerctl
+polkit-kde-agent
 polybar
 postgresql
 psutils
@@ -192,6 +197,7 @@ sfml
 shellcheck
 shfmt
 sipp
+slurp
 socat
 speedtest-cli
 steam
@@ -200,7 +206,9 @@ strace
 streamlink-git
 sudo
 surf
+swayidle
 swi-prolog
+swww
 sxhkd
 sxiv
 syncthing
@@ -258,13 +266,20 @@ vlc
 vscode-css-languageserver
 vscode-html-languageserver
 vscodium-bin
+waybar
+waylock
+wf-recorder
 wget
 which
 wireless_tools
+wireplumber
 wireshark-qt
+wl-clipboard
+wofi
 wxwidgets-gtk3
 xautolock
 xclip
+xdg-desktop-portal-hyprland
 xdotool
 xf86-video-amdgpu
 xf86-video-intel
