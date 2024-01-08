@@ -4,7 +4,7 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [],
   "modules-right": [
-    "weather",
+    "custom/docker",
     "bluetooth",
     "network",
     "docker",
@@ -29,6 +29,12 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/docker": {
+    "exec": "docker ps -q | wc -l",
+    "interval": 1,
+    "format": "  {}  ",
+    "on-click": "docker ps -q | xargs docker stop"
   },
   "bluetooth": {
     "format": " {status}",
