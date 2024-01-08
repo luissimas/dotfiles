@@ -23,7 +23,8 @@
 ;;
 (setq doom-font (font-spec :family "Iosevka Padawan" :size 18.0 :weight 'regular)
       doom-big-font (font-spec :family "Iosevka Padawan" :size 26.0 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0))
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0)
+      doom-symbol-font (font-spec :family "Noto Color Emoji"))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -561,8 +562,6 @@
   (map! :leader
         :desc "Agenda"            "oaa" #'pada/custom-agenda
         :desc "Agenda dispatcher" "oaA"   #'org-agenda)
-
-  (add-to-list 'org-agenda-files "~/repos/zettelkasten/journal")
 
   (defun pada/org-mode-setup ()
     "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."

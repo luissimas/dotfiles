@@ -1,5 +1,4 @@
 {
-  "height": 20,
   "spacing": 0,
   "layer": "top",
   "modules-left": ["hyprland/workspaces"],
