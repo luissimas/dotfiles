@@ -5,6 +5,6 @@ profile {
 }
 
 profile {
-    output eDP-1 enable position 0,0
+    output eDP-1 enable position 0,0 scale 1
     exec swww img $(cat ~/.bg) -t none
 }
