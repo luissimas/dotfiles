@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: LiveView handle event
-# key: lv_he
+# key: he
 # --
 def handle_event("${1:event}", ${2:payload}, socket) do
   $0
