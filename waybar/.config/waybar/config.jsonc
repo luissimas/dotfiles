@@ -4,8 +4,8 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [],
   "modules-right": [
-    "custom/docker",
     "bluetooth",
+    "custom/docker",
     "network",
     "docker",
     "cpu",
@@ -33,11 +33,11 @@
   "custom/docker": {
     "exec": "docker ps -q | wc -l",
     "interval": 1,
-    "format": "  {}  ",
-    "on-click": "docker ps -q | xargs docker stop"
+    "format": "  {}",
+    "on-click": "kill-docker-containers"
   },
   "bluetooth": {
-    "format": " {status}",
+    "format": " {status} ",
     "format-disabled": "",
     "format-disabled": "",
     "tooltip-format": "{controller_alias}\t{controller_address}",
@@ -72,6 +72,7 @@
     "format": "󰃟 {percent}%"
   },
   "battery": {
+    "interval": 5,
     "states": {
       "good": 95,
       "warning": 30,
