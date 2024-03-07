@@ -18,6 +18,7 @@ bat
 batsignal
 beekeeper-studio-bin
 betterlockscreen
+bind
 binutils
 bison
 bluez
@@ -27,11 +28,13 @@ brave-bin
 brillo
 bspwm
 btop
+caddy
 calc
 chromium-widevine
 clang
 colorpicker
 dbeaver
+ddcutil
 debugedit
 discord
 djvu2pdf
@@ -44,6 +47,7 @@ efibootmgr
 emacs-nativecomp
 erlang
 exercism
+exfatprogs
 eza
 fakeroot
 fd
@@ -65,7 +69,6 @@ gimp
 git
 gnome-calculator
 gnome-disk-utility
-gnome-keyring
 gnome-multi-writer
 gnu-netcat
 gparted
@@ -94,6 +97,7 @@ jdk8-openjdk
 jq
 jre8-openjdk
 jre8-openjdk-headless
+kanshi
 keybase-bin
 kitty
 ledger
@@ -119,6 +123,7 @@ man-pages
 mariadb
 maven
 mediainfo
+micropython
 mongodb-bin
 mongodb-tools-bin
 mongosh-bin
@@ -127,6 +132,7 @@ mpd
 mpv
 mypy
 nautilus
+ncdu
 ncmpcpp
 neofetch
 neovim
@@ -197,6 +203,7 @@ sfml
 shellcheck
 shfmt
 sipp
+slack-desktop-wayland
 slurp
 socat
 speedtest-cli
@@ -206,6 +213,7 @@ strace
 streamlink-git
 sudo
 surf
+swappy
 swayidle
 swi-prolog
 swww
@@ -228,6 +236,7 @@ texlive-music
 texlive-pictures
 texlive-pstricks
 texlive-publishers
+thonny
 throttled
 time
 tk
@@ -271,10 +280,13 @@ waylock
 wf-recorder
 wget
 which
+wireguard-tools
+wireguird
 wireless_tools
 wireplumber
 wireshark-qt
 wl-clipboard
+wlr-randr
 wxwidgets-gtk3
 xautolock
 xclip
