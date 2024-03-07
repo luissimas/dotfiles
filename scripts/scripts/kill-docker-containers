@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 docker ps -q | xargs -r docker stop

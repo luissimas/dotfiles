@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 wall_dir=~/.wal
 theme_dir=~/.config/wal/colorschemes

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 selected=$(pamixer --list-sinks | grep alsa | rofi -dmenu -i -p "Select output device" | awk '{print $1}')
 

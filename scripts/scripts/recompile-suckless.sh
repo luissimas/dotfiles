@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 dwmDir=/home/padawan/repos/dwm
 stDir=/home/padawan/repos/st

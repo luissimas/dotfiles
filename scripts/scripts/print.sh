@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 screenshotPath="/home/padawan/dotfiles/.screenshots/"
 notesPath="/home/padawan/repos/zettelkasten/attachments/"
 

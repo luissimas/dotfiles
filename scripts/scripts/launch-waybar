@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CONFIG_FILES="$HOME/.config/waybar/config.jsonc $HOME/.config/waybar/style.css"
 
-trap "killall waybar" EXIT
+trap "pkill -f waybar" EXIT
 
 while true; do
     waybar &
