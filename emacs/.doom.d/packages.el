@@ -124,3 +124,5 @@
 (package! rfc-mode)
 
 (package! ob-prolog :recipe (:host github :repo "ljos/ob-prolog"))
+
+(package! caddyfile-mode)

@@ -186,10 +186,18 @@
   :config
   (treemacs-follow-mode))
 
+;; Caddyfile
+(use-package caddyfile-mode
+  :mode (("Caddyfile\\'" . caddyfile-mode)
+         ("caddy\\.conf\\'" . caddyfile-mode)))
+
 ;; Formatting
 (use-package! apheleia
   :config
+  (setq apheleia-remote-algorithm 'local)
+
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
+  (add-to-list 'apheleia-mode-alist '(caddyfile-mode caddyfmt))
 
   (setf (alist-get 'isort apheleia-formatters)
         '("isort" "--stdout" "-"))
@@ -382,6 +390,7 @@
 (defcustom pada/system-theme-associations
   '(("modus-operandi" modus-operandi)
     ("modus-vivendi" modus-vivendi)
+    ("ef-day" ef-day)
     ("nord" doom-nord-aurora)
     ("gruvbox" doom-gruvbox)
     ("tokyonight" doom-tokyo-night)

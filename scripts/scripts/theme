@@ -2,7 +2,7 @@
 
 wall_dir=~/.wal
 theme_dir=~/.config/wal/colorschemes
-themes="OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi"
+themes="OneDark\nNord\nCatppuccin\nPalenight\nGruvbox\nTokyonight\nRosé Pine\nModus Vivendi\nModus Operandi\nEf Day"
 selected=$(echo -e "$themes" | rofi -dmenu -i -p "Theme")
 
 case $selected in "Palenight")
@@ -49,6 +49,11 @@ case $selected in "Palenight")
     name=catppuccin
     theme=$theme_dir/catppuccin.json
     bg=$wall_dir/catpuccin_leaves.png
+    ;;
+"Ef Day")
+    name=ef-day
+    theme=$theme_dir/ef-day.json
+    bg=$wall_dir/brownleaves.jpg
     ;;
 *) printf "No option selected." ;;
 esac
