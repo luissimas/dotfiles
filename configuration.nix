@@ -75,11 +75,12 @@
     #media-session.enable = true;
   };
 
+  # Bluetooth
   services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
 
-  hardware = {
-    bluetooth.enable = true;
-  };
+  # Screen brigthness
+  hardware.brillo.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -116,7 +117,6 @@
     gnumake
     libtool
     pywal
-    zoxide
     waybar
     dunst
     libnotify
@@ -132,6 +132,14 @@
     hunspell
     hunspellDicts.pt_BR
     hunspellDicts.en_US
+    beekeeper-studio
+    gcc
+    go
+    mpv
+    nodejs
+    python3
+    zathura
+    pamixer
   ];
 
   programs.git.enable = true;

@@ -104,7 +104,7 @@
        rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        terraform         ; infrastructure as code
-       ;tmux              ; an API for interacting with tmux
+       ;;tmux              ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp
 
@@ -151,7 +151,7 @@
        (lua +lsp)               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
+       nix               ; I hereby declare "nix geht mehr!"
        (ocaml +lsp +tree-sitter)             ; an objective camel
        (org +pandoc +present +journal +roam2 +jupyter)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
