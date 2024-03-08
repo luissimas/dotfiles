@@ -152,12 +152,6 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  # Emacs daemon
-  # services.emacs = {
-  #   enable = true;
-  #   package = pkgs.emacs;
-  # };
-
   # Docker setup
   virtualisation.docker.enable = true;
 
