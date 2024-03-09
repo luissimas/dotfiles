@@ -150,6 +150,7 @@
     python3
     zathura
     pamixer
+    waylock
   ];
 
   programs.git.enable = true;
@@ -172,6 +173,23 @@
     nerdfonts
     font-awesome
   ];
+
+  # Fix waylock (https://github.com/NixOS/nixpkgs/issues/143365)
+  security.pam.services.waylock.text = ''
+    # Account management.
+    account required pam_unix.so
+
+    # Authentication management.
+    auth sufficient pam_unix.so   likeauth try_first_pass
+    auth required pam_deny.so
+
+    # Password management.
+    password sufficient pam_unix.so nullok sha512
+
+    # Session management.
+    session required pam_env.so conffile=/etc/pam/environment readenv=0
+    session required pam_unix.so
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

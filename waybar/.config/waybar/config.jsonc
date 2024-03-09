@@ -32,7 +32,7 @@
     "on-click": "kill-docker-containers"
   },
   "bluetooth": {
-    "format-on": "  ",
+    "format-on": " ",
     "format-off": "",
     "format-disabled": "",
     "format-connected": " {device_alias} ",
