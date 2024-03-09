@@ -119,6 +119,9 @@
     emacs
     fastfetch
     bat
+    tree
+    fd
+    fzf
     kitty
     unzip
     tmux

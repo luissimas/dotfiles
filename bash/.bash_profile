@@ -1,19 +1,14 @@
-#
-# ~/.bash_profile
-#
-
 # Path
-export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/bin:${HOME}/.emacs.d/bin:${HOME}/repos/elixir-ls:${HOME}/.cargo/bin"
 export PATH=$HOME/.local/go/bin:$PATH
-export PATH=$HOME/.config/bspwm/scripts:$PATH
-export PATH=$HOME/.config/polybar/scripts:$PATH
 export PATH=$HOME/scripts:$PATH
 export GOPATH=$HOME/.local/go
-export QUTEWAL_DYNAMIC_LOADING=True
 
 # Exports
-export BROWSER="qutebrowser"
+export TERM="kitty"
+export BROWSER="brave"
 export READER="zathura"
-export EDITOR="nvim"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--color=16 --no-mouse --height 40%" # --preview 'bat {} --color=always -p'"
+export EDITOR="emacsclient -c"
+export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --exclude .git --color=always"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--border --ansi --preview 'bat --style=numbers --color=always {}' --bind 'ctrl-/:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"

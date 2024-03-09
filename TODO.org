@@ -1,7 +1,11 @@
 #+title: Dotfiles
 
-* TODO Tmux setup
-* TODO Bash setup
+* DONE Tmux setup
+CLOSED: [2024-03-09 sáb 09:43]
+* DONE Bash setup
+CLOSED: [2024-03-09 sáb 10:18]
+* DONE FZF
+CLOSED: [2024-03-09 sáb 10:53]
 * TODO Language servers
 * TODO Cursor theme (maybe KDE is messing with this?)
 * TODO Minimal usable neovim setup
