@@ -1,1 +1,8 @@
 #+title: Dotfiles
+
+* TODO Tmux setup
+* TODO Bash setup
+* TODO Language servers
+* TODO Cursor theme (maybe KDE is messing with this?)
+* TODO Minimal usable neovim setup
+* TODO Docs
