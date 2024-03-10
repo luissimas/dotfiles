@@ -148,6 +148,8 @@
     beekeeper-studio
     gcc
     go
+    gotools
+    gotests
     mpv
     nodejs
     python3
