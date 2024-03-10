@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -103,7 +102,7 @@
     packages = with pkgs; [
       firefox
       kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -150,6 +149,7 @@
     go
     gotools
     gotests
+    gomodifytags
     mpv
     nodejs
     python3
@@ -160,6 +160,7 @@
     clang-tools
     elixir-ls
     erlang-ls
+    nil
     gopls
     typescript
     lua
@@ -167,6 +168,10 @@
     ocaml
     ocamlPackages.lsp
     nodePackages.bash-language-server
+    nixfmt
+    ledger
+    terraform
+    python312Packages.editorconfig
   ];
 
   programs.git.enable = true;
@@ -183,12 +188,7 @@
   virtualisation.docker.enable = true;
 
   # Fonts
-  fonts.packages = with pkgs; [
-    fira
-    iosevka
-    nerdfonts
-    font-awesome
-  ];
+  fonts.packages = with pkgs; [ fira iosevka nerdfonts font-awesome ];
 
   # Fix waylock (https://github.com/NixOS/nixpkgs/issues/143365)
   security.pam.services.waylock.text = ''

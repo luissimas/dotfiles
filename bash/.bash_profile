@@ -1,6 +1,7 @@
 # Path
 export PATH=$HOME/.local/go/bin:$PATH
 export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/.config/emacs/bin:$PATH
 export GOPATH=$HOME/.local/go
 
 # Exports
