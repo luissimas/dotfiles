@@ -6,7 +6,8 @@ CLOSED: [2024-03-09 sáb 09:43]
 CLOSED: [2024-03-09 sáb 10:18]
 * DONE FZF
 CLOSED: [2024-03-09 sáb 10:53]
-* TODO Language servers
-* TODO Cursor theme (maybe KDE is messing with this?)
+* DONE Language servers
+CLOSED: [2024-03-09 sáb 11:46]
 * TODO Minimal usable neovim setup
+* TODO Cursor theme (maybe KDE is messing with this?)
 * TODO Docs

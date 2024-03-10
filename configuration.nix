@@ -154,6 +154,17 @@
     zathura
     pamixer
     waylock
+    jq
+    clang-tools
+    elixir-ls
+    erlang-ls
+    gopls
+    typescript
+    lua
+    luajitPackages.lua-lsp
+    ocaml
+    ocamlPackages.lsp
+    nodePackages.bash-language-server
   ];
 
   programs.git.enable = true;
