@@ -98,7 +98,7 @@
   users.users.padawan = {
     isNormalUser = true;
     description = "Luís";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" "wireshark" ];
     packages = with pkgs; [
       firefox
       kate
@@ -168,13 +168,21 @@
     ocaml
     ocamlPackages.lsp
     nodePackages.bash-language-server
+    nodePackages_latest.pyright
     nixfmt
     ledger
     terraform
     python312Packages.editorconfig
+    black
+    isort
+    wireshark
+    poetry
+    google-cloud-sdk
   ];
 
+  # Enabling some programs
   programs.git.enable = true;
+  programs.wireshark.enable = true;
 
   # Hyprland setup
   programs.hyprland = {
@@ -206,6 +214,15 @@
     session required pam_env.so conffile=/etc/pam/environment readenv=0
     session required pam_unix.so
   '';
+
+  # Allow running dynamically linked executables
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs;
+    [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+      python3
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
