@@ -178,6 +178,9 @@
     wireshark
     poetry
     google-cloud-sdk
+    nmap
+    qmk
+    via
   ];
 
   # Enabling some programs
@@ -223,6 +226,12 @@
       # here, NOT in environment.systemPackages
       python3
     ];
+
+  # SSH keep alive connection
+  programs.ssh.extraConfig = ''
+    ServerAliveInterval 60
+    ServerAliveCountMax 120
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
