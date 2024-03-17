@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 18.0 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 26.0 :weight 'regular)
+(setq doom-font (font-spec :family "Iosevka" :size 18.0 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka" :size 26.0 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0)
       doom-symbol-font (font-spec :family "Noto Color Emoji"))
 ;;
@@ -667,7 +667,7 @@
 ;; Setting the menu items
 (setq! +doom-dashboard-menu-sections
        '(("Reload last session"
-          :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-title)
           :when (cond ((modulep! :ui workspaces)
                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
                       ((require 'desktop nil t)
@@ -675,20 +675,20 @@
           :face (:inherit (doom-dashboard-menu-title bold))
           :action doom/quickload-session)
          ("Open org-agenda"
-          :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
           :when (fboundp 'org-agenda)
           :action pada/custom-agenda)
          ("Recently opened files"
-          :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-title)
           :action recentf-open-files)
          ("Open project"
-          :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-title)
           :action projectile-switch-project)
          ("Jump to bookmark"
-          :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-title)
           :action bookmark-jump)
          ("Open today's journal" :icon
-          (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+          (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
           :action org-roam-dailies-goto-today)))
 
 (map! :map +doom-dashboard-mode-map
@@ -806,8 +806,7 @@ Default to the URL around or before point."
          doom-modeline-checker-simple-format t
          doom-modeline-vcs-max-length 20
          doom-modeline-lsp nil)
-  (setq! lsp-modeline-diagnostics-enable nil)
-  (setq all-the-icons-scale-factor 1.0))
+  (setq! lsp-modeline-diagnostics-enable nil))
 
 (use-package! modus-themes
   :init
