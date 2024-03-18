@@ -181,6 +181,7 @@
     nmap
     qmk
     via
+    telegram-desktop
   ];
 
   # Enabling some programs
