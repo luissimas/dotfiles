@@ -125,6 +125,7 @@
     unzip
     tmux
     brave
+    qutebrowser
     cmake
     gnumake
     libtool
@@ -134,7 +135,6 @@
     libnotify
     swww
     rofi-wayland
-    batsignal
     kanshi
     inotify-tools
     ripgrep
@@ -182,6 +182,8 @@
     qmk
     via
     telegram-desktop
+    btop
+    pavucontrol
   ];
 
   # Enabling some programs
@@ -233,6 +235,20 @@
     ServerAliveInterval 60
     ServerAliveCountMax 120
   '';
+
+  # CPU thermal throttling
+  services.thermald.enable = true;
+
+  # TLP thresholds for improving battery longevity
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 60;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT1 = 60;
+      STOP_CHARGE_THRESH_BAT1 = 80;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
