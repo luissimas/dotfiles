@@ -50,10 +50,6 @@
                                         ;(unpin! t)
 
 ;; Themes
-(package! nano-theme)
-(package! mindre-theme :recipe (:repo "erikbackman/mindre-theme"))
-(package! ewal)
-(package! ewal-doom-themes)
 (package! ef-themes)
 (package! modus-themes)
 (package! catppuccin :recipe (:host github :repo "catppuccin/emacs"))
@@ -66,19 +62,9 @@
 (package! org-appear)
 (package! org-fragtog)
 
-;; Screenshot
-(package! screenshot :recipe (:repo "tecosaur/screenshot"))
-
 ;; Disabling flycheck popup
 (package! flycheck-popup-tip :disable t)
 (package! flycheck-posframe :disable t)
-
-;; Org-roam
-(unpin! org-roam)
-(package! org-roam-ui)
-
-;; Prisma mode
-(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 ;; Elfeed-tube
 (package! elfeed-tube)
@@ -103,16 +89,13 @@
 
 ;; Better completion at point
 (package! corfu :recipe (:files (:defaults "extensions/*.el") :host github :repo "minad/corfu"))
-
 (package! kind-icon)
 (package! cape)
-
-;; Needed to use company-yasnippet
-(package! company)
 
 ;; Disable nose tests
 (package! nose :disable t)
 
+;; Better terminal emulator
 (package! eat :recipe (:host codeberg
                        :repo "akib/emacs-eat"
                        :files ("*.el" ("term" "term/*.el") "*.texi"
@@ -121,8 +104,11 @@
                                ("integration" "integration/*")
                                (:exclude ".dir-locals.el" "*-tests.el"))))
 
+;; Implementing protocols is cool
 (package! rfc-mode)
 
-(package! ob-prolog :recipe (:host github :repo "ljos/ob-prolog"))
-
+;; Caddy is cool
 (package! caddyfile-mode)
+
+;; Zettelkasten management
+(package! denote)

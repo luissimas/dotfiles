@@ -42,8 +42,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/docs/org/"
-      org-roam-directory "~/repos/zettelkasten")
+(setq org-directory "~/Documents/org/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -689,7 +688,7 @@
           :action bookmark-jump)
          ("Open today's journal" :icon
           (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
-          :action org-roam-dailies-goto-today)))
+          :action org-journal-open-current-journal-file)))
 
 (map! :map +doom-dashboard-mode-map
       :desc "Reload last session"   :n "R" #'doom/quickload-session
@@ -697,7 +696,7 @@
       :desc "Recently opened files" :n "r" #'consult-recent-file
       :desc "Open project"          :n "p" #'projectile-switch-project
       :desc "Jump to bookmark"      :n "b" #'bookmark-jump
-      :desc "Open today's journal"  :n "J" #'org-roam-dailies-goto-today)
+      :desc "Open today's journal"  :n "J" #'org-journal-new-entry)
 
 ;; Setting dashboard functions
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
@@ -706,10 +705,6 @@
 
 (setq fancy-splash-image (expand-file-name "icon.png" doom-user-dir))
 
-;; Org-roam
-(use-package! websocket
-  :after org-roam)
-
 (defun browse-url-surf (url &optional _new-window)
   "Ask the surf WWW browser to load URL.
 Default to the URL around or before point."
@@ -717,32 +712,6 @@ Default to the URL around or before point."
   (setq url (browse-url-encode-url url))
   (message url)
   (start-process (concat "surf " url) nil "surf" url))
-
-(use-package org-roam
-  :config
-  (setq org-roam-dailies-directory "journal")
-  (map! :leader "nrd" nil)
-  (map! :leader :map doom-leader-workspace-map
-        (:prefix-map ("nj" . "Journal")
-         :desc "Create entry for today"    "c"   #'org-roam-dailies-capture-today
-         :desc "Go to today's entry"       "j"   #'org-roam-dailies-goto-today
-         :desc "Create entry for tomorrow" "T"   #'org-roam-dailies-capture-tomorrow
-         :desc "Go to entry by date"       "d"   #'org-roam-dailies-goto-date
-         :desc "Create entry for date"     "D"   #'org-roam-dailies-capture-date)))
-
-(use-package! org-roam-ui
-  :after org-roam
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t
-        org-roam-ui-browser-function #'browse-url-surf)
-  (map! :leader
-        :desc "Open graph" "nrg" #'org-roam-ui-open)
-  (map! :leader
-        :map org-roam-mode-map
-        :desc "Open graph" "mmg" #'org-roam-ui-open))
 
 (defun pada/elfeed-show-mode-setup ()
   "Set options for `elfeed-show-mode'. This function is meant to be added to `elfeed-show-mode-hook'."
@@ -964,14 +933,6 @@ NO-TEMPLATE is non-nil."
 ;;     (add-to-list 'completion-at-point-functions
 ;;                  (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
 
-;;   (defun pada/cape-capf-setup-org ()
-;;     (require 'org-roam)
-;;         (add-to-list 'completion-at-point-functions
-;;                      (apply #'cape-super-capf
-;;                             (append
-;;                              (if (org-roam-file-p) org-roam-completion-functions ())
-;;                              (list #'cape-ispell #'cape-dabbrev (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-tex)))))
-
 ;;   (defun pada/cape-capf-setup-lsp ()
 ;;     (add-to-list 'completion-at-point-functions
 ;;                  (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
@@ -1028,3 +989,13 @@ NO-TEMPLATE is non-nil."
 (use-package! magit-todos
   :config
   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:"))
+
+(use-package! denote
+  :config
+  (setq denote-org-front-matter
+        "#+title:%s\n#+date: %s\n#+filetags: %s\n#+identifier: %s\n\n"))
+
+
+(use-package! highlight-indent-guides
+  :config
+  (remove-hook! 'prog-mode-hook #'highlight-indent-guides-mode))
