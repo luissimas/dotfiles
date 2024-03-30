@@ -184,6 +184,11 @@
     telegram-desktop
     btop
     pavucontrol
+    hledger
+    gnome.gnome-calculator
+    minikube
+    kubectl
+    elixir_1_16
   ];
 
   # Enabling some programs
@@ -195,8 +200,14 @@
     enable = true;
     xwayland.enable = true;
   };
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+  };
 
   # Docker setup
   virtualisation.docker.enable = true;

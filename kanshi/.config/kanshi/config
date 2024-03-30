@@ -1,4 +1,10 @@
 profile {
+    output DP-4 enable position 0,0
+    output eDP-1 disable
+    exec swww img $(cat ~/.bg) -t none
+}
+
+profile {
     output DP-5 enable position 0,0
     output eDP-1 disable
     exec swww img $(cat ~/.bg) -t none
