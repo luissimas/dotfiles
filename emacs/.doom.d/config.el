@@ -312,8 +312,6 @@
          modus-themes-org-blocks 'gray-background
          modus-themes-hl-line '(accented)))
 
-(use-package nano-theme)
-
 (after! ispell
   (setq! ispell-dictionary  "pt_BR,en_US"
          ispell-silently-savep t)
@@ -473,7 +471,6 @@
         :i "C-c" #'eat-self-input
         :i "C-d" #'eat-self-input
         :i "C-r" #'eat-self-input))
-
 
 (use-package! org
   :config
@@ -951,34 +948,6 @@ NO-TEMPLATE is non-nil."
   :config
   (map! :map minibuffer-local-map
         "M-a" #'marginalia-cycle))
-
-;; (use-package! poetry
-;;   :config
-
-;;   (setq! poetry-tracking-strategy 'switch-buffer)
-
-;;   (defvar pada/poetry--last-project-venv nil
-;;     "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
-
-;;   (defun pada/set-pyright-venv ()
-;;     "Set `lsp-pyright-venv-path' the same as `poetry-project-venv'.
-;; Also restarts the LSP workspace via `lsp-workspace-restart' so the
-;; venv change affects pyright."
-
-;;     (if (and (boundp 'lsp-pyright-venv-path)
-;;              (boundp 'poetry-project-venv)
-;;              poetry-project-venv
-;;              (not (string-equal pada/poetry--last-project-venv poetry-project-venv)))
-;;         (progn
-;;           (message "Setting lsp-pyright-venv-path")
-;;           (setq pada/poetry--last-project-venv poetry-project-venv)
-;;           (setq-local lsp-pyright-venv-path poetry-project-venv)
-;;           (if lsp-mode
-;;               (progn
-;;                 (lsp-workspace-restart (car (lsp-workspaces))))))))
-
-;;   ;; (add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
-;;   )
 
 ;; Prevent python template (shebang)
 (set-file-template! "\\.py$" :ignore t)
