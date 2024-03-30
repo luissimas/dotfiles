@@ -468,7 +468,11 @@
             (persp-add-buffer buffer))))))
 
   (map! :leader
-        :desc "Toggle eat popup" "ot" #'pada/popup-eat))
+        :desc "Toggle eat popup" "ot" #'pada/popup-eat)
+  (map! :map 'eat-mode-map
+        :i "C-c" #'eat-self-input
+        :i "C-d" #'eat-self-input
+        :i "C-r" #'eat-self-input))
 
 
 (use-package! org
