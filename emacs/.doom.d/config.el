@@ -979,4 +979,3 @@ NO-TEMPLATE is non-nil."
 (use-package! highlight-indent-guides
   :config
   (remove-hook! 'prog-mode-hook #'highlight-indent-guides-mode))
-

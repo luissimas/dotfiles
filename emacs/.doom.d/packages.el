@@ -112,3 +112,6 @@
 
 ;; Zettelkasten management
 (package! denote)
+
+;; Screenshot
+(package! screenshot :recipe (:repo "tecosaur/screenshot"))

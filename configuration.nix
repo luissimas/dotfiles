@@ -186,6 +186,7 @@
     gnome.gnome-calculator
     minikube
     kubectl
+    xclip
   ];
 
   # Enabling some programs
