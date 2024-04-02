@@ -142,7 +142,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '("~/liven"  ("~/docs" . 2) "~/projects")
+  (setq! projectile-project-search-path '("~/liven"  ("~/Documents" . 2) "~/projects")
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid)
@@ -483,7 +483,6 @@
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("liven") ("personal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
-        org-hidden-keywords '(title)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
         org-tags-column 0
@@ -574,7 +573,7 @@
 
   (defun pada/org-mode-setup ()
     "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
-    (mixed-pitch-mode)
+    ;; (mixed-pitch-mode)
     (visual-line-mode)
     (diff-hl-mode -1)
     (setq-local line-spacing 1
@@ -614,7 +613,8 @@
         org-modern-star '("◉ " "🞛 " "○ " "◇ "))
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
   (set-face-attribute 'org-modern-label nil :height 1.0)
-  :init (global-org-modern-mode))
+  ;; :init (global-org-modern-mode)
+  )
 
 ;; Toggle emphasis markers on cursor
 (use-package! org-appear
@@ -633,16 +633,6 @@
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
-
-(use-package ob-prolog
-  :ensure t
-  :config
-  (setq org-babel-prolog-command "swipl")
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((prolog . t))))
 
 ;; Popup rules
 (set-popup-rules!
@@ -687,8 +677,8 @@
          ("Jump to bookmark"
           :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-title)
           :action bookmark-jump)
-         ("Open today's journal" :icon
-          (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
+         ("Open today's journal"
+          :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
           :action org-journal-open-current-journal-file)))
 
 (map! :map +doom-dashboard-mode-map
@@ -697,7 +687,12 @@
       :desc "Recently opened files" :n "r" #'consult-recent-file
       :desc "Open project"          :n "p" #'projectile-switch-project
       :desc "Jump to bookmark"      :n "b" #'bookmark-jump
-      :desc "Open today's journal"  :n "J" #'org-journal-new-entry)
+      :desc "Open today's journal"  :n "J" #'org-journal-open-current-journal-file)
+
+(use-package! org-capture
+  :config
+  (map! :leader
+        :desc "Org Capture" "DEL" #'org-capture))
 
 ;; Setting dashboard functions
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
@@ -965,10 +960,23 @@ NO-TEMPLATE is non-nil."
 
 (use-package! denote
   :config
-  (setq denote-org-front-matter
-        "#+title:%s\n#+date: %s\n#+filetags: %s\n#+identifier: %s\n\n"))
+  (add-to-list 'org-capture-templates
+               '("n" "New note (with Denote)" plain
+                 (file denote-last-path)
+                 #'denote-org-capture
+                 :no-save t
+                 :immediate-finish nil
+                 :kill-buffer t
+                 :jump-to-captured t))
 
+  (defun pada/denote-region-org-structure-template (_beg _end)
+    (when (derived-mode-p 'org-mode)
+      (activate-mark)
+      (call-interactively 'org-insert-structure-template)))
+
+  (add-hook 'denote-region-after-new-note-functions #'pada/denote-region-org-structure-template))
 
 (use-package! highlight-indent-guides
   :config
   (remove-hook! 'prog-mode-hook #'highlight-indent-guides-mode))
+
