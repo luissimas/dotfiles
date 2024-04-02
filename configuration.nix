@@ -186,13 +186,12 @@
     gnome.gnome-calculator
     minikube
     kubectl
-    direnv
-    nix-direnv
   ];
 
   # Enabling some programs
   programs.git.enable = true;
   programs.wireshark.enable = true;
+  programs.direnv.enable = true;
 
   # Hyprland setup
   programs.hyprland = {
