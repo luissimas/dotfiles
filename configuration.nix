@@ -151,7 +151,6 @@
     gotests
     gomodifytags
     mpv
-    nodejs
     python3
     zathura
     pamixer
@@ -165,7 +164,6 @@
     typescript
     lua
     luajitPackages.lua-lsp
-    ocaml
     ocamlPackages.lsp
     nodePackages.bash-language-server
     nodePackages_latest.pyright
@@ -188,7 +186,8 @@
     gnome.gnome-calculator
     minikube
     kubectl
-    elixir_1_16
+    direnv
+    nix-direnv
   ];
 
   # Enabling some programs

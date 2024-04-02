@@ -31,3 +31,6 @@ fi
 # Enable eat integration
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
   source "$EAT_SHELL_INTEGRATION_DIR/bash"
+
+# Hook direnv
+eval "$(direnv hook bash)"
