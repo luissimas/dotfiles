@@ -197,23 +197,26 @@
 
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
   (add-to-list 'apheleia-mode-alist '(caddyfile-mode caddyfmt))
+  (add-to-list 'apheleia-mode-alist '(heex-ts-mode mix-format-heex))
 
   (setf (alist-get 'isort apheleia-formatters)
         '("isort" "--stdout" "-"))
   (setf (alist-get 'python-mode apheleia-mode-alist) '(isort black)
         (alist-get 'go-mode apheleia-mode-alist) 'goimports)
+  (push '(mix-format-heex . ("apheleia-from-project-root" ".formatter.exs" "mix" "format" "--stdin-filename" file "-"))
+        apheleia-formatters)
 
   ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
   ;; run the commands in the current project root. This is important to make mix
   ;; formatter respect the project configuration in .formatter.exs.
   ;; source: https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
-  (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
-    (let ((project (project-current)))
-      (if (not (null project))
-          (let ((default-directory (project-root project))) (apply orig-fn args))
-        (apply orig-fn args))))
+  ;; (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
+  ;;   (let ((project (project-current)))
+  ;;     (if (not (null project))
+  ;;         (let ((default-directory (project-root project))) (apply orig-fn args))
+  ;;       (apply orig-fn args))))
 
-  (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
+  ;; (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
 
   :init (apheleia-global-mode))
 
@@ -228,14 +231,10 @@
          lsp-completion-provider :none
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
-         lsp-file-watch-threshold 5000)
-  (add-to-list 'exec-path "~/repos/elixir-ls")
+         lsp-file-watch-threshold 5000
+         lsp-elixir-server-command '("elixir-ls"))
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
-  (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
-                    :activation-fn (lsp-activate-on "elixir-lexical")
-                    :server-id 'elixir-lexical))
+
   (add-hook! '(prisma-mode-hook terraform-mode-hook) #'lsp)
   (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
 
@@ -979,3 +978,11 @@ NO-TEMPLATE is non-nil."
 (use-package! highlight-indent-guides
   :config
   (remove-hook! 'prog-mode-hook #'highlight-indent-guides-mode))
+
+(use-package! heex-ts-mode
+  :mode "\\.heex\\'")
+
+(use-package! elixir-ts-mode
+  :custom
+  (major-mode-remap-alist
+   '((elixir-mode . elixir-ts-mode))))

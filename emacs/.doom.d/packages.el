@@ -115,3 +115,5 @@
 
 ;; Screenshot
 (package! screenshot :recipe (:repo "tecosaur/screenshot"))
+
+(package! elixir-ts-mode)
