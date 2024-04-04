@@ -3,13 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    lexical = {
+      url = "github:lexical-lsp/lexical";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... } : {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linx";
-	modules = [ ./configuration.nix ];
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [ ./configuration.nix ];
       };
     };
   };

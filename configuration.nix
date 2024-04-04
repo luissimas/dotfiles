@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -157,8 +157,6 @@
     waylock
     jq
     clang-tools
-    elixir-ls
-    erlang-ls
     nil
     gopls
     typescript
@@ -187,6 +185,8 @@
     minikube
     kubectl
     xclip
+    nodePackages_latest.prettier
+    inputs.lexical.packages.x86_64-linux.lexical
   ];
 
   # Enabling some programs
