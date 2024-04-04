@@ -232,8 +232,13 @@
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000
-         lsp-elixir-server-command '("elixir-ls"))
+         lsp-elixir-server-command '("lexical"))
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
+  (add-to-list 'lsp-language-id-configuration '(elixir-ts-mode . "elixir-lexical"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "lexical")
+                    :activation-fn (lsp-activate-on "elixir-lexical")
+                    :server-id 'elixir-lexical))
 
   (add-hook! '(prisma-mode-hook terraform-mode-hook) #'lsp)
   (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
@@ -985,4 +990,6 @@ NO-TEMPLATE is non-nil."
 (use-package! elixir-ts-mode
   :custom
   (major-mode-remap-alist
-   '((elixir-mode . elixir-ts-mode))))
+   '((elixir-mode . elixir-ts-mode)))
+  :config
+  (add-hook! 'elixir-ts-mode-hook #'lsp))
