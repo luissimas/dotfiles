@@ -197,14 +197,14 @@
 
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
   (add-to-list 'apheleia-mode-alist '(caddyfile-mode caddyfmt))
-  (add-to-list 'apheleia-mode-alist '(heex-ts-mode mix-format-heex))
+  (add-to-list 'apheleia-mode-alist '(heex-ts-mode mix-format))
 
   (setf (alist-get 'isort apheleia-formatters)
         '("isort" "--stdout" "-"))
+  (setf (alist-get 'mix-format apheleia-formatters)
+        '("apheleia-from-project-root" ".formatter.exs" "mix" "format" "--stdin-filename" file "-"))
   (setf (alist-get 'python-mode apheleia-mode-alist) '(isort black)
         (alist-get 'go-mode apheleia-mode-alist) 'goimports)
-  (push '(mix-format-heex . ("apheleia-from-project-root" ".formatter.exs" "mix" "format" "--stdin-filename" file "-"))
-        apheleia-formatters)
 
   ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
   ;; run the commands in the current project root. This is important to make mix
@@ -232,7 +232,9 @@
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
          lsp-file-watch-threshold 5000
-         lsp-elixir-server-command '("lexical"))
+         lsp-elixir-server-command '("lexical")
+         lsp-modeline-diagnostics-enable nil)
+
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
   (add-to-list 'lsp-language-id-configuration '(elixir-ts-mode . "elixir-lexical"))
   (lsp-register-client
@@ -774,8 +776,7 @@ Default to the URL around or before point."
          doom-modeline-enable-word-count t
          doom-modeline-checker-simple-format t
          doom-modeline-vcs-max-length 20
-         doom-modeline-lsp nil)
-  (setq! lsp-modeline-diagnostics-enable nil))
+         doom-modeline-lsp nil))
 
 (use-package! modus-themes
   :init
