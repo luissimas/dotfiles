@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 wall_dir=~/.wal
 theme_dir=~/.config/wal/colorschemes
@@ -70,4 +70,4 @@ emacsclient -e "(pada/load-system-theme)"
 pgrep qutebrowser >/dev/null && qutebrowser :config-source
 
 # Restart waybar
-killall launch-waybar && launch-waybar
+pkill -f waybar && waybar

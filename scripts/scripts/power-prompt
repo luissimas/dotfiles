@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 option=$(echo -e 'Lock\nShutdown\nReboot' | rofi -dmenu -i -p "Power prompt")
 

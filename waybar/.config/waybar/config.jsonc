@@ -1,5 +1,5 @@
 {
-  "spacing": 0,
+  "spacing": 1,
   "layer": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [],
@@ -7,10 +7,9 @@
     "bluetooth",
     "custom/docker",
     "network",
-    "docker",
+    "temperature",
     "cpu",
     "memory",
-    "temperature",
     "pulseaudio",
     "backlight",
     "battery",
@@ -22,24 +21,24 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "󰝟  muted",
+    "format-muted": "󰝟 {volume}%",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": ["", "", "", ""]
     },
     "on-click": "pavucontrol"
   },
   "custom/docker": {
-    "exec": "docker ps -q | wc -l",
-    "interval": 1,
-    "format": "  {}",
+    "exec": "docker ps -q | wc -l | xargs -I {} bash -c '[[ {} -ne 0 ]] && echo \"  {}\"'",
+    "interval": 5,
     "on-click": "kill-docker-containers"
   },
   "bluetooth": {
-    "format": " {status} ",
+    "format-on": " ",
+    "format-off": "",
     "format-disabled": "",
-    "format-disabled": "",
+    "format-connected": " {device_alias} ",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
@@ -66,6 +65,7 @@
   },
   "temperature": {
     "critical-threshold": 80,
+    "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
     "format": " {temperatureC}°C"
   },
   "backlight": {

@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Padawan" :size 18.0 :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Padawan" :size 26.0 :weight 'regular)
+(setq doom-font (font-spec :family "Iosevka" :size 18.0 :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka" :size 26.0 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0)
       doom-symbol-font (font-spec :family "Noto Color Emoji"))
 ;;
@@ -42,8 +42,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/docs/org/"
-      org-roam-directory "~/repos/zettelkasten")
+(setq org-directory "~/Documents/org/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -143,7 +142,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '("~/liven"  ("~/docs" . 2) "~/projects")
+  (setq! projectile-project-search-path '("~/liven"  ("~/Documents" . 2) "~/projects")
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid)
@@ -198,9 +197,12 @@
 
   (add-to-list 'apheleia-mode-alist '(prisma-mode prettier))
   (add-to-list 'apheleia-mode-alist '(caddyfile-mode caddyfmt))
+  (add-to-list 'apheleia-mode-alist '(heex-ts-mode mix-format))
 
   (setf (alist-get 'isort apheleia-formatters)
         '("isort" "--stdout" "-"))
+  (setf (alist-get 'mix-format apheleia-formatters)
+        '("apheleia-from-project-root" ".formatter.exs" "mix" "format" "--stdin-filename" file "-"))
   (setf (alist-get 'python-mode apheleia-mode-alist) '(isort black)
         (alist-get 'go-mode apheleia-mode-alist) 'goimports)
 
@@ -208,13 +210,13 @@
   ;; run the commands in the current project root. This is important to make mix
   ;; formatter respect the project configuration in .formatter.exs.
   ;; source: https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
-  (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
-    (let ((project (project-current)))
-      (if (not (null project))
-          (let ((default-directory (project-root project))) (apply orig-fn args))
-        (apply orig-fn args))))
+  ;; (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
+  ;;   (let ((project (project-current)))
+  ;;     (if (not (null project))
+  ;;         (let ((default-directory (project-root project))) (apply orig-fn args))
+  ;;       (apply orig-fn args))))
 
-  (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
+  ;; (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
 
   :init (apheleia-global-mode))
 
@@ -229,14 +231,17 @@
          lsp-completion-provider :none
          lsp-elixir-suggest-specs nil
          lsp-elixir-dialyzer-enabled nil
-         lsp-file-watch-threshold 5000)
-  (add-to-list 'exec-path "~/repos/elixir-ls")
+         lsp-file-watch-threshold 5000
+         lsp-elixir-server-command '("lexical")
+         lsp-modeline-diagnostics-enable nil)
+
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]volumes\\'")
-  (add-to-list 'lsp-language-id-configuration '(elixir-mode . "elixir-lexical"))
+  (add-to-list 'lsp-language-id-configuration '(elixir-ts-mode . "elixir-lexical"))
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "/home/padawan/repos/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
+   (make-lsp-client :new-connection (lsp-stdio-connection "lexical")
                     :activation-fn (lsp-activate-on "elixir-lexical")
                     :server-id 'elixir-lexical))
+
   (add-hook! '(prisma-mode-hook terraform-mode-hook) #'lsp)
   (add-hook! 'lsp-help-mode-hook #'visual-line-mode))
 
@@ -312,8 +317,6 @@
          modus-themes-mode-line '(borderless)
          modus-themes-org-blocks 'gray-background
          modus-themes-hl-line '(accented)))
-
-(use-package nano-theme)
 
 (after! ispell
   (setq! ispell-dictionary  "pt_BR,en_US"
@@ -469,8 +472,11 @@
             (persp-add-buffer buffer))))))
 
   (map! :leader
-        :desc "Toggle eat popup" "ot" #'pada/popup-eat))
-
+        :desc "Toggle eat popup" "ot" #'pada/popup-eat)
+  (map! :map 'eat-mode-map
+        :i "C-c" #'eat-self-input
+        :i "C-d" #'eat-self-input
+        :i "C-r" #'eat-self-input))
 
 (use-package! org
   :config
@@ -483,7 +489,6 @@
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("liven") ("personal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
-        org-hidden-keywords '(title)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
         org-tags-column 0
@@ -574,7 +579,7 @@
 
   (defun pada/org-mode-setup ()
     "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
-    (mixed-pitch-mode)
+    ;; (mixed-pitch-mode)
     (visual-line-mode)
     (diff-hl-mode -1)
     (setq-local line-spacing 1
@@ -614,7 +619,8 @@
         org-modern-star '("◉ " "🞛 " "○ " "◇ "))
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
   (set-face-attribute 'org-modern-label nil :height 1.0)
-  :init (global-org-modern-mode))
+  ;; :init (global-org-modern-mode)
+  )
 
 ;; Toggle emphasis markers on cursor
 (use-package! org-appear
@@ -633,16 +639,6 @@
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
-
-(use-package ob-prolog
-  :ensure t
-  :config
-  (setq org-babel-prolog-command "swipl")
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((prolog . t))))
 
 ;; Popup rules
 (set-popup-rules!
@@ -667,7 +663,7 @@
 ;; Setting the menu items
 (setq! +doom-dashboard-menu-sections
        '(("Reload last session"
-          :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-title)
           :when (cond ((modulep! :ui workspaces)
                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
                       ((require 'desktop nil t)
@@ -675,21 +671,21 @@
           :face (:inherit (doom-dashboard-menu-title bold))
           :action doom/quickload-session)
          ("Open org-agenda"
-          :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
           :when (fboundp 'org-agenda)
           :action pada/custom-agenda)
          ("Recently opened files"
-          :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-title)
           :action recentf-open-files)
          ("Open project"
-          :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-title)
           :action projectile-switch-project)
          ("Jump to bookmark"
-          :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+          :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-title)
           :action bookmark-jump)
-         ("Open today's journal" :icon
-          (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
-          :action org-roam-dailies-goto-today)))
+         ("Open today's journal"
+          :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
+          :action org-journal-open-current-journal-file)))
 
 (map! :map +doom-dashboard-mode-map
       :desc "Reload last session"   :n "R" #'doom/quickload-session
@@ -697,7 +693,12 @@
       :desc "Recently opened files" :n "r" #'consult-recent-file
       :desc "Open project"          :n "p" #'projectile-switch-project
       :desc "Jump to bookmark"      :n "b" #'bookmark-jump
-      :desc "Open today's journal"  :n "J" #'org-roam-dailies-goto-today)
+      :desc "Open today's journal"  :n "J" #'org-journal-open-current-journal-file)
+
+(use-package! org-capture
+  :config
+  (map! :leader
+        :desc "Org Capture" "DEL" #'org-capture))
 
 ;; Setting dashboard functions
 (setq! +doom-dashboard-functions '(doom-dashboard-widget-banner
@@ -706,10 +707,6 @@
 
 (setq fancy-splash-image (expand-file-name "icon.png" doom-user-dir))
 
-;; Org-roam
-(use-package! websocket
-  :after org-roam)
-
 (defun browse-url-surf (url &optional _new-window)
   "Ask the surf WWW browser to load URL.
 Default to the URL around or before point."
@@ -717,32 +714,6 @@ Default to the URL around or before point."
   (setq url (browse-url-encode-url url))
   (message url)
   (start-process (concat "surf " url) nil "surf" url))
-
-(use-package org-roam
-  :config
-  (setq org-roam-dailies-directory "journal")
-  (map! :leader "nrd" nil)
-  (map! :leader :map doom-leader-workspace-map
-        (:prefix-map ("nj" . "Journal")
-         :desc "Create entry for today"    "c"   #'org-roam-dailies-capture-today
-         :desc "Go to today's entry"       "j"   #'org-roam-dailies-goto-today
-         :desc "Create entry for tomorrow" "T"   #'org-roam-dailies-capture-tomorrow
-         :desc "Go to entry by date"       "d"   #'org-roam-dailies-goto-date
-         :desc "Create entry for date"     "D"   #'org-roam-dailies-capture-date)))
-
-(use-package! org-roam-ui
-  :after org-roam
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t
-        org-roam-ui-browser-function #'browse-url-surf)
-  (map! :leader
-        :desc "Open graph" "nrg" #'org-roam-ui-open)
-  (map! :leader
-        :map org-roam-mode-map
-        :desc "Open graph" "mmg" #'org-roam-ui-open))
 
 (defun pada/elfeed-show-mode-setup ()
   "Set options for `elfeed-show-mode'. This function is meant to be added to `elfeed-show-mode-hook'."
@@ -805,9 +776,7 @@ Default to the URL around or before point."
          doom-modeline-enable-word-count t
          doom-modeline-checker-simple-format t
          doom-modeline-vcs-max-length 20
-         doom-modeline-lsp nil)
-  (setq! lsp-modeline-diagnostics-enable nil)
-  (setq all-the-icons-scale-factor 1.0))
+         doom-modeline-lsp nil))
 
 (use-package! modus-themes
   :init
@@ -965,14 +934,6 @@ NO-TEMPLATE is non-nil."
 ;;     (add-to-list 'completion-at-point-functions
 ;;                  (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
 
-;;   (defun pada/cape-capf-setup-org ()
-;;     (require 'org-roam)
-;;         (add-to-list 'completion-at-point-functions
-;;                      (apply #'cape-super-capf
-;;                             (append
-;;                              (if (org-roam-file-p) org-roam-completion-functions ())
-;;                              (list #'cape-ispell #'cape-dabbrev (cape-company-to-capf #'company-yasnippet) #'cape-file #'cape-tex)))))
-
 ;;   (defun pada/cape-capf-setup-lsp ()
 ;;     (add-to-list 'completion-at-point-functions
 ;;                  (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
@@ -988,34 +949,6 @@ NO-TEMPLATE is non-nil."
   (map! :map minibuffer-local-map
         "M-a" #'marginalia-cycle))
 
-;; (use-package! poetry
-;;   :config
-
-;;   (setq! poetry-tracking-strategy 'switch-buffer)
-
-;;   (defvar pada/poetry--last-project-venv nil
-;;     "Used to store the last value of `poetry-project-venv' set on `pada/set-pyright-venv'.")
-
-;;   (defun pada/set-pyright-venv ()
-;;     "Set `lsp-pyright-venv-path' the same as `poetry-project-venv'.
-;; Also restarts the LSP workspace via `lsp-workspace-restart' so the
-;; venv change affects pyright."
-
-;;     (if (and (boundp 'lsp-pyright-venv-path)
-;;              (boundp 'poetry-project-venv)
-;;              poetry-project-venv
-;;              (not (string-equal pada/poetry--last-project-venv poetry-project-venv)))
-;;         (progn
-;;           (message "Setting lsp-pyright-venv-path")
-;;           (setq pada/poetry--last-project-venv poetry-project-venv)
-;;           (setq-local lsp-pyright-venv-path poetry-project-venv)
-;;           (if lsp-mode
-;;               (progn
-;;                 (lsp-workspace-restart (car (lsp-workspaces))))))))
-
-;;   ;; (add-hook 'lsp-mode-hook #'pada/set-pyright-venv)
-;;   )
-
 ;; Prevent python template (shebang)
 (set-file-template! "\\.py$" :ignore t)
 
@@ -1029,3 +962,35 @@ NO-TEMPLATE is non-nil."
 (use-package! magit-todos
   :config
   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:"))
+
+(use-package! denote
+  :config
+  (add-to-list 'org-capture-templates
+               '("n" "New note (with Denote)" plain
+                 (file denote-last-path)
+                 #'denote-org-capture
+                 :no-save t
+                 :immediate-finish nil
+                 :kill-buffer t
+                 :jump-to-captured t))
+
+  (defun pada/denote-region-org-structure-template (_beg _end)
+    (when (derived-mode-p 'org-mode)
+      (activate-mark)
+      (call-interactively 'org-insert-structure-template)))
+
+  (add-hook 'denote-region-after-new-note-functions #'pada/denote-region-org-structure-template))
+
+(use-package! highlight-indent-guides
+  :config
+  (remove-hook! 'prog-mode-hook #'highlight-indent-guides-mode))
+
+(use-package! heex-ts-mode
+  :mode "\\.heex\\'")
+
+(use-package! elixir-ts-mode
+  :custom
+  (major-mode-remap-alist
+   '((elixir-mode . elixir-ts-mode)))
+  :config
+  (add-hook! 'elixir-ts-mode-hook #'lsp))
