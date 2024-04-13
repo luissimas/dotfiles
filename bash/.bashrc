@@ -8,7 +8,7 @@ export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 
 # Prompt Style
-PS1='\e[1m \w 󱄅 \e[m '
+PS1='\[\e[1m\] \w 󱄅 \[\e[m\] '
 
 # vi bindings
 set -o vi
