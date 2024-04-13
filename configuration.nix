@@ -87,6 +87,7 @@
   # Bluetooth
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
 
   # Screen brigthness
   hardware.brillo.enable = true;
@@ -116,7 +117,7 @@
     wget
     stow
     emacs
-    fastfetch
+    neofetch
     bat
     tree
     fd
@@ -183,7 +184,6 @@
     hledger
     gnome.gnome-calculator
     minikube
-    kubectl
     xclip
     nodePackages_latest.prettier
     inputs.lexical.packages.x86_64-linux.lexical
