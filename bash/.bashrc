@@ -10,9 +10,6 @@ export HISTCONTROL=ignorespace
 # Prompt Style
 PS1='\[\e[1m\] \w 󱄅 \[\e[m\] '
 
-# vi bindings
-set -o vi
-
 # Aliases
 alias v='nvim'
 alias t='tmux'
