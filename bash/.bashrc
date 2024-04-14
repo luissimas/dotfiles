@@ -12,6 +12,7 @@ PS1='\[\e[1m\] \w 󱄅 \[\e[m\] '
 
 # Aliases
 alias v='nvim'
+alias k='kubectl'
 alias t='tmux'
 alias ta='tmux attach'
 alias ls='ls --color=auto'
