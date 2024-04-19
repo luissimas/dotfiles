@@ -247,6 +247,13 @@
     ServerAliveCountMax 120
   '';
 
+  # Syncthing
+  services.syncthing = {
+    enable = true;
+    user = "padawan";
+    dataDir = "/home/padawan/Documents";
+  };
+
   # CPU thermal throttling
   services.thermald.enable = true;
   services.throttled.enable = true;
