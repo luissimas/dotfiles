@@ -448,13 +448,6 @@
   (progn
     (pada/set-frame-parameters)))
 
-(use-package! vterm
-  :config
-  (map! :map 'vterm-mode-map
-        :i "C-c"   #'vterm--self-insert
-        :i "C-d"   #'vterm--self-insert
-        :i "C-SPC" #'vterm--self-insert))
-
 (use-package! eat
   :config
   (setq eshell-visual-commands nil)
