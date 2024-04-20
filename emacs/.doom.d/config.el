@@ -23,7 +23,7 @@
 ;;
 (setq doom-font (font-spec :family "Iosevka" :size 18.0 :weight 'regular)
       doom-big-font (font-spec :family "Iosevka" :size 26.0 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18.0)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16.0)
       doom-symbol-font (font-spec :family "Noto Color Emoji"))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -142,7 +142,7 @@
 
 ;; Projectile
 (after! projectile
-  (setq! projectile-project-search-path '("~/liven"  ("~/Documents" . 2) "~/projects")
+  (setq! projectile-project-search-path '("~/work"  ("~/Documents" . 2) "~/projects")
          projectile-enable-caching nil
          projectile-per-project-compilation-buffer t
          projectile-indexing-method 'hybrid)
@@ -480,7 +480,7 @@
         org-startup-with-latex-preview t
         org-preview-latex-default-process 'imagemagick
         org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
-        org-tag-alist '(("ufscar") ("liven") ("personal"))
+        org-tag-alist '(("ufscar") ("work") ("personal") ("goal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
         org-deadline-warning-days 5
         org-agenda-start-with-log-mode t
@@ -554,7 +554,7 @@
             (point)))))
 
   (defun pada/org-agenda-skip-non-habits ()
-    "Skip entries where the STYLE property is no set to 'habit'."
+    "Skip entries where the STYLE property is not set to 'habit'."
     (org-back-to-heading t)
     (let ((style (org-entry-get (point) "STYLE")))
       (unless (string-equal style "habit")
@@ -572,7 +572,7 @@
 
   (defun pada/org-mode-setup ()
     "Set options for `org-mode'. This function is meant to be added to `org-mode-hook'."
-    ;; (mixed-pitch-mode)
+    (mixed-pitch-mode)
     (visual-line-mode)
     (diff-hl-mode -1)
     (setq-local line-spacing 1
@@ -605,15 +605,16 @@
 
 (use-package! org-modern
   :after org
+  :init
+  (global-org-modern-mode)
   :config
   (setq org-modern-list '((?* . "•")
                           (?+ . "◦")
                           (?- . "•"))
-        org-modern-star '("◉ " "🞛 " "○ " "◇ "))
+        org-modern-star '("◉ " "🞛 " "○ " "◇ ")
+        org-modern-table nil)
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
-  (set-face-attribute 'org-modern-label nil :height 1.0)
-  ;; :init (global-org-modern-mode)
-  )
+  (set-face-attribute 'org-modern-label nil :height 1.2 :inherit 'fixed-pitch))
 
 ;; Toggle emphasis markers on cursor
 (use-package! org-appear
@@ -651,7 +652,7 @@
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1))
 
 ;; Hiding cursor on dashboard
-;; (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
 
 ;; Setting the menu items
 (setq! +doom-dashboard-menu-sections
@@ -841,100 +842,6 @@ NO-TEMPLATE is non-nil."
          (car (cdr (car guessed-directories))))
     (if (and (not no-template) yas-new-snippet-default)
         (yas-expand-snippet yas-new-snippet-default))))
-
-;; Corfu
-;; (use-package! corfu
-;;   :init (global-corfu-mode)
-;;   :config
-;;   (setq corfu-cycle t
-;;         corfu-auto t
-;;         corfu-auto-delay 0.1
-;;         corfu-auto-prefix 2
-;;         corfu-separator ?\s
-;;         corfu-preview-current nil
-;;         corfu-quit-no-match t
-;;         corfu-quit-at-boundary nil
-;;         corfu-on-exact-match nil
-;;         corfu-bar-width 0
-;;         corfu-min-width 80
-;;         corfu-max-width 100
-;;         corfu-scroll-margin 4
-;;         corfu-echo-delay 0.1
-;;         corfu-popupinfo-delay '(nil 0.2)
-;;         corfu-popupinfo-hide nil
-;;         tab-always-indent t)
-
-;;   (defun pada/+org-return-advice (fun &rest args)
-;;     "Advice for `+org/return' that inserts the selected completion candidate if it exists."
-;;     (if (and (boundp 'corfu-mode) (>= corfu--index 0))
-;;         (corfu-insert)
-;;       (apply fun args)))
-
-;;   (advice-add #'+org/return :around #'pada/+org-return-advice)
-
-;;   (defun pada/corfu-quit ()
-;;     "Quits corfu completion and enter evil normal mode."
-;;     (interactive)
-;;     (corfu-quit)
-;;     (evil-normal-state))
-
-;;   (map! :mode global-corfu-mode :map corfu-mode-map :i "C-SPC" #'completion-at-point)
-;;   (map! :mode global-corfu-mode :map corfu-map
-;;         :i
-;;         [escape] #'pada/corfu-quit
-;;         "ESC" #'pada/corfu-quit
-;;         "C-SPC" #'corfu-quit
-;;         "C-j" #'corfu-next
-;;         "C-k" #'corfu-previous
-;;         "C-h" #'corfu-info-documentation
-;;         "C-l" #'corfu-info-location)
-
-;;   (defun pada/lsp-corfu-setup ()
-;;     "Setup corfu completion style for lsp."
-;;     (setq-local completion-styles '(orderless)
-;;                 completion-category-defaults nil))
-
-;;   (add-hook! 'lsp-completion-mode-hook #'pada/lsp-corfu-setup)
-
-;;   (defun pada/corfu-enable-in-minibuffer ()
-;;     "Enable Corfu in the minibuffer if `completion-at-point' is bound."
-;;     (when (where-is-internal #'completion-at-point (list (current-local-map)))
-;;       ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
-;;       (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
-;;                   corfu-popupinfo-delay nil)
-;;       (corfu-mode 1)))
-
-;;   (add-hook 'minibuffer-setup-hook #'pada/corfu-enable-in-minibuffer)
-;;   (add-hook 'eshell-mode-hook #'corfu-mode)
-
-;;   (corfu-history-mode)
-;;   (corfu-echo-mode)
-;;   (corfu-popupinfo-mode))
-
-;; (use-package! kind-icon
-;;   :after corfu
-;;   :config
-;;   (setq kind-icon-default-face 'corfu-default ; to compute blended backgrounds correctly
-;;         kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 1.0 :scale 0.9)
-;;         kind-icon-blend-background nil)
-;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-;;   (add-hook 'doom-load-theme-hook #'kind-icon-reset-cache)
-;;   (add-hook 'doom-big-font-mode-hook #'kind-icon-reset-cache))
-
-;; (use-package! cape
-;;   :init
-;;   (defun pada/cape-capf-setup-git-commit ()
-;;     (add-to-list 'completion-at-point-functions
-;;                  (cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-symbol #'cape-file #'cape-tex)))
-
-;;   (defun pada/cape-capf-setup-lsp ()
-;;     (add-to-list 'completion-at-point-functions
-;;                  (cape-super-capf #'lsp-completion-at-point (cape-company-to-capf #'company-yasnippet) #'cape-file)))
-
-
-;;   (add-hook! 'lsp-completion-mode-hook #'pada/cape-capf-setup-lsp)
-;;   (add-hook! 'git-commit-mode-hook #'pada/cape-capf-setup-git-commit)
-;;   (add-hook! 'org-mode-hook #'pada/cape-capf-setup-org))
 
 ;; Marginalia
 (use-package! marginalia
