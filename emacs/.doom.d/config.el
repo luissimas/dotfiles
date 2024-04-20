@@ -479,7 +479,6 @@
         org-startup-with-inline-images t
         org-startup-with-latex-preview t
         org-preview-latex-default-process 'imagemagick
-        org-todo-keywords '((sequence "TODO(t)" "ACTIVE(a)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-tag-alist '(("ufscar") ("work") ("personal") ("goal"))
         org-format-latex-options (plist-put org-format-latex-options :scale 1.5)
         org-deadline-warning-days 5
