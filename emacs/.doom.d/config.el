@@ -616,6 +616,10 @@
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
   (set-face-attribute 'org-modern-label nil :height 1.2 :inherit 'fixed-pitch))
 
+(use-package! mixed-pitch
+  :config
+  (delete 'org-done mixed-pitch-fixed-pitch-faces))
+
 ;; Toggle emphasis markers on cursor
 (use-package! org-appear
   :after org
