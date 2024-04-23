@@ -506,6 +506,18 @@
                                                                     ("" "forest" t)
                                                                     "\\usetikzlibrary{arrows,automata,positioning}")))
 
+  (setq org-todo-keywords
+        '("TODO(t)"       ; A task that needs doing & is ready to do
+          "PROJ(p)"       ; A project, which usually contains other tasks
+          "DOING(d)"      ; A task that is in progress
+          "WAIT(w)"       ; Something external is holding up this task
+          "HOLD(h)"       ; This task is paused/on hold because of me
+          "IDEA(i)"       ; An unconfirmed and unapproved task or notion
+          "|"
+          "DONE(D)"       ; Task successfully completed
+          "CANCELLED(c)") ; Task was cancelled, aborted, or is no longer applicable
+        )
+
   (setq org-agenda-custom-commands
         '(("P" "Padawan's custom agenda"
            ((todo ""
@@ -612,6 +624,16 @@
                           (?- . "•"))
         org-modern-star '("◉ " "🞛 " "○ " "◇ ")
         org-modern-table nil)
+  (setq org-modern-todo-faces
+        '(("TODO"      :inherit bold :background "dark red")
+          ("PROJ"      :inherit bold :background "royal blue")
+          ("DOING"     :inherit bold :background "forest green")
+          ("WAIT"      :inherit bold :background "dark orange")
+          ("HOLD"      :inherit bold :background "orange")
+          ("IDEA"      :inherit bold :background "blue violet")
+          ("DONE"      :inherit bold :background "dim gray")
+          ("CANCELLED" :inherit bold :background "dim gray")))
+
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka" :height 1.2)
   (set-face-attribute 'org-modern-label nil :height 1.2 :inherit 'fixed-pitch))
 
