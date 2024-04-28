@@ -188,6 +188,8 @@
     nodePackages_latest.prettier
     inputs.lexical.packages.x86_64-linux.lexical
     yaml-language-server
+    nwg-displays
+    killall
   ];
 
   # Enabling some programs
