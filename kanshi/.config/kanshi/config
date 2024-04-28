@@ -1,19 +1,16 @@
 profile {
     output DP-4 enable position 0,0
     output eDP-1 disable
-    exec swww init
-    exec swww img $(cat ~/.bg) -t none
+    exec reload_wallpaper
 }
 
 profile {
     output DP-5 enable position 0,0
     output eDP-1 disable
-    exec swww init
-    exec swww img $(cat ~/.bg) -t none
+    exec reload_wallpaper
 }
 
 profile {
     output eDP-1 enable position 0,0 scale 1
-    exec swww init
-    exec swww img $(cat ~/.bg) -t none
+    exec reload_wallpaper
 }

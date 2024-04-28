@@ -12,10 +12,15 @@ CLOSED: [2024-03-09 sáb 11:46]
 CLOSED: [2024-04-28 dom 10:45]
 * DONE Cursor theme (maybe KDE is messing with this?)
 CLOSED: [2024-04-28 dom 10:42]
-* TODO Tmux default keybindings
-* TODO Emacs/Vim default keybindings
+* DONE Tmux default keybindings
+CLOSED: [2024-04-28 dom 14:19]
+* DONE Emacs/Vim default keybindings
+CLOSED: [2024-04-28 dom 14:20]
+* DONE Change monitor settings on the fly
+CLOSED: [2024-04-28 dom 14:26]
+* DONE Persist wallpapers in all monitors
+CLOSED: [2024-04-28 dom 14:51]
 * TODO Better Bluetooth connection
+* TODO Fix screensharing
 * TODO Organize scripts
-* TODO Persist wallpapers in all monitors
-* TODO Change monitor settings on the fly
 * TODO Docs

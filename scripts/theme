@@ -59,15 +59,13 @@ case $selected in "Palenight")
 esac
 
 wal --theme $theme
-swww img $bg -t none
 echo $name >~/.colorscheme
 echo $bg >~/.bg
 
 # Update emacs colors
 emacsclient -e "(pada/load-system-theme)"
 
-# Update qutebrowser colors
-pgrep qutebrowser >/dev/null && qutebrowser :config-source
+reload_wallpaper
 
 # Restart waybar
 pkill -f waybar && waybar

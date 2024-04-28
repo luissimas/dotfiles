@@ -135,7 +135,7 @@
     waybar
     dunst
     libnotify
-    swww
+    hyprpaper
     rofi-wayland
     kanshi
     inotify-tools
