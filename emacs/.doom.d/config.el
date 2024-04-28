@@ -114,9 +114,7 @@
 
   (map! :nv "gr" #'+lookup/references)
 
-  (map! :nv "H" 'evil-beginning-of-line
-        :nv "L" 'evil-end-of-line
-        :nv "j" 'evil-next-visual-line
+  (map! :nv "j" 'evil-next-visual-line
         :nv "k" 'evil-previous-visual-line))
 
 ;; Unique buffer name formats
