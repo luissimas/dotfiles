@@ -8,6 +8,14 @@ CLOSED: [2024-03-09 sáb 10:18]
 CLOSED: [2024-03-09 sáb 10:53]
 * DONE Language servers
 CLOSED: [2024-03-09 sáb 11:46]
-* TODO Minimal usable neovim setup
-* TODO Cursor theme (maybe KDE is messing with this?)
+* DONE Minimal usable neovim setup
+CLOSED: [2024-04-28 dom 10:45]
+* DONE Cursor theme (maybe KDE is messing with this?)
+CLOSED: [2024-04-28 dom 10:42]
+* TODO Tmux default keybindings
+* TODO Emacs/Vim default keybindings
+* TODO Better Bluetooth connection
+* TODO Organize scripts
+* TODO Persist wallpapers in all monitors
+* TODO Change monitor settings on the fly
 * TODO Docs
