@@ -420,7 +420,7 @@
             (setq associations nil)))))))
 
 ;; Load system theme on startup
-(add-hook 'doom-after-init-hook #'pada/load-system-theme)
+;; (add-hook 'doom-after-init-hook #'pada/load-system-theme)
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
@@ -732,59 +732,6 @@ Default to the URL around or before point."
   (message url)
   (start-process (concat "surf " url) nil "surf" url))
 
-(defun pada/elfeed-show-mode-setup ()
-  "Set options for `elfeed-show-mode'. This function is meant to be added to `elfeed-show-mode-hook'."
-  (mixed-pitch-mode)
-  (setq-local line-spacing 1
-              display-line-numbers nil
-              scroll-margin 0)
-  (setq-local evil-normal-state-cursor nil
-              evil-visual-state-cursor nil
-              cursor-type nil)
-  (centered-cursor-mode)
-  (focus-mode)
-  (+zen/toggle))
-
-(use-package! centered-cursor-mode
-  :after elfeed)
-
-(use-package! focus
-  :after elfeed
-  :config
-  (add-to-list 'focus-mode-to-thing '(elfeed-show-mode . paragraph)))
-
-(use-package! elfeed
-  :config
-  (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
-  (add-hook! 'elfeed-search-mode-hook #'centered-cursor-mode)
-  (add-hook! 'elfeed-show-mode-hook #'pada/elfeed-show-mode-setup)
-  (map! :map 'elfeed-show-mode-map
-        :n "j" #'evil-forward-paragraph
-        :n "k" #'evil-backward-paragraph)
-  (setq! elfeed-goodies/entry-pane-size 0.5
-         elfeed-goodies/feed-source-column-width 20
-         elfeed-goodies/tag-column-width 30
-         elfeed-search-filter "@6-months-ago")
-  (setq elfeed-feeds
-        '(("https://www.youtube.com/feeds/videos.xml?channel_id=UCYCO3Kifwg56zhus3XXiAVg" youtube productivity)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCcaTUtGzOiS4cqrgtcsHYWg" youtube productivity)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" youtube programming)
-          ("https://protesilaos.com/codelog.xml" programming)
-          ("https://karthinks.com/index.xml" programming)
-          ("https://protesilaos.com/commentary.xml" misc)
-          ("https://protesilaos.com/news.xml" misc)
-          ("https://phaazon.net/blog/feed" programming)
-          ("https://lukesmith.xyz/index.xml" misc)
-          ("https://luissimas.github.io/posts/index.xml" mine))))
-
-(use-package! elfeed-tube
-  :after elfeed
-  :config
-  (elfeed-tube-setup))
-
-(use-package! elfeed-tube-mpv
-  :after elfeed-tube)
-
 (use-package! doom-modeline
   :config
   (setq! doom-modeline-buffer-file-name-style 'buffer-name
@@ -917,3 +864,5 @@ NO-TEMPLATE is non-nil."
    '((elixir-mode . elixir-ts-mode)))
   :config
   (add-hook! 'elixir-ts-mode-hook #'lsp))
+
+(message "Got to the end of config")

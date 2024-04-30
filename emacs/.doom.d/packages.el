@@ -66,11 +66,6 @@
 (package! flycheck-popup-tip :disable t)
 (package! flycheck-posframe :disable t)
 
-;; Elfeed-tube
-(package! elfeed-tube)
-(package! elfeed-tube-mpv)
-(package! mpv)
-
 ;; sxhkdrc
 (package! sxhkdrc-mode)
 
