@@ -1,26 +1,12 @@
 #+title: Dotfiles
 
-* DONE Tmux setup
-CLOSED: [2024-03-09 sáb 09:43]
-* DONE Bash setup
-CLOSED: [2024-03-09 sáb 10:18]
-* DONE FZF
-CLOSED: [2024-03-09 sáb 10:53]
-* DONE Language servers
-CLOSED: [2024-03-09 sáb 11:46]
-* DONE Minimal usable neovim setup
-CLOSED: [2024-04-28 dom 10:45]
-* DONE Cursor theme (maybe KDE is messing with this?)
-CLOSED: [2024-04-28 dom 10:42]
-* DONE Tmux default keybindings
-CLOSED: [2024-04-28 dom 14:19]
-* DONE Emacs/Vim default keybindings
-CLOSED: [2024-04-28 dom 14:20]
-* DONE Change monitor settings on the fly
-CLOSED: [2024-04-28 dom 14:26]
-* DONE Persist wallpapers in all monitors
-CLOSED: [2024-04-28 dom 14:51]
-* TODO Better Bluetooth connection
-* TODO Fix screensharing
-* TODO Organize scripts
-* TODO Docs
+* DONE Emacs setup
+CLOSED: [2024-04-30 Tue 06:41]
+* DONE UFSCar Setup
+CLOSED: [2024-05-01 Wed 09:16]
+* DONE Cleanup nix files
+CLOSED: [2024-05-01 Wed 09:18]
+* DONE Cleanup dotfiles
+CLOSED: [2024-05-01 Wed 09:39]
+* TODO Update QMK keymap
+* TODO Fonts on dotfiles
