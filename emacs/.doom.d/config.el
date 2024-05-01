@@ -431,6 +431,8 @@
               (assq-delete-all 'continuation
                                (assq-delete-all 'truncation fringe-indicator-alist)))
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 (defun pada/set-frame-parameters ()
   "Set custom parameters for the current frame."
   (interactive)
