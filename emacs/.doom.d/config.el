@@ -159,14 +159,14 @@
          :desc "Display tab bar"           "TAB" #'+workspace/display
          :desc "Switch workspace"          "s"   #'+workspace/switch-to
          :desc "Switch to last workspace"  "l"   #'+workspace/other
-         :desc "New workspace"             "n"   #'+workspace/new-named
-         :desc "New unnamed workspace"     "N"   #'+workspace/new
+         :desc "New workspace"             "c"   #'+workspace/new-named
+         :desc "New unnamed workspace"     "C"   #'+workspace/new
          :desc "Load workspace from file"  "L"   #'+workspace/load
          :desc "Save workspace to file"    "S"   #'+workspace/save
-         :desc "Delete session"            "x"   #'+workspace/kill-session
-         :desc "Delete this workspace"     "k"   #'+workspace/delete
-         :desc "Previous workspace"        "i"   #'+workspace/switch-left
-         :desc "Next workspace"            "o"   #'+workspace/switch-right
+         :desc "Delete session"            "k"   #'+workspace/kill-session
+         :desc "Delete this workspace"     "x"   #'+workspace/delete
+         :desc "Previous workspace"        "p"   #'+workspace/switch-left
+         :desc "Next workspace"            "n"   #'+workspace/switch-right
          :desc "Rename workspace"          "r"   #'+workspace/rename
          :desc "Restore last session"      "R"   #'+workspace/restore-last-session)))
 
@@ -203,19 +203,6 @@
         '("apheleia-from-project-root" ".formatter.exs" "mix" "format" "--stdin-filename" file "-"))
   (setf (alist-get 'python-mode apheleia-mode-alist) '(isort black)
         (alist-get 'go-mode apheleia-mode-alist) 'goimports)
-
-  ;; By default Apheleia runs commands in the buffer cwd, this advice makes it
-  ;; run the commands in the current project root. This is important to make mix
-  ;; formatter respect the project configuration in .formatter.exs.
-  ;; source: https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
-  ;; (defun pada/fix-apheleia-project-dir (orig-fn &rest args)
-  ;;   (let ((project (project-current)))
-  ;;     (if (not (null project))
-  ;;         (let ((default-directory (project-root project))) (apply orig-fn args))
-  ;;       (apply orig-fn args))))
-
-  ;; (advice-add 'apheleia-format-buffer :around #'pada/fix-apheleia-project-dir)
-
   :init (apheleia-global-mode))
 
 ;; LSP
@@ -386,41 +373,6 @@
         (apply fun args)))))
 
 (advice-add 'find-file :around 'pada/open-external-advice)
-
-;; Sync system theme with emacs theme
-(defcustom pada/system-theme-associations
-  '(("modus-operandi" modus-operandi)
-    ("modus-vivendi" modus-vivendi)
-    ("ef-day" ef-day)
-    ("nord" doom-nord-aurora)
-    ("gruvbox" doom-gruvbox)
-    ("tokyonight" doom-tokyo-night)
-    ("palenight" doom-palenight)
-    ("pywal" ewal-doom-one)
-    ("onedark" doom-one)
-    ("catppuccin" catppuccin))
-  "A alist of association between file patterns and external programs."
-  :group 'system-theme
-  :type "alist")
-
-(defun pada/load-system-theme ()
-  "Read file ~/.colorscheme and load its theme."
-  (interactive)
-  (with-temp-buffer
-    (insert-file-contents "~/.colorscheme")
-    (let ((theme (string-trim (buffer-string)))
-          (associations pada/system-theme-associations))
-      (while associations
-        (let* ((current (pop associations))
-               (system-theme (car current))
-               (emacs-theme (car (cdr current))))
-          (when (string-match-p system-theme theme)
-            (setq doom-theme emacs-theme)
-            (load-theme emacs-theme t)
-            (setq associations nil)))))))
-
-;; Load system theme on startup
-;; (add-hook 'doom-after-init-hook #'pada/load-system-theme)
 
 ;; Time display format
 (setq display-time-format "%A %d %b, %H:%M")
@@ -866,5 +818,3 @@ NO-TEMPLATE is non-nil."
    '((elixir-mode . elixir-ts-mode)))
   :config
   (add-hook! 'elixir-ts-mode-hook #'lsp))
-
-(message "Got to the end of config")

@@ -111,4 +111,5 @@
 ;; Screenshot
 (package! screenshot :recipe (:repo "tecosaur/screenshot"))
 
+;; A superior elixir mode
 (package! elixir-ts-mode)
