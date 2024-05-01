@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-hyprctl hyprpaper preload "$(cat ~/.bg)"
-
-hyprctl monitors -j | jq -r '.[] | .name' | while read -r monitor_name; do
-    hyprctl hyprpaper wallpaper "$monitor_name,$(cat ~/.bg)"
-done
-
-hyprctl hyprpaper unload all
