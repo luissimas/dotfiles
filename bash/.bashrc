@@ -12,6 +12,7 @@ alias ci='cd $(find . -type d -print | fzf)'
 alias ef='fzf | xargs -r $EDITOR'
 alias fd='fdfind'
 alias killall-docker='docker ps -q | xargs -r docker stop'
+alias k='kubectl'
 
 # If not running interactively, skip the rest
 [[ $- != *i* ]] && return
