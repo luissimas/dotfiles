@@ -13,6 +13,9 @@ alias ef='fzf | xargs -r $EDITOR'
 alias fd='fdfind'
 alias killall-docker='docker ps -q | xargs -r docker stop'
 alias k='kubectl'
+alias hl='cd ~/projects/homelab'
+alias dot='cd ~/dotfiles'
+alias lg='lazygit'
 
 # If not running interactively, skip the rest
 [[ $- != *i* ]] && return
