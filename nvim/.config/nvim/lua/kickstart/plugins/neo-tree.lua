@@ -11,13 +11,13 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
+    { '<leader>ot', ':Neotree reveal<CR>', { desc = 'Neo[T]ree' } },
   },
   opts = {
     filesystem = {
       window = {
         mappings = {
-          ['\\'] = 'close_window',
+          ['<leader>ot'] = 'close_window',
         },
       },
     },
