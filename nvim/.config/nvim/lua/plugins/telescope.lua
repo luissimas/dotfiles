@@ -48,13 +48,19 @@ return {
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
+    vim.keymap.set('n', '<leader>fq', builtin.builtin, { desc = '[F]ind [Q]uickfix' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent Files' })
     vim.keymap.set('n', '<leader>.', builtin.resume, { desc = 'Repeat' })
-    vim.keymap.set('n', '<leader><leader>', builtin.git_files, { desc = '[ ] Find project files' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind [B]uffer' })
+
+    vim.keymap.set('n', '<leader><leader>', function()
+      builtin.git_files {
+        show_untracked = true,
+      }
+    end, { desc = '[ ] Find git files' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
