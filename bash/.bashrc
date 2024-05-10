@@ -16,6 +16,7 @@ alias k='kubectl'
 alias hl='cd ~/projects/homelab'
 alias dot='cd ~/dotfiles'
 alias lg='lazygit'
+alias proj='cd $(find ~/projects -maxdepth 1 -type d -print | fzf)'
 
 # If not running interactively, skip the rest
 [[ $- != *i* ]] && return
