@@ -46,10 +46,11 @@ return {
 
     -- Keybinds for the builtin pickers
     local builtin = require 'telescope.builtin'
+    local utils = require 'telescope.utils'
+
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
     vim.keymap.set('n', '<leader>fm', builtin.man_pages, { desc = '[F]ind [M]an page' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
     vim.keymap.set('n', '<leader>fq', builtin.builtin, { desc = '[F]ind [Q]uickfix' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
@@ -58,6 +59,12 @@ return {
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent Files' })
     vim.keymap.set('n', '<leader>.', builtin.resume, { desc = 'Repeat' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind [B]uffer' })
+
+    vim.keymap.set('n', '<leader>ff', function()
+      builtin.find_files {
+        cwd = utils.buffer_dir(),
+      }
+    end, { desc = '[F]ind [F]iles' })
 
     vim.keymap.set('n', '<leader><leader>', function()
       builtin.git_files {
