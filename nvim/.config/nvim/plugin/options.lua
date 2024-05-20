@@ -54,3 +54,6 @@ vim.opt.scrolloff = 8
 
 -- Highlight search
 vim.opt.hlsearch = true
+
+-- Enable concealing of text
+vim.opt.conceallevel = 1
