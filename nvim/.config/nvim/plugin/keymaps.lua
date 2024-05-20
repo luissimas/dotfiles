@@ -20,3 +20,7 @@ vim.keymap.set('n', '<leader>bp', '<cmd>bprev<CR>', { desc = '[P]revious buffer'
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Move in visual lines with j and k
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
