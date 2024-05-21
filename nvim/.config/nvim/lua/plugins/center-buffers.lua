@@ -2,5 +2,7 @@
 return {
   'shortcuts/no-neck-pain.nvim',
   version = '*',
-  config = function() end,
+  config = function()
+    vim.keymap.set('n', '<leader>tn', '<cmd>NoNeckPain<CR>', { desc = '[T]oggle [N]oNeckPain' })
+  end,
 }
