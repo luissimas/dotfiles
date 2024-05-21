@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+time=$(date "+%H:%M")
+today=$(date "+%Y-%m-%d")
+tomorrow=$(date -d "tomorrow" "+%Y-%m-%d")
+yesterday=$(date -d "yesterday" "+%Y-%m-%d")
+file="$NOTES/2 - Journal/$today.md"
+
+# Create a note with the template
+create_note() {
+    cat > "$file" <<EOF
+---
+created-at: "$today"
+---
+
+[[$yesterday]] - [[$tomorrow]]
+
+# Habits
+
+- [ ] Study
+- [ ] Reading
+- [ ] Running
+- [ ] Gym
+
+# Log
+EOF
+}
+
+# Insert and entry for the current time
+insert_entry() {
+    cat >> "$file" <<EOF
+
+## $time
+
+EOF
+}
+
+# If today's note does not exist, create it
+if [ ! -f "$file" ]; then
+    echo "File does not exist, creating new daily note."
+    create_note
+fi
+
+insert_entry
+
+# Start nvim in insert mode
+nvim -c "normal Gzzo" -c "startinsert" "$file"
