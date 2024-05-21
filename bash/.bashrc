@@ -15,6 +15,7 @@ alias killall-docker='docker ps -q | xargs -r docker stop'
 alias k='kubectl'
 alias hl='cd ~/projects/homelab'
 alias dot='cd ~/dotfiles'
+alias zet='cd $NOTES'
 alias lg='lazygit'
 alias proj='cd $(find ~/projects -maxdepth 1 -type d -print | fzf)'
 
