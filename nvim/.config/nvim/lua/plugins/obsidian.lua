@@ -64,7 +64,7 @@ return {
     { '<leader>or', '<cmd>ObsidianRename<CR>', desc = '[O]bsidian [R]ename Note' },
     { '<leader>on', '<cmd>ObsidianNew<CR>', desc = '[N]ew Note' },
     { '<leader>og', '<cmd>ObsidianSearch<CR>', desc = '[G]rep' },
-    { '<leader>oT', '<cmd>ObsidianTemplate<CR>', desc = 'Insert [T]emplate' },
+    { '<leader>ot', '<cmd>ObsidianTemplate<CR>', desc = 'Insert [T]emplate' },
     { '<leader>od', '<cmd>ObsidianDailies<CR>', desc = 'Open [D]ailies' },
     {
       '<CR>',

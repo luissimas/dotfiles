@@ -24,3 +24,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Move in visual lines with j and k
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
+
+-- Netrw
+vim.keymap.set('n', '<leader>oe', '<cmd>Explore<CR>', { desc = '[E]xplore' })
