@@ -57,7 +57,7 @@ return {
     end,
   },
   keys = {
-    { '<leader>fz', '<cmd>ObsidianQuickSwitch<CR>', desc = '[F]ind [Z]ettelkasten' },
+    { '<leader>fn', '<cmd>ObsidianQuickSwitch<CR>', desc = '[F]ind [N]otes' },
     { '<leader>ob', '<cmd>ObsidianBacklinks<CR>', desc = '[O]pen [B]acklinks' },
     { '<leader>oo', '<cmd>ObsidianOpen<CR>', desc = '[O]pen [O]bsidian' },
     { '<leader>op', '<cmd>ObsidianPasteImg<CR>', desc = '[O]bsidian [P]aste Image' },
