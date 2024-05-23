@@ -3,7 +3,23 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   opts = {
-    ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'vim', 'vimdoc', 'python', 'go', 'gomod', 'gosum', 'ledger' },
+    ensure_installed = {
+      'bash',
+      'c',
+      'html',
+      'lua',
+      'luadoc',
+      'markdown',
+      'markdown_inline',
+      'vim',
+      'vimdoc',
+      'python',
+      'go',
+      'gomod',
+      'gosum',
+      'ledger',
+      'dockerfile',
+    },
     -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
