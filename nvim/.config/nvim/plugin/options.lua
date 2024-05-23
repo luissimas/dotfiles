@@ -57,3 +57,6 @@ vim.opt.hlsearch = true
 
 -- Enable concealing of text
 vim.opt.conceallevel = 1
+
+-- Spellcheck
+vim.opt.spelllang = 'en_us,pt_br'
