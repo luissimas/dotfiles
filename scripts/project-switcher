@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Get directory by fzf or parameter
+if [ -z "$1" ]; then
+	dir=$(find ~/projects -maxdepth 1 -type d -print | fzf)
+else
+	dir=$1
+fi
+
+if [[ -z $dir ]]; then
+	exit 0
+fi
+
+name=$(basename "$dir" | sed "s/\./-/g")
+tmux_running=$(pgrep tmux)
+
+# If tmux is not running or we're not in tmux, create the new
+# session and attach to it
+if [[ -z $TMUX ]] || [[ -z $tmux_running ]]; then
+	tmux new-session -s "$name" -c "$dir"
+	exit 0
+fi
+
+# If tmux is running and the session does not exist, create it dettached
+if ! tmux has-session -t="$name" 2>/dev/null; then
+	tmux new-session -ds "$name" -c "$dir"
+fi
+
+# Attach to session
+tmux switch-client -t "$name"

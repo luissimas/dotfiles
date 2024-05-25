@@ -17,7 +17,7 @@ alias hl='cd ~/projects/homelab'
 alias dot='cd ~/dotfiles'
 alias zet='cd $NOTES'
 alias lg='lazygit'
-alias proj='cd $(find ~/projects -maxdepth 1 -type d -print | fzf)'
+alias proj='project-switcher'
 
 # If not running interactively, skip the rest
 [[ $- != *i* ]] && return
@@ -36,7 +36,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # Enable eat integration
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] &&
   source "$EAT_SHELL_INTEGRATION_DIR/bash"
 
 # Hook direnv
