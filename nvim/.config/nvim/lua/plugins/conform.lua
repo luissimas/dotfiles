@@ -27,6 +27,7 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       go = { 'goimports', 'gofmt' },
+      bash = { 'shfmt' },
       -- markdown = { 'mdformat' },
       -- Conform can also run multiple formatters sequentially
       -- python = { 'isort', 'black' },
