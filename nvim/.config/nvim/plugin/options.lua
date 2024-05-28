@@ -60,3 +60,6 @@ vim.opt.conceallevel = 1
 
 -- Spellcheck
 vim.opt.spelllang = 'en_us,pt_br'
+
+-- No wrap
+vim.opt.wrap = false
