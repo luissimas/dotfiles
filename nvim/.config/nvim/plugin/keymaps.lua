@@ -12,6 +12,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Buffer navigation
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[N]ext buffer' })
 vim.keymap.set('n', '<leader>bp', '<cmd>bprev<CR>', { desc = '[P]revious buffer' })
+vim.keymap.set('n', '<leader>bk', '<cmd>bdelete<CR>', { desc = '[K]ill buffer' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
