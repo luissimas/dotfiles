@@ -137,6 +137,7 @@ return {
         },
       },
       pyright = {},
+      lexical = {},
       yamlls = {
         settings = {
           yaml = {

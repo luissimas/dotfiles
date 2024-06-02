@@ -51,7 +51,6 @@ return {
     ---@param spec { id: string, dir: obsidian.Path, title: string|? }
     ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
-      -- This is equivalent to the default behavior.
       local path = spec.dir / '1 - Inbox' / tostring(spec.id)
       return path:with_suffix '.md'
     end,
