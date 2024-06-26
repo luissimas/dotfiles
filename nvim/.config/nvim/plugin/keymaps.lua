@@ -28,3 +28,8 @@ vim.keymap.set('n', 'k', 'gk')
 
 -- Netrw
 vim.keymap.set('n', '<leader>oe', '<cmd>Explore<CR>', { desc = '[E]xplore' })
+
+-- Quickfix
+vim.keymap.set('n', '<leader>qo', '<cmd>copen<CR>', { desc = '[Q]uickfix [O]pen' })
+vim.keymap.set('n', '<leader>qn', '<cmd>cn<CR>', { desc = '[Q]uickfix [N]ext' })
+vim.keymap.set('n', '<leader>qp', '<cmd>cp<CR>', { desc = '[Q]uickfix [P]revious' })
