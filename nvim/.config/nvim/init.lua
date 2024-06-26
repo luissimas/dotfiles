@@ -24,6 +24,18 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
+  -- Code screenshots
+  {
+    'mistricky/codesnap.nvim',
+    build = 'make',
+    opts = {
+      has_breadcrumbs = true,
+      bg_color = '#ffffff',
+      watermark = '',
+      code_font_family = 'Iosevka',
+    },
+  },
+
   { import = 'plugins' }, -- Import all plugin specs from lua/plugins
 }, {
   change_detection = {
