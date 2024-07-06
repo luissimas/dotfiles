@@ -1,5 +1,7 @@
+import = [ "~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml" ]
+
 [font]
-size = 18
+size = 20
 
 [font.normal]
 family = "Iosevka Term"
