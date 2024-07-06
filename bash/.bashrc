@@ -42,5 +42,5 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 # Hook direnv
 eval "$(direnv hook bash)"
 
-# Kiex setup
-[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+# Mise setup
+eval "$(~/.local/bin/mise activate bash)"
