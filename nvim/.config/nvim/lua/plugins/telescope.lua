@@ -67,12 +67,6 @@ return {
       }
     end, { desc = '[F]ind [F]iles' })
 
-    vim.keymap.set('n', '<leader><leader>', function()
-      builtin.git_files {
-        show_untracked = true,
-      }
-    end, { desc = '[ ] Find git files' })
-
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -90,5 +84,29 @@ return {
         prompt_title = 'Live Grep in Open Files',
       }
     end, { desc = '[F]ind [/] in Open Files' })
+
+    -- Custom find project files picker
+    -- Cache the results of "git rev-parse"
+    local is_inside_work_tree = {}
+
+    local function project_files()
+      local cwd = vim.fn.getcwd()
+      if is_inside_work_tree[cwd] == nil then
+        vim.fn.system 'git rev-parse --is-inside-work-tree'
+        is_inside_work_tree[cwd] = vim.v.shell_error == 0
+      end
+
+      if is_inside_work_tree[cwd] then
+        builtin.git_files {
+          show_untracked = true,
+        }
+      else
+        builtin.find_files {
+          cwd = utils.buffer_dir(),
+        }
+      end
+    end
+
+    vim.keymap.set('n', '<leader><leader>', project_files, { desc = '[ ] Find project files' })
   end,
 }
