@@ -136,6 +136,15 @@ return {
           },
         },
       },
+      tailwindcss = {
+        init_options = {
+          userLanguages = {
+            elixir = 'html-eex',
+            eelixir = 'html-eex',
+            heex = 'html-eex',
+          },
+        },
+      },
       pyright = {},
       elixirls = {},
       yamlls = {
