@@ -145,6 +145,15 @@ return {
           },
         },
       },
+      emmet_ls = {
+        filetypes = {
+          'elixir',
+          'eelixir',
+          'heex',
+          'html',
+          'html-eex',
+        },
+      },
       pyright = {},
       elixirls = {},
       yamlls = {
