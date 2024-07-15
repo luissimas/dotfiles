@@ -18,16 +18,16 @@ return {
       },
     },
     templates = {
-      folder = '5 - Templates',
+      folder = 'Templates',
       date_format = '%Y-%m-%d',
       time_format = '%H:%M',
     },
     daily_notes = {
-      folder = '2 - Journal',
+      folder = 'Journal',
       date_format = '%Y-%m-%d',
     },
     attachments = {
-      img_folder = '4 - Attachments',
+      img_folder = 'Attachments',
     },
     ui = {
       checkboxes = {
@@ -51,7 +51,7 @@ return {
     ---@param spec { id: string, dir: obsidian.Path, title: string|? }
     ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
-      local path = spec.dir / '1 - Inbox' / tostring(spec.id)
+      local path = spec.dir / 'Inbox' / tostring(spec.id)
       return path:with_suffix '.md'
     end,
   },
