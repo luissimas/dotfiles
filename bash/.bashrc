@@ -33,14 +33,11 @@ export HISTCONTROL=ignorespace
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # Enable FZF keybindings
-source /usr/share/doc/fzf/examples/key-bindings.bash
+eval "$(fzf --bash)"
 
 # Enable eat integration
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] &&
   source "$EAT_SHELL_INTEGRATION_DIR/bash"
-
-# Hook direnv
-eval "$(direnv hook bash)"
 
 # Mise setup
 eval "$(~/.local/bin/mise activate bash)"
