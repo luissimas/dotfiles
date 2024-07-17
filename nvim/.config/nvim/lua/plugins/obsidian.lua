@@ -14,7 +14,7 @@ return {
     workspaces = {
       {
         name = 'personal',
-        path = '~/Documents/vault/',
+        path = '~/projects/vault/',
       },
     },
     templates = {
