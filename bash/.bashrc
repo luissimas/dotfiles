@@ -27,16 +27,11 @@ export HISTSIZE=25000
 export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 
-# Prompt styling
-# PS1='\[\e[1m\] \w $ \[\e[m\] '
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
 # Enable FZF keybindings
 eval "$(fzf --bash)"
 
-# Enable eat integration
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] &&
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
-
 # Mise setup
 eval "$(~/.local/bin/mise activate bash)"
+
+# Starship setup
+eval "$(starship init bash)"
