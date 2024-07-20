@@ -17,10 +17,8 @@ created-at: "$today"
 
 # Habits
 
-- [ ] Study
-- [ ] Reading
-- [ ] Running
-- [ ] Gym
+- [ ] Fullstack development
+- [ ] Exercise
 
 # Log
 EOF
