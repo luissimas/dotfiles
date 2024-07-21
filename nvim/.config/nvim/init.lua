@@ -35,6 +35,7 @@ require('lazy').setup({
       code_font_family = 'Iosevka',
     },
   },
+  'ledger/vim-ledger',
 
   { import = 'plugins' }, -- Import all plugin specs from lua/plugins
 }, {
