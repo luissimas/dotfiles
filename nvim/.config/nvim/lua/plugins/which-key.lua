@@ -6,22 +6,22 @@ return {
     require('which-key').setup()
 
     -- Document existing key chains
-    require('which-key').register {
-      ['<leader>b'] = { name = '[B]buffer', _ = 'which_key_ignore' },
-      ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-      ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-      ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-      ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-      ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-      ['<leader>o'] = { name = '[O]pen', _ = 'which_key_ignore' },
-      ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-      ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-      ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-      ['<leader>q'] = { name = '[Q]uickfix', _ = 'which_key_ignore' },
+    require('which-key').add {
+      { '<leader>b', group = '[B]buffer' },
+      { '<leader>c', group = '[C]ode' },
+      { '<leader>d', group = '[D]ocument' },
+      { '<leader>f', group = '[F]ind' },
+      { '<leader>g', group = '[G]it' },
+      { '<leader>h', group = '[H]arpoon' },
+      { '<leader>o', group = '[O]pen' },
+      { '<leader>q', group = '[Q]uickfix' },
+      { '<leader>r', group = '[R]ename' },
+      { '<leader>t', group = '[T]oggle' },
+      { '<leader>w', group = '[W]orkspace' },
     }
     -- visual mode
-    require('which-key').register({
-      ['<leader>g'] = { '[G]it' },
-    }, { mode = 'v' })
+    require('which-key').add {
+      { '<leader>g', desc = '[G]it', mode = 'v' },
+    }
   end,
 }
