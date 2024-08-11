@@ -17,6 +17,7 @@ alias dot='cd ~/dotfiles'
 alias zet='cd $NOTES'
 alias lg='lazygit'
 alias proj='project-switcher'
+alias open='xdg-open'
 
 # If not running interactively, skip the rest
 [[ $- != *i* ]] && return
