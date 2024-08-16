@@ -4,3 +4,6 @@ zettelkasten
 testability
 transcode
 transcoding
+runtime
+verifier
+monomorphization

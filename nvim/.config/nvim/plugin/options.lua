@@ -55,8 +55,8 @@ vim.opt.scrolloff = 8
 -- Highlight search
 vim.opt.hlsearch = true
 
--- Enable concealing of text
-vim.opt.conceallevel = 1
+-- Disable concealing of text
+vim.opt.conceallevel = 0
 
 -- Spellcheck
 vim.opt.spelllang = 'en_us,pt_br'
