@@ -1,7 +1,7 @@
 import = [ "~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml" ]
 
 [font]
-size = 20
+size = 24
 
 [font.normal]
 family = "Iosevka Term Nerd Font"
