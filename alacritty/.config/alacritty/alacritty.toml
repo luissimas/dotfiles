@@ -9,3 +9,6 @@ family = "Iosevka Term Nerd Font"
 [window]
 decorations = "Full"
 startup_mode = "Maximized"
+
+[env]
+TERM = "xterm-256color"

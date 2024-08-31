@@ -8,7 +8,6 @@ export PATH=$HOME/scripts:$PATH
 export GOPATH=$HOME/.local/go
 
 # Exports
-export TERM="xterm-256color"
 export BROWSER="firefox"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --exclude .git --color=always"
