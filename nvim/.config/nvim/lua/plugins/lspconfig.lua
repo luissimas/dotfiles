@@ -128,6 +128,7 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       -- clangd = {},
+      tsserver = {},
       rust_analyzer = {},
       bashls = {},
       gopls = {
