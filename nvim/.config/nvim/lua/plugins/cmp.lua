@@ -40,6 +40,7 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local compare = require 'cmp.config.compare'
     luasnip.config.setup {}
 
     cmp.setup {
@@ -96,10 +97,20 @@ return {
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
+        { name = 'nvim_lsp', priority = 0 },
+        { name = 'luasnip', priority = 1 },
+        { name = 'path', priority = 2 },
         { name = 'hledger' },
+      },
+      sorting = {
+        priority_weight = 1.0,
+        comparators = {
+          compare.order,
+          compare.locality,
+          compare.recently_used,
+          compare.score,
+          compare.offset,
+        },
       },
     }
   end,
