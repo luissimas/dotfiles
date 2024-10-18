@@ -9,3 +9,6 @@ verifier
 monomorphization
 dereferenced
 observability
+struct
+polymorphism
+destructure
