@@ -28,14 +28,10 @@ return {
       lua = { 'stylua' },
       go = { 'goimports', 'gofmt' },
       bash = { 'shfmt' },
-      -- markdown = { 'mdformat' },
-      -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'black' },
       rust = { 'rustfmt', lsp_format = 'fallback' },
-      --
-      -- You can use a sub-list to tell conform to run *until* a formatter
-      -- is found.
-      javascript = { { 'prettierd', 'prettier' } },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
     },
   },
 }
