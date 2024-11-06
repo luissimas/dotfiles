@@ -28,7 +28,7 @@ return {
       lua = { 'stylua' },
       go = { 'goimports', 'gofmt' },
       bash = { 'shfmt' },
-      python = { 'isort', 'black' },
+      python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
       rust = { 'rustfmt', lsp_format = 'fallback' },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },
       typescript = { 'prettierd', 'prettier', stop_after_first = true },
