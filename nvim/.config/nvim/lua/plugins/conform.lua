@@ -32,6 +32,7 @@ return {
       rust = { 'rustfmt', lsp_format = 'fallback' },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },
       typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      terraform = { 'terraform_fmt' },
     },
   },
 }
