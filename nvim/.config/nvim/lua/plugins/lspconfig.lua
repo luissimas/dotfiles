@@ -130,6 +130,7 @@ return {
       -- clangd = {},
       ts_ls = {},
       rust_analyzer = {},
+      ansiblels = {},
       terraformls = {},
       bashls = {},
       gopls = {
