@@ -16,3 +16,4 @@ export FZF_DEFAULT_OPTS="--border --ansi"
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export LEDGER_FILE=~/Documents/accounting/accounting.journal
 export NOTES=~/projects/zettelkasten
+export MANPAGER='nvim +Man!'
