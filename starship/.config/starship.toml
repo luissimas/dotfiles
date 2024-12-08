@@ -4,6 +4,8 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-# Disable showing package version
 [package]
+disabled = true
+
+[gcloud]
 disabled = true
