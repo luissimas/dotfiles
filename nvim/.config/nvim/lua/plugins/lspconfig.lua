@@ -133,6 +133,9 @@ return {
       ansiblels = {},
       terraformls = {},
       bashls = {},
+      ltex = {
+        filetypes = { 'markdown', 'text', 'tex', 'gitcommit' },
+      },
       gopls = {
         settings = {
           gopls = {
