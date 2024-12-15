@@ -61,5 +61,21 @@ return {
       mode = 'n',
       desc = '[B]lame line',
     },
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit.open()
+      end,
+      mode = 'n',
+      desc = '[G]it',
+    },
+    {
+      '<leader>gl',
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      mode = 'n',
+      desc = '[L]og current file',
+    },
   },
 }
