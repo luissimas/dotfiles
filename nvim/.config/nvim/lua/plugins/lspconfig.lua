@@ -16,6 +16,8 @@ return {
 
     -- yamlls and jsonls schemas
     'b0o/schemastore.nvim',
+
+    'saghen/blink.cmp',
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -38,7 +40,7 @@ return {
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
@@ -115,7 +117,7 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities, true)
 
     -- Enable the following language servers
     --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
