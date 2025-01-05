@@ -131,6 +131,7 @@ return {
     local servers = {
       -- clangd = {},
       ts_ls = {},
+      zls = {},
       rust_analyzer = {},
       ansiblels = {},
       terraformls = {},
