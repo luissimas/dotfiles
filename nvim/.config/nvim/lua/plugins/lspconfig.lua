@@ -119,6 +119,17 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities, true)
 
+    local function make_ltex_dictionary()
+      local path = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
+      local words = {}
+
+      for word in io.open(path, 'r'):lines() do
+        table.insert(words, word)
+      end
+
+      return words
+    end
+
     -- Enable the following language servers
     --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
     --
@@ -138,6 +149,9 @@ return {
       bashls = {},
       ltex = {
         filetypes = { 'markdown', 'text', 'tex', 'gitcommit' },
+        dictionary = {
+          ['en-US'] = make_ltex_dictionary(),
+        },
       },
       gopls = {
         settings = {
