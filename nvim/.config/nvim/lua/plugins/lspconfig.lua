@@ -179,7 +179,7 @@ return {
         },
       },
       pyright = {},
-      elixirls = {},
+      lexical = {},
       yamlls = {
         settings = {
           yaml = {
