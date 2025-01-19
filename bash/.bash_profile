@@ -6,6 +6,8 @@ export PATH=$HOME/.config/emacs/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
 export GOPATH=$HOME/.local/go
+export FLYCTL_INSTALL=$HOME/.fly
+export PATH=$FLYCTL_INSTALL/bin:$PATH
 
 # Exports
 export BROWSER="firefox"
