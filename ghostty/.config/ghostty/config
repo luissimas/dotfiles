@@ -1,5 +1,5 @@
 font-family = Iosevka Term Nerd Font
-font-size = 18
+font-size = 15
 theme = light:catppuccin-latte,dark:catppuccin-mocha
 window-decoration = false
 confirm-close-surface = false
