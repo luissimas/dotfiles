@@ -8,7 +8,7 @@ return {
     notifier = { enabled = false },
     quickfile = { enabled = true },
     scratch = { name = 'Scratch', ft = 'markdown' },
-    statuscolumn = { enabled = true },
+    statuscolumn = { enabled = false },
     words = { enabled = true },
   },
   keys = {
@@ -52,14 +52,6 @@ return {
       end,
       mode = 'n',
       desc = 'Select Scratch Buffer',
-    },
-    {
-      '<leader>gb',
-      function()
-        Snacks.git.blame_line()
-      end,
-      mode = 'n',
-      desc = '[B]lame line',
     },
     {
       '<leader>gg',
