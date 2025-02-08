@@ -28,11 +28,11 @@ export HISTSIZE=25000
 export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 
-# Enable FZF keybindings
-eval "$(fzf --bash)"
-
 # Mise setup
 eval "$(~/.local/bin/mise activate bash)"
 
 # Starship setup
 eval "$(starship init bash)"
+
+# Television setup
+eval "$(tv init bash)"
