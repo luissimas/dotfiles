@@ -1,14 +1,25 @@
 -- Colorschemes
 return {
-  'catppuccin/nvim',
+  'rebelot/kanagawa.nvim',
   lazy = false,
   priority = 1000, -- Make sure to load this before all the other start plugins.
+  opts = {
+    background = {
+      dark = 'dragon',
+      light = 'lotus',
+    },
+    colors = {
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = 'none',
+          },
+        },
+      },
+    },
+  },
   init = function()
-    -- Load the colorscheme here.
-    vim.cmd.colorscheme 'catppuccin'
-
-    -- You can configure highlights by doing something like:
-    -- vim.cmd.hi 'Comment gui=none'
-    -- vim.cmd.hi 'SignColumn guibg=none'
+    -- Load the colorscheme
+    vim.cmd.colorscheme 'kanagawa'
   end,
 }
