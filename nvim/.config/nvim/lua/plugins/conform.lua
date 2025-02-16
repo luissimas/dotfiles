@@ -25,6 +25,7 @@ return {
       }
     end,
     formatters_by_ft = {
+      nix = { 'nixfmt' },
       lua = { 'stylua' },
       go = { 'goimports', 'gofmt' },
       bash = { 'shfmt' },

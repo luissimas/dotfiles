@@ -33,6 +33,7 @@ if status is-interactive
     abbr lg lazygit
     abbr open xdg-open
     abbr p project-switcher
+    abbr nix-shell nix-shell --run fish
 end
 
 function mkpass
