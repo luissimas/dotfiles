@@ -25,6 +25,9 @@ if status is-interactive
     # Television setup
     tv init fish | source
 
+    # Direnv setup
+    direnv hook fish | source
+
     # Abbreviations
     abbr v nvim
     abbr t tmux
