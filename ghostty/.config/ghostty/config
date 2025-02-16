@@ -6,3 +6,4 @@ confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
 keybind = ctrl+/=text:/
 keybind = ctrl+shift+/=text:?
+command = fish

@@ -35,3 +35,7 @@ preview_command = ":files:"
 [[cable_channel]]
 name = "bash-history"
 source_command = "sed '1!G;h;$!d' $HOME/.bash_history"
+
+[[cable_channel]]
+name = "fish-history"
+source_command = "fish -c 'history'"
