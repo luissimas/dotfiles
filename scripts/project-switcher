@@ -14,17 +14,15 @@ fi
 name=$(basename "$dir" | sed "s/\./-/g")
 tmux_running=$(pgrep tmux)
 
-# If tmux is not running or we're not in tmux, create the new
-# session and attach to it
-if [[ -z $TMUX ]] || [[ -z $tmux_running ]]; then
-	tmux new-session -s "$name" -c "$dir"
-	exit 0
-fi
 
-# If tmux is running and the session does not exist, create it dettached
+# If the session does not exist, create it dettached
 if ! tmux has-session -t="$name" 2>/dev/null; then
 	tmux new-session -ds "$name" -c "$dir"
 fi
 
-# Attach to session
-tmux switch-client -t "$name"
+# If we're not in tmux, attach to the session.
+if [[ -z $TMUX ]] || [[ -z $tmux_running ]]; then
+	tmux attach -t "$name" -c "$dir"
+else # If we're already inside tmux, just switch the client
+	tmux switch-client -t "$name"
+fi
