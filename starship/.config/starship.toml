@@ -4,6 +4,9 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
+[line_break]
+disabled = true
+
 [package]
 disabled = true
 
