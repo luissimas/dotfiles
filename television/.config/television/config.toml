@@ -180,6 +180,7 @@ toggle_preview = "ctrl-o"
 "less" = "files"
 "head" = "files"
 "tail" = "files"
+"nvim" = "files"
 "vim" = "files"
 "v" = "files"
 "bat" = "files"
@@ -194,6 +195,3 @@ toggle_preview = "ctrl-o"
 
 # docker-images channel
 "docker run" = "docker-images"
-
-# gitrepos channel
-"nvim" = "git-repos"
