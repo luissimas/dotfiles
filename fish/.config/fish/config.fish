@@ -19,14 +19,21 @@ if status is-interactive
     set fish_cursor_insert line
     set fish_cursor_replace_one underscore
 
-    # Mise setup
-    mise activate fish | source
-
     # Television setup
     tv init fish | source
 
+    # Since we're using vi mode, we need to explicitly bind in insert mode
+    bind --mode insert \cr tv_shell_history
+    bind --mode insert \ct tv_smart_autocomplete
+
+    # Starship setup
+    starship init fish | source
+
     # Direnv setup
     direnv hook fish | source
+
+    # Cargo setup
+    source "$HOME/.cargo/env.fish"
 
     # Abbreviations
     abbr v nvim
@@ -39,6 +46,6 @@ if status is-interactive
     abbr nix-shell nix-shell --run fish
 end
 
-function mkpass
-    head -c 12 /dev/urandom | base64 -w 0
+function mkpass -d "Create a random password and copy it to the clipboard"
+    head -c 12 /dev/urandom | base64 -w 0 | wl-copy
 end
