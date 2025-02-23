@@ -1,6 +1,0 @@
-set selection-clipboard "clipboard"
-
-set font "Iosevka 14"
-set guioptions ""
-
-map i recolor

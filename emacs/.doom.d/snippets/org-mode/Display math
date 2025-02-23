@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: Display math
-# key: mq
-# --
-
-$$
-$0
-$$

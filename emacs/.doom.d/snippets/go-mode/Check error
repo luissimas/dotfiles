@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Check error
-# key: err
-# --
-if err != nil {
-   ${1:return nil, err}
-}
-
-$0

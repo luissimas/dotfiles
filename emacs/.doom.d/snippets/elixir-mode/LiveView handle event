@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: LiveView handle event
-# key: he
-# --
-def handle_event("${1:event}", ${2:payload}, socket) do
-  $0
-  {:noreply, socket}
-end

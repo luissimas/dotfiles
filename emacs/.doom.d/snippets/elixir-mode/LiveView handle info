@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: LiveView handle invo
-# key: hi
-# --
-def handle_info(${1:message}, socket) do
-  $0
-  {:noreply, socket}
-end

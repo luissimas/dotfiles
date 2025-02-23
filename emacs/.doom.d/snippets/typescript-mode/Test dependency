@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: Test dependency
-# key: td
-# --
-const $1 = new Mocked${1:$(pada/capitalize-first-char yas-text)}()
-const $1Spy = jest.spyOn($1, '$2')
-
-$0

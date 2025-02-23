@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: LiveView handle params
-# key: hp
-# --
-def handle_params(${1:params}, _uri, socket) do
-  $0
-  {:noreply, socket}
-end

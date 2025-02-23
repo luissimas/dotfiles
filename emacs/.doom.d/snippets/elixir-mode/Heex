@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: Heex
-# key: heex
-# --
-~H"""
-$0
-"""
