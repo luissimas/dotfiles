@@ -44,6 +44,7 @@ if status is-interactive
     abbr open xdg-open
     abbr p project-switcher
     abbr nix-shell nix-shell --run fish
+    abbr j juju
 end
 
 function mkpass -d "Create a random password and copy it to the clipboard"
