@@ -1,3 +1,5 @@
+local zettelkasten_root = '~/projects/zettelkasten/'
+
 return {
   'epwalsh/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
@@ -13,7 +15,7 @@ return {
     workspaces = {
       {
         name = 'personal',
-        path = '~/projects/zettelkasten/',
+        path = zettelkasten_root,
       },
     },
     templates = {
@@ -44,7 +46,24 @@ return {
         ['x'] = { char = '✔', hl_group = 'ObsidianDone' },
       },
     },
-    disable_frontmatter = true,
+    disable_frontmatter = false,
+    -- Optional, alternatively you can customize the frontmatter data.
+    ---@param note obsidian.Note
+    ---@return table
+    note_frontmatter_func = function(note)
+      local out = { ['created-at'] = os.date '%Y-%m-%d' }
+
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+
+      return out
+    end,
+
     -- Customize how note IDs are generated given an optional title.
     ---@param title string|?
     ---@return string
@@ -59,8 +78,9 @@ return {
     ---@param spec { id: string, dir: obsidian.Path, title: string|? }
     ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
-      local path = spec.dir / 'Inbox' / tostring(spec.id)
-      return path:with_suffix '.md'
+      local path = require 'obsidian.path'
+      local note_path = path.new(zettelkasten_root) / 'Inbox' / tostring(spec.id)
+      return note_path:with_suffix '.md'
     end,
   },
   keys = {
