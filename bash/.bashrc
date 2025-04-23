@@ -29,10 +29,17 @@ export SAVEHIST=25000
 export HISTCONTROL=ignorespace
 
 # Mise setup
-eval "$(~/.local/bin/mise activate bash)"
+# eval "$(~/.local/bin/mise activate bash)"
 
 # Starship setup
 eval "$(starship init bash)"
 
 # Television setup
 eval "$(tv init bash)"
+
+# Incus development. I kinda miss NixOS + direnv, ngl
+export CGO_CFLAGS="-I/home/padawan/.local/go/deps/raft/include/ -I/home/padawan/.local/go/deps/cowsql/include/"
+export CGO_LDFLAGS="-L/home/padawan/.local/go/deps/raft/.libs -L/home/padawan/.local/go/deps/cowsql/.libs/"
+export LD_LIBRARY_PATH="/home/padawan/.local/go/deps/raft/.libs/:/home/padawan/.local/go/deps/cowsql/.libs/"
+export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
+. "$HOME/.cargo/env"
