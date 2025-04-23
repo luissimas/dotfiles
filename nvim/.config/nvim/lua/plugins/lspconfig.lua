@@ -147,12 +147,6 @@ return {
       ansiblels = {},
       terraformls = {},
       bashls = {},
-      ltex = {
-        filetypes = { 'markdown', 'text', 'tex', 'gitcommit' },
-        dictionary = {
-          ['en-US'] = make_ltex_dictionary(),
-        },
-      },
       gopls = {
         settings = {
           gopls = {
