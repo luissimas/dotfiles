@@ -46,12 +46,12 @@ return {
         ['x'] = { char = '✔', hl_group = 'ObsidianDone' },
       },
     },
-    disable_frontmatter = false,
+    disable_frontmatter = true,
     -- Optional, alternatively you can customize the frontmatter data.
     ---@param note obsidian.Note
     ---@return table
     note_frontmatter_func = function(note)
-      local out = { ['created-at'] = os.date '%Y-%m-%d' }
+      local out = { ['created-at'] = os.date '%Y-%m-%d', tags = note.tags }
 
       -- `note.metadata` contains any manually added fields in the frontmatter.
       -- So here we just make sure those fields are kept in the frontmatter.
