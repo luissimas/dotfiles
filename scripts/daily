@@ -4,7 +4,7 @@ time=$(date "+%H:%M")
 today=$(date "+%Y-%m-%d")
 tomorrow=$(date -d "tomorrow" "+%Y-%m-%d")
 yesterday=$(date -d "yesterday" "+%Y-%m-%d")
-file="$NOTES/Journal/$today.md"
+file="$NOTES/Daily/$today.md"
 
 # Create a note with the template
 create_note() {
@@ -14,11 +14,6 @@ created-at: "$today"
 ---
 
 [[$yesterday]] - [[$tomorrow]]
-
-# Habits
-
-- [ ] Fullstack development
-- [ ] Exercise
 
 # Log
 EOF
