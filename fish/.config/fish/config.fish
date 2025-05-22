@@ -9,6 +9,9 @@ set -Ux KUBECTX_IGNORE_FZF 1
 
 # If we're in an interactive shell
 if status is-interactive
+    # Disable greeting message
+    set fish_greeting
+
     # vi bindings
     fish_vi_key_bindings
     set -g fish_vi_force_cursor 1
@@ -47,14 +50,4 @@ end
 
 function mkpass -d "Create a random password and copy it to the clipboard"
     head -c 12 /dev/urandom | base64 -w 0 | wl-copy
-end
-
-function fish_greeting
-    if ! test -e /tmp/pada-motd
-        echo "Message of the day"
-        echo "Pending nodes in your Inbox"
-        echo "==========================="
-        find ~/projects/zettelkasten/Inbox/* -maxdepth 1 -type f -name "*.md" -exec basename {} .md \;
-        touch /tmp/pada-motd
-    end
 end
