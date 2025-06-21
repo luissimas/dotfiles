@@ -1,12 +1,35 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+set -e
+
+OS="$(uname)"
+
+if [ "$OS" = "Linux" ]; then
+    BREW_PATH="/home/linuxbrew/.linuxbrew"
+elif [ "$OS" = "Darwin" ]; then
+    BREW_PATH="/opt/homebrew"
+else
+    echo "Unsupported OS: $OS"
+    exit 1
+fi
+
+if [ -d "$BREW_PATH" ]; then
+    echo "Homebrew already installed at $BREW_PATH, skipping installation."
+else
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "Setting up Homebrew environment for $OS..."
+eval "$("$BREW_PATH/bin/brew" shellenv)"
+
+echo "Installing brew bundle..."
+brew bundle
 
 echo "Symlinking directories with stow..."
-
-# Use GNU Stow to symlink config files
-for folder in $(ls -d */ | sed "s/\/$//"); do
-    echo -n -e "\t linking $folder... "
-    stow $folder
-echo "Done."
+for folder in $(find . -mindepth 1 -maxdepth 1 -type d ! -name '.*' -printf "%f\n"); do
+    echo "Linking $folder... "
+    stow "$folder"
 done
 
-echo "Directories linked sucessfully!"
+echo "Done!"

@@ -4,6 +4,9 @@ fish_add_path ~/.local/go/bin
 fish_add_path ~/dotfiles/scripts
 fish_add_path ~/.krew/bin
 
+# Setup homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Set env variables
 set -Ux KUBECTX_IGNORE_FZF 1
 
