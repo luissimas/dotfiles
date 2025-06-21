@@ -1,0 +1,29 @@
+" Leader key
+let mapleader=" "
+
+" Set the clipboard
+set clipboard^=unnamedplus
+
+" Plugins
+set surround
+set commentary
+
+" Basic settings
+set incsearch
+set nu
+set ignorecase
+set smartcase
+set number relativenumber
+
+" Mappings
+map <leader>ot <Action>(ActivateTerminalToolWindow)
+map <leader>tz <Action>(ToggleZenMode)
+map <leader>tf <Action>(ToggleDistractionFreeMode)
+map <leader>tp <Action>(TogglePresentationMode)
+map <leader>ff <Action>(GotoFile)
+map <leader>fr <Action>(RecentFiles)
+map <leader>fs <Action>(GotoSymbol)
+map <leader><leader> <Action>(GotoAction)
+map <leader>r <Action>(Rerun)
+map <leader>e <Action>(ShowErrorDescription)
+map <leader>rn <Action>(RenameElement)
