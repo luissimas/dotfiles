@@ -1,9 +1,8 @@
 font-family = Iosevka Term Nerd Font
 font-size = 15
-theme = light:kanagawa-lotus,dark:kanagawa-dragon
-window-decoration = false
+theme = light:primary,dark:catppuccin-mocha
 confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
 keybind = ctrl+/=text:/
 keybind = ctrl+shift+/=text:?
-command = fish
+command = /opt/homebrew/bin/fish
