@@ -3,9 +3,10 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.local/go/bin
 fish_add_path ~/dotfiles/scripts
 fish_add_path ~/.krew/bin
+fish_add_path /opt/homebrew/bin/
 
 # Setup homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 # Set env variables
 set -Ux KUBECTX_IGNORE_FZF 1
@@ -36,7 +37,9 @@ if status is-interactive
     direnv hook fish | source
 
     # Cargo setup
-    source "$HOME/.cargo/env.fish"
+    if test -e "$HOME/.cargo/env.fish"
+        source "$HOME/.cargo/env.fish"
+    end
 
     # Abbreviations
     abbr v nvim
