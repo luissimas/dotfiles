@@ -14,6 +14,8 @@ set nu
 set ignorecase
 set smartcase
 set number relativenumber
+set noerrorbells
+set visualbell
 
 " Mappings
 map <leader>ot <Action>(ActivateTerminalToolWindow)
@@ -27,3 +29,4 @@ map <leader><leader> <Action>(GotoAction)
 map <leader>r <Action>(Rerun)
 map <leader>e <Action>(ShowErrorDescription)
 map <leader>rn <Action>(RenameElement)
+map g; <Action>(JumpToLastChange)
