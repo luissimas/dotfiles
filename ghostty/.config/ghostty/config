@@ -1,6 +1,7 @@
 font-family = Iosevka Term Nerd Font
 font-size = 15
-theme = light:primary,dark:catppuccin-mocha
+theme = light:Apple System Colors Light,dark:catppuccin-mocha
+window-save-state = always
 confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
 keybind = ctrl+/=text:/
