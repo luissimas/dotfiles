@@ -65,3 +65,20 @@ end
 function mkpass -d "Create a random password and copy it to the clipboard"
     head -c 12 /dev/urandom | base64 -w 0 | wl-copy
 end
+
+function pr_changes -d "Generate a description of the current git changes in bullet point format"
+    set -l arg (count $argv > 0 && echo $argv[1] || echo "main")
+
+    git diff $arg...$(git branch --show-current) | gemini -p "
+    Review these changes and generate a brief description of what was done.
+    The description will be used in a PR description to summarize the changes for other developers that will be reviewing them.
+
+    Guidelines:
+      - Use simple wording (e.g. no 'comprehensive')
+      - Be brief and direct. Assume the reader has context of the project, and avoid wasting its time with redundant information
+      - Don't oversell the changes, be unbiased and humble in communicating their impact
+      - Output only the bullet points in markdown format, no other text
+    "
+end
+
+complete -c pr_changes -f -a "(git branch --format='%(refname:short)')"
