@@ -17,6 +17,7 @@ eval "$(brew shellenv)"
 
 # Set env variables
 set -Ux KUBECTX_IGNORE_FZF 1
+set -Ux EDITOR nvim
 
 # If we're in an interactive shell
 if status is-interactive
