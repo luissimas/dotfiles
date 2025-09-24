@@ -67,7 +67,7 @@ function mkpass -d "Create a random password and copy it to the clipboard"
 end
 
 function pr_changes -d "Generate a description of the current git changes in bullet point format"
-    set -l arg (count $argv > 0 && echo $argv[1] || echo "main")
+    set -l arg (test (count $argv) -gt 0 && echo $argv[1] || echo "main")
 
     git diff $arg...$(git branch --show-current) | gemini -p "
     Review these changes and generate a brief description of what was done.
