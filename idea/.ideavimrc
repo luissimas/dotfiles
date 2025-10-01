@@ -31,3 +31,6 @@ map <leader>e <Action>(ShowErrorDescription)
 map <leader>rn <Action>(RenameElement)
 map g; <Action>(JumpToLastChange)
 map <C-t> <Action>(Refactorings.QuickListPopupAction)
+
+" Y copies to the end of the line
+nnoremap Y y$
