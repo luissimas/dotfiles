@@ -19,7 +19,7 @@ return {
       },
     },
     templates = {
-      folder = 'Templates',
+      folder = 'Tools/Templates',
       date_format = '%Y-%m-%d',
       time_format = '%H:%M',
     },
