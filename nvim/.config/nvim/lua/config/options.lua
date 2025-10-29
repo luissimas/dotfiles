@@ -23,3 +23,6 @@ vim.opt.cursorline = false
 
 -- Make "." count as a word separator
 vim.opt.iskeyword = "@,48-57,_,192-255"
+
+-- Disable text conceal
+vim.opt.conceallevel = 0
