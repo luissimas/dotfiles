@@ -1,6 +1,6 @@
 font-family = Iosevka Term Nerd Font
 font-size = 15
-theme = light:Monokai Pro Light,dark:Black Metal (Bathory)
+theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
 window-save-state = always
 confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
