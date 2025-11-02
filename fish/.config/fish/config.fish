@@ -3,6 +3,7 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.local/go/bin
 fish_add_path ~/dotfiles/scripts
 fish_add_path ~/.krew/bin
+fish_add_path /home/linuxbrew/.linuxbrew/opt/dotnet@8/bin
 
 if test -e /opt/homebrew/bin/
     fish_add_path /opt/homebrew/bin/
