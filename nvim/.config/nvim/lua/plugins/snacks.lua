@@ -10,6 +10,12 @@ return {
         explorer = {
           auto_close = true,
         },
+        files = {
+          hidden = true,
+        },
+        grep = {
+          hidden = true,
+        },
       },
     },
   },
