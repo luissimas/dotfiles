@@ -12,7 +12,7 @@ return {
       return os.date("%Y/%m/%d")
     end
 
-    -- Add hledger snippets
+    -- hledger snippets
     ls.add_snippets("ledger", {
       s("t", {
         f(today, {}),
@@ -26,6 +26,10 @@ return {
         i(4, "Assets:Account"),
         i(0),
       }),
+
+      s("n", { t("; type:need") }),
+      s("w", { t("; type:want") }),
+      s("s", { t("shop:"), i(1, "value") }),
     })
   end,
 }
