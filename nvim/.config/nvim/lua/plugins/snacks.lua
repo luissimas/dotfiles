@@ -18,5 +18,17 @@ return {
         },
       },
     },
+    image = {
+      img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "Attachments" },
+      doc = {
+        inline = true,
+        enabled = true,
+        max_width = 80,
+        max_height = 20,
+      },
+      math = {
+        enabled = true,
+      },
+    },
   },
 }
