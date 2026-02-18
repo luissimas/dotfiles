@@ -1,8 +1,13 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "master",
+  branch = "main",
+  lazy = false,
+  build = ":TSUpdate",
   opts = {
-    ensure_installed = {
+    install_dir = vim.fn.stdpath("data") .. "/site",
+  },
+  init = function()
+    require("nvim-treesitter").install({
       "bash",
       "bicep",
       "c",
@@ -32,6 +37,6 @@ return {
       "vimdoc",
       "xml",
       "yaml",
-    },
-  },
+    })
+  end,
 }
