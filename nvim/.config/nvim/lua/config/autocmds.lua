@@ -9,6 +9,11 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
+    -- Skip toggle on floating windows. Makes it behave nicely for LSP hover pop ups.
+    if vim.api.nvim_win_get_config(0).zindex then
+      return
+    end
+
     require("no-neck-pain").enable()
   end,
 })
