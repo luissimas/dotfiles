@@ -9,6 +9,9 @@ export GOPATH=$HOME/.local/go
 export FLYCTL_INSTALL=$HOME/.fly
 export PATH=$FLYCTL_INSTALL/bin:$PATH
 
+# Setup homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Exports
 export BROWSER="firefox"
 export EDITOR="nvim"
