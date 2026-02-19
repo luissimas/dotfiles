@@ -63,7 +63,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     opts = function(_, opts)
       local ai = require("mini.ai")
       opts.custom_textobjects = vim.tbl_deep_extend("force", opts.custom_textobjects or {}, {
