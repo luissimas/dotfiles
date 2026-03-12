@@ -1,6 +1,7 @@
 ---@alias obsidian.PartialUI obsidian.config.UIOpts | {}
 
 local zettelkasten_root = "~/projects/zettelkasten/"
+local inbox_directory = "0. Inbox"
 
 return {
   "obsidian-nvim/obsidian.nvim",
@@ -79,7 +80,7 @@ return {
     ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
       local path = require("obsidian.path")
-      local note_path = path.new(zettelkasten_root) / "Inbox" / tostring(spec.id)
+      local note_path = path.new(zettelkasten_root) / path.new(inbox_directory) / tostring(spec.id)
       return note_path:with_suffix(".md")
     end,
   },
