@@ -17,3 +17,27 @@ vim.api.nvim_create_autocmd("FileType", {
     require("no-neck-pain").enable()
   end,
 })
+
+vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
+  group = vim.api.nvim_create_augroup("luis_theme", { clear = true }),
+  -- `nested` so the `:colorscheme` call inside `apply()` actually fires the
+  -- `ColorScheme` autocmd below (and lualine's own listeners). Without this,
+  -- nested autocmds are suppressed and the statusline keeps the stale palette.
+  nested = true,
+  callback = function()
+    require("config.theme").apply()
+  end,
+})
+
+-- Lualine reads its theme at setup time and doesn't fully re-detect on
+-- `ColorScheme` alone, so re-run setup with `theme = "auto"` after every
+-- colorscheme change to refresh the statusline palette.
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("luis_theme_lualine", { clear = true }),
+  callback = function()
+    local ok, lualine = pcall(require, "lualine")
+    if ok then
+      lualine.setup({ options = { theme = "auto" } })
+    end
+  end,
+})
