@@ -1,6 +1,6 @@
 font-family = Iosevka Term Nerd Font
 font-size = 15
-theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
+theme = light:GitHub Light Default,dark:Gruvbox Dark Hard
 window-save-state = always
 confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
