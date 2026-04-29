@@ -3,5 +3,4 @@
 -- Add any additional keymaps here
 
 local theme = require("config.theme")
-vim.keymap.set("n", "<leader>uT", theme.apply, { desc = "Re-detect system theme" })
-vim.keymap.set("n", "<leader>uF", theme.pick, { desc = "Pick theme family" })
+vim.keymap.set("n", "<leader>ut", theme.pick, { desc = "Pick [t]heme family" })
