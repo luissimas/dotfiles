@@ -6,7 +6,10 @@ local inbox_directory = "0. Inbox"
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
-  ft = "markdown",
+  event = {
+    "BufReadPre " .. vim.fn.expand("~/projects/zettelkasten") .. "/**/*.md",
+    "BufNewFile " .. vim.fn.expand("~/projects/zettelkasten") .. "/**/*.md",
+  },
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
