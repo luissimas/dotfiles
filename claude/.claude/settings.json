@@ -1,0 +1,15 @@
+{
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/lsimasde/.claude/statusline-command.sh"
+  },
+  "effortLevel": "high",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "theme": "auto",
+  "editorMode": "vim",
+  "voiceEnabled": true
+}
