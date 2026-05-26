@@ -51,8 +51,11 @@ Luís.
 ---
 
 Guidelines:
-- Summary sentence per section states the overall thrust only — never repeats what the bullets say.
+- Summary sentence per section states the overall thrust only — never repeats what the bullets say. It is optional: drop it if the section has only one or two bullets.
+- Keep the tone neutral and factual; avoid loaded words like "dominated", "crucial", "major focus".
 - Use past tense, active voice.
-- Bullets describe themes or outcomes, not individual task completions.
+- Bullets describe themes or outcomes, not individual task completions. Use sub-bullets to group related sub-items under a theme (e.g. multiple GGUS tickets, sub-steps of a migration).
+- Forward-looking next steps ("I'll follow up next week", "I'll remove the mitigations once kernels are updated") are welcome when they appear in the task data.
+- When ticket IDs, PR/MR links, JIRA issues, postmortem docs, ServiceNow tickets, or cms-talk threads are present in task descriptions, surface them as numbered footnote references (`[1]`, `[2]`, ...) with the URLs listed under a trailing `---` separator at the end of the email.
 - When in doubt about a task's category or relevance, ask the user rather than guessing.
 - Do not invent details not present in the task titles or descriptions.
