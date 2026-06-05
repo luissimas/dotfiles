@@ -1,26 +1,36 @@
-# Path
-export PATH=$HOME/.local/go/bin:$PATH
-export PATH=$HOME/.local/npm/bin:$PATH
-export PATH=$HOME/dotfiles/scripts:$PATH
-export PATH=$HOME/.config/emacs/bin:$PATH
+# PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/dotfiles/scripts:$PATH
+export PATH=$HOME/.local/go/bin:$PATH
 export GOPATH=$HOME/.local/go
-export FLYCTL_INSTALL=$HOME/.fly
-export PATH=$FLYCTL_INSTALL/bin:$PATH
 
-# Setup homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Editor: prefer nvim, fall back to vim
+if command -v nvim >/dev/null 2>&1; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
-# Exports
-export BROWSER="firefox"
-export EDITOR="nvim"
-export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --exclude .git --color=always"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--border --ansi"
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
-export LEDGER_FILE=~/Documents/accounting/accounting.journal
-export NOTES=~/projects/zettelkasten
+# Homebrew (macOS)
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-if [ -e /home/padawan/.nix-profile/etc/profile.d/nix.sh ]; then . /home/padawan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-. "$HOME/.cargo/env"
+# Homebrew (linuxbrew)
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# Cargo
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# Nix
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
+# Source interactive setup for login shells
+[ -f ~/.bashrc ] && . ~/.bashrc

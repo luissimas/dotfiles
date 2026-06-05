@@ -1,10 +1,9 @@
 font-family = Iosevka Term Nerd Font
 font-size = 15
-theme = light:Kanagawa Lotus,dark:Kanagawa Dragon
+theme = light:kanagawa-lotus,dark:Kanagawa Dragon
 window-save-state = always
 confirm-close-surface = false
 keybind = ctrl+alt+space=toggle_window_decorations
 keybind = ctrl+/=text:/
 keybind = ctrl+shift+/=text:?
-command = fish
-window-decoration = none
+macos-option-as-alt = true
