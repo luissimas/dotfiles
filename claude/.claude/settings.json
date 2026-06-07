@@ -1,17 +1,5 @@
 {
   "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "sh /Users/lsimasde/.claude/statusline-command.sh"
-  },
-  "effortLevel": "high",
-  "voice": {
-    "enabled": true,
-    "mode": "hold"
-  },
-  "theme": "auto",
-  "editorMode": "vim",
-  "voiceEnabled": true,
   "hooks": {
     "PreToolUse": [
       {
@@ -24,5 +12,17 @@
         ]
       }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/lsimasde/.claude/statusline-command.sh"
+  },
+  "effortLevel": "medium",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "theme": "auto",
+  "editorMode": "vim",
+  "voiceEnabled": true
 }
