@@ -70,3 +70,8 @@ __prompt() {
   PS1="${host_color}\u@\h${reset}:${cyan}\w${reset}${branch} ${marker}"
 }
 PROMPT_COMMAND='history -a; __prompt'
+
+# Direnv hook
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook bash)"
+fi
