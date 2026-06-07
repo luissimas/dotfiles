@@ -1,28 +1,22 @@
 #!/usr/bin/env bash
 
-# Get directory by fuzzy finder or parameter
 if [ -z "$1" ]; then
-	dir=$(tv git-repos)
-else
-	dir=$1
+  echo "usage: project-switcher <directory>" >&2
+  exit 1
 fi
 
-if [[ -z $dir ]]; then
-	exit 0
-fi
-
+dir=$1
 name=$(basename "$dir" | sed "s/\./-/g")
 tmux_running=$(pgrep tmux)
 
-
 # If the session does not exist, create it dettached
 if ! tmux has-session -t="$name" 2>/dev/null; then
-	tmux new-session -ds "$name" -c "$dir"
+  tmux new-session -ds "$name" -c "$dir"
 fi
 
 # If we're not in tmux, attach to the session.
 if [[ -z $TMUX ]] || [[ -z $tmux_running ]]; then
-	tmux attach -t "$name" -c "$dir"
+  tmux attach -t "$name" -c "$dir"
 else # If we're already inside tmux, just switch the client
-	tmux switch-client -t "$name"
+  tmux switch-client -t "$name"
 fi
