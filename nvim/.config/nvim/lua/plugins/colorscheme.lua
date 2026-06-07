@@ -5,6 +5,14 @@ return {
   { "catppuccin/nvim", lazy = false, priority = 1000, name = "catppuccin" },
   { "rose-pine/neovim", lazy = false, priority = 1000, name = "rose-pine" },
   {
+    "miikanissi/modus-themes.nvim",
+    priority = 1000,
+    opts = {
+      line_nr_column_background = false,
+      sign_column_background = false,
+    },
+  },
+  {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,

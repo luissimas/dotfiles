@@ -6,10 +6,11 @@ M.families = {
   tokyonight = { dark = "tokyonight-night", light = "tokyonight-day" },
   catppuccin = { dark = "catppuccin-mocha", light = "catppuccin-latte" },
   kanagawa = { dark = "kanagawa-dragon", light = "kanagawa-lotus" },
+  modus = { dark = "modus_vivendi", light = "modus_operandi" },
   ["rose-pine"] = { dark = "rose-pine-moon", light = "rose-pine-dawn" },
 }
 
-M.active = { dark = "kanagawa", light = "kanagawa" }
+M.active = { dark = "modus", light = "modus" }
 
 local function detect_background()
   if vim.fn.has("mac") == 0 then
