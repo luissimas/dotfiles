@@ -75,3 +75,6 @@ PROMPT_COMMAND='history -a; __prompt'
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook bash)"
 fi
+
+# Make Python based CLIs (e.g openstack) respect terminal width
+export CLIFF_FIT_WIDTH=1
