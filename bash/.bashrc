@@ -78,3 +78,6 @@ fi
 
 # Make Python based CLIs (e.g openstack) respect terminal width
 export CLIFF_FIT_WIDTH=1
+
+# Set zk's default notebook directory
+[ -d ~/notes ] && export ZK_NOTEBOOK_DIR=~/notes
