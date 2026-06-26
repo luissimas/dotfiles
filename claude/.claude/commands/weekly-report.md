@@ -21,8 +21,9 @@ Steps:
 5. Skip personal/admin tasks (e.g. "schedule day off", "update address", "update UBS").
 6. Collect all tasks that have no section and whose category (Frontier vs Factory) is ambiguous from the title/description. Use AskUserQuestion to ask about all of them at once in a single prompt — list each task clearly and ask whether it belongs to Factory, Frontier, or should be excluded. Do not ask task by task; batch them all in one question.
 7. Group related tasks into themes — do NOT list every task as its own bullet.
-8. Read the most recent existing report in `weekly-report/` (the file with the latest date) before writing. Match its style, structure, frontmatter, and footnote conventions, and write in my voice.
-9. Write the email to `weekly-report/YYYY-MM-DD_YYYY-MM-DD.md` in the current project directory (since and until dates, in ISO format). Create the `weekly-report/` directory if it does not exist. Also display the email content in the response. Use this structure:
+8. Collect the links for the report. Every substantive theme/bullet should carry a footnote link. First use links present in task descriptions. Then, for any bullet that plausibly has an associated reference (PR/MR, JIRA, GGUS ticket, commit, GitHub issue/PR, ServiceNow, cms-talk thread, postmortem, indico) but has no URL in Todoist, use AskUserQuestion to ask for the link for each one of them — list each one clearly. Do not invent links. Trivial operational tasks that would not have a link (e.g. "check alarms") may be left without one.
+9. Read the most recent existing report in `weekly-report/` (the file with the latest date) before writing. Match its style, structure, frontmatter, and footnote conventions, and write in my voice.
+10. Write the email to `weekly-report/YYYY-MM-DD_YYYY-MM-DD.md` in the current project directory (since and until dates, in ISO format). Create the `weekly-report/` directory if it does not exist. Also display the email content in the response. Use this structure:
 
 ---
 
