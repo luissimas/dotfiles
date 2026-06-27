@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-  echo "usage: project-switcher <directory>" >&2
-  exit 1
+  sel=$(ls ~/projects | fzf) || exit 0
+  dir=~/projects/$sel
+else
+  dir=$1
 fi
 
-dir=$1
 name=$(basename "$dir" | sed "s/\./-/g")
 tmux_running=$(pgrep tmux)
 
