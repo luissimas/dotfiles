@@ -1,31 +1,24 @@
-# Modus-Vivendi Colors
+# Modus Themes for Ghostty
+# Auto generated with https://github.com/miikanissi/modus-themes.nvim/blob/master/lua/modus-themes/extras/ghostty.lua
+
+palette = 0=#000000
+palette = 1=#ff5f59
+palette = 2=#44bc44
+palette = 3=#d0bc00
+palette = 4=#2fafff
+palette = 5=#feacd0
+palette = 6=#00d3d0
+palette = 7=#ffffff
+palette = 8=#303030
+palette = 9=#ff5f5f
+palette = 10=#44df44
+palette = 11=#efef00
+palette = 12=#338fff
+palette = 13=#ff66ff
+palette = 14=#00eff0
+palette = 15=#989898
 background = #000000
 foreground = #ffffff
-selection-background = #5a5a5a
-selection-foreground = #ffffff
 cursor-color = #ffffff
-
-# black
-palette = 0=#1e1e1e
-palette = 8=#535353
-# red
-palette = 1=#ff5f59
-palette = 9=#ff7f9f
-# green
-palette = 2=#44bc44
-palette = 10=#00c06f
-# yellow
-palette = 3=#d0bc00
-palette = 11=#dfaf7a
-# blue
-palette = 4=#2fafff
-palette = 12=#00bcff
-# magenta
-palette = 5=#feacd0
-palette = 13=#b6a0ff
-# cyan
-palette = 6=#00d3d0
-palette = 14=#6ae4b9
-# white
-palette = 7=#ffffff
-palette = 15=#989898
+selection-background = #7030af
+selection-foreground = #ffffff
