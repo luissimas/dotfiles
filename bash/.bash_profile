@@ -32,5 +32,11 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
+# Git identity on CERN servers
+if [ -d /afs ]; then
+  export GIT_AUTHOR_NAME="Luís Simas"
+  export GIT_AUTHOR_EMAIL="luis.simas@cern.ch"
+fi
+
 # Source interactive setup for login shells
 [ -f ~/.bashrc ] && . ~/.bashrc
