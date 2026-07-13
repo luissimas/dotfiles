@@ -1,8 +1,16 @@
 # PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/scripts:$PATH
-export PATH=$HOME/dotfiles/scripts:$PATH
-export PATH=$HOME/.local/go/bin:$PATH
+add_path() {
+  [ -d "$1" ] && export PATH="$1:$PATH"
+}
+
+add_path "$HOME/.local/bin"
+add_path "$HOME/scripts"
+add_path "$HOME/dotfiles/scripts"
+add_path "$HOME/.local/go/bin"
+add_path "$HOME/work/scripts"
+add_path "$HOME/work/scripts/factory"
+add_path "$HOME/work/scripts/frontier"
+
 export GOPATH=$HOME/.local/go
 
 # Editor: prefer nvim, fall back to vim
