@@ -22,7 +22,7 @@ Steps:
 6. Collect all tasks that have no section and whose category (Frontier vs Factory) is ambiguous from the title/description. Use AskUserQuestion to ask about all of them at once in a single prompt — list each task clearly and ask whether it belongs to Factory, Frontier, or should be excluded. Do not ask task by task; batch them all in one question.
 7. Group related tasks into themes — do NOT list every task as its own bullet.
 8. Collect the links for the report. Every substantive theme/bullet should carry a footnote link. First use links present in task descriptions. Then, for any bullet that plausibly has an associated reference (PR/MR, JIRA, GGUS ticket, commit, GitHub issue/PR, ServiceNow, cms-talk thread, postmortem, indico) but has no URL in Todoist, use AskUserQuestion to ask for the link for each one of them — list each one clearly. Do not invent links. Trivial operational tasks that would not have a link (e.g. "check alarms") may be left without one.
-9. Read the most recent existing report in `weekly-report/` (the file with the latest date) before writing. Match its style, structure, frontmatter, and footnote conventions, and write in my voice.
+9. Read the 5 most recent existing reports in `weekly-report/` (the files with the latest dates) before writing. Match their style, structure, frontmatter, and footnote conventions, and write in my voice. If fewer than 5 exist, read all of them.
 10. Write the email to `weekly-report/YYYY-MM-DD_YYYY-MM-DD.md` in the current project directory (since and until dates, in ISO format). Create the `weekly-report/` directory if it does not exist. Also display the email content in the response. Use this structure:
 
 ---
@@ -53,7 +53,7 @@ Luís.
 ---
 
 Guidelines:
-- Reuse the style of previous reports and write in my voice. Read the latest report in `weekly-report/` and mirror it: plain first-person past tense, concrete and specific (name the systems, tickets, and people involved), no preamble or filler, no marketing words. When unsure how I'd phrase something, copy the phrasing patterns from earlier reports rather than inventing a polished tone.
+- Reuse the style of previous reports and write in my voice. Read the 5 most recent reports in `weekly-report/` and mirror them: plain first-person past tense, concrete and specific (name the systems, tickets, and people involved), no preamble or filler, no marketing words. When unsure how I'd phrase something, copy the phrasing patterns from earlier reports rather than inventing a polished tone.
 - Summary sentence per section states the overall thrust only — never repeats what the bullets say. It is optional: drop it if the section has only one or two bullets.
 - Keep the tone neutral and factual; avoid loaded words like "dominated", "crucial", "major focus".
 - Use past tense, active voice.
