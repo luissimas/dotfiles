@@ -46,5 +46,8 @@ if [ -d /afs ]; then
   export GIT_AUTHOR_EMAIL="luis.simas@cern.ch"
 fi
 
+# EOS home on CERN servers
+[ -d /afs ] && export EOSHOME="/eos/home-l/lsimasde"
+
 # Source interactive setup for login shells
 [ -f ~/.bashrc ] && . ~/.bashrc
