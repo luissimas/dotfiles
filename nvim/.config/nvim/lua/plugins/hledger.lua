@@ -16,7 +16,9 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      { "kirasok/cmp-hledger" },
+      -- Vendored fork of kirasok/cmp-hledger (upstream ea2211c), patched to fix the
+      -- off-by-one completion range that duplicated the first typed character.
+      { dir = vim.fn.stdpath("config") .. "/plugins/cmp-hledger", name = "cmp-hledger" },
     },
     opts = {
       sources = {
