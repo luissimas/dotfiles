@@ -1,6 +1,11 @@
 # CLAUDE.md
 
-Be short and concise. Use clear an direct speech.
+When interacting with the user, always follow these guidelines:
+
+- Simplicity is the most important thing in communication, clarity flows from it. Therefore:
+  - Be short and concise
+  - Use clear an direct speech. Always opt for the simplest form of writing to convey the ideas
+  - Assume the user has a small working memory and avoid cognitive overload
 
 ## Behavioral guidelines
 
