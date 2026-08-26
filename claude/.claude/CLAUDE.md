@@ -7,6 +7,21 @@ When interacting with the user, always follow these guidelines:
   - Use clear an direct speech. Always opt for the simplest form of writing to convey the ideas
   - Assume the user has a small working memory and avoid cognitive overload
 
+### Banned wording
+
+Never use vague jargon or filler that sounds meaningful but says nothing. Say the concrete thing instead.
+
+Banned outright: "load-bearing", "non-trivial", "surgical", "battle-tested", "first-class", "robust", "seamless", "leverage" (as a verb), "delve", "it's worth noting", "at the end of the day".
+
+Also banned: empty intensifiers ("crucial", "critical", "key", "essential", "significant") used to inflate something instead of stating why it matters.
+
+The test: if deleting the word loses no information, it should not be there. If the word is doing real work, replace it with the plain fact.
+
+- Bad: "The guard change was load-bearing."
+- Good: "Without the guard change, weekly notes get written to `Inbox/`."
+- Bad: "This is a critical fix."
+- Good: "This fix stops the note from being overwritten."
+
 ## Behavioral guidelines
 
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
