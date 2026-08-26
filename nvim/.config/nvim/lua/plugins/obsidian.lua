@@ -1,6 +1,36 @@
 local zettelkasten_root = "~/projects/zettelkasten/"
 local inbox_directory = "Inbox"
 local journal_directory = "Journal"
+local daily_directory = journal_directory .. "/Daily"
+local weekly_directory = journal_directory .. "/Weekly"
+local weekly_date_format = "GGGG-[W]WW"
+
+-- Open the current week's note, creating it from the template if needed.
+local function open_weekly_note()
+  local Note = require("obsidian.note")
+  local Path = require("obsidian.path")
+  local util = require("obsidian.util")
+
+  local id = tostring(util.format_date(os.time(), weekly_date_format))
+  local note_path = Path.new(Obsidian.dir) / weekly_directory / (id .. ".md")
+
+  local note
+  if note_path:is_file() then
+    note = Note.from_file(note_path)
+  else
+    note = Note.create({
+      id = id,
+      verbatim = true,
+      dir = note_path:parent(),
+      template = "Weekly.md",
+    })
+  end
+
+  if not note:exists() then
+    note:write()
+  end
+  note:open()
+end
 
 return {
   "obsidian-nvim/obsidian.nvim",
@@ -38,7 +68,7 @@ return {
       },
     },
     daily_notes = {
-      folder = journal_directory,
+      folder = daily_directory,
       template = "Daily.md",
       date_format = "%Y-%m-%d",
     },
@@ -90,8 +120,10 @@ return {
     note_path_func = function(spec)
       local path = require("obsidian.path")
 
-      -- Keep the requested directory for journal notes.
-      if spec.dir ~= nil and spec.dir.name == journal_directory then
+      local journal = path.new(vim.fs.joinpath(vim.fn.expand(zettelkasten_root), journal_directory))
+
+      -- Keep the requested directory for journal notes (daily and weekly)
+      if spec.dir ~= nil and (spec.dir == journal or journal:is_parent_of(spec.dir)) then
         return (spec.dir / tostring(spec.id)):with_suffix(".md")
       end
 
@@ -108,6 +140,7 @@ return {
     { "<leader>og", "<cmd>Obsidian search<CR>", desc = "[G]rep" },
     { "<leader>ot", "<cmd>Obsidian template<CR>", desc = "Insert [T]emplate" },
     { "<leader>od", "<cmd>Obsidian dailies<CR>", desc = "Open [D]ailies" },
+    { "<leader>ow", open_weekly_note, desc = "Open [W]eekly" },
     {
       "<CR>",
       function()
