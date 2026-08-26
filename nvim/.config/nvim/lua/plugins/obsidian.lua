@@ -119,15 +119,25 @@ return {
     ---@return string|obsidian.Path The full path to the new note.
     note_path_func = function(spec)
       local path = require("obsidian.path")
+      local vault = path.new(Obsidian.dir)
+      local id = tostring(spec.id)
 
-      local journal = path.new(vim.fs.joinpath(vim.fn.expand(zettelkasten_root), journal_directory))
+      -- Keep Journal notes in their folder based not only on directory, but also
+      -- on ID pattern. This is needed otherwise regular notes created while editing
+      -- a journal note end up in the journal directory, as they inherit the current
+      -- working directory.
+      local journals = {
+        { dir = vault / daily_directory, pattern = "^%d%d%d%d%-%d%d%-%d%d$" },
+        { dir = vault / weekly_directory, pattern = "^%d%d%d%d%-W%d%d$" },
+      }
 
-      -- Keep the requested directory for journal notes (daily and weekly)
-      if spec.dir ~= nil and (spec.dir == journal or journal:is_parent_of(spec.dir)) then
-        return (spec.dir / tostring(spec.id)):with_suffix(".md")
+      for _, journal in ipairs(journals) do
+        if spec.dir == journal.dir and id:match(journal.pattern) then
+          return (journal.dir / id):with_suffix(".md")
+        end
       end
 
-      return (path.new(zettelkasten_root) / path.new(inbox_directory) / tostring(spec.id)):with_suffix(".md")
+      return (vault / inbox_directory / id):with_suffix(".md")
     end,
   },
   keys = {
