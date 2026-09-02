@@ -6,18 +6,6 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function()
-    -- Skip toggle on floating windows. Makes it behave nicely for LSP hover pop ups.
-    if vim.api.nvim_win_get_config(0).zindex then
-      return
-    end
-
-    require("no-neck-pain").enable()
-  end,
-})
-
 vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
   group = vim.api.nvim_create_augroup("luis_theme", { clear = true }),
   -- `nested` so the `:colorscheme` call inside `apply()` actually fires the
