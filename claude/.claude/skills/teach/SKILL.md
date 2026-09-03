@@ -84,9 +84,12 @@ Each lesson, the user should always feel as if they are being challenged 'just e
 
 The user may specify an exact thing they want to learn. If they don't, figure out their zone of proximal development by:
 
+- Asking the user questions about the subject to gauge how much they already know and clarify the scope
+- Searching notes about the subject on their zettelkasten (at `~/projects/zettelkasten/`)
 - Reading their `learning-records`
 - Figuring out the right thing to teach them based on their mission
-- Teach the most relevant thing that fits in their zone of proximal development
+
+Teach the most relevant thing that fits in their zone of proximal development.
 
 ## Knowledge
 
