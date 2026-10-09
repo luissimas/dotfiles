@@ -6,6 +6,12 @@ return {
         ghost_text = {
           enabled = false,
         },
+        per_filetype = {
+          markdown = {
+            "lsp",
+            "dictionary",
+          },
+        },
       },
     },
   },
