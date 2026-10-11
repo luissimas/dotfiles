@@ -36,8 +36,8 @@ return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   event = {
-    "BufReadPre " .. vim.fn.expand(zettelkasten_root) .. "/**/*.md",
-    "BufNewFile " .. vim.fn.expand(zettelkasten_root) .. "/**/*.md",
+    "BufReadPre " .. vim.fn.expand(zettelkasten_root) .. "*.md",
+    "BufNewFile " .. vim.fn.expand(zettelkasten_root) .. "*.md",
   },
   dependencies = {
     -- Required.
