@@ -26,3 +26,6 @@ vim.opt.iskeyword = "@,48-57,_,192-255"
 
 -- Show the default nvim intro screen (LazyVim hides it with shortmess "I")
 vim.opt.shortmess:remove("I")
+
+-- Don't hide markup by default (LazyVim sets this to 2)
+vim.opt.conceallevel = 0
