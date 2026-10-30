@@ -3,6 +3,7 @@ return {
   opts = {
     servers = {
       bicep = {},
+      puppet = {},
     },
     inlay_hints = {
       enabled = false,
