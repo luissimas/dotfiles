@@ -12,6 +12,11 @@ return {
       return os.date("%Y/%m/%d")
     end
 
+    -- Pad the account so the amount starts at column 38, like in my journal
+    local function amount_padding(args)
+      return string.rep(" ", math.max(2, 34 - #args[1][1]))
+    end
+
     -- hledger snippets
     ls.add_snippets("ledger", {
       s("t", {
@@ -20,16 +25,13 @@ return {
         i(1, "Description"),
         t({ "", "    " }),
         i(2, "Expenses:Category"),
-        t("                        CHF"),
-        i(3, "0.00"),
+        f(amount_padding, { 2 }),
+        t("CHF"),
+        i(3, "0"),
         t({ "", "    " }),
         i(4, "Assets:Account"),
         i(0),
       }),
-
-      s("n", { t("; type:need") }),
-      s("w", { t("; type:want") }),
-      s("s", { t("shop:"), i(1, "value") }),
     })
   end,
 }
