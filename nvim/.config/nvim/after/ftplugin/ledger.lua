@@ -1,0 +1,3 @@
+-- Postings in my journals are indented with 4 spaces
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4
